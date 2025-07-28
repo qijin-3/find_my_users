@@ -52,7 +52,7 @@
 4. Set up your GitHub repository:
    - Create a new repository on GitHub
    - Create two folders in the repository: `data/json` and `data/md`
-   - In `data/json`, create a file named `resources.json` with an empty array: `[]`
+   - In `data/json`, create a file named `sitelists.json` with an empty array: `[]`
 
 5. Run the development server:
    ```

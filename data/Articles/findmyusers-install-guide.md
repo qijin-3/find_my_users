@@ -55,7 +55,7 @@ Replace the placeholders with your actual GitHub information and desired access 
 
 1. Create a new repository on GitHub if you haven't already.
 2. In your GitHub repository, create two folders: `data/json` and `data/md`.
-3. In the `data/json` folder, create a file named `resources.json` with an empty array: `[]`.
+3. In the `data/json` folder, create a file named `sitelists.json` with an empty array: `[]`.
 
 ## Step 5: Run the Development Server
 

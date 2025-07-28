@@ -199,6 +199,45 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
    ]
    ```
 
+## 404错误修复记录
+
+### 问题描述
+用户报告主页显示404错误，经检查发现：
+1. 主页本身工作正常（返回200状态码）
+2. `/site` 页面显示404错误
+
+### 根本原因
+在 Next.js 13+ App Router 中，页面文件必须使用 `.tsx` 扩展名，但 `/site` 页面使用的是 `.js` 文件。
+
+### 修复步骤
+1. **文件重命名**：
+   ```bash
+   # 将 page.js 重命名为 page.tsx
+   mv src/app/site/page.js src/app/site/page.tsx
+   ```
+
+2. **添加TypeScript类型**：
+   ```typescript
+   // src/app/site/page.tsx
+   import { Metadata } from 'next'
+   
+   export const metadata: Metadata = {
+     title: '分类',
+     description: '独立开发者工具站 | 全球产品必备工具资源源',
+   }
+   ```
+
+### 技术要点
+- Next.js 13+ App Router 要求页面文件使用 TypeScript 格式（.tsx）
+- 需要从 'next' 导入 Metadata 类型进行类型声明
+- 组件 props 传递保持不变，SitePageContent 组件正确接收 resources 参数
+
+### 验证结果
+- 主页正常显示（http://localhost:3004）
+- Site页面正常显示（http://localhost:3004/site）
+- 分类筛选功能正常工作
+- 开发服务器编译成功，无错误信息
+
 3. **组件功能特性**：
    - 左侧分类菜单：7种站点类型，带图标和选中状态
    - 顶部标题栏：包含页面标题和"提交工具"占位按钮
@@ -220,6 +259,40 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 - 保持暗黑模式支持
 - 遵循项目代码规范和TypeScript类型定义
 
+### 文件重命名：resources.json → sitelists.json (2024-12-19)
+
+**背景**: 用户要求将数据文件 `resources.json` 重命名为 `sitelists.json`
+
+**实现步骤**:
+
+1. **重命名数据文件**
+   - 将 `/data/json/resources.json` 重命名为 `/data/json/sitelists.json`
+
+2. **更新所有文件引用**
+   - 更新主页文件: `src/app/page.tsx`
+   - 更新site页面: `src/app/site/page.js`
+   - 更新动态路由: `src/app/site/[slug]/page.tsx`
+   - 更新API路由: `src/app/api/resources/route.js`
+   - 更新项目文档: `README.md`、安装指南、管理资源文档
+   - 更新项目记忆文件: `.doc/memory/self.md`
+
+3. **清理冗余文件** (2024-12-19):
+   - 删除原 `resources.json` 文件
+   - 修复主页中 `ResourceList` 组件的 props 传递方式
+   - 在 `ResourceList` 组件中添加类型检查以防止 undefined 错误
+
+**技术要点**:
+- 保持所有功能不变，仅更改文件名和路径引用
+- 确保API路由中的GitHub路径和本地路径都正确更新
+- 更新相关文档以保持一致性
+- 添加防御性编程，提高组件健壮性
+
+**验证结果**:
+- 首页和site页面功能正常
+- 分类筛选功能正常工作
+- 所有数据加载正确
+- 冗余文件已清理
+
 ### 统一卡片组件和分类筛选功能 (2024-12-19)
 
 **背景**: 用户要求确保 site 页面和 home 页面使用统一的卡片组件，并修复侧边栏切换时卡片未更新的问题
@@ -227,7 +300,7 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 **实现步骤**:
 
 1. **为资源数据添加分类字段**
-   - 更新 `/data/json/resources.json`，为每个站点添加 `category` 字段
+    - 更新 `/data/json/sitelists.json`，为每个站点添加 `category` 字段
    - 分类包括: product-showcase, tool-navigation, blog-newsletter, social-community, media, vertical-forum, design-platform
 
 2. **创建统一的 ResourceCard 组件**
@@ -467,6 +540,61 @@ import Image from 'next/image'
   <svg aria-hidden="true">...</svg>
 </button>
 ```
+
+### 数据结构扩展：sitelists.json 字段增强
+**日期**：2025-01-28
+**问题描述**：需要为 sitelists.json 中的每个站点添加创建时间、修改时间和对应路径字段。
+
+**数据结构扩展**：
+为每个站点资源添加新字段：
+```json
+{
+  "id": 1,
+  "name": "Next.js",
+  "slug": "nextjs",
+  // ... 原有字段
+  "date": "2024-08-16T03:57:46.153Z",           // 创建时间
+  "lastModified": "2025-07-28T03:34:22Z"       // 最后修改时间
+}
+```
+
+**字段移除记录 (2025-01-28)**：
+- **移除字段**: `path` 
+- **移除原因**: 
+  - 信息冗余：路径可通过 `slug` 动态计算 (`data/Site/${slug}.json`)
+  - 减少维护负担：避免路径不一致的风险
+  - 简化数据结构：降低文件大小和复杂度
+- **影响评估**: 无功能影响，动态路由页面通过 `slug` 构建路径
+- **验证结果**: 所有页面和功能正常
+
+**跳转机制分析**：
+1. **卡片跳转实现**：
+   - ResourceCard 组件使用 `next/link` 创建动态路由
+   - 跳转路径：`/site/${resource.slug}`
+   - 通过 slug 字段建立关联关系
+
+2. **数据关系维护**：
+   - sitelists.json：存储资源列表和基础信息
+   - data/Site/${slug}.json：存储对应的详细信息
+   - 通过 slug 字段一一对应
+
+3. **路由处理**：
+   - 动态路由：`/src/app/site/[slug]/page.tsx`
+   - 使用 `generateStaticParams` 预生成静态路由
+   - 通过 `getSiteData` 方法加载详情数据
+
+**技术要点**：
+- 保持 slug 字段的唯一性和一致性
+- 时间戳使用 ISO 8601 格式确保标准化
+- 新字段不影响现有功能的正常运行
+- 移除冗余字段简化数据结构
+
+**验证结果**：
+- ✅ 主页正常显示 (http://localhost:3004)
+- ✅ Site 页面正常显示 (http://localhost:3004/site)
+- ✅ 所有卡片跳转功能正常
+- ✅ 站点详情页正常显示
+- ✅ 数据结构扩展成功，包含7个资源的完整信息
 
 ## 学习要点
 

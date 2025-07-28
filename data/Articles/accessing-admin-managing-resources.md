@@ -49,18 +49,18 @@ Note: The current version of FindMyUsers might not support direct deletion throu
 1. Edit the resource.
 2. Replace its content with placeholder text or mark it as "Deprecated" in the description.
 3. Save the changes.
-4. For permanent removal, you may need to manually delete the entry from the `resources.json` file in your GitHub repository.
+4. For permanent removal, you may need to manually delete the entry from the `sitelists.json` file in your GitHub repository.
 
 ## Syncing Changes
 
 FindMyUsers automatically syncs your changes with the GitHub repository configured in your environment variables. After making changes:
 
-1. The `resources.json` file in your GitHub repository will be updated.
+1. The `sitelists.json` file in your GitHub repository will be updated.
 2. These changes will be reflected on your live site after a short delay (usually a few minutes, depending on your hosting setup).
 
 ## Best Practices
 
-1. **Regular Backups**: Although FindMyUsers uses GitHub for version control, it's a good practice to periodically backup your `resources.json` file.
+1. **Regular Backups**: Although FindMyUsers uses GitHub for version control, it's a good practice to periodically backup your `sitelists.json` file.
 2. **Descriptive Names and Descriptions**: Use clear, concise names and descriptions for your resources to make them easy to understand and find.
 3. **URL Verification**: Always double-check the URLs you enter to ensure they are correct and functional.
 4. **Consistent Formatting**: Maintain a consistent style in your resource descriptions for a professional appearance.

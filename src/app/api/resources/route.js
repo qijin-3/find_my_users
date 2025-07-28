@@ -9,8 +9,8 @@ const octokit = new Octokit({
 
 const owner = process.env.GITHUB_OWNER;
 const repo = process.env.GITHUB_REPO;
-const githubPath = 'data/json/resources.json';
-const localPath = path.join(process.cwd(), 'data', 'json', 'resources.json');
+const githubPath = 'data/json/sitelists.json';
+const localPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
 
 async function getResourcesFromGitHub() {
   try {

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-  const resourcesPath = path.join(process.cwd(), 'data', 'json', 'resources.json')
+  const resourcesPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json')
   const resources = JSON.parse(fs.readFileSync(resourcesPath, 'utf8'))
   const allPostsData = getSortedPostsData().slice(0, 6)
 
@@ -28,7 +28,7 @@ export default function Home() {
         </p>
       </section>
 
-      <ResourceList resources={resources} />
+      <ResourceList {...resources} />
       <ArticleList articles={allPostsData} />
     </div>
   )

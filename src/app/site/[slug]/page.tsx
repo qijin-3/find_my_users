@@ -46,7 +46,7 @@ interface PageParams {
  * @returns {Array} 包含所有资源slug的参数数组
  */
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const resourcesPath = path.join(process.cwd(), 'data', 'json', 'resources.json');
+  const resourcesPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
   const resources: Resource[] = JSON.parse(fs.readFileSync(resourcesPath, 'utf8'));
   
   return resources.map((resource: Resource) => ({
