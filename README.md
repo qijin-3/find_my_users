@@ -1,13 +1,13 @@
-# GitBase
+# FindMyUsers
 
-[GitBase](https://gitbase.app/) is an open-source dynamic website solution without a traditional database, built with Next.js, Tailwind CSS, and Shadcn/UI. It leverages GitHub as a content management system, providing a seamless way to create and manage website content.
+[FindMyUsers](https://findmyusers.app/) is an open-source dynamic website solution without a traditional database, built with Next.js, Tailwind CSS, and Shadcn/UI. It leverages GitHub as a content management system, providing a seamless way to create and manage website content.
 
-![GitBase](https://toimg.xyz/file/5aa892c8e8385232fcdf3.png)
+![FindMyUsers](https://toimg.xyz/file/5aa892c8e8385232fcdf3.png)
 
 
 ## Deploy on Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fqiayue%2Fgitbase&project-name=GitBase&repository-name=GitBase&external-id=https%3A%2F%2Fgithub.com%2Fqiayue%2Fgitbase%2Ftree%2Fmain)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fqiayue%2Ffindmyusers&project-name=FindMyUsers&repository-name=FindMyUsers&external-id=https%3A%2F%2Fgithub.com%2Fqiayue%2Ffindmyusers%2Ftree%2Fmain)
 
 
 ## Features
@@ -32,8 +32,8 @@
 
 1. Clone the repository:
    ```
-   git clone https://github.com/qiayue/gitbase.git
-   cd gitbase
+   git clone https://github.com/qiayue/findmyusers.git
+   cd findmyusers
    ```
 
 2. Install dependencies:
@@ -59,7 +59,7 @@
    npm run dev
    ```
 
-Visit `http://localhost:3000` to see your GitBase instance running locally.
+Visit `http://localhost:3000` to see your FindMyUsers instance running locally.
 
 ## Deployment
 
@@ -72,7 +72,7 @@ Visit `http://localhost:3000` to see your GitBase instance running locally.
    - `ACCESS_PASSWORD`
 4. Deploy the project.
 
-For a detailed deployment guide, please refer to our [Installation and Deployment Guide](https://gitbase.app/posts/gitbase-install-guide).
+For a detailed deployment guide, please refer to our [Installation and Deployment Guide](https://findmyusers.app/posts/findmyusers-install-guide).
 
 ## Usage
 
@@ -83,11 +83,11 @@ For a detailed deployment guide, please refer to our [Installation and Deploymen
 
 ## Contributing
 
-We welcome contributions to GitBase! Please read our [Contributing Guide](https://gitbase.app/posts/how-to-contributing-to-gitbase) for details on our code of conduct and the process for submitting pull requests.
+We welcome contributions to FindMyUsers! Please read our [Contributing Guide](https://findmyusers.app/posts/how-to-contributing-to-findmyusers) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
-GitBase is open-source software licensed under the [MIT license](https://github.com/qiayue/gitbase/?tab=MIT-1-ov-file).
+FindMyUsers is open-source software licensed under the [MIT license](https://github.com/qiayue/findmyusers/?tab=MIT-1-ov-file).
 
 ## Support
 
@@ -95,7 +95,7 @@ If you encounter any issues or have questions, please file an issue on the GitHu
 
 ## Acknowledgements
 
-GitBase is built with the following open-source libraries:
+FindMyUsers is built with the following open-source libraries:
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn/UI](https://ui.shadcn.com/)

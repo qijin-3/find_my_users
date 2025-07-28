@@ -1,12 +1,12 @@
 ---
-title: "Installing and Deploying GitBase: A Step-by-Step Guide"
-description: "A comprehensive guide for setting up GitBase locally and deploying it to Vercel, suitable for beginners."
+title: "Installing and Deploying FindMyUsers: A Step-by-Step Guide"
+description: "A comprehensive guide for setting up FindMyUsers locally and deploying it to Vercel, suitable for beginners."
 date: "2024-08-11"
 ---
 
-# Installing and Deploying GitBase: A Step-by-Step Guide
+# Installing and Deploying FindMyUsers: A Step-by-Step Guide
 
-This guide will walk you through the process of setting up GitBase on your local machine and deploying it to Vercel. Even if you're new to web development, you should be able to follow these steps to get your GitBase instance up and running.
+This guide will walk you through the process of setting up FindMyUsers on your local machine and deploying it to Vercel. Even if you're new to web development, you should be able to follow these steps to get your FindMyUsers instance up and running.
 
 ## Prerequisites
 
@@ -23,8 +23,8 @@ This guide will walk you through the process of setting up GitBase on your local
 3. Run the following command:
 
 ```bash
-git clone https://github.com/qiayue/gitbase.git
-cd gitbase
+git clone https://github.com/qiayue/findmyusers.git
+cd findmyusers
 ```
 
 ## Step 2: Install Dependencies
@@ -65,7 +65,7 @@ To start the development server, run:
 npm run dev
 ```
 
-Open `http://localhost:3000` in your browser. You should see the GitBase homepage.
+Open `http://localhost:3000` in your browser. You should see the FindMyUsers homepage.
 
 ## Step 6: Build the Project
 
@@ -81,7 +81,7 @@ If this completes successfully, your project is ready for deployment.
 
 1. Log in to your Vercel account.
 2. Click "New Project".
-3. Import your GitBase repository from GitHub.
+3. Import your FindMyUsers repository from GitHub.
 4. In the "Configure Project" step, add the following environment variables:
    - `GITHUB_TOKEN`
    - `GITHUB_OWNER`
@@ -92,7 +92,7 @@ If this completes successfully, your project is ready for deployment.
 
 ## Step 8: Test Your Deployment
 
-Once the deployment is complete, Vercel will provide you with a URL. Open this URL in your browser to verify that your GitBase instance is working correctly.
+Once the deployment is complete, Vercel will provide you with a URL. Open this URL in your browser to verify that your FindMyUsers instance is working correctly.
 
 ## Step 9: Configure Custom Domain (Optional)
 
@@ -101,7 +101,7 @@ If you want to use your own domain:
 1. In your Vercel project dashboard, go to "Settings" > "Domains".
 2. Add your custom domain and follow Vercel's instructions for DNS configuration.
 
-## Using GitBase
+## Using FindMyUsers
 
 - To access the admin panel, go to `/admin` and use the `ACCESS_PASSWORD` you set.
 - You can now create, edit, and manage articles and resources through the admin interface.
@@ -114,6 +114,6 @@ If you encounter any issues:
 - Check the console in your browser and the Vercel deployment logs for any error messages.
 - Ensure your GitHub token has the necessary permissions (repo scope).
 
-Congratulations! You've successfully set up and deployed your own GitBase instance. Enjoy your new database-free, GitHub-powered website!
+Congratulations! You've successfully set up and deployed your own FindMyUsers instance. Enjoy your new database-free, GitHub-powered website!
 
-For more help, refer to the [GitBase documentation](https://github.com/qiayue/gitbase) or open an issue on the GitHub repository.
+For more help, refer to the [FindMyUsers documentation](https://github.com/qiayue/findmyusers) or open an issue on the GitHub repository.

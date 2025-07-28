@@ -1,7 +1,8 @@
 # 技术栈文档
 
 ## 项目概述
-GitBase 是一个基于 Next.js 和 GitHub API 构建的开源动态网站，无需传统数据库。
+
+FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站，无需传统数据库。
 
 ## 核心技术栈
 

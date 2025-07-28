@@ -6,7 +6,7 @@ export async function generateMetadata({ params }) {
   const postData = await getPostData(params.slug);
   return {
     title: `${postData.title}`,
-    description: postData.description || `Read about ${postData.title} on GitBase`,
+    description: postData.description || `Read about ${postData.title} on FindMyUsers`,
   };
 }
 

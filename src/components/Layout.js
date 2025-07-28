@@ -1,5 +1,5 @@
 // components/Layout.js
-import { Navigation } from './Navigation'
+import { Navigation } from './Navigation.tsx'
 import { Footer } from '@/components/Footer'
 
 export function Layout({ children }) {
