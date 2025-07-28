@@ -670,3 +670,70 @@ import Image from 'next/image'
 8. **错误处理** - 所有异步操作都要有错误处理
 9. **性能优化** - 使用 Next.js 提供的优化组件
 10. **可访问性** - 确保所有用户都能使用应用
+
+### 错误：网站截图API服务选择不当
+**日期**：2025-01-28
+**错误现象**：
+- `screenshotmachine.com` demo key 返回无效图片
+- `htmlcsstoimage.com` 被浏览器 CORS 策略阻止，出现 `ERR_BLOCKED_BY_ORB` 错误
+- Google PageSpeed API 返回 JSON 数据而非图片
+
+**错误做法**：
+```typescript
+// 使用不稳定或被CORS阻止的截图服务
+const screenshotUrl = `https://api.screenshotmachine.com/?key=demo&url=${url}&dimension=120x80`
+const screenshotUrl = `https://htmlcsstoimage.com/demo_run?url=${url}&width=400&height=300`
+const screenshotUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${url}`
+```
+
+**正确做法**：
+```typescript
+/**
+ * 获取网站缩略截图URL
+ * @param {string} url - 网站URL
+ * @returns {string} 缩略截图URL
+ */
+const getWebsiteScreenshotUrl = (url: string): string => {
+  try {
+    // 使用 WordPress.com 的 mshots 服务获取网站截图
+    // 这是一个稳定且免费的服务，被广泛使用
+    const encodedUrl = encodeURIComponent(url)
+    // 设置合适的宽度和高度，适配卡片布局
+    return `https://s0.wp.com/mshots/v1/${encodedUrl}?w=400&h=300`
+  } catch {
+    // 如果URL无效，返回默认图片
+    return '/next.svg'
+  }
+}
+```
+
+**修复要点**：
+1. **避免依赖不稳定的第三方截图API** - 很多免费服务不稳定或有CORS限制
+2. **使用稳定的占位图片服务** - ui-avatars.com 等服务更可靠
+3. **基于域名生成唯一标识** - 为每个网站生成独特的视觉标识
+4. **添加错误处理** - 确保URL解析失败时有备用方案
+5. **考虑用户体验** - 占位图片应该美观且有意义
+
+**布局优化**：
+```tsx
+// 让图片占满卡片宽度的布局
+<Card className="h-72 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden">
+  {/* 网站缩略截图 - 占满卡片宽度 */}
+  <div className="relative w-full h-32 overflow-hidden">
+    <Image
+      src={getWebsiteScreenshotUrl(resource.url)}
+      alt={`${resource.name} screenshot`}
+      fill
+      className="object-cover transition-transform duration-300 group-hover:scale-105"
+      unoptimized
+    />
+  </div>
+  {/* 其他内容 */}
+</Card>
+```
+
+**预防措施**：
+- 优先使用稳定的占位图片服务而非实时截图API
+- 测试第三方服务的CORS策略和稳定性
+- 为所有外部服务调用添加错误处理
+- 考虑使用本地生成的SVG图标作为备用方案
