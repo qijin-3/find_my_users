@@ -1,0 +1,16 @@
+{
+  "name": "Tailwind CSS",
+  "description": "A utility-first CSS framework",
+  "screenshot": "/images/sites/tailwindcss-screenshot.jpg",
+  "status": "运行中",
+  "type": "产品展示页",
+  "region": "海外",
+  "url": "https://tailwindcss.com/",
+  "submitMethod": "GitHub",
+  "submitUrl": "https://github.com/tailwindlabs/tailwindcss",
+  "submitRequirements": "需要提供详细的bug报告或功能请求，遵循贡献指南",
+  "review": "Y",
+  "reviewTime": "一周内",
+  "expectedExposure": "1w以上",
+  "rating": "革命性的CSS框架，通过实用优先的方法大大提高了开发效率。学习曲线平缓，可定制性强，是现代前端开发的必备工具。"
+}

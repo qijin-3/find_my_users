@@ -2,36 +2,43 @@
   {
     "name": "Next.js",
     "description": "The React Framework for the Web",
-    "url": "https://nextjs.org/"
+    "url": "https://nextjs.org/",
+    "slug": "nextjs"
   },
   {
     "name": "Tailwind CSS",
     "description": "A utility-first CSS framework",
-    "url": "https://tailwindcss.com/"
+    "url": "https://tailwindcss.com/",
+    "slug": "tailwind-css"
   },
   {
     "name": "Shadcn/ui",
     "description": "Re-usable components built with Radix UI and Tailwind CSS",
-    "url": "https://ui.shadcn.com/"
+    "url": "https://ui.shadcn.com/",
+    "slug": "shadcnui"
   },
   {
     "name": "Vercel",
     "description": "Cloud platform for static sites and Serverless Functions",
-    "url": "https://vercel.com/"
+    "url": "https://vercel.com/",
+    "slug": "vercel"
   },
   {
     "name": "Github.com",
     "description": "The world's leading platform for version control and collaborative software development.",
-    "url": "https://github.com/"
+    "url": "https://github.com/",
+    "slug": "github"
   },
   {
     "name": "Woy.ai",
     "description": "AI Tools Directory",
-    "url": "https://woy.ai"
+    "url": "https://woy.ai",
+    "slug": "woyai"
   },
   {
     "name": "Music Player",
     "description": "Online Music Player",
-    "url": "https://musicplayer-olive.vercel.app/"
+    "url": "https://musicplayer-olive.vercel.app/",
+    "slug": "music-player"
   }
 ]

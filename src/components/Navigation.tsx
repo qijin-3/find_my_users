@@ -8,7 +8,7 @@ import { LanguageToggle } from '@/components/language-toggle'
 
 const navItems = [
   { path: '/', label: 'Home' },
-  { path: '/resources', label: 'Resources' },
+  { path: '/site', label: 'Site' },
   { path: '/posts', label: 'Articles' },
 ]
 

@@ -164,6 +164,131 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
+## 项目重构记录 - Resources 改名为 Site 和卡片高度修复
+
+### 错误现象
+1. 用户反馈 "rescources" 拼写错误，应该改为 "Site"
+2. 卡片高度使用响应式设计（`h-full`）导致显示混乱，需要固定高度
+
+### 修复步骤
+1. **目录重命名**：
+   ```bash
+   mv src/app/resources src/app/site
+   ```
+
+2. **导航组件更新**：
+   ```tsx
+   // src/components/Navigation.tsx
+   const navItems = [
+     { path: '/', label: 'Home' },
+     { path: '/site', label: 'Site' },  // 从 /resources 改为 /site
+     { path: '/posts', label: 'Articles' },
+   ]
+   ```
+
+3. **页面元数据更新**：
+   ```js
+   // src/app/site/page.js
+   export const metadata = {
+     title: 'Site',  // 从 Resources 改为 Site
+     description: 'Explore our curated list of sites for web development, GitHub, and more.',
+   }
+   ```
+
+4. **卡片高度修复**：
+   ```js
+   // src/components/ResourceList.js
+   <Card className="h-48 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105">
+   // 从 h-full 改为 h-48 固定高度
+   ```
+
+5. **链接路径更新**：
+   - ResourceList 组件：`/resources/${resource.slug}` → `/site/${resource.slug}`
+   - Footer 组件：`/resources` → `/site`
+   - Site 详情页面：返回链接从 `/resources` 改为 `/site`
+
+6. **清理工作**：
+   ```bash
+   rm -rf src/app/resources  # 删除旧目录
+   ```
+
+### 验证结果
+- ✅ 首页正常加载 (http://localhost:3004)
+- ✅ Site 页面正常加载 (http://localhost:3004/site)
+- ✅ Site 详情页面正常加载 (http://localhost:3004/site/nextjs)
+- ✅ 卡片高度统一为固定 192px (h-48)
+- ✅ 所有导航链接正常工作
+
+### 预防措施
+1. **全局搜索验证**：使用 `search_by_regex` 搜索所有相关路径引用
+2. **功能测试**：测试所有页面和链接的正常工作
+3. **服务器重启**：确保路由更改生效
+
+### 错误：文件路径配置错误导致 ENOENT 错误
+**错误现象**：
+```
+Error: ENOENT: no such file or directory, scandir '/path/to/project/data/md'
+```
+
+**错误原因**：
+代码中硬编码的文件路径与实际项目结构不匹配。
+
+**错误做法**：
+```javascript
+// posts.js 中错误的路径配置
+const postsDirectory = path.join(process.cwd(), 'data', 'md')
+```
+
+**正确做法**：
+```javascript
+// 根据实际项目结构配置正确的路径
+const postsDirectory = path.join(process.cwd(), 'data', 'Articles')
+```
+
+**修复步骤**：
+1. 检查项目实际的目录结构
+2. 确认文件存储的真实位置
+3. 更新代码中的路径配置
+4. 测试确保路径正确
+
+**预防措施**：
+- 在项目初期建立清晰的目录结构文档
+- 使用相对路径时要确保路径的正确性
+- 添加文件存在性检查，提供更友好的错误信息
+
+### 错误：文件移动后未更新代码中的引用路径
+**错误现象**：
+移动文件夹后，应用出现文件找不到的错误，如：
+```
+Error: ENOENT: no such file or directory, open '/path/to/old/location/file.json'
+```
+
+**错误原因**：
+文件或文件夹移动后，代码中仍然使用旧的路径引用。
+
+**错误做法**：
+```javascript
+// 移动文件夹后，代码中仍使用旧路径
+const sitePath = path.join(process.cwd(), 'public', 'Site', `${slug}.json`);
+```
+
+**正确做法**：
+```javascript
+// 更新为新的路径
+const sitePath = path.join(process.cwd(), 'data', 'Site', `${slug}.json`);
+```
+
+**修复步骤**：
+1. 使用搜索工具查找所有引用旧路径的代码
+2. 逐一更新路径引用
+3. 测试所有相关功能确保正常工作
+4. 重启开发服务器确保更改生效
+
+**预防措施**：
+- 移动文件前先搜索所有引用该路径的代码
+- 使用配置文件统一管理路径常量
+- 建立文件移动的检查清单
+
 ### 错误：未正确处理异步操作错误
 **错误做法**：
 ```javascript

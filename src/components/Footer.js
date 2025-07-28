@@ -21,9 +21,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/resources" className="text-base text-gray-500 hover:text-gray-900">
-                  Resources
-                </Link>
+                <Link href="/site" className="text-base text-gray-500 hover:text-gray-900">
+                    Site
+                  </Link>
               </li>
               <li>
                 <Link href="/posts" className="text-base text-gray-500 hover:text-gray-900">
