@@ -164,6 +164,108 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
+## 项目重构记录 - Site页面重新设计
+
+### 修改需求
+用户要求重新设计site页面，具体要求：
+1. 左侧菜单包含7种站点类型分类：产品展示页、工具导航、博客/周刊、社交社区、媒体、垂直论坛/社区、设计平台
+2. 右侧的"提交工具"按钮作为占位，暂不实现功能
+
+### 修复步骤
+1. **更新页面结构**：
+   ```js
+   // src/app/site/page.js
+   // 将原有的 ResourceList 组件替换为新的 SitePageContent 组件
+   import SitePageContent from '@/components/SitePageContent'
+   
+   export const metadata = {
+     title: '分类',
+     description: '独立开发者工具站 | 全球产品必备工具资源源',
+   }
+   ```
+
+2. **创建新的SitePageContent组件**：
+   ```js
+   // src/components/SitePageContent.js
+   // 实现左侧分类菜单和右侧内容区域的布局
+   const siteCategories = [
+     { id: 'product-showcase', name: '产品展示页', icon: Globe },
+     { id: 'tool-navigation', name: '工具导航', icon: Wrench },
+     { id: 'blog-newsletter', name: '博客/周刊', icon: BookOpen },
+     { id: 'social-community', name: '社交社区', icon: Users },
+     { id: 'media', name: '媒体', icon: Radio },
+     { id: 'vertical-forum', name: '垂直论坛/社区', icon: MessageSquare },
+     { id: 'design-platform', name: '设计平台', icon: Palette },
+   ]
+   ```
+
+3. **组件功能特性**：
+   - 左侧分类菜单：7种站点类型，带图标和选中状态
+   - 顶部标题栏：包含页面标题和"提交工具"占位按钮
+   - 右侧内容区域：响应式网格布局（1-3列）
+   - 卡片设计：固定高度h-64、标签显示、外部链接处理
+   - 空状态处理：友好的提示信息
+
+### 验证结果
+- 开发服务器运行在端口3004：http://localhost:3004/site
+- 页面正常编译和渲染
+- 左侧菜单包含用户要求的7种分类
+- 右侧"提交工具"按钮已作为占位实现
+- 响应式布局在不同屏幕尺寸下正常工作
+
+### 技术要点
+- 使用Shadcn/ui组件库（Card、Button、Badge）
+- 集成Lucide图标库
+- 客户端组件实现交互功能
+- 保持暗黑模式支持
+- 遵循项目代码规范和TypeScript类型定义
+
+### 统一卡片组件和分类筛选功能 (2024-12-19)
+
+**背景**: 用户要求确保 site 页面和 home 页面使用统一的卡片组件，并修复侧边栏切换时卡片未更新的问题
+
+**实现步骤**:
+
+1. **为资源数据添加分类字段**
+   - 更新 `/data/json/resources.json`，为每个站点添加 `category` 字段
+   - 分类包括: product-showcase, tool-navigation, blog-newsletter, social-community, media, vertical-forum, design-platform
+
+2. **创建统一的 ResourceCard 组件**
+   ```javascript
+   // src/components/ResourceCard.js
+   export default function ResourceCard({ 
+     resource, 
+     showCategory = false, 
+     className = "" 
+   }) {
+     // 统一的卡片渲染逻辑
+     // 支持分类标签显示/隐藏
+     // 保持一致的样式和交互效果
+   }
+   ```
+
+3. **更新 ResourceList 组件**
+   - 使用新的 ResourceCard 组件替代内部卡片实现
+   - 设置 `showCategory={false}` 隐藏分类标签
+
+4. **更新 SitePageContent 组件**
+   - 使用 ResourceCard 组件替代内部卡片实现
+   - 实现分类筛选功能，使用 `useMemo` 优化性能
+   - 添加分类计数显示
+   - 设置 `showCategory={true}` 显示分类标签
+
+**技术要点**:
+- 使用 `useMemo` 优化分类筛选性能
+- 分类ID到显示名称的映射转换
+- 统一的卡片样式和交互效果
+- 响应式设计和暗黑模式支持
+
+**验证结果**:
+- 首页和site页面使用相同的卡片组件
+- 分类筛选功能正常工作，切换分类时卡片内容正确更新
+- 分类菜单显示每个分类的资源数量
+- 保持原有的样式和交互效果
+
 ## 项目重构记录 - Resources 改名为 Site 和卡片高度修复
 
 ### 错误现象
