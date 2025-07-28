@@ -164,6 +164,68 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
+## 站点详情页结构统一 (2025-01-28)
+
+### 修改需求
+用户要求确保站点详情页 (`/site/[slug]`) 的基本结构和样式与文章详情页 (`/posts/[slug]`) 保持一致，但不修改文章详情页。
+
+### 修复步骤
+1. **分析文章详情页结构**：
+   - 使用 `<article>` 标签包装，最大宽度 `max-w-3xl`
+   - 包含面包屑导航 (Breadcrumb navigation)
+   - 元信息卡片 (Meta information card) 使用灰色背景
+   - 内容区域使用 `prose prose-lg` 样式
+   - 底部返回链接
+
+2. **重构站点详情页**：
+   ```tsx
+   // src/app/site/[slug]/page.tsx
+   // 移除复杂的卡片布局，改为简洁的文章式布局
+   
+   return (
+     <article className="container mx-auto px-4 py-12 max-w-3xl">
+       {/* Breadcrumb navigation */}
+       <nav className="flex items-center text-sm text-gray-500 mb-6">
+         <Link href="/" className="hover:text-blue-600">Home</Link>
+         <ChevronRight className="mx-2" size={16} />
+         <Link href="/site" className="hover:text-blue-600">Site</Link>
+         <ChevronRight className="mx-2" size={16} />
+         <span className="text-gray-900">{siteData.name}</span>
+       </nav>
+       
+       {/* Meta information card */}
+       <div className="bg-gray-100 rounded-lg p-6 mb-8">
+         {/* 站点基本信息以网格形式展示 */}
+       </div>
+
+       {/* Site content */}
+       <div className="prose prose-lg max-w-none">
+         {/* 详细内容 */}
+       </div>
+       
+       {/* Back to site list link */}
+       <div className="mt-12">
+         <Link href="/site">Back to site list</Link>
+       </div>
+     </article>
+   )
+   ```
+
+3. **主要变更**：
+   - 移除了 Card 组件的复杂布局
+   - 添加了面包屑导航 (使用 ChevronRight 图标)
+   - 将站点信息整合到单个灰色背景的元信息卡片中
+   - 使用 prose 样式处理详细内容
+   - 统一了容器样式和最大宽度限制
+   - 保持了与文章详情页一致的视觉层次
+
+### 验证结果
+- 站点详情页现在与文章详情页具有相同的基本结构
+- 面包屑导航正常工作
+- 元信息卡片样式一致
+- 内容区域使用相同的 prose 样式
+- 返回链接位置和样式统一
+
 ## 项目重构记录 - Site页面重新设计
 
 ### 修改需求

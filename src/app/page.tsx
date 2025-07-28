@@ -4,6 +4,7 @@ import path from 'path'
 import { getSortedPostsData } from '@/lib/posts'
 import ResourceList from '@/components/ResourceList'
 import ArticleList from '@/components/ArticleList'
+import SiteList from '@/components/SiteList'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -14,7 +15,14 @@ export const metadata: Metadata = {
 export default function Home() {
   const resourcesPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json')
   const resources = JSON.parse(fs.readFileSync(resourcesPath, 'utf8'))
-  const allPostsData = getSortedPostsData().slice(0, 6)
+  
+  // 获取最新的8个站点，按日期排序
+  const latestSites = resources
+    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 8)
+  
+  // 获取最新的4篇文章
+  const allPostsData = getSortedPostsData().slice(0, 4)
 
   return (
     <div className="container mx-auto py-12 space-y-16">
@@ -29,6 +37,7 @@ export default function Home() {
       </section>
 
       <ResourceList {...resources} />
+      <SiteList sites={latestSites} />
       <ArticleList articles={allPostsData} />
     </div>
   )

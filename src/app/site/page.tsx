@@ -16,5 +16,5 @@ export default function Site() {
   const resourcesPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
   const resources = JSON.parse(fs.readFileSync(resourcesPath, 'utf8'));
 
-  return <SitePageContent {...resources} />
+  return <SitePageContent resources={resources} />
 }

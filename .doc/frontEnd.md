@@ -133,6 +133,14 @@ shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 - **Class Variance Authority (CVA)** - 组件变体管理
 - **Tailwind Merge** - 类名合并工具
 - **CLSX** - 条件类名工具
+- **Tailwindcss Animate** - Tailwind CSS 动画扩展
+- **@tailwindcss/typography** - 排版样式插件
+
+### 主题系统
+- **next-themes** - Next.js 主题切换解决方案
+  - 支持明暗主题切换
+  - 系统主题检测
+  - 无闪烁主题切换
 
 ## 图标集
 
@@ -155,10 +163,21 @@ import { Github, Menu, X, ChevronDown } from 'lucide-react'
 ```
 
 ### 常用图标
-- **Github** - GitHub 链接
-- **Menu** - 移动端菜单
+- **X** - 关闭按钮、模态框关闭
+- **Globe** - 语言切换、网站链接
+- **Check** - 确认状态、选中状态
+- **ChevronRight** - 右箭头、导航指示
+- **Circle** - 圆形图标、状态指示
+- **ArrowRight** - 右箭头、跳转指示
+- **ExternalLink** - 外部链接
+- **Moon** - 深色主题图标
+- **Sun** - 浅色主题图标
+- **ArrowLeft** - 返回按钮、左箭头
+- **Clock** - 时间相关
+- **Users** - 用户相关
+- **CheckCircle** - 成功状态
+- **XCircle** - 错误状态
 - **ChevronDown** - 下拉指示器
-- **X** - 关闭按钮
 
 ## 前端架构
 
@@ -167,22 +186,48 @@ import { Github, Menu, X, ChevronDown } from 'lucide-react'
 src/
 ├── app/                    # Next.js App Router 页面
 │   ├── admin/             # 管理后台页面
+│   │   ├── articles/      # 文章管理页面
+│   │   └── page.js        # 管理后台首页
 │   ├── api/               # API 路由
+│   │   ├── articles/      # 文章相关 API
+│   │   ├── check-auth/    # 认证检查 API
+│   │   ├── login/         # 登录 API
+│   │   ├── logout/        # 登出 API
+│   │   └── resources/     # 资源相关 API
 │   ├── login/             # 登录页面
+│   │   └── page.js        # 登录页面组件
 │   ├── posts/             # 文章页面
-│   ├── resources/         # 资源页面
+│   │   ├── [slug]/        # 动态文章详情页
+│   │   └── page.js        # 文章列表页
+│   ├── site/              # 站点资源页面
+│   │   ├── [slug]/        # 动态站点详情页
+│   │   └── page.tsx       # 站点列表页
+│   ├── favicon.ico        # 网站图标
 │   ├── globals.css        # 全局样式
 │   ├── layout.tsx         # 根布局组件
 │   └── page.tsx           # 首页
 ├── components/            # 可复用组件
 │   ├── ui/               # Shadcn/ui 基础组件
+│   │   ├── alert.tsx     # 警告提示组件
+│   │   ├── badge.tsx     # 徽章组件
+│   │   ├── button.tsx    # 按钮组件
+│   │   ├── card.tsx      # 卡片组件
+│   │   ├── dropdown-menu.tsx # 下拉菜单组件
+│   │   ├── input.tsx     # 输入框组件
+│   │   ├── table.tsx     # 表格组件
+│   │   └── textarea.tsx  # 文本域组件
 │   ├── ArticleEditor.js  # 文章编辑器
 │   ├── ArticleList.js    # 文章列表
 │   ├── Footer.js         # 页脚组件
 │   ├── Layout.js         # 布局组件
 │   ├── LoginModal.js     # 登录模态框
-│   ├── Navigation.js     # 导航组件
-│   └── ResourceList.js   # 资源列表
+│   ├── Navigation.tsx    # 导航组件 (TypeScript)
+│   ├── ResourceCard.js   # 资源卡片组件
+│   ├── ResourceList.js   # 资源列表
+│   ├── SitePageContent.js # 站点页面内容组件
+│   ├── language-toggle.tsx # 语言切换组件
+│   ├── providers.tsx     # 全局提供者组件
+│   └── theme-toggle.tsx  # 主题切换组件
 └── lib/                  # 工具函数和配置
     ├── auth.js           # 认证逻辑
     ├── posts.js          # 文章处理
@@ -195,27 +240,47 @@ src/
 - **layout.tsx**: 根布局，定义全站结构和元数据
 - **page.tsx**: 首页，展示项目介绍、资源和文章列表
 - **admin/**: 管理后台，用于内容管理
+  - **articles/**: 文章管理页面
+  - **page.js**: 管理后台首页
 - **api/**: API 路由，处理认证和数据操作
+  - **articles/**: 文章相关 API (创建、编辑、删除)
+  - **check-auth/**: 认证状态检查 API
+  - **login/**: 用户登录 API
+  - **logout/**: 用户登出 API
+  - **resources/**: 资源相关 API
 - **login/**: 用户登录页面
+  - **page.js**: 登录页面组件
 - **posts/**: 文章详情和列表页面
-- **resources/**: 资源页面
+  - **[slug]/**: 动态文章详情页
+  - **page.js**: 文章列表页
+- **site/**: 站点资源页面 (原 resources 页面)
+  - **[slug]/**: 动态站点详情页
+  - **page.tsx**: 站点列表页
 
 #### 组件层 (components/)
 
 ##### 布局组件
 - **Layout.js**: 主布局组件，包含导航和页脚
-- **Navigation.js**: 顶部导航栏，包含菜单和用户状态
+- **Navigation.tsx**: 顶部导航栏，包含菜单和用户状态 (TypeScript)
 - **Footer.js**: 页脚组件，包含链接和版权信息
 
 ##### 功能组件
 - **ArticleEditor.js**: 文章编辑器，支持 Markdown 编辑
 - **ArticleList.js**: 文章列表展示组件
 - **ResourceList.js**: 资源列表展示组件
+- **ResourceCard.js**: 资源卡片组件，用于展示单个资源
+- **SitePageContent.js**: 站点页面内容组件
 - **LoginModal.js**: 登录模态框组件
+
+##### 主题和国际化组件
+- **theme-toggle.tsx**: 明暗主题切换组件
+- **language-toggle.tsx**: 语言切换组件
+- **providers.tsx**: 全局提供者组件，包含主题和其他上下文
 
 ##### UI 基础组件 (ui/)
 - **button.tsx**: 按钮组件，支持多种变体和尺寸
 - **card.tsx**: 卡片组件，包含标题、内容、页脚
+- **badge.tsx**: 徽章组件，用于状态标识和分类标签
 - **input.tsx**: 输入框组件
 - **textarea.tsx**: 文本域组件
 - **table.tsx**: 表格组件
@@ -299,3 +364,34 @@ const buttonVariants = cva(
 - SWR 数据缓存
 - 浏览器缓存优化
 - CDN 静态资源缓存
+
+## 项目更新记录
+
+### 2025-01-28 架构重构
+#### 路由结构调整
+- **resources → site**: 将资源页面路由从 `/resources` 更改为 `/site`
+- **动态路由优化**: 实现 `/site/[slug]` 动态详情页
+- **数据结构扩展**: 为 `sitelists.json` 添加时间戳字段
+
+#### 组件系统增强
+- **新增组件**:
+  - `ResourceCard.js` - 资源卡片组件
+  - `SitePageContent.js` - 站点页面内容组件
+  - `theme-toggle.tsx` - 主题切换组件
+  - `language-toggle.tsx` - 语言切换组件
+  - `providers.tsx` - 全局提供者组件
+  - `badge.tsx` - 徽章 UI 组件
+
+#### TypeScript 迁移
+- **Navigation.js → Navigation.tsx**: 导航组件 TypeScript 化
+- **类型安全**: 增强组件类型定义和接口
+
+#### 主题系统
+- **next-themes 集成**: 实现明暗主题切换
+- **系统主题检测**: 自动适配用户系统偏好
+- **无闪烁切换**: 优化主题切换体验
+
+#### 数据管理优化
+- **字段简化**: 移除 `sitelists.json` 中冗余的 `path` 字段
+- **动态路径**: 通过 `slug` 字段动态构建文件路径
+- **数据一致性**: 确保列表数据与详情数据的关联性

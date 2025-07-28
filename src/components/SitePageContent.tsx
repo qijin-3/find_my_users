@@ -15,6 +15,26 @@ import {
 } from 'lucide-react'
 
 /**
+ * 资源对象类型定义
+ */
+interface Resource {
+  name: string
+  description: string
+  url: string
+  slug: string
+  category: string
+  date: string
+  lastModified: string
+}
+
+/**
+ * SitePageContent组件的Props类型定义
+ */
+interface SitePageContentProps {
+  resources: Resource[]
+}
+
+/**
  * 站点分类配置
  * 定义左侧菜单的分类项目和对应图标
  */
@@ -31,9 +51,9 @@ const siteCategories = [
 /**
  * SitePageContent组件 - 分类页面主要内容
  * 包含左侧分类菜单、顶部标题栏和右侧工具展示区域
- * @param {Array} resources - 资源数组
+ * @param {SitePageContentProps} props - 组件属性
  */
-export default function SitePageContent({ resources }) {
+export default function SitePageContent({ resources }: SitePageContentProps) {
   const [selectedCategory, setSelectedCategory] = useState('product-showcase')
 
   /**
@@ -41,6 +61,7 @@ export default function SitePageContent({ resources }) {
    * 使用useMemo优化性能，避免不必要的重新计算
    */
   const filteredResources = useMemo(() => {
+    if (!resources || !Array.isArray(resources)) return []
     if (!selectedCategory) return resources
     return resources.filter(resource => resource.category === selectedCategory)
   }, [resources, selectedCategory])
@@ -72,7 +93,9 @@ export default function SitePageContent({ resources }) {
                 {siteCategories.map((category) => {
                   const IconComponent = category.icon
                   const isSelected = selectedCategory === category.id
-                  const categoryCount = resources.filter(r => r.category === category.id).length
+                  const categoryCount = resources && Array.isArray(resources) 
+                    ? resources.filter(r => r.category === category.id).length 
+                    : 0
                   
                   return (
                     <button

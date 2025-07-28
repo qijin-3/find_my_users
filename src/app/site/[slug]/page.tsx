@@ -2,14 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Globe, Clock, Users, CheckCircle, XCircle } from 'lucide-react';
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "@/components/ui/card";
+import { ArrowLeft, ExternalLink, Globe, Clock, Users, CheckCircle, XCircle, ChevronRight } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 
 // 类型定义
@@ -123,149 +116,98 @@ export default function SiteDetail({ params }: { params: PageParams }) {
   const StatusIcon = statusInfo.icon;
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      {/* 返回按钮 */}
-      <div className="mb-6">
-        <Link 
-          href="/site" 
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
-        >
-          <ArrowLeft size={16} />
-          返回资源列表
-        </Link>
-      </div>
-
-      {/* 站点标题和基本信息 */}
-      <div className="mb-8">
+    <article className="container mx-auto px-4 py-12 max-w-3xl">
+      {/* Breadcrumb navigation */}
+      <nav className="flex items-center text-sm text-gray-500 mb-6">
+        <Link href="/" className="hover:text-blue-600">Home</Link>
+        <ChevronRight className="mx-2" size={16} />
+        <Link href="/site" className="hover:text-blue-600">Site</Link>
+        <ChevronRight className="mx-2" size={16} />
+        <span className="text-gray-900">{siteData.name}</span>
+      </nav>
+      
+      {/* Meta information card */}
+      <div className="bg-gray-100 rounded-lg p-6 mb-8">
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h1 className="text-4xl font-bold mb-2">{siteData.name}</h1>
-            <p className="text-xl text-gray-600 mb-4">{siteData.description}</p>
+            <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
+            <p className="text-gray-600 mb-2">{siteData.description}</p>
           </div>
-          <div className="flex gap-2">
-            <Badge className={statusInfo.color}>
-              <StatusIcon size={14} className="mr-1" />
-              {siteData.status}
-            </Badge>
+          <Badge className={statusInfo.color}>
+            <StatusIcon size={14} className="mr-1" />
+            {siteData.status}
+          </Badge>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div>
+            <span className="font-semibold text-gray-700">站点类型：</span>
+            <span className="text-gray-600">{siteData.type}</span>
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">适合地区：</span>
+            <span className="text-gray-600">{siteData.region}</span>
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">递交方式：</span>
+            <span className="text-gray-600">{siteData.submitMethod}</span>
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">审核：</span>
+            <span className="text-gray-600">{siteData.review === 'Y' ? '需要审核' : '无需审核'}</span>
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">审核耗时：</span>
+            <span className="text-gray-600">{siteData.reviewTime}</span>
+          </div>
+          <div>
+            <span className="font-semibold text-gray-700">预计曝光（周）：</span>
+            <span className="text-gray-600">{siteData.expectedExposure}</span>
           </div>
         </div>
-
-        {/* 官网链接 */}
-        <a 
-          href={siteData.url} 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors text-lg"
-        >
-          <Globe size={18} />
-          访问官网
-          <ExternalLink size={16} />
-        </a>
+        
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <a 
+            href={siteData.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
+          >
+            <Globe size={16} />
+            访问官网
+            <ExternalLink size={14} />
+          </a>
+        </div>
       </div>
 
-      {/* 详细信息卡片 */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 基本信息 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>基本信息</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">站点类型</h4>
-              <Badge variant="outline">{siteData.type}</Badge>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">适合地区</h4>
-              <Badge variant="outline">{siteData.region}</Badge>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">网站地址</h4>
-              <a 
-                href={siteData.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 transition-colors break-all"
-              >
-                {siteData.url}
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* 投稿信息 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>投稿信息</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">递交方式</h4>
-              <Badge variant="outline">{siteData.submitMethod}</Badge>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">递交地址</h4>
-              <a 
-                href={siteData.submitUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 transition-colors break-all"
-              >
-                {siteData.submitUrl}
-              </a>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">审核</h4>
-              <Badge variant={siteData.review === 'Y' ? 'default' : 'secondary'}>
-                {siteData.review === 'Y' ? '需要审核' : '无需审核'}
-              </Badge>
-            </div>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">审核耗时</h4>
-              <div className="flex items-center gap-2">
-                <Clock size={16} className="text-gray-500" />
-                <span>{siteData.reviewTime}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* 曝光信息 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>曝光信息</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div>
-              <h4 className="font-semibold text-gray-700 mb-1">预计曝光（周）</h4>
-              <div className="flex items-center gap-2">
-                <Users size={16} className="text-gray-500" />
-                <span>{siteData.expectedExposure}</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* 递交要求 */}
-        <Card>
-          <CardHeader>
-            <CardTitle>递交要求</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-gray-700 leading-relaxed">{siteData.submitRequirements}</p>
-          </CardContent>
-        </Card>
+      {/* Site content */}
+      <div className="prose prose-lg max-w-none">
+        <h2>递交要求</h2>
+        <p className="text-gray-700 leading-relaxed">{siteData.submitRequirements}</p>
+        
+        <h2>递交地址</h2>
+        <p>
+          <a 
+            href={siteData.submitUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 transition-colors break-all"
+          >
+            {siteData.submitUrl}
+          </a>
+        </p>
+        
+        <h2>评价</h2>
+        <p className="text-gray-700 leading-relaxed">{siteData.rating}</p>
       </div>
-
-      {/* 评价 */}
-      <Card className="mt-6">
-        <CardHeader>
-          <CardTitle>评价</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-gray-700 leading-relaxed">{siteData.rating}</p>
-        </CardContent>
-      </Card>
-    </div>
+      
+      {/* Back to site list link */}
+      <div className="mt-12">
+        <Link href="/site" className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
+          <ArrowLeft size={20} />
+          Back to site list
+        </Link>
+      </div>
+    </article>
   );
 }
