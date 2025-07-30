@@ -95,11 +95,6 @@ export default function ResourceCard({
               <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 mb-2">
                 {resource.name}
               </CardTitle>
-              {showCategory && resource.category && (
-                <Badge variant="secondary" className="text-xs mb-2">
-                  {getCategoryDisplayName(resource.category)}
-                </Badge>
-              )}
             </div>
             <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-200 flex-shrink-0 ml-2" />
           </div>
@@ -118,7 +113,14 @@ export default function ResourceCard({
               {resource.description}
             </p>
             
-            {/* 标签区域移到描述下方 */}
+            {/* 产品种类标签放在描述下方 */}
+            {showCategory && resource.category && (
+              <Badge variant="secondary" className="text-xs">
+                {getCategoryDisplayName(resource.category)}
+              </Badge>
+            )}
+            
+            {/* 其他标签区域 */}
             {resource.tags && resource.tags.length > 0 && (
               <div className="flex flex-wrap gap-1">
                 {resource.tags.slice(0, 2).map((tag, index) => (
