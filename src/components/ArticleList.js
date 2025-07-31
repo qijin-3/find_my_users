@@ -1,5 +1,6 @@
 // components/ArticleList.js
-import Link from 'next/link'
+'use client'
+import { Link } from '@/i18n/navigation'
 import {
   Card,
   CardHeader,
@@ -19,11 +20,11 @@ export default function ArticleList({ articles, showMoreLink = true }) {
         )}
       </div>
       <div className="space-y-6">
-        {articles.map(({ id, title, description }) => (
-          <Card key={id}>
+        {articles.map(({ slug, title, description }) => (
+          <Card key={slug}>
             <CardHeader>
               <Link 
-                href={`/posts/${id}`}
+                href={`/posts/${slug}`}
                 className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-1"
               >
                 <CardTitle>{title}</CardTitle>

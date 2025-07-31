@@ -1,9 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-import { notFound } from 'next/navigation';
-import Link from 'next/link';
-import { ArrowLeft, ExternalLink, Globe, Clock, Users, CheckCircle, XCircle, ChevronRight } from 'lucide-react';
-import { Badge } from "@/components/ui/badge";
+import { setRequestLocale } from 'next-intl/server'
+import { getTranslations } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
+import { Link } from '@/i18n/navigation'
+import { ArrowLeft, ExternalLink, Globe, Clock, Users, CheckCircle, XCircle, ChevronRight } from 'lucide-react'
+import { Badge } from "@/components/ui/badge"
 
 // 类型定义
 interface Resource {
@@ -30,21 +31,29 @@ interface SiteData {
   rating: string;
 }
 
-interface PageParams {
-  slug: string;
+interface SitePageProps {
+  params: Promise<{ locale: string; slug: string }>
 }
 
 /**
  * 生成静态参数用于预渲染
  * @returns {Array} 包含所有资源slug的参数数组
  */
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
-  const resourcesPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
-  const resources: Resource[] = JSON.parse(fs.readFileSync(resourcesPath, 'utf8'));
+export async function generateStaticParams(): Promise<{ locale: string; slug: string }[]> {
+  const locales = ['zh', 'en']
+  const params: { locale: string; slug: string }[] = []
   
-  return resources.map((resource: Resource) => ({
-    slug: resource.slug,
-  }));
+  for (const locale of locales) {
+    const resources: Resource[] = getI18nJsonData('sitelists.json', locale)
+    for (const resource of resources) {
+      params.push({
+        locale,
+        slug: resource.slug,
+      })
+    }
+  }
+  
+  return params
 }
 
 /**
@@ -52,34 +61,40 @@ export async function generateStaticParams(): Promise<{ slug: string }[]> {
  * @param {Object} params - 路由参数
  * @returns {Object} 页面元数据
  */
-export async function generateMetadata({ params }: { params: PageParams }) {
-  const siteData = getSiteData(params.slug);
+export async function generateMetadata({ params }: SitePageProps) {
+  const { locale, slug } = await params
+  const siteData = getI18nSiteData(slug, locale)
   
   if (!siteData) {
     return {
-      title: '站点未找到',
-    };
+      title: locale === 'zh' ? '站点未找到' : 'Site Not Found',
+    }
   }
 
   return {
-    title: `${siteData.name} - 站点详情`,
+    title: `${siteData.name} - ${locale === 'zh' ? '站点详情' : 'Site Details'}`,
     description: siteData.description,
-  };
+  }
 }
 
 /**
- * 获取站点详情数据
- * @param {string} slug - 站点标识符
- * @returns {Object|null} 站点详情数据或null
+ * 获取状态翻译文本
+ * @param {string} status - 站点状态
+ * @param {string} locale - 语言
+ * @returns {string} 翻译后的状态文本
  */
-function getSiteData(slug: string): SiteData | null {
-  try {
-    const sitePath = path.join(process.cwd(), 'data', 'Site', `${slug}.json`);
-    const siteData: SiteData = JSON.parse(fs.readFileSync(sitePath, 'utf8'));
-    return siteData;
-  } catch (error) {
-    return null;
+function getStatusText(status: string, locale: string): string {
+  if (locale === 'zh') {
+    return status
   }
+  
+  const statusMap: Record<string, string> = {
+    '运行中': 'Running',
+    '疑似不再维护': 'Possibly Unmaintained',
+    '停止运营': 'Shut Down'
+  }
+  
+  return statusMap[status] || status
 }
 
 /**
@@ -105,23 +120,37 @@ function getStatusInfo(status: string) {
  * @param {Object} params - 路由参数
  * @returns {JSX.Element} 站点详情页面
  */
-export default function SiteDetail({ params }: { params: PageParams }) {
-  const siteData = getSiteData(params.slug);
+export default async function SiteDetailPage({ params }: SitePageProps) {
+  const { locale, slug } = await params
+  
+  // 启用静态渲染
+  setRequestLocale(locale)
+  
+  // 获取翻译文本
+  const t = await getTranslations('site')
+  
+  // 获取站点数据
+  const siteData = getI18nSiteData(slug, locale)
 
   if (!siteData) {
-    notFound();
+    notFound()
   }
 
-  const statusInfo = getStatusInfo(siteData.status);
-  const StatusIcon = statusInfo.icon;
+  const statusInfo = getStatusInfo(siteData.status)
+  const StatusIcon = statusInfo.icon
+  const statusText = getStatusText(siteData.status, locale)
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-blue-600">Home</Link>
+        <Link href="/" className="hover:text-blue-600">
+          {locale === 'zh' ? '首页' : 'Home'}
+        </Link>
         <ChevronRight className="mx-2" size={16} />
-        <Link href="/site" className="hover:text-blue-600">Site</Link>
+        <Link href="/site" className="hover:text-blue-600">
+          {t('title')}
+        </Link>
         <ChevronRight className="mx-2" size={16} />
         <span className="text-gray-900">{siteData.name}</span>
       </nav>
@@ -135,33 +164,50 @@ export default function SiteDetail({ params }: { params: PageParams }) {
           </div>
           <Badge className={statusInfo.color}>
             <StatusIcon size={14} className="mr-1" />
-            {siteData.status}
+            {statusText}
           </Badge>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
-            <span className="font-semibold text-gray-700">站点类型：</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '站点类型：' : 'Site Type:'}
+            </span>
             <span className="text-gray-600">{siteData.type}</span>
           </div>
           <div>
-            <span className="font-semibold text-gray-700">适合地区：</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '适合地区：' : 'Suitable Region:'}
+            </span>
             <span className="text-gray-600">{siteData.region}</span>
           </div>
           <div>
-            <span className="font-semibold text-gray-700">递交方式：</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '递交方式：' : 'Submit Method:'}
+            </span>
             <span className="text-gray-600">{siteData.submitMethod}</span>
           </div>
           <div>
-            <span className="font-semibold text-gray-700">审核：</span>
-            <span className="text-gray-600">{siteData.review === 'Y' ? '需要审核' : '无需审核'}</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '审核：' : 'Review:'}
+            </span>
+            <span className="text-gray-600">
+              {siteData.review === 'Y' 
+                ? (locale === 'zh' ? '需要审核' : 'Required') 
+                : (locale === 'zh' ? '无需审核' : 'Not Required')
+              }
+            </span>
           </div>
           <div>
-            <span className="font-semibold text-gray-700">审核耗时：</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '审核耗时：' : 'Review Time:'}
+            </span>
             <span className="text-gray-600">{siteData.reviewTime}</span>
           </div>
           <div>
-            <span className="font-semibold text-gray-700">预计曝光（周）：</span>
+            <span className="font-semibold text-gray-700">
+              {locale === 'zh' ? '预计曝光（周）：' : 'Expected Exposure (weeks):'}
+            </span>
             <span className="text-gray-600">{siteData.expectedExposure}</span>
           </div>
         </div>
@@ -174,7 +220,7 @@ export default function SiteDetail({ params }: { params: PageParams }) {
             className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
           >
             <Globe size={16} />
-            访问官网
+            {locale === 'zh' ? '访问官网' : 'Visit Website'}
             <ExternalLink size={14} />
           </a>
         </div>
@@ -182,10 +228,10 @@ export default function SiteDetail({ params }: { params: PageParams }) {
 
       {/* Site content */}
       <div className="prose prose-lg max-w-none">
-        <h2>递交要求</h2>
+        <h2>{locale === 'zh' ? '递交要求' : 'Submit Requirements'}</h2>
         <p className="text-gray-700 leading-relaxed">{siteData.submitRequirements}</p>
         
-        <h2>递交地址</h2>
+        <h2>{locale === 'zh' ? '递交地址' : 'Submit URL'}</h2>
         <p>
           <a 
             href={siteData.submitUrl} 
@@ -197,7 +243,7 @@ export default function SiteDetail({ params }: { params: PageParams }) {
           </a>
         </p>
         
-        <h2>评价</h2>
+        <h2>{locale === 'zh' ? '评价' : 'Rating'}</h2>
         <p className="text-gray-700 leading-relaxed">{siteData.rating}</p>
       </div>
       
@@ -205,7 +251,7 @@ export default function SiteDetail({ params }: { params: PageParams }) {
       <div className="mt-12">
         <Link href="/site" className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
           <ArrowLeft size={20} />
-          Back to site list
+          {locale === 'zh' ? '返回站点列表' : 'Back to site list'}
         </Link>
       </div>
     </article>

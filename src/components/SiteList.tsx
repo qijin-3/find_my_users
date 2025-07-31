@@ -1,5 +1,6 @@
 // components/SiteList.tsx
-import Link from 'next/link'
+'use client'
+import { Link } from '@/i18n/navigation'
 import ResourceCard from '@/components/ResourceCard'
 
 /**

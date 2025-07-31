@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import ResourceCard from '@/components/ResourceCard'
 import { 
@@ -32,20 +33,22 @@ interface Resource {
  */
 interface SitePageContentProps {
   resources: Resource[]
+  locale?: string
 }
 
 /**
  * 站点分类配置
  * 定义左侧菜单的分类项目和对应图标
+ * @param t - 翻译函数
  */
-const siteCategories = [
-  { id: 'product-showcase', name: '产品展示页', icon: Globe },
-  { id: 'tool-navigation', name: '工具导航', icon: Wrench },
-  { id: 'blog-newsletter', name: '博客/周刊', icon: BookOpen },
-  { id: 'social-community', name: '社交社区', icon: Users },
-  { id: 'media', name: '媒体', icon: Radio },
-  { id: 'vertical-forum', name: '垂直论坛/社区', icon: MessageSquare },
-  { id: 'design-platform', name: '设计平台', icon: Palette },
+const getSiteCategories = (t: any) => [
+  { id: 'product-showcase', name: t('categories.product-showcase'), icon: Globe },
+  { id: 'tool-navigation', name: t('categories.tool-navigation'), icon: Wrench },
+  { id: 'blog-newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
+  { id: 'social-community', name: t('categories.social-community'), icon: Users },
+  { id: 'media', name: t('categories.media'), icon: Radio },
+  { id: 'vertical-forum', name: t('categories.vertical-forum'), icon: MessageSquare },
+  { id: 'design-platform', name: t('categories.design-platform'), icon: Palette },
 ]
 
 /**
@@ -53,8 +56,12 @@ const siteCategories = [
  * 包含左侧分类菜单、顶部标题栏和右侧工具展示区域
  * @param {SitePageContentProps} props - 组件属性
  */
-export default function SitePageContent({ resources }: SitePageContentProps) {
+export default function SitePageContent({ resources, locale = 'zh' }: SitePageContentProps) {
+  const t = useTranslations('site')
   const [selectedCategory, setSelectedCategory] = useState('product-showcase')
+
+  // 获取本地化的分类配置
+  const siteCategories = getSiteCategories(t)
 
   /**
    * 根据选中的分类筛选资源
@@ -73,12 +80,12 @@ export default function SitePageContent({ resources }: SitePageContentProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">分类</h1>
-              <p className="text-sm text-gray-500">独立开发者工具站 | 全球产品必备工具资源源</p>
+              <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
+              <p className="text-sm text-gray-500">{t('description')}</p>
             </div>
             <Button className="bg-black text-white hover:bg-gray-800">
               <Plus className="w-4 h-4 mr-2" />
-              提交工具
+              {t('submitTool')}
             </Button>
           </div>
         </div>
@@ -143,8 +150,8 @@ export default function SitePageContent({ resources }: SitePageContentProps) {
                 <div className="text-gray-400 mb-4">
                   <Globe className="w-12 h-12 mx-auto" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">暂无工具</h3>
-                <p className="text-gray-500">该分类下暂时没有工具，敬请期待</p>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">{t('empty.title')}</h3>
+                <p className="text-gray-500">{t('empty.description')}</p>
               </div>
             )}
           </div>

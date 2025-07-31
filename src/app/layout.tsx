@@ -1,30 +1,23 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { Layout } from '@/components/Layout'
 import { Providers } from '@/components/providers'
-import { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
-
-
-export const metadata: Metadata = {
-  title: {
-    default: 'FindMyUsers',
-    template: '%s | FindMyUsers'
-  },
-  description: 'Open source dynamic website without database, built with Next.js and GitHub API',
-}
 
 interface RootLayoutProps {
   children: React.ReactNode
 }
 
+/**
+ * 根布局组件
+ * 设置全局样式和提供者，国际化处理在[locale]布局中进行
+ */
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
-          <Layout>{children}</Layout>
+          {children}
         </Providers>
       </body>
     </html>

@@ -1,0 +1,61 @@
+{
+  "navigation": {
+    "home": "首页",
+    "site": "分类",
+    "articles": "文章"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "back": "返回",
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "create": "创建",
+    "search": "搜索"
+  },
+  "home": {
+    "title": "FindMyUsers",
+    "subtitle": "无数据库开源动态网站内容管理系统",
+    "description": "FindMyUsers 是一个动态、无数据库的网站，使用 Next.js、Tailwind CSS 和 Shadcn/UI 构建，具有由 GitHub API 驱动的内容管理系统，可实现无缝更新和管理。"
+  },
+  "site": {
+    "title": "分类",
+    "description": "独立开发者工具站 | 全球产品必备工具资源源",
+    "submitTool": "提交工具",
+    "categories": {
+      "product-showcase": "产品展示页",
+      "tool-navigation": "工具导航",
+      "blog-newsletter": "博客/周刊",
+      "social-community": "社交社区",
+      "media": "媒体",
+      "vertical-forum": "垂直论坛/社区",
+      "design-platform": "设计平台"
+    },
+    "empty": {
+      "title": "暂无工具",
+      "description": "该分类下暂时没有工具，敬请期待"
+    }
+  },
+  "articles": {
+    "title": "文章",
+    "backToList": "返回文章列表",
+    "publishedOn": "发布于",
+    "lastModified": "最后修改"
+  },
+  "footer": {
+    "poweredBy": "由 {technology} 驱动",
+    "openSource": "开源项目"
+  },
+  "language": {
+    "chinese": "中文",
+    "english": "English"
+  },
+  "theme": {
+    "light": "浅色模式",
+    "dark": "深色模式",
+    "system": "跟随系统"
+  }
+}

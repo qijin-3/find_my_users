@@ -1,29 +1,27 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useLocale, useTranslations } from 'next-intl'
+import { useRouter, usePathname } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
 import { Globe } from 'lucide-react'
 
+/**
+ * 语言切换组件
+ * 使用next-intl的路由系统进行语言切换
+ */
 export function LanguageToggle() {
-  const [mounted, setMounted] = useState(false)
-  const [language, setLanguage] = useState('en')
+  const t = useTranslations('language')
+  const locale = useLocale()
+  const router = useRouter()
+  const pathname = usePathname()
 
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-    // Get language from localStorage or default to 'en'
-    const savedLanguage = localStorage.getItem('language') || 'en'
-    setLanguage(savedLanguage)
-  }, [])
-
+  /**
+   * 切换语言
+   * 保持当前页面路径，只改变语言前缀
+   */
   const toggleLanguage = () => {
-    const newLanguage = language === 'en' ? 'zh' : 'en'
-    setLanguage(newLanguage)
-    localStorage.setItem('language', newLanguage)
-  }
-
-  if (!mounted) {
-    return null
+    const newLocale = locale === 'en' ? 'zh' : 'en'
+    router.replace(pathname, { locale: newLocale })
   }
 
   return (
@@ -32,9 +30,10 @@ export function LanguageToggle() {
       size="sm"
       onClick={toggleLanguage}
       className="h-9 px-2 text-sm font-medium"
+      aria-label={`Switch to ${locale === 'en' ? 'Chinese' : 'English'}`}
     >
       <Globe className="h-[1.2rem] w-[1.2rem] mr-1" />
-      {language === 'en' ? 'EN' : '中文'}
+      {locale === 'en' ? t('chinese') : t('english')}
     </Button>
   )
 }

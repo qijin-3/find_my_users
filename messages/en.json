@@ -1,0 +1,61 @@
+{
+  "navigation": {
+    "home": "Home",
+    "site": "Site",
+    "articles": "Articles"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "back": "Back",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "create": "Create",
+    "search": "Search"
+  },
+  "home": {
+    "title": "FindMyUsers",
+    "subtitle": "Open Source Dynamic Website CMS Without Database",
+    "description": "FindMyUsers is a dynamic, database-free website built with Next.js, Tailwind CSS, and Shadcn/UI, featuring a content management system powered by the GitHub API for seamless updates and administration."
+  },
+  "site": {
+    "title": "Site",
+    "description": "Explore our curated list of sites for web development, GitHub, and more.",
+    "submitTool": "Submit Tool",
+    "categories": {
+      "product-showcase": "Product Showcase",
+      "tool-navigation": "Tool Navigation",
+      "blog-newsletter": "Blog/Newsletter",
+      "social-community": "Social Community",
+      "media": "Media",
+      "vertical-forum": "Vertical Forum/Community",
+      "design-platform": "Design Platform"
+    },
+    "empty": {
+      "title": "No Tools Available",
+      "description": "No tools are available in this category at the moment. Please check back later."
+    }
+  },
+  "articles": {
+    "title": "Articles",
+    "backToList": "Back to article list",
+    "publishedOn": "Published on",
+    "lastModified": "Last modified"
+  },
+  "footer": {
+    "poweredBy": "Powered by {technology}",
+    "openSource": "Open Source Project"
+  },
+  "language": {
+    "chinese": "中文",
+    "english": "English"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode",
+    "system": "System"
+  }
+}

@@ -1,19 +1,24 @@
 'use client'
 
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { useTranslations } from 'next-intl'
+import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageToggle } from '@/components/language-toggle'
 
-const navItems = [
-  { path: '/', label: 'Home' },
-  { path: '/site', label: 'Site' },
-  { path: '/posts', label: 'Articles' },
-]
-
+/**
+ * 导航组件
+ * 使用next-intl进行国际化，支持多语言路由
+ */
 export function Navigation() {
+  const t = useTranslations('navigation')
   const pathname = usePathname()
+
+  const navItems = [
+    { path: '/', label: t('home') },
+    { path: '/site', label: t('site') },
+    { path: '/posts', label: t('articles') },
+  ]
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background">

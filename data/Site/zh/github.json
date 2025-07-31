@@ -1,0 +1,16 @@
+{
+  "name": "Github.com",
+  "description": "The world's leading platform for version control and collaborative software development.",
+  "screenshot": "/images/sites/github-screenshot.jpg",
+  "status": "运行中",
+  "type": "社交社区",
+  "region": "海外",
+  "url": "https://github.com/",
+  "submitMethod": "GitHub",
+  "submitUrl": "https://github.com/github/feedback",
+  "submitRequirements": "需要详细描述功能请求或bug报告，遵循社区准则",
+  "review": "Y",
+  "reviewTime": "一周内",
+  "expectedExposure": "1w以上",
+  "rating": "全球最大的代码托管平台，不仅提供版本控制功能，还是开发者社交和协作的重要平台。功能丰富，生态完善，是每个开发者必备的工具。"
+}
