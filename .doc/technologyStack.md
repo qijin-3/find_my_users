@@ -18,6 +18,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
   - `@radix-ui/react-dropdown-menu`
   - `@radix-ui/react-slot`
 - **Lucide React** - 现代图标库
+- **Framer Motion** - 生产级动画库
 - **Class Variance Authority (CVA)** - 组件变体管理
 - **Tailwind Merge** - Tailwind 类名合并工具
 - **CLSX** - 条件类名工具
@@ -37,6 +38,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
   "class-variance-authority": "^0.7.0",          // 组件变体管理
   "clsx": "^2.1.1",                              // 条件类名工具
   "cookie": "^0.6.0",                            // Cookie 处理
+  "framer-motion": "^11.11.17",                  // 动画库
   "gray-matter": "^4.0.3",                       // Markdown 前置数据解析
   "jsonwebtoken": "^9.0.2",                      // JWT 令牌处理
   "lucide-react": "^0.427.0",                    // 图标库
@@ -82,6 +84,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 - [Shadcn/ui 组件文档](https://ui.shadcn.com/)
 - [Radix UI 文档](https://www.radix-ui.com/primitives/docs/overview/introduction)
 - [Lucide React 图标](https://lucide.dev/guide/packages/lucide-react)
+- [Framer Motion 文档](https://www.framer.com/motion/)
 
 ### 工具和实用程序
 - [GitHub Octokit REST API](https://octokit.github.io/rest.js/v21)

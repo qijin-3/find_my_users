@@ -737,3 +737,99 @@ const getWebsiteScreenshotUrl = (url: string): string => {
 - 测试第三方服务的CORS策略和稳定性
 - 为所有外部服务调用添加错误处理
 - 考虑使用本地生成的SVG图标作为备用方案
+
+### 错误：动画组件图层层级管理不当
+**日期**：2025-01-31
+**错误现象**：
+在实现小人插画动效时，后排小人在动画或悬停时会覆盖前排小人，违反了预期的视觉层次。
+
+**错误做法**：
+```tsx
+// 未设置适当的 z-index 层级
+<div className="flex justify-center items-end space-x-1">
+  {/* 后排小人 */}
+  <motion.div className="cursor-pointer">
+    {/* 动画时可能覆盖前排 */}
+  </motion.div>
+</div>
+<div className="flex justify-center items-end space-x-1" style={{ marginTop: '-100px' }}>
+  {/* 前排小人 */}
+  <motion.div className="cursor-pointer">
+    {/* 被后排覆盖 */}
+  </motion.div>
+</div>
+```
+
+**正确做法**：
+```tsx
+// 明确设置图层层级，确保视觉层次正确
+{/* 后排小人 - 较低层级 */}
+<div className="flex justify-center items-end space-x-1 relative z-10">
+  <motion.div className="cursor-pointer relative z-10">
+    {/* 后排小人永远在较低层级 */}
+  </motion.div>
+</div>
+
+{/* 前排小人 - 较高层级 */}
+<div className="flex justify-center items-end space-x-1 relative z-20" style={{ marginTop: '-100px' }}>
+  <motion.div className="cursor-pointer relative z-30">
+    {/* 前排小人始终在最高层级 */}
+  </motion.div>
+</div>
+```
+
+**修复要点**：
+1. **层级规划** - 在复杂布局中提前规划 z-index 层级
+2. **容器层级** - 父容器和子元素都需要设置合适的 z-index
+3. **交互保护** - 确保动画和悬停效果不会破坏视觉层次
+4. **渐进式层级** - 使用递增的 z-index 值 (z-10, z-20, z-30)
+
+**预防措施**：
+- 复杂动画组件设计时先绘制层级关系图
+- 使用语义化的 z-index 值而非随意数字
+- 测试所有交互状态下的层级表现
+- 为重叠元素建立明确的层级规范
+
+### 错误：动画方向与用户期望不符
+**日期**：2025-01-31
+**错误现象**：
+实现动画时默认使用了从上往下的出现效果，但用户明确要求从下往上出现，更符合"冒出来"的俏皮感觉。
+
+**错误做法**：
+```tsx
+// 错误的动画方向和顺序
+const getAnimationDelay = (row: number, col: number) => {
+  // 后排先出现，前排后出现 - 不符合"从下往上"的视觉逻辑
+  const rowDelay = row === 2 ? 0 : 0.8
+  return rowDelay + colDelay
+}
+
+initial={{ y: 50 }}  // 从较小的 y 值开始，视觉上像从上往下
+```
+
+**正确做法**：
+```tsx
+// 正确的从下往上动画效果
+const getAnimationDelay = (row: number, col: number) => {
+  // 前排（视觉下方）先出现，后排（视觉上方）后出现
+  const rowDelay = row === 1 ? 0 : 0.8  // row=1是前排，先出现
+  const colDelay = (col - 1) * 0.15
+  return rowDelay + colDelay
+}
+
+// 更大的初始 y 值，营造从下方"蹦出"的效果
+initial={{ y: 100 }}  // 后排从更下方开始
+initial={{ y: 120 }}  // 前排从最下方开始
+```
+
+**修复要点**：
+1. **用户体验理解** - 深入理解用户的视觉期望
+2. **动画语义** - 动画应该支撑而不是违背设计意图
+3. **空间逻辑** - 动画方向应该符合空间层次逻辑
+4. **渐进优化** - 根据用户反馈调整动画参数
+
+**预防措施**：
+- 在实现动画前明确用户的视觉期望
+- 使用描述性的变量名表达动画意图
+- 为复杂动画制作原型或草图确认效果
+- 保持动画参数的可配置性以便快速调整

@@ -99,5 +99,6 @@ FindMyUsers is built with the following open-source libraries:
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn/UI](https://ui.shadcn.com/)
+- [Framer Motion](https://www.framer.com/motion/)
 
 We are grateful to the maintainers and contributors of these projects.
