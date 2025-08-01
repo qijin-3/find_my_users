@@ -18,8 +18,8 @@
   },
   "home": {
     "title": "FindMyUsers",
-    "subtitle": "Open Source Dynamic Website CMS Without Database",
-    "description": "FindMyUsers is a dynamic, database-free website built with Next.js, Tailwind CSS, and Shadcn/UI, featuring a content management system powered by the GitHub API for seamless updates and administration."
+    "subtitle": "Your first users, start here.",
+    "description": "FindMyUsers is a curated directory of promotion channels built for indie developers. We continuously collect and review real, actionable channels from around the world to help you reach your first users, validate your product idea, and confidently take your first step out of cold start."
   },
   "site": {
     "title": "Site",

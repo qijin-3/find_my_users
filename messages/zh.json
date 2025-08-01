@@ -18,8 +18,8 @@
   },
   "home": {
     "title": "FindMyUsers",
-    "subtitle": "无数据库开源动态网站内容管理系统",
-    "description": "FindMyUsers 是一个动态、无数据库的网站，使用 Next.js、Tailwind CSS 和 Shadcn/UI 构建，具有由 GitHub API 驱动的内容管理系统，可实现无缝更新和管理。"
+    "subtitle": "你的第一批用户，从这里开始",
+    "description": "FindMyUsers 是专为独立开发者打造的推广渠道导航站，持续收录并评测国内外真实、可操作的产品推广渠道。帮助开发者找到首批用户、验证产品可行性，轻松迈出冷启动第一步。"
   },
   "site": {
     "title": "分类",
