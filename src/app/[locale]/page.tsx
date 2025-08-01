@@ -37,19 +37,19 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <div className="container mx-auto py-12 space-y-16">
-      <section className="text-center">
+      <section className="text-center pt-8">
         {/* 小人插画 */}
         <PeopleIllustration />
         
         {/* 标题和描述 */}
-        <div className="space-y-4">
+        <div>
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
             {t('title')}
           </h1>
-          <h2 className="text-2xl tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
+          <h2 className="mt-2 text-2xl tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
             {t('subtitle')}
           </h2>
-          <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl">
+          <p className="mt-2 mx-auto max-w-[700px] text-gray-500 md:text-xl">
             {t('description')}
           </p>
         </div>

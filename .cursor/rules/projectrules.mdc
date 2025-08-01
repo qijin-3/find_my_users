@@ -4,4 +4,4 @@ alwaysApply: true
 1. 确保在每次聊天时都会读取@Memory.md和@Shadcn.md，并遵循其中的规则。
 2. 请确保每一次更新代码前，都会使用content7.mcp来阅读最新的文档。
 3. 请确保每次更新代码时，如果涉及新的组件、页面或者文案变更，都需要阅读@i18n.md，确保多语言功能的统一。
-4. 请确保每一更新代码后，都会反思和总结这次的代码更新，并将相应的的更新内容更新到@frontend.md、@technologyStack.md、@readme.md、@i18n.md中。
+4. 请确保每次更新代码后，都会反思和总结这次的代码更新，并将相应的的更新内容更新到@frontend.md、@technologyStack.md、@readme.md、@i18n.md中。
