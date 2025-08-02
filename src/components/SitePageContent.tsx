@@ -10,10 +10,10 @@ import {
   BookOpen, 
   Users, 
   Radio, 
-  MessageSquare, 
+  ChatCircle, 
   Palette,
   Plus
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 /**
  * 资源对象类型定义
@@ -47,7 +47,7 @@ const getSiteCategories = (t: any) => [
   { id: 'blog-newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
   { id: 'social-community', name: t('categories.social-community'), icon: Users },
   { id: 'media', name: t('categories.media'), icon: Radio },
-  { id: 'vertical-forum', name: t('categories.vertical-forum'), icon: MessageSquare },
+  { id: 'vertical-forum', name: t('categories.vertical-forum'), icon: ChatCircle },
   { id: 'design-platform', name: t('categories.design-platform'), icon: Palette },
 ]
 

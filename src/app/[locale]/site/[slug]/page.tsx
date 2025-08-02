@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, ExternalLink, Globe, Clock, Users, CheckCircle, XCircle, ChevronRight } from 'lucide-react'
+import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { Badge } from "@/components/ui/badge"
 
 // 类型定义
@@ -147,11 +147,11 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <Link href="/" className="hover:text-blue-600">
           {locale === 'zh' ? '首页' : 'Home'}
         </Link>
-        <ChevronRight className="mx-2" size={16} />
+        <CaretRight className="mx-2" size={16} />
         <Link href="/site" className="hover:text-blue-600">
           {t('title')}
         </Link>
-        <ChevronRight className="mx-2" size={16} />
+        <CaretRight className="mx-2" size={16} />
         <span className="text-gray-900">{siteData.name}</span>
       </nav>
       
@@ -221,7 +221,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
           >
             <Globe size={16} />
             {locale === 'zh' ? '访问官网' : 'Visit Website'}
-            <ExternalLink size={14} />
+            <ArrowSquareOut size={14} />
           </a>
         </div>
       </div>

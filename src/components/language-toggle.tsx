@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, usePathname } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
-import { Globe } from 'lucide-react'
+import { Globe } from '@phosphor-icons/react'
 
 /**
  * 语言切换组件

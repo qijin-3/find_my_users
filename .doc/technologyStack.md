@@ -41,7 +41,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
   "framer-motion": "^11.11.17",                  // 动画库
   "gray-matter": "^4.0.3",                       // Markdown 前置数据解析
   "jsonwebtoken": "^9.0.2",                      // JWT 令牌处理
-  "lucide-react": "^0.427.0",                    // 图标库
+  "@phosphor-icons/react": "^2.1.7",              // 图标库
   "next": "14.2.5",                              // Next.js 框架
   "react": "^18",                                // React 库
   "react-dom": "^18",                            // React DOM 渲染
@@ -83,7 +83,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 - [Tailwind CSS 文档](https://tailwindcss.com/docs)
 - [Shadcn/ui 组件文档](https://ui.shadcn.com/)
 - [Radix UI 文档](https://www.radix-ui.com/primitives/docs/overview/introduction)
-- [Lucide React 图标](https://lucide.dev/guide/packages/lucide-react)
+- [Phosphor Icons React](https://phosphoricons.com/) - 现代化的图标库
 - [Framer Motion 文档](https://www.framer.com/motion/)
 
 ### 工具和实用程序

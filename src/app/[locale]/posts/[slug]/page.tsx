@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, ChevronRight } from 'lucide-react'
+import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { remark } from 'remark'
 import html from 'remark-html'
 
@@ -13,10 +13,19 @@ interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>
 }
 
+interface PostData {
+  title: string
+  description?: string
+  date?: string
+  content: string
+  locale: string
+  slug: string
+}
+
 /**
  * 获取文章数据 - 内联函数
  */
-function getArticleData(slug: string, locale: string) {
+function getArticleData(slug: string, locale: string): PostData | null {
   try {
     // 首先尝试获取指定语言的文章
     const localePath = path.join(process.cwd(), 'data', 'Articles', locale, `${slug}.md`)
@@ -25,7 +34,9 @@ function getArticleData(slug: string, locale: string) {
       const content = fs.readFileSync(localePath, 'utf8')
       const { data, content: articleContent } = matter(content)
       return {
-        ...data,
+        title: data.title || slug,
+        description: data.description,
+        date: data.date,
         content: articleContent,
         locale: locale,
         slug: slug
@@ -39,7 +50,9 @@ function getArticleData(slug: string, locale: string) {
       const content = fs.readFileSync(fallbackPath, 'utf8')
       const { data, content: articleContent } = matter(content)
       return {
-        ...data,
+        title: data.title || slug,
+        description: data.description,
+        date: data.date,
         content: articleContent,
         locale: 'zh', // 标记实际使用的语言
         slug: slug
@@ -102,9 +115,9 @@ export default async function PostPage({ params }: PostPageProps) {
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:text-blue-600">{t('backToList')}</Link>
-        <ChevronRight className="mx-2" size={16} />
+        <CaretRight className="mx-2" size={16} />
         <Link href="/posts" className="hover:text-blue-600">{t('title')}</Link>
-        <ChevronRight className="mx-2" size={16} />
+        <CaretRight className="mx-2" size={16} />
         <span className="text-gray-900">{postData.title}</span>
       </nav>
       

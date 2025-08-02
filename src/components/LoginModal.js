@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { X } from '@phosphor-icons/react';
 
 export default function LoginModal({ isOpen, onClose, onLogin }) {
   const [password, setPassword] = useState('');
