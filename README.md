@@ -100,5 +100,8 @@ FindMyUsers is built with the following open-source libraries:
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Shadcn/UI](https://ui.shadcn.com/)
 - [Framer Motion](https://www.framer.com/motion/)
+- [Coco Material](https://cocomaterial.com)
+- [GitBase](https://github.com/qiayue/GitBase)
+
 
 We are grateful to the maintainers and contributors of these projects.
