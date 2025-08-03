@@ -15,10 +15,15 @@ interface Resource {
   description: string
   url: string
   slug: string
-  category: string
+  type: string  // 站点类型，用于分类筛选
   date?: string
   lastModified?: string
   tags?: string[]
+  status?: string
+  region?: string
+  submitMethod?: string
+  reviewTime?: string
+  expectedExposure?: string
 }
 
 /**
@@ -44,12 +49,12 @@ export default function ResourceCard({
 }: ResourceCardProps) {
   /**
    * 获取分类显示名称
-   * @param {string} categoryId - 分类ID
+   * @param {string} typeId - 类型ID
    * @param {string} locale - 语言环境
    * @returns {string} 分类显示名称
    */
-  const getCategoryDisplayName = (categoryId: string, locale: string): string => {
-    return getFieldDisplayText('category', categoryId, locale as 'zh' | 'en');
+  const getCategoryDisplayName = (typeId: string, locale: string): string => {
+    return getFieldDisplayText('type', typeId, locale as 'zh' | 'en');
   }
 
   /**
@@ -109,9 +114,9 @@ export default function ResourceCard({
             </p>
             
             {/* 产品种类标签放在描述下方 */}
-            {showCategory && resource.category && (
+            {showCategory && resource.type && (
               <Badge variant="secondary" className="text-xs">
-                {getCategoryDisplayName(resource.category, locale)}
+                {getCategoryDisplayName(resource.type, locale)}
               </Badge>
             )}
             

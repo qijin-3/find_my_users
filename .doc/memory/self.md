@@ -164,39 +164,86 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
-## 站点详情页结构统一 (2025-01-28)
+### 错误：字段映射不完整导致显示变量名而非翻译文本
+**错误做法**：
+```typescript
+// field-utils.ts 中缺少实际数据中使用的字段值映射
+const zhFields = {
+  type: {
+    free: "免费",
+    freemium: "免费增值",
+    // 缺少 tool_navigation, social_platform 等实际使用的值
+  },
+  region: {
+    global: "全球",
+    china: "中国大陆",
+    // 缺少 domestic, overseas 等实际使用的值
+  }
+}
+```
 
-### 修改需求
-用户要求确保站点详情页 (`/site/[slug]`) 的基本结构和样式与文章详情页 (`/posts/[slug]`) 保持一致，但不修改文章详情页。
+**正确做法**：
+```typescript
+// 完整的字段映射，包含所有实际数据中使用的值
+const zhFields = {
+  type: {
+    free: "免费",
+    freemium: "免费增值",
+    paid: "付费",
+    subscription: "订阅制",
+    one_time_purchase: "一次性购买",
+    tool_navigation: "工具导航",
+    social_platform: "社交平台",
+    product_showcase: "产品展示",
+    blog_newsletter: "博客/周刊",
+    media: "媒体平台",
+    vertical_forum: "垂直论坛",
+    design_platform: "设计平台"
+  },
+  region: {
+    global: "全球",
+    china: "中国大陆",
+    asia_pacific: "亚太地区",
+    north_america: "北美",
+    europe: "欧洲",
+    domestic: "国内",
+    overseas: "海外",
+    other: "其他"
+  },
+  submitMethod: {
+    email: "邮件提交",
+    form: "表单提交",
+    api: "API提交",
+    manual: "手动提交",
+    automatic: "自动收录",
+    site_submission: "站点提交",
+    submit_issue: "提交Issue"
+  },
+  reviewTime: {
+    immediate: "即时",
+    within_24h: "24小时内",
+    within_week: "一周内",
+    within_month: "一个月内",
+    within_three_days: "三天内",
+    within_one_week: "一周内",
+    unknown: "未知"
+  },
+  expectedExposure: {
+    high: "高",
+    medium: "中",
+    low: "低",
+    within_2k: "2千以内",
+    over_10k: "1万以上",
+    unknown: "未知"
+  }
+}
+```
 
-### 修复步骤
-1. **分析文章详情页结构**：
-   - 使用 `<article>` 标签包装，最大宽度 `max-w-3xl`
-   - 包含面包屑导航 (Breadcrumb navigation)
-   - 元信息卡片 (Meta information card) 使用灰色背景
-   - 内容区域使用 `prose prose-lg` 样式
-   - 底部返回链接
-
-2. **重构站点详情页**：
-   ```tsx
-   // src/app/site/[slug]/page.tsx
-   // 移除复杂的卡片布局，改为简洁的文章式布局
-   
-   return (
-     <article className="container mx-auto px-4 py-12 max-w-3xl">
-       {/* Breadcrumb navigation */}
-       <nav className="flex items-center text-sm text-gray-500 mb-6">
-         <Link href="/" className="hover:text-blue-600">Home</Link>
-         <ChevronRight className="mx-2" size={16} />
-         <Link href="/site" className="hover:text-blue-600">Site</Link>
-         <ChevronRight className="mx-2" size={16} />
-         <span className="text-gray-900">{siteData.name}</span>
-       </nav>
-       
-       {/* Meta information card */}
-       <div className="bg-gray-100 rounded-lg p-6 mb-8">
-         {/* 站点基本信息以网格形式展示 */}
-       </div>
+**修复要点**：
+1. 检查实际数据文件中使用的字段值
+2. 确保 field-utils.ts 中包含所有实际使用的映射
+3. 同时更新中文和英文映射
+4. 使用 getFieldDisplayText 函数进行字段值转换
 
        {/* Site content */}
        <div className="prose prose-lg max-w-none">

@@ -23,9 +23,14 @@ interface Resource {
   description: string
   url: string
   slug: string
-  category: string
+  type: string  // 站点类型，用于分类筛选
   date: string
   lastModified: string
+  status?: string
+  region?: string
+  submitMethod?: string
+  reviewTime?: string
+  expectedExposure?: string
 }
 
 /**
@@ -66,11 +71,12 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
   /**
    * 根据选中的分类筛选资源
    * 使用useMemo优化性能，避免不必要的重新计算
+   * 注意：站点数据中使用的是 type 字段而不是 category 字段
    */
   const filteredResources = useMemo(() => {
     if (!resources || !Array.isArray(resources)) return []
     if (!selectedCategory) return resources
-    return resources.filter(resource => resource.category === selectedCategory)
+    return resources.filter(resource => resource.type === selectedCategory)
   }, [resources, selectedCategory])
 
   return (
@@ -101,7 +107,7 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                   const IconComponent = category.icon
                   const isSelected = selectedCategory === category.id
                   const categoryCount = resources && Array.isArray(resources) 
-                    ? resources.filter(r => r.category === category.id).length 
+                    ? resources.filter(r => r.type === category.id).length 
                     : 0
                   
                   return (

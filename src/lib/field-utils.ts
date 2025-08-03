@@ -34,7 +34,14 @@ const zhFields = {
     freemium: "免费增值",
     paid: "付费",
     subscription: "订阅制",
-    one_time_purchase: "一次性购买"
+    one_time_purchase: "一次性购买",
+    tool_navigation: "工具导航",
+    social_platform: "社交平台",
+    product_showcase: "产品展示",
+    blog_newsletter: "博客/周刊",
+    media: "媒体平台",
+    vertical_forum: "垂直论坛",
+    design_platform: "设计平台"
   },
   region: {
     global: "全球",
@@ -42,6 +49,8 @@ const zhFields = {
     asia_pacific: "亚太地区",
     north_america: "北美",
     europe: "欧洲",
+    domestic: "国内",
+    overseas: "海外",
     other: "其他"
   },
   submitMethod: {
@@ -49,19 +58,25 @@ const zhFields = {
     form: "表单提交",
     api: "API提交",
     manual: "手动提交",
-    automatic: "自动收录"
+    automatic: "自动收录",
+    site_submission: "站点提交",
+    submit_issue: "提交Issue"
   },
   reviewTime: {
     immediate: "即时",
     within_24h: "24小时内",
     within_week: "一周内",
     within_month: "一个月内",
+    within_three_days: "三天内",
+    within_one_week: "一周内",
     unknown: "未知"
   },
   expectedExposure: {
     high: "高",
     medium: "中",
     low: "低",
+    within_2k: "2千以内",
+    over_10k: "1万以上",
     unknown: "未知"
   },
   category: {
@@ -91,7 +106,14 @@ const enFields = {
     freemium: "Freemium",
     paid: "Paid",
     subscription: "Subscription",
-    one_time_purchase: "One-time Purchase"
+    one_time_purchase: "One-time Purchase",
+    tool_navigation: "Tool Navigation",
+    social_platform: "Social Platform",
+    product_showcase: "Product Showcase",
+    blog_newsletter: "Blog/Newsletter",
+    media: "Media Platform",
+    vertical_forum: "Vertical Forum",
+    design_platform: "Design Platform"
   },
   region: {
     global: "Global",
@@ -99,6 +121,8 @@ const enFields = {
     asia_pacific: "Asia Pacific",
     north_america: "North America",
     europe: "Europe",
+    domestic: "Domestic",
+    overseas: "Overseas",
     other: "Other"
   },
   submitMethod: {
@@ -106,19 +130,25 @@ const enFields = {
     form: "Form Submission",
     api: "API Submission",
     manual: "Manual Submission",
-    automatic: "Automatic Inclusion"
+    automatic: "Automatic Inclusion",
+    site_submission: "Site Submission",
+    submit_issue: "Submit Issue"
   },
   reviewTime: {
     immediate: "Immediate",
     within_24h: "Within 24 Hours",
     within_week: "Within a Week",
     within_month: "Within a Month",
+    within_three_days: "Within 3 Days",
+    within_one_week: "Within One Week",
     unknown: "Unknown"
   },
   expectedExposure: {
     high: "High",
     medium: "Medium",
     low: "Low",
+    within_2k: "Within 2K",
+    over_10k: "Over 10K",
     unknown: "Unknown"
   },
   category: {
