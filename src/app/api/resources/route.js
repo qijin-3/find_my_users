@@ -9,9 +9,13 @@ const octokit = new Octokit({
 
 const owner = process.env.GITHUB_OWNER;
 const repo = process.env.GITHUB_REPO;
-const githubPath = 'data/json/sitelists.json';
-const localPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
+const githubPath = 'data/json/zh/sitelists.json'; // 更新为新的路径结构
+const localPath = path.join(process.cwd(), 'data', 'json', 'zh', 'sitelists.json'); // 更新为新的路径结构
 
+/**
+ * 从 GitHub 获取站点列表数据
+ * @returns {Promise<Array>} 站点列表数组
+ */
 async function getResourcesFromGitHub() {
   try {
     const { data } = await octokit.repos.getContent({
@@ -28,17 +32,70 @@ async function getResourcesFromGitHub() {
   }
 }
 
+/**
+ * 从本地文件获取站点列表数据
+ * @returns {Array} 站点列表数组
+ */
 function getLocalResources() {
   return JSON.parse(fs.readFileSync(localPath, 'utf8'));
+}
+
+/**
+ * 获取站点详细信息
+ * @param {string} slug - 站点 slug
+ * @param {string} locale - 语言代码
+ * @returns {Object|null} 站点详细信息
+ */
+function getSiteDetails(slug, locale = 'zh') {
+  try {
+    const sitePath = path.join(process.cwd(), 'data', 'Site', locale, `${slug}.json`);
+    if (fs.existsSync(sitePath)) {
+      return JSON.parse(fs.readFileSync(sitePath, 'utf8'));
+    }
+    return null;
+  } catch (error) {
+    console.error(`Error reading site details for ${slug}:`, error);
+    return null;
+  }
+}
+
+/**
+ * 合并站点列表和详细信息
+ * @param {Array} siteList - 简化的站点列表
+ * @param {string} locale - 语言代码
+ * @returns {Array} 完整的站点信息数组
+ */
+function mergeWithSiteDetails(siteList, locale = 'zh') {
+  return siteList.map(site => {
+    const details = getSiteDetails(site.slug, locale);
+    if (details) {
+      return {
+        ...details,
+        name: site.name || details.name,
+        date: site.date || details.date,
+        lastModified: site.lastModified || details.lastModified,
+        slug: site.slug
+      };
+    }
+    return site;
+  });
 }
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const source = searchParams.get('source');
+  const locale = searchParams.get('locale') || 'zh';
+  const includeDetails = searchParams.get('includeDetails') === 'true';
 
   if (source === 'github') {
     try {
       const resources = await getResourcesFromGitHub();
+      
+      if (includeDetails) {
+        const mergedResources = mergeWithSiteDetails(resources, locale);
+        return NextResponse.json(mergedResources);
+      }
+      
       return NextResponse.json(resources);
     } catch (error) {
       return NextResponse.json({ error: 'Failed to fetch resources from GitHub' }, { status: 500 });
@@ -46,6 +103,12 @@ export async function GET(req) {
   } else {
     // Default to local file for homepage
     const resources = getLocalResources();
+    
+    if (includeDetails) {
+      const mergedResources = mergeWithSiteDetails(resources, locale);
+      return NextResponse.json(mergedResources);
+    }
+    
     return NextResponse.json(resources);
   }
 }

@@ -1,6 +1,6 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
-import { getI18nJsonData, getI18nArticlesList } from '@/lib/i18n-data'
+import { getI18nJsonData, getI18nArticlesList, getI18nSitesList } from '@/lib/i18n-data'
 import ResourceList from '@/components/ResourceList'
 import ArticleList from '@/components/ArticleList'
 import SiteList from '@/components/SiteList'
@@ -26,9 +26,10 @@ export default async function HomePage({ params }: HomePageProps) {
   // 获取多语言数据
   const resources = getI18nJsonData('sitelists.json', locale)
   const allPostsData = getI18nArticlesList(locale)
+  const sites = getI18nSitesList(locale)
   
   // 获取最新的8个站点，按日期排序
-  const latestSites = resources
+  const latestSites = sites
     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 8)
   

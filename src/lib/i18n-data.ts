@@ -164,3 +164,61 @@ export function getI18nArticlesList(locale: string = 'zh'): any[] {
     return [];
   }
 }
+
+/**
+ * 获取指定语言的完整站点列表
+ * 将sitelists.json中的基本信息与Site目录下的详细信息合并
+ * @param locale - 语言代码（'zh' 或 'en'）
+ * @returns 完整的站点列表数组
+ */
+export function getI18nSitesList(locale: string = 'zh'): any[] {
+  try {
+    // 从sitelists.json获取站点基本信息列表
+    const siteListData = getI18nJsonData('sitelists.json', locale);
+    
+    if (!Array.isArray(siteListData)) {
+      return [];
+    }
+    
+    // 为每个站点获取详细信息并合并
+    const sites = siteListData.map((siteMeta: any) => {
+      // 获取站点详细信息
+      const siteDetails = getI18nSiteData(siteMeta.slug, locale);
+      
+      if (siteDetails) {
+        return {
+          // 使用详细信息中的所有字段
+          ...siteDetails,
+          // 确保使用sitelists.json中的基本元数据（如果存在）
+          name: siteMeta.name || siteDetails.name,
+          date: siteMeta.date || siteDetails.date,
+          lastModified: siteMeta.lastModified || siteDetails.lastModified,
+          slug: siteMeta.slug
+        };
+      }
+      
+      // 如果无法获取详细信息，返回基本信息
+      return {
+        name: siteMeta.name,
+        slug: siteMeta.slug,
+        date: siteMeta.date,
+        lastModified: siteMeta.lastModified,
+        description: '',
+        url: '',
+        category: '',
+        status: '',
+        type: '',
+        region: '',
+        submitMethod: '',
+        reviewTime: '',
+        expectedExposure: ''
+      };
+    }).filter(Boolean); // 过滤掉null值
+    
+    return sites;
+    
+  } catch (error) {
+    console.error(`Error getting sites list for locale ${locale}:`, error);
+    return [];
+  }
+}

@@ -1,5 +1,5 @@
 import { setRequestLocale } from 'next-intl/server'
-import { getI18nJsonData } from '@/lib/i18n-data'
+import { getI18nSitesList } from '@/lib/i18n-data'
 import SitePageContent from '@/components/SitePageContent'
 
 interface SitePageProps {
@@ -17,8 +17,8 @@ export default async function SitePage({ params }: SitePageProps) {
   // 启用静态渲染
   setRequestLocale(locale)
   
-  // 获取多语言资源数据
-  const resources = getI18nJsonData('sitelists.json', locale)
+  // 获取完整的站点数据（合并 sitelists.json 和 Site 目录下的详细信息）
+  const resources = getI18nSitesList(locale)
 
   return <SitePageContent resources={resources} locale={locale} />
 }
