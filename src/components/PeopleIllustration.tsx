@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useLocale } from 'next-intl'
-import messagesDataZh from '../../data/people-messages.json'
-import messagesDataEn from '../../data/people-messages-en.json'
+import messagesDataZh from '../../data/json/zh/people-messages.json'
+import messagesDataEn from '../../data/json/en/people-messages.json'
 
 interface ChatBubbleProps {
   message: string
