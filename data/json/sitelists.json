@@ -1,42 +1,49 @@
 [
   {
-    "name": "Next.js",
+    "name_zh": "Next.js",
+    "name_en": "Next.js",
     "slug": "nextjs",
     "date": "2024-08-16T03:57:46.153Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Tailwind CSS",
+    "name_zh": "Tailwind CSS",
+    "name_en": "Tailwind CSS",
     "slug": "tailwind-css",
     "date": "2024-08-20T10:15:30.456Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Shadcn/ui",
+    "name_zh": "Shadcn/ui",
+    "name_en": "Shadcn/ui",
     "slug": "shadcnui",
     "date": "2024-09-05T14:22:18.789Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Vercel",
+    "name_zh": "Vercel",
+    "name_en": "Vercel",
     "slug": "vercel",
     "date": "2024-08-25T08:45:12.234Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Github.com",
+    "name_zh": "Github.com",
+    "name_en": "Github.com",
     "slug": "github",
     "date": "2024-07-10T16:30:45.678Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Woy.ai",
+    "name_zh": "Woy.ai",
+    "name_en": "Woy.ai",
     "slug": "woyai",
     "date": "2024-10-12T12:18:33.901Z",
     "lastModified": "2025-01-28T03:34:22Z"
   },
   {
-    "name": "Music Player",
+    "name_zh": "音乐播放器",
+    "name_en": "Music Player",
     "slug": "music-player",
     "date": "2024-11-08T09:42:27.345Z",
     "lastModified": "2025-01-28T03:34:22Z"
