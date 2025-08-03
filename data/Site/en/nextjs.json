@@ -2,15 +2,15 @@
   "name": "Next.js",
   "description": "The React Framework for the Web",
   "screenshot": "/images/sites/nextjs-screenshot.jpg",
-  "status": "运行中",
-  "type": "产品展示页",
-  "region": "海外",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "overseas",
   "url": "https://nextjs.org/",
-  "submitMethod": "GitHub",
+  "submitMethod": "submit_issue",
   "submitUrl": "https://github.com/vercel/next.js",
-  "submitRequirements": "需要提供详细的bug报告或功能请求，遵循贡献指南",
+  "submitRequirements": "Detailed bug reports or feature requests required, following contribution guidelines",
   "review": "Y",
-  "reviewTime": "一周内",
-  "expectedExposure": "1w以上",
-  "rating": "优秀的React框架，提供了完整的全栈解决方案，包括SSR、SSG、API路由等功能。文档详细，社区活跃，是现代Web开发的首选框架之一。"
+  "reviewTime": "within_one_week",
+  "expectedExposure": "over_10k",
+  "rating": "Excellent React framework providing a complete full-stack solution including SSR, SSG, API routes, and more. Comprehensive documentation, active community, one of the preferred frameworks for modern web development."
 }

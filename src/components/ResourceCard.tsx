@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight } from '@phosphor-icons/react'
+import { getFieldDisplayText } from '@/lib/field-utils'
 
 /**
  * 资源对象类型定义
@@ -27,6 +28,7 @@ interface ResourceCardProps {
   resource: Resource
   showCategory?: boolean
   className?: string
+  locale?: string
 }
 
 /**
@@ -37,24 +39,17 @@ interface ResourceCardProps {
 export default function ResourceCard({ 
   resource, 
   showCategory = false, 
-  className = "" 
+  className = "",
+  locale = 'zh'
 }: ResourceCardProps) {
   /**
    * 获取分类显示名称
    * @param {string} categoryId - 分类ID
+   * @param {string} locale - 语言环境
    * @returns {string} 分类显示名称
    */
-  const getCategoryDisplayName = (categoryId: string): string => {
-    const categoryMap: Record<string, string> = {
-      'product-showcase': '产品展示页',
-      'tool-navigation': '工具导航',
-      'blog-newsletter': '博客/周刊',
-      'social-community': '社交社区',
-      'media': '媒体',
-      'vertical-forum': '垂直论坛/社区',
-      'design-platform': '设计平台',
-    }
-    return categoryMap[categoryId] || categoryId
+  const getCategoryDisplayName = (categoryId: string, locale: string): string => {
+    return getFieldDisplayText('category', categoryId, locale as 'zh' | 'en');
   }
 
   /**
@@ -116,7 +111,7 @@ export default function ResourceCard({
             {/* 产品种类标签放在描述下方 */}
             {showCategory && resource.category && (
               <Badge variant="secondary" className="text-xs">
-                {getCategoryDisplayName(resource.category)}
+                {getCategoryDisplayName(resource.category, locale)}
               </Badge>
             )}
             

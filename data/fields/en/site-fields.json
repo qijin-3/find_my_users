@@ -1,0 +1,54 @@
+{
+  "status": {
+    "running": "Running",
+    "suspected_unmaintained": "Suspected Unmaintained",
+    "stopped": "Stopped"
+  },
+  "type": {
+    "product_showcase": "Product Showcase",
+    "tool_navigation": "Tool Navigation",
+    "blog_newsletter": "Blog / Newsletter",
+    "social_platform": "Social Platform",
+    "media": "Media",
+    "vertical_forum_community": "Vertical Forum/Community",
+    "design_platform": "Design Platform"
+  },
+  "category": {
+    "product_showcase": "Product Showcase",
+    "tool_navigation": "Tool Navigation",
+    "blog_newsletter": "Blog / Newsletter",
+    "social_community": "Social Community",
+    "media": "Media",
+    "vertical_forum": "Vertical Forum/Community",
+    "design_platform": "Design Platform"
+  },
+  "region": {
+    "domestic": "Domestic",
+    "overseas": "Overseas"
+  },
+  "submitMethod": {
+    "site_submission": "Site Submission",
+    "submit_issue": "Submit Issue",
+    "questionnaire": "Questionnaire",
+    "site_form": "Site Form",
+    "email": "Email",
+    "submit_comment": "Submit Comment"
+  },
+  "reviewTime": {
+    "immediately": "Immediately",
+    "within_one_day": "Within One Day",
+    "within_three_days": "Within Three Days",
+    "within_one_week": "Within One Week",
+    "over_one_week": "Over One Week"
+  },
+  "expectedExposure": {
+    "not_disclosed": "Not Disclosed",
+    "not_evaluated": "Not Evaluated",
+    "within_100": "Within 100",
+    "within_500": "Within 500",
+    "within_1k": "Within 1K",
+    "within_2k": "Within 2K",
+    "within_10k": "Within 10K",
+    "over_10k": "Over 10K"
+  }
+}

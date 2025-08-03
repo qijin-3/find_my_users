@@ -1,0 +1,54 @@
+{
+  "status": {
+    "running": "运行中",
+    "suspected_unmaintained": "疑似不再维护",
+    "stopped": "停止运营"
+  },
+  "type": {
+    "product_showcase": "产品展示页",
+    "tool_navigation": "工具导航",
+    "blog_newsletter": "博客 / 周刊",
+    "social_platform": "社交平台",
+    "media": "媒体",
+    "vertical_forum_community": "垂直论坛/社区",
+    "design_platform": "设计平台"
+  },
+  "category": {
+    "product_showcase": "产品展示页",
+    "tool_navigation": "工具导航",
+    "blog_newsletter": "博客 / 周刊",
+    "social_community": "社交社区",
+    "media": "媒体",
+    "vertical_forum": "垂直论坛/社区",
+    "design_platform": "设计平台"
+  },
+  "region": {
+    "domestic": "国内",
+    "overseas": "海外"
+  },
+  "submitMethod": {
+    "site_submission": "站内投稿",
+    "submit_issue": "提交issue",
+    "questionnaire": "问卷",
+    "site_form": "站内表单",
+    "email": "Email",
+    "submit_comment": "提交Comment"
+  },
+  "reviewTime": {
+    "immediately": "立刻",
+    "within_one_day": "一天内",
+    "within_three_days": "三天内",
+    "within_one_week": "一周内",
+    "over_one_week": "一周以上"
+  },
+  "expectedExposure": {
+    "not_disclosed": "未披露",
+    "not_evaluated": "未评测",
+    "within_100": "100以内",
+    "within_500": "500以内",
+    "within_1k": "1k以内",
+    "within_2k": "2k以内",
+    "within_10k": "1w以内",
+    "over_10k": "1w以上"
+  }
+}

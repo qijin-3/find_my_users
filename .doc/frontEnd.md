@@ -153,31 +153,32 @@ shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 ## 图标集
 
 ### 主要图标库
-- **Lucide React** (v0.427.0)
+- **Phosphor Icons** (v2.1.7)
   - 现代、一致的图标设计
   - 轻量级 SVG 图标
   - 完全可定制
   - 支持 Tree Shaking
+  - 多种图标风格 (Regular, Bold, Duotone, Fill, Light, Thin)
 
 ### 图标使用示例
 ```jsx
-import { Github, Menu, X, CaretDown } from '@phosphor-icons/react'
+import { GithubLogo, List, X, CaretDown } from '@phosphor-icons/react'
 
 // 基础使用
-<Github className="h-5 w-5" />
+<GithubLogo className="h-5 w-5" />
 
 // 带样式
-<Menu className="h-6 w-6 text-muted-foreground hover:text-foreground" />
+<List className="h-6 w-6 text-muted-foreground hover:text-foreground" />
 ```
 
 ### 常用图标
 - **X** - 关闭按钮、模态框关闭
 - **Globe** - 语言切换、网站链接
 - **Check** - 确认状态、选中状态
-- **ChevronRight** - 右箭头、导航指示
+- **CaretRight** - 右箭头、导航指示
 - **Circle** - 圆形图标、状态指示
 - **ArrowRight** - 右箭头、跳转指示
-- **ExternalLink** - 外部链接
+- **ArrowSquareOut** - 外部链接
 - **Moon** - 深色主题图标
 - **Sun** - 浅色主题图标
 - **ArrowLeft** - 返回按钮、左箭头
@@ -185,7 +186,7 @@ import { Github, Menu, X, CaretDown } from '@phosphor-icons/react'
 - **Users** - 用户相关
 - **CheckCircle** - 成功状态
 - **XCircle** - 错误状态
-- **ChevronDown** - 下拉指示器
+- **CaretDown** - 下拉指示器
 
 ## 前端架构
 
@@ -432,3 +433,35 @@ const buttonVariants = cva(
 - **阴影系统**: 微妙的底部阴影增强立体感
 - **图层管理**: 使用 z-10, z-20, z-30 递进式层级
 - **响应式动画**: 不同设备上的动画适配
+
+### 2025-01-31 字段管理系统
+#### 集中式字段管理
+- **字段定义文件**: 创建 `/data/fields/zh/site-fields.json` 和 `/data/fields/en/site-fields.json`
+- **变量化存储**: 站点数据中使用变量形式存储字段值，便于统一管理
+- **多语言支持**: 中英文字段显示文本分离维护
+
+#### 字段管理工具
+- **field-utils.ts**: 新增字段管理工具函数
+  - `getFieldDisplayText()`: 获取字段显示文本
+  - `getFieldOptions()`: 获取字段选项列表
+  - `isValidFieldKey()`: 验证字段值有效性
+- **缓存机制**: 字段数据缓存，提升性能
+- **类型安全**: TypeScript 类型定义，确保类型安全
+
+#### 标准化字段
+- **站点状态**: running, suspected_unmaintained, stopped
+- **站点类型**: product_showcase, tool_navigation, blog_newsletter, social_platform, media, vertical_forum_community, design_platform
+- **适合地区**: domestic, overseas
+- **递交方式**: site_submission, submit_issue, questionnaire, site_form, email, submit_comment
+- **审核耗时**: immediately, within_one_day, within_three_days, within_one_week, over_one_week
+- **预计曝光**: not_disclosed, not_evaluated, within_100, within_500, within_1k, within_2k, within_10k, over_10k
+
+#### 数据结构优化
+- **sitelists.json 扩展**: 添加 status, type, region, submitMethod, reviewTime, expectedExposure 字段
+- **站点详情统一**: 所有站点详情文件使用统一的字段变量
+- **批量更新**: 使用脚本批量更新现有数据文件
+
+#### 维护便利性
+- **统一修改**: 修改字段显示文本只需更新字段定义文件
+- **多语言一致性**: 确保中英文字段定义的键名完全一致
+- **向后兼容**: 保持现有数据结构的兼容性

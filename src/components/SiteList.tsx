@@ -22,15 +22,17 @@ interface Site {
 interface SiteListProps {
   sites: Site[];
   showMoreLink?: boolean;
+  locale?: string;
 }
 
 /**
  * 站点列表组件 - 展示最新的站点卡片
  * @param sites - 站点数据数组
  * @param showMoreLink - 是否显示"更多站点"链接，默认为 true
+ * @param locale - 语言环境，默认为 'zh'
  * @returns 站点列表组件
  */
-export default function SiteList({ sites, showMoreLink = true }: SiteListProps) {
+export default function SiteList({ sites, showMoreLink = true, locale = 'zh' }: SiteListProps) {
   return (
     <section>
       <div className="flex justify-between items-center mb-6">
@@ -47,6 +49,7 @@ export default function SiteList({ sites, showMoreLink = true }: SiteListProps) 
             key={site.slug}
             resource={site}
             showCategory={true}
+            locale={locale}
             className=""
           />
         ))}

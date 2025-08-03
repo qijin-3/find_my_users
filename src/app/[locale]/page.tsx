@@ -56,7 +56,7 @@ export default async function HomePage({ params }: HomePageProps) {
       </section>
 
       <ResourceList {...resources} />
-      <SiteList sites={latestSites} />
+      <SiteList sites={latestSites} locale={locale} />
       <ArticleList articles={latestArticles} />
     </div>
   )

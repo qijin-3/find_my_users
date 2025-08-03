@@ -42,13 +42,13 @@ interface SitePageContentProps {
  * @param t - 翻译函数
  */
 const getSiteCategories = (t: any) => [
-  { id: 'product-showcase', name: t('categories.product-showcase'), icon: Globe },
-  { id: 'tool-navigation', name: t('categories.tool-navigation'), icon: Wrench },
-  { id: 'blog-newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
-  { id: 'social-community', name: t('categories.social-community'), icon: Users },
+  { id: 'product_showcase', name: t('categories.product-showcase'), icon: Globe },
+  { id: 'tool_navigation', name: t('categories.tool-navigation'), icon: Wrench },
+  { id: 'blog_newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
+  { id: 'social_community', name: t('categories.social-community'), icon: Users },
   { id: 'media', name: t('categories.media'), icon: Radio },
-  { id: 'vertical-forum', name: t('categories.vertical-forum'), icon: ChatCircle },
-  { id: 'design-platform', name: t('categories.design-platform'), icon: Palette },
+  { id: 'vertical_forum', name: t('categories.vertical-forum'), icon: ChatCircle },
+  { id: 'design_platform', name: t('categories.design-platform'), icon: Palette },
 ]
 
 /**
@@ -58,7 +58,7 @@ const getSiteCategories = (t: any) => [
  */
 export default function SitePageContent({ resources, locale = 'zh' }: SitePageContentProps) {
   const t = useTranslations('site')
-  const [selectedCategory, setSelectedCategory] = useState('product-showcase')
+  const [selectedCategory, setSelectedCategory] = useState('product_showcase')
 
   // 获取本地化的分类配置
   const siteCategories = getSiteCategories(t)
@@ -140,6 +140,7 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                   key={resource.name} 
                   resource={resource}
                   showCategory={true}
+                  locale={locale}
                 />
               ))}
             </div>

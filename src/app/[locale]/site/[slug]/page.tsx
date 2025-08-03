@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
+import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
 import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { Badge } from "@/components/ui/badge"
@@ -84,17 +85,7 @@ export async function generateMetadata({ params }: SitePageProps) {
  * @returns {string} 翻译后的状态文本
  */
 function getStatusText(status: string, locale: string): string {
-  if (locale === 'zh') {
-    return status
-  }
-  
-  const statusMap: Record<string, string> = {
-    '运行中': 'Running',
-    '疑似不再维护': 'Possibly Unmaintained',
-    '停止运营': 'Shut Down'
-  }
-  
-  return statusMap[status] || status
+  return getFieldDisplayText('status', status, locale as 'zh' | 'en')
 }
 
 /**
@@ -104,11 +95,11 @@ function getStatusText(status: string, locale: string): string {
  */
 function getStatusInfo(status: string) {
   switch (status) {
-    case '运行中':
+    case 'running':
       return { color: 'bg-green-100 text-green-800', icon: CheckCircle };
-    case '疑似不再维护':
+    case 'suspected_unmaintained':
       return { color: 'bg-yellow-100 text-yellow-800', icon: Clock };
-    case '停止运营':
+    case 'stopped':
       return { color: 'bg-red-100 text-red-800', icon: XCircle };
     default:
       return { color: 'bg-gray-100 text-gray-800', icon: Globe };
@@ -173,19 +164,19 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '站点类型：' : 'Site Type:'}
             </span>
-            <span className="text-gray-600">{siteData.type}</span>
+            <span className="text-gray-600">{getFieldDisplayText('type', siteData.type, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '适合地区：' : 'Suitable Region:'}
             </span>
-            <span className="text-gray-600">{siteData.region}</span>
+            <span className="text-gray-600">{getFieldDisplayText('region', siteData.region, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '递交方式：' : 'Submit Method:'}
             </span>
-            <span className="text-gray-600">{siteData.submitMethod}</span>
+            <span className="text-gray-600">{getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
@@ -202,13 +193,13 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '审核耗时：' : 'Review Time:'}
             </span>
-            <span className="text-gray-600">{siteData.reviewTime}</span>
+            <span className="text-gray-600">{getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '预计曝光（周）：' : 'Expected Exposure (weeks):'}
             </span>
-            <span className="text-gray-600">{siteData.expectedExposure}</span>
+            <span className="text-gray-600">{getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}</span>
           </div>
         </div>
         
