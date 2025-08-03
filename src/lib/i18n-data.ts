@@ -113,14 +113,54 @@ export function getI18nSiteData(slug: string, locale: string = 'zh'): any {
 
 /**
  * 获取指定语言的所有文章列表
- * 使用articles.json文件，包含fallback逻辑
+ * 使用合并后的articles.json文件，支持中英文字段
  * @param locale - 语言代码（'zh' 或 'en'）
  * @returns 文章列表数组
  */
 export function getI18nArticlesList(locale: string = 'zh'): any[] {
   try {
-    // 从articles.json获取文章列表
-    const articlesData = getI18nJsonData('articles.json', locale);
+    // 从合并后的articles.json获取文章列表
+    const articlesPath = path.join(process.cwd(), 'data', 'json', 'articles.json');
+    
+    if (!fs.existsSync(articlesPath)) {
+      // 如果合并文件不存在，fallback到原有逻辑
+      const articlesData = getI18nJsonData('articles.json', locale);
+      
+      if (!Array.isArray(articlesData)) {
+        return [];
+      }
+      
+      return articlesData.map((articleMeta: any) => {
+        const fullArticle = getI18nArticle(articleMeta.slug, locale);
+        
+        if (fullArticle) {
+          return {
+            ...fullArticle,
+            title: articleMeta.title,
+            description: articleMeta.description,
+            date: articleMeta.date,
+            lastModified: articleMeta.lastModified,
+            slug: articleMeta.slug,
+            hasEnglish: articleMeta.hasEnglish
+          };
+        }
+        
+        return {
+          title: articleMeta.title,
+          description: articleMeta.description,
+          date: articleMeta.date,
+          lastModified: articleMeta.lastModified,
+          slug: articleMeta.slug,
+          hasEnglish: articleMeta.hasEnglish,
+          content: '',
+          locale: locale
+        };
+      }).filter(Boolean);
+    }
+    
+    // 读取合并后的articles.json文件
+    const content = fs.readFileSync(articlesPath, 'utf8');
+    const articlesData = JSON.parse(content);
     
     if (!Array.isArray(articlesData)) {
       return [];
@@ -131,27 +171,31 @@ export function getI18nArticlesList(locale: string = 'zh'): any[] {
       // 获取完整的文章数据
       const fullArticle = getI18nArticle(articleMeta.slug, locale);
       
+      // 根据语言选择对应的标题和描述
+      const title = locale === 'en' ? articleMeta.title_en : articleMeta.title_zh;
+      const description = locale === 'en' ? articleMeta.description_en : articleMeta.description_zh;
+      
       if (fullArticle) {
         return {
           ...fullArticle,
-          // 确保使用articles.json中的元数据
-          title: articleMeta.title,
-          description: articleMeta.description,
+          // 使用合并文件中对应语言的元数据
+          title: title,
+          description: description,
           date: articleMeta.date,
           lastModified: articleMeta.lastModified,
           slug: articleMeta.slug,
-          hasEnglish: articleMeta.hasEnglish
+          hasEnglish: true // 合并文件中的文章都有英文版本
         };
       }
       
       // 如果无法获取完整文章，返回基本信息
       return {
-        title: articleMeta.title,
-        description: articleMeta.description,
+        title: title,
+        description: description,
         date: articleMeta.date,
         lastModified: articleMeta.lastModified,
         slug: articleMeta.slug,
-        hasEnglish: articleMeta.hasEnglish,
+        hasEnglish: true,
         content: '',
         locale: locale
       };
