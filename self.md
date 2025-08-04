@@ -50,19 +50,26 @@
 ## 字段映射问题修复记录
 
 ### 问题描述
-站点详情页面中的 `status`、`type`、`region`、`submitMethod`、`expectedExposure`、`reviewTime` 等字段显示的是原始变量值（如 `product_showcase`、`submit_issue`、`within_three_days`），而不是 `site-fields.json` 中映射的中文或英文翻译文本。
+在站点详情页面和 ResourceCard 组件中，`status`、`type`、`region`、`submitMethod`、`expectedExposure`、`reviewTime` 这些字段显示的是原始变量值（如 `product_showcase`、`submit_issue`、`within_three_days`），而不是 `site-fields.json` 中映射的中文或英文翻译文本。
 
 ### 根本原因
-`field-utils.ts` 中的 `getFieldsData` 函数在服务端环境下使用了错误的文件读取方式。原代码通过 `getI18nJsonData` 函数尝试从 `data/json/zh/` 或 `data/json/en/` 目录读取语言特定的字段文件，但实际的字段映射文件位于 `data/json/site-fields.json`，这是一个统一格式的文件，包含所有语言的翻译。
+1. **服务端字段工具**：`src/lib/field-utils.ts` 中的 `getFieldsData` 函数在服务端环境下使用了错误的文件读取方式
+2. **API 路由**：`src/app/api/fields/route.ts` 中同样使用了错误的 `getI18nJsonData` 函数来读取字段文件
+3. **文件路径问题**：原代码通过 `getI18nJsonData` 函数尝试从 `data/json/zh/` 或 `data/json/en/` 目录读取语言特定的字段文件，但实际的字段映射文件位于 `data/json/site-fields.json`，这是一个统一格式的文件，包含所有语言的翻译
 
 ### 解决方案
-1. **修改文件读取路径**：直接读取 `data/json/site-fields.json` 文件
-2. **简化读取逻辑**：移除对 `getI18nJsonData` 的依赖，直接使用 `fs` 和 `path` 模块读取文件
-3. **保持转换逻辑**：继续使用 `transformUnifiedToLocaleFormat` 函数将统一格式转换为语言特定格式
+1. **修复服务端字段工具**（`src/lib/field-utils.ts`）：
+   - 修改文件读取路径：直接读取 `data/json/site-fields.json` 文件
+   - 简化读取逻辑：移除对 `getI18nJsonData` 的依赖，直接使用 `fs` 和 `path` 模块读取文件
+   - 保持转换逻辑：继续使用 `transformUnifiedToLocaleFormat` 函数将统一格式转换为语言特定格式
+
+2. **修复 API 路由**（`src/app/api/fields/route.ts`）：
+   - 移除对 `getI18nJsonData` 的依赖
+   - 直接使用 `fs.readFileSync` 读取 `site-fields.json` 文件
+   - 保持相同的数据转换逻辑
 
 ### 修复的代码变更
-在 `src/lib/field-utils.ts` 的 `getFieldsData` 函数中：
-
+#### `src/lib/field-utils.ts`
 ```typescript
 // 修改前
 const { getI18nJsonData } = await import('./i18n-data');
@@ -81,13 +88,26 @@ if (fs.existsSync(fieldsPath)) {
 }
 ```
 
+#### `src/app/api/fields/route.ts`
+```typescript
+// 直接读取 site-fields.json 文件
+const filePath = path.join(process.cwd(), 'data', 'json', 'site-fields.json')
+const fileContent = fs.readFileSync(filePath, 'utf-8')
+const unifiedFieldsData = JSON.parse(fileContent)
+```
+
 ### 验证结果
-- 中文页面：`http://localhost:3001/zh/site/shadcnui` - 字段正确显示中文翻译
-- 英文页面：`http://localhost:3001/en/site/shadcnui` - 字段正确显示英文翻译
+- **站点详情页面**：
+  - 中文页面：`http://localhost:3001/zh/site/shadcnui` - 字段正确显示中文翻译
+  - 英文页面：`http://localhost:3001/en/site/shadcnui` - 字段正确显示英文翻译
+- **ResourceCard 组件**：
+  - 中文首页：`http://localhost:3001/zh` - type 字段正确显示中文翻译
+  - 英文首页：`http://localhost:3001/en` - type 字段正确显示英文翻译
 - 服务器运行正常，无编译错误
 
 ### 相关文件
 - `src/lib/field-utils.ts` - 字段映射工具函数
+- `src/app/api/fields/route.ts` - 字段 API 路由
 - `data/json/site-fields.json` - 统一的字段映射配置文件
 - `src/app/[locale]/site/[slug]/page.tsx` - 站点详情页面组件
 

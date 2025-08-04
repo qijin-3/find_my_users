@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getI18nJsonData } from '@/lib/i18n-data'
+import fs from 'fs'
+import path from 'path'
 
 /**
  * 将统一格式转换为语言特定格式
@@ -34,8 +35,10 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const locale = searchParams.get('locale') || 'zh'
     
-    // 读取统一的字段文件（固定从根目录读取）
-    const unifiedFieldsData = getI18nJsonData('site-fields.json', 'zh')
+    // 直接读取 site-fields.json 文件
+    const filePath = path.join(process.cwd(), 'data', 'json', 'site-fields.json')
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const unifiedFieldsData = JSON.parse(fileContent)
     
     // 转换为当前API期望的格式
     const transformedData = transformUnifiedToLocaleFormat(unifiedFieldsData, locale)
