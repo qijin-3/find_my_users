@@ -54,6 +54,7 @@
 - 同时更新中英文映射
 - 使用 `getFieldDisplayText` 函数进行字段值转换
 - 确保组件中调用 `getFieldDisplayText` 时使用正确的字段类型参数
+- **最新修复**: 2024-12-24 修复了 github.json 中的 type 字段值不匹配问题，将 "social_community" 改为 "social_platform"
 
 ### 14. 字段映射合并维护优化
 **需求**: 将分散在多个文件中的字段映射数据统一管理，减少维护成本

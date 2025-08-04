@@ -44,13 +44,14 @@ interface SitePageContentProps {
 /**
  * 站点分类配置
  * 定义左侧菜单的分类项目和对应图标
+ * 注意：分类 ID 必须与 site-fields.json 中的 type 字段键值完全一致
  * @param t - 翻译函数
  */
 const getSiteCategories = (t: any) => [
   { id: 'product_showcase', name: t('categories.product-showcase'), icon: Globe },
   { id: 'tool_navigation', name: t('categories.tool-navigation'), icon: Wrench },
   { id: 'blog_newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
-  { id: 'social_community', name: t('categories.social-community'), icon: Users },
+  { id: 'social_platform', name: t('categories.social-platform'), icon: Users },
   { id: 'media', name: t('categories.media'), icon: Radio },
   { id: 'vertical_forum', name: t('categories.vertical-forum'), icon: ChatCircle },
   { id: 'design_platform', name: t('categories.design-platform'), icon: Palette },

@@ -47,6 +47,50 @@
 3. **字段映射完整性**：确保 `field-utils.ts` 中包含所有可能的字段值映射
 4. **缓存管理**：修改代码后重启开发服务器以确保修改生效
 
+## 字段映射问题修复记录
+
+### 问题描述
+站点详情页面中的 `status`、`type`、`region`、`submitMethod`、`expectedExposure`、`reviewTime` 等字段显示的是原始变量值（如 `product_showcase`、`submit_issue`、`within_three_days`），而不是 `site-fields.json` 中映射的中文或英文翻译文本。
+
+### 根本原因
+`field-utils.ts` 中的 `getFieldsData` 函数在服务端环境下使用了错误的文件读取方式。原代码通过 `getI18nJsonData` 函数尝试从 `data/json/zh/` 或 `data/json/en/` 目录读取语言特定的字段文件，但实际的字段映射文件位于 `data/json/site-fields.json`，这是一个统一格式的文件，包含所有语言的翻译。
+
+### 解决方案
+1. **修改文件读取路径**：直接读取 `data/json/site-fields.json` 文件
+2. **简化读取逻辑**：移除对 `getI18nJsonData` 的依赖，直接使用 `fs` 和 `path` 模块读取文件
+3. **保持转换逻辑**：继续使用 `transformUnifiedToLocaleFormat` 函数将统一格式转换为语言特定格式
+
+### 修复的代码变更
+在 `src/lib/field-utils.ts` 的 `getFieldsData` 函数中：
+
+```typescript
+// 修改前
+const { getI18nJsonData } = await import('./i18n-data');
+const unifiedData = await getI18nJsonData('site-fields.json', 'zh');
+
+// 修改后
+const fs = await import('fs');
+const path = await import('path');
+const fieldsPath = path.join(process.cwd(), 'data', 'json', 'site-fields.json');
+
+if (fs.existsSync(fieldsPath)) {
+  const content = fs.readFileSync(fieldsPath, 'utf8');
+  const unifiedData = JSON.parse(content);
+  // 转换为语言特定格式
+  const fieldsData = transformUnifiedToLocaleFormat(unifiedData, locale);
+}
+```
+
+### 验证结果
+- 中文页面：`http://localhost:3001/zh/site/shadcnui` - 字段正确显示中文翻译
+- 英文页面：`http://localhost:3001/en/site/shadcnui` - 字段正确显示英文翻译
+- 服务器运行正常，无编译错误
+
+### 相关文件
+- `src/lib/field-utils.ts` - 字段映射工具函数
+- `data/json/site-fields.json` - 统一的字段映射配置文件
+- `src/app/[locale]/site/[slug]/page.tsx` - 站点详情页面组件
+
 ## Site 文件夹数据结构优化 (2025-01-28)
 
 ### 问题描述

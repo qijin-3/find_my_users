@@ -58,17 +58,25 @@ export async function getFieldsData(locale: 'zh' | 'en' = 'zh'): Promise<FieldOp
 
     // 在服务端环境中，直接读取文件而不是使用 fetch
     if (typeof window === 'undefined') {
-      // 服务端环境，直接导入 i18n-data 函数
-      const { getI18nJsonData } = await import('./i18n-data');
-      // 读取统一的字段文件（固定从根目录读取）
-      const unifiedData = await getI18nJsonData('site-fields.json', 'zh');
-      // 转换为语言特定格式
-      const fieldsData = transformUnifiedToLocaleFormat(unifiedData, locale);
+      // 服务端环境，直接读取统一的字段文件
+      const fs = await import('fs');
+      const path = await import('path');
+      const fieldsPath = path.join(process.cwd(), 'data', 'json', 'site-fields.json');
       
-      // 缓存数据
-      fieldsCache[locale] = fieldsData;
-      
-      return fieldsData;
+      if (fs.existsSync(fieldsPath)) {
+        const content = fs.readFileSync(fieldsPath, 'utf8');
+        const unifiedData = JSON.parse(content);
+        // 转换为语言特定格式
+        const fieldsData = transformUnifiedToLocaleFormat(unifiedData, locale);
+        
+        // 缓存数据
+        fieldsCache[locale] = fieldsData;
+        
+        return fieldsData;
+      } else {
+        // 如果文件不存在，返回空对象
+        return {};
+      }
     } else {
       // 客户端环境，使用 fetch（API已经处理了转换）
       const response = await fetch(`/api/fields?locale=${locale}`, {

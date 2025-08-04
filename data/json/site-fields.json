@@ -9,12 +9,8 @@
       "en": "Suspected Unmaintained"
     },
     "confirmed_unmaintained": {
-      "zh": "确认不再维护",
-      "en": "Confirmed Unmaintained"
-    },
-    "under_construction": {
-      "zh": "建设中",
-      "en": "Under Construction"
+      "zh": "不再维护",
+      "en": "Unmaintained"
     },
     "temporarily_unavailable": {
       "zh": "暂时无法访问",
@@ -26,26 +22,6 @@
     }
   },
   "type": {
-    "free": {
-      "zh": "免费",
-      "en": "Free"
-    },
-    "freemium": {
-      "zh": "免费增值",
-      "en": "Freemium"
-    },
-    "paid": {
-      "zh": "付费",
-      "en": "Paid"
-    },
-    "subscription": {
-      "zh": "订阅制",
-      "en": "Subscription"
-    },
-    "one_time_purchase": {
-      "zh": "一次性购买",
-      "en": "One-time Purchase"
-    },
     "product_showcase": {
       "zh": "产品展示页",
       "en": "Product Showcase"
@@ -55,16 +31,12 @@
       "en": "Tool Navigation"
     },
     "blog_newsletter": {
-      "zh": "博客 / 周刊",
-      "en": "Blog / Newsletter"
+      "zh": "博客/周刊",
+      "en": "Blog/Newsletter"
     },
     "social_platform": {
       "zh": "社交平台",
       "en": "Social Platform"
-    },
-    "social_community": {
-      "zh": "社交社区",
-      "en": "Social Community"
     },
     "media": {
       "zh": "媒体",
@@ -74,36 +46,12 @@
       "zh": "垂直论坛",
       "en": "Vertical Forum"
     },
-    "vertical_forum_community": {
-      "zh": "垂直论坛/社区",
-      "en": "Vertical Forum/Community"
-    },
     "design_platform": {
       "zh": "设计平台",
       "en": "Design Platform"
     }
   },
   "region": {
-    "global": {
-      "zh": "全球",
-      "en": "Global"
-    },
-    "china": {
-      "zh": "中国大陆",
-      "en": "China Mainland"
-    },
-    "asia_pacific": {
-      "zh": "亚太地区",
-      "en": "Asia Pacific"
-    },
-    "north_america": {
-      "zh": "北美",
-      "en": "North America"
-    },
-    "europe": {
-      "zh": "欧洲",
-      "en": "Europe"
-    },
     "domestic": {
       "zh": "国内",
       "en": "Domestic"
@@ -111,32 +59,12 @@
     "overseas": {
       "zh": "海外",
       "en": "Overseas"
-    },
-    "other": {
-      "zh": "其他",
-      "en": "Other"
     }
   },
   "submitMethod": {
     "email": {
       "zh": "邮件提交",
       "en": "Email Submission"
-    },
-    "form": {
-      "zh": "表单提交",
-      "en": "Form Submission"
-    },
-    "api": {
-      "zh": "API提交",
-      "en": "API Submission"
-    },
-    "manual": {
-      "zh": "手动提交",
-      "en": "Manual Submission"
-    },
-    "automatic": {
-      "zh": "自动收录",
-      "en": "Automatic Inclusion"
     },
     "site_submission": {
       "zh": "站内投稿",
@@ -160,22 +88,6 @@
     }
   },
   "reviewTime": {
-    "immediate": {
-      "zh": "即时",
-      "en": "Immediate"
-    },
-    "within_24h": {
-      "zh": "24小时内",
-      "en": "Within 24 Hours"
-    },
-    "within_week": {
-      "zh": "一周内",
-      "en": "Within a Week"
-    },
-    "within_month": {
-      "zh": "一个月内",
-      "en": "Within a Month"
-    },
     "immediately": {
       "zh": "立刻",
       "en": "Immediately"
@@ -202,18 +114,6 @@
     }
   },
   "expectedExposure": {
-    "high": {
-      "zh": "高",
-      "en": "High"
-    },
-    "medium": {
-      "zh": "中",
-      "en": "Medium"
-    },
-    "low": {
-      "zh": "低",
-      "en": "Low"
-    },
     "not_disclosed": {
       "zh": "未披露",
       "en": "Not Disclosed"
@@ -245,40 +145,6 @@
     "over_10k": {
       "zh": "1w以上",
       "en": "Over 10K"
-    },
-    "unknown": {
-      "zh": "未知",
-      "en": "Unknown"
-    }
-  },
-  "category": {
-    "product_showcase": {
-      "zh": "产品展示页",
-      "en": "Product Showcase"
-    },
-    "tool_navigation": {
-      "zh": "工具导航",
-      "en": "Tool Navigation"
-    },
-    "blog_newsletter": {
-      "zh": "博客/周刊",
-      "en": "Blog/Newsletter"
-    },
-    "social_community": {
-      "zh": "社交社区",
-      "en": "Social Community"
-    },
-    "media": {
-      "zh": "媒体",
-      "en": "Media"
-    },
-    "vertical_forum": {
-      "zh": "垂直论坛/社区",
-      "en": "Vertical Forum"
-    },
-    "design_platform": {
-      "zh": "设计平台",
-      "en": "Design Platform"
-    }
+    }  
   }
 }
