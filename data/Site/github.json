@@ -1,0 +1,20 @@
+{
+  "name_zh": "Github",
+  "name_en": "Github",
+  "description_zh": "全球最大的代码托管平台，不仅提供版本控制功能，还是开发者社交和协作的重要平台。",
+  "description_en": "The world's leading platform for version control and collaborative software development.",
+  "screenshot": "/images/sites/github-screenshot.jpg",
+  "status": "running",
+  "type": "social_community",
+  "region": "overseas",
+  "url": "https://github.com/",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/github/feedback",
+  "submitRequirements_zh": "需要提供详细的功能请求或bug报告，遵循社区指南",
+  "submitRequirements_en": "Detailed description of feature requests or bug reports required, following community guidelines",
+  "review": "Y",
+  "reviewTime": "within_one_week",
+  "expectedExposure": "over_10k",
+  "rating_zh": "全球最大的代码托管平台，不仅提供版本控制功能，还是开发者社交和协作的重要平台。功能丰富，生态完善，是每个开发者必备的工具。",
+  "rating_en": "The world's largest code hosting platform, not only providing version control functionality but also serving as an important platform for developer social interaction and collaboration. Feature-rich, well-established ecosystem, an essential tool for every developer."
+}

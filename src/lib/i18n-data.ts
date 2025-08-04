@@ -80,15 +80,40 @@ export function getI18nArticle(slug: string, locale: string = 'zh'): any {
 }
 
 /**
- * 获取多语言站点详情数据
- * 如果指定语言的站点详情不存在，则fallback到中文版本
- * @param slug - 站点slug
- * @param locale - 语言代码（'zh' 或 'en'）
- * @returns 站点详情数据
+ * 获取站点详情数据
+ * @param slug 站点标识符
+ * @param locale 语言代码
+ * @returns 站点详情数据或null
  */
-export function getI18nSiteData(slug: string, locale: string = 'zh'): any {
+export async function getI18nSiteData(slug: string, locale: string): Promise<any> {
   try {
-    // 首先尝试获取指定语言的站点详情
+    // 首先尝试从合并后的文件获取数据
+    const mergedFilePath = path.join(process.cwd(), 'data', 'Site', `${slug}.json`);
+    
+    if (fs.existsSync(mergedFilePath)) {
+      const fileContent = fs.readFileSync(mergedFilePath, 'utf8');
+      const data = JSON.parse(fileContent);
+      
+      // 根据语言返回相应的字段
+      return {
+        name: locale === 'zh' ? data.name_zh : data.name_en,
+        description: locale === 'zh' ? data.description_zh : data.description_en,
+        submitRequirements: locale === 'zh' ? data.submitRequirements_zh : data.submitRequirements_en,
+        rating: locale === 'zh' ? data.rating_zh : data.rating_en,
+        screenshot: data.screenshot,
+        status: data.status,
+        type: data.type,
+        region: data.region,
+        url: data.url,
+        submitMethod: data.submitMethod,
+        submitUrl: data.submitUrl,
+        review: data.review,
+        reviewTime: data.reviewTime,
+        expectedExposure: data.expectedExposure
+      };
+    }
+    
+    // 如果合并文件不存在，回退到原有逻辑
     const localePath = path.join(process.cwd(), 'data', 'Site', locale, `${slug}.json`);
     
     if (fs.existsSync(localePath)) {
@@ -106,7 +131,7 @@ export function getI18nSiteData(slug: string, locale: string = 'zh'): any {
     
     return null;
   } catch (error) {
-    console.error(`Error reading site data ${slug} for locale ${locale}:`, error);
+    console.error(`Error loading site data for ${slug}:`, error);
     return null;
   }
 }
@@ -215,7 +240,7 @@ export function getI18nArticlesList(locale: string = 'zh'): any[] {
  * @param locale - 语言代码（'zh' 或 'en'）
  * @returns 完整的站点列表数组
  */
-export function getI18nSitesList(locale: string = 'zh'): any[] {
+export async function getI18nSitesList(locale: string = 'zh'): Promise<any[]> {
   try {
     // 首先尝试从合并后的sitelists.json获取站点基本信息列表
     const mergedSiteListPath = path.join(process.cwd(), 'data', 'json', 'sitelists.json');
@@ -230,9 +255,9 @@ export function getI18nSitesList(locale: string = 'zh'): any[] {
       }
       
       // 为每个站点获取详细信息并合并
-      const sites = siteListData.map((siteMeta: any) => {
+      const sitePromises = siteListData.map(async (siteMeta: any) => {
         // 获取站点详细信息
-        const siteDetails = getI18nSiteData(siteMeta.slug, locale);
+        const siteDetails = await getI18nSiteData(siteMeta.slug, locale);
         
         // 根据语言选择对应的名称
         const name = locale === 'en' ? siteMeta.name_en : siteMeta.name_zh;
@@ -265,9 +290,11 @@ export function getI18nSitesList(locale: string = 'zh'): any[] {
           reviewTime: '',
           expectedExposure: ''
         };
-      }).filter(Boolean); // 过滤掉null值
+      });
       
-      return sites;
+      // 等待所有Promise完成
+      const sites = await Promise.all(sitePromises);
+      return sites.filter(Boolean);
     }
     
     // 如果合并文件不存在，fallback到原有逻辑
@@ -278,9 +305,9 @@ export function getI18nSitesList(locale: string = 'zh'): any[] {
     }
     
     // 为每个站点获取详细信息并合并
-    const sites = siteListData.map((siteMeta: any) => {
+    const sitePromises = siteListData.map(async (siteMeta: any) => {
       // 获取站点详细信息
-      const siteDetails = getI18nSiteData(siteMeta.slug, locale);
+      const siteDetails = await getI18nSiteData(siteMeta.slug, locale);
       
       if (siteDetails) {
         return {
@@ -310,9 +337,11 @@ export function getI18nSitesList(locale: string = 'zh'): any[] {
         reviewTime: '',
         expectedExposure: ''
       };
-    }).filter(Boolean); // 过滤掉null值
+    });
     
-    return sites;
+    // 等待所有Promise完成
+    const sites = await Promise.all(sitePromises);
+    return sites.filter(Boolean);
     
   } catch (error) {
     console.error(`Error getting sites list for locale ${locale}:`, error);

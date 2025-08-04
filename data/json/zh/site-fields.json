@@ -2,37 +2,65 @@
   "status": {
     "running": "运行中",
     "suspected_unmaintained": "疑似不再维护",
+    "confirmed_unmaintained": "确认不再维护",
+    "under_construction": "建设中",
+    "temporarily_unavailable": "暂时无法访问",
     "stopped": "停止运营"
   },
   "type": {
+    "free": "免费",
+    "freemium": "免费增值",
+    "paid": "付费",
+    "subscription": "订阅制",
+    "one_time_purchase": "一次性购买",
     "product_showcase": "产品展示页",
     "tool_navigation": "工具导航",
     "blog_newsletter": "博客 / 周刊",
     "social_platform": "社交平台",
+    "social_community": "社交社区",
     "media": "媒体",
+    "vertical_forum": "垂直论坛",
     "vertical_forum_community": "垂直论坛/社区",
     "design_platform": "设计平台"
   },
   "region": {
+    "global": "全球",
+    "china": "中国大陆",
+    "asia_pacific": "亚太地区",
+    "north_america": "北美",
+    "europe": "欧洲",
     "domestic": "国内",
-    "overseas": "海外"
+    "overseas": "海外",
+    "other": "其他"
   },
   "submitMethod": {
+    "email": "邮件提交",
+    "form": "表单提交",
+    "api": "API提交",
+    "manual": "手动提交",
+    "automatic": "自动收录",
     "site_submission": "站内投稿",
     "submit_issue": "提交issue",
     "questionnaire": "问卷",
     "site_form": "站内表单",
-    "email": "Email",
     "submit_comment": "提交Comment"
   },
   "reviewTime": {
+    "immediate": "即时",
+    "within_24h": "24小时内",
+    "within_week": "一周内",
+    "within_month": "一个月内",
     "immediately": "立刻",
     "within_one_day": "一天内",
     "within_three_days": "三天内",
     "within_one_week": "一周内",
-    "over_one_week": "一周以上"
+    "over_one_week": "一周以上",
+    "unknown": "未知"
   },
   "expectedExposure": {
+    "high": "高",
+    "medium": "中",
+    "low": "低",
     "not_disclosed": "未披露",
     "not_evaluated": "未评测",
     "within_100": "100以内",
@@ -40,6 +68,16 @@
     "within_1k": "1k以内",
     "within_2k": "2k以内",
     "within_10k": "1w以内",
-    "over_10k": "1w以上"
+    "over_10k": "1w以上",
+    "unknown": "未知"
+  },
+  "category": {
+    "product_showcase": "产品展示页",
+    "tool_navigation": "工具导航",
+    "blog_newsletter": "博客/周刊",
+    "social_community": "社交社区",
+    "media": "媒体",
+    "vertical_forum": "垂直论坛/社区",
+    "design_platform": "设计平台"
   }
 }

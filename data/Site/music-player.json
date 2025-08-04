@@ -1,0 +1,20 @@
+{
+  "name_zh": "Music Player",
+  "name_en": "Music Player",
+  "description_zh": "在线音乐播放器",
+  "description_en": "Online Music Player",
+  "screenshot": "/images/sites/musicplayer-screenshot.jpg",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "overseas",
+  "url": "https://musicplayer-olive.vercel.app/",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/username/musicplayer",
+  "submitRequirements_zh": "需要提供功能建议或bug报告",
+  "submitRequirements_en": "Feature suggestions or bug reports required",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_100",
+  "rating_zh": "简洁的在线音乐播放器，界面美观，功能基础但实用。适合作为学习项目参考，展示了现代Web音频API的使用。",
+  "rating_en": "A clean online music player with beautiful interface and basic but practical features. Suitable as a learning project reference, demonstrating the use of modern Web Audio APIs."
+}

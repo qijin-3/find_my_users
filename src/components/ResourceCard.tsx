@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ArrowRight } from '@phosphor-icons/react'
-import { getFieldDisplayText } from '@/lib/field-utils'
+import { useFieldData } from '@/hooks/useFieldData'
 
 /**
  * 资源对象类型定义
@@ -47,6 +47,8 @@ export default function ResourceCard({
   className = "",
   locale = 'zh'
 }: ResourceCardProps) {
+  const { getFieldDisplayText } = useFieldData(locale as 'zh' | 'en')
+
   /**
    * 获取分类显示名称
    * @param {string} typeId - 类型ID
@@ -54,7 +56,7 @@ export default function ResourceCard({
    * @returns {string} 分类显示名称
    */
   const getCategoryDisplayName = (typeId: string, locale: string): string => {
-    return getFieldDisplayText('type', typeId, locale as 'zh' | 'en');
+    return getFieldDisplayText('type', typeId);
   }
 
   /**

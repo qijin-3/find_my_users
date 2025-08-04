@@ -64,7 +64,7 @@ export async function generateStaticParams(): Promise<{ locale: string; slug: st
  */
 export async function generateMetadata({ params }: SitePageProps) {
   const { locale, slug } = await params
-  const siteData = getI18nSiteData(slug, locale)
+  const siteData = await getI18nSiteData(slug, locale)
   
   if (!siteData) {
     return {
@@ -82,10 +82,10 @@ export async function generateMetadata({ params }: SitePageProps) {
  * 获取状态翻译文本
  * @param {string} status - 站点状态
  * @param {string} locale - 语言
- * @returns {string} 翻译后的状态文本
+ * @returns {Promise<string>} 翻译后的状态文本
  */
-function getStatusText(status: string, locale: string): string {
-  return getFieldDisplayText('status', status, locale as 'zh' | 'en')
+async function getStatusText(status: string, locale: string): Promise<string> {
+  return await getFieldDisplayText('status', status, locale as 'zh' | 'en')
 }
 
 /**
@@ -121,7 +121,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
   const t = await getTranslations('site')
   
   // 获取站点数据
-  const siteData = getI18nSiteData(slug, locale)
+  const siteData = await getI18nSiteData(slug, locale)
 
   if (!siteData) {
     notFound()
@@ -129,7 +129,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
 
   const statusInfo = getStatusInfo(siteData.status)
   const StatusIcon = statusInfo.icon
-  const statusText = getStatusText(siteData.status, locale)
+  const statusText = await getStatusText(siteData.status, locale)
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
@@ -164,19 +164,19 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '站点类型：' : 'Site Type:'}
             </span>
-            <span className="text-gray-600">{getFieldDisplayText('type', siteData.type, locale as 'zh' | 'en')}</span>
+            <span className="text-gray-600">{await getFieldDisplayText('type', siteData.type, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '适合地区：' : 'Suitable Region:'}
             </span>
-            <span className="text-gray-600">{getFieldDisplayText('region', siteData.region, locale as 'zh' | 'en')}</span>
+            <span className="text-gray-600">{await getFieldDisplayText('region', siteData.region, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '递交方式：' : 'Submit Method:'}
             </span>
-            <span className="text-gray-600">{getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}</span>
+            <span className="text-gray-600">{await getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
@@ -193,13 +193,13 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '审核耗时：' : 'Review Time:'}
             </span>
-            <span className="text-gray-600">{getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}</span>
+            <span className="text-gray-600">{await getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}</span>
           </div>
           <div>
             <span className="font-semibold text-gray-700">
               {locale === 'zh' ? '预计曝光（周）：' : 'Expected Exposure (weeks):'}
             </span>
-            <span className="text-gray-600">{getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}</span>
+            <span className="text-gray-600">{await getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}</span>
           </div>
         </div>
         

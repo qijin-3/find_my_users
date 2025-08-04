@@ -1,223 +1,145 @@
 /**
  * 站点字段类型定义
  */
-type FieldType = 'status' | 'type' | 'region' | 'submitMethod' | 'reviewTime' | 'expectedExposure' | 'category';
+export type SiteFieldKey = 'status' | 'type' | 'region' | 'submitMethod' | 'reviewTime' | 'expectedExposure' | 'category'
 
 /**
  * 字段数据结构
  */
-interface FieldData {
-  [key: string]: string;
+export interface FieldData {
+  [key: string]: string
 }
 
 /**
  * 字段选项结构
  */
-interface FieldOption {
-  key: string;
-  label: string;
+export interface FieldOptions {
+  [fieldKey: string]: FieldData
 }
 
 /**
- * 静态字段数据 - 中文
+ * 字段数据缓存
  */
-const zhFields = {
-  status: {
-    running: "运行中",
-    suspected_unmaintained: "疑似不再维护",
-    confirmed_unmaintained: "确认不再维护",
-    under_construction: "建设中",
-    temporarily_unavailable: "暂时无法访问"
-  },
-  type: {
-    free: "免费",
-    freemium: "免费增值",
-    paid: "付费",
-    subscription: "订阅制",
-    one_time_purchase: "一次性购买",
-    tool_navigation: "工具导航",
-    social_platform: "社交平台",
-    product_showcase: "产品展示",
-    blog_newsletter: "博客/周刊",
-    media: "媒体平台",
-    vertical_forum: "垂直论坛",
-    design_platform: "设计平台"
-  },
-  region: {
-    global: "全球",
-    china: "中国大陆",
-    asia_pacific: "亚太地区",
-    north_america: "北美",
-    europe: "欧洲",
-    domestic: "国内",
-    overseas: "海外",
-    other: "其他"
-  },
-  submitMethod: {
-    email: "邮件提交",
-    form: "表单提交",
-    api: "API提交",
-    manual: "手动提交",
-    automatic: "自动收录",
-    site_submission: "站点提交",
-    submit_issue: "提交Issue"
-  },
-  reviewTime: {
-    immediate: "即时",
-    within_24h: "24小时内",
-    within_week: "一周内",
-    within_month: "一个月内",
-    within_three_days: "三天内",
-    within_one_week: "一周内",
-    unknown: "未知"
-  },
-  expectedExposure: {
-    high: "高",
-    medium: "中",
-    low: "低",
-    within_2k: "2千以内",
-    over_10k: "1万以上",
-    unknown: "未知"
-  },
-  category: {
-    product_showcase: "产品展示页",
-    tool_navigation: "工具导航",
-    blog_newsletter: "博客/周刊",
-    social_community: "社交社区",
-    media: "媒体",
-    vertical_forum: "垂直论坛/社区",
-    design_platform: "设计平台"
-  }
-};
+let fieldsCache: { [locale: string]: any } = {};
 
 /**
- * 静态字段数据 - 英文
- */
-const enFields = {
-  status: {
-    running: "Running",
-    suspected_unmaintained: "Suspected Unmaintained",
-    confirmed_unmaintained: "Confirmed Unmaintained",
-    under_construction: "Under Construction",
-    temporarily_unavailable: "Temporarily Unavailable"
-  },
-  type: {
-    free: "Free",
-    freemium: "Freemium",
-    paid: "Paid",
-    subscription: "Subscription",
-    one_time_purchase: "One-time Purchase",
-    tool_navigation: "Tool Navigation",
-    social_platform: "Social Platform",
-    product_showcase: "Product Showcase",
-    blog_newsletter: "Blog/Newsletter",
-    media: "Media Platform",
-    vertical_forum: "Vertical Forum",
-    design_platform: "Design Platform"
-  },
-  region: {
-    global: "Global",
-    china: "China Mainland",
-    asia_pacific: "Asia Pacific",
-    north_america: "North America",
-    europe: "Europe",
-    domestic: "Domestic",
-    overseas: "Overseas",
-    other: "Other"
-  },
-  submitMethod: {
-    email: "Email Submission",
-    form: "Form Submission",
-    api: "API Submission",
-    manual: "Manual Submission",
-    automatic: "Automatic Inclusion",
-    site_submission: "Site Submission",
-    submit_issue: "Submit Issue"
-  },
-  reviewTime: {
-    immediate: "Immediate",
-    within_24h: "Within 24 Hours",
-    within_week: "Within a Week",
-    within_month: "Within a Month",
-    within_three_days: "Within 3 Days",
-    within_one_week: "Within One Week",
-    unknown: "Unknown"
-  },
-  expectedExposure: {
-    high: "High",
-    medium: "Medium",
-    low: "Low",
-    within_2k: "Within 2K",
-    over_10k: "Over 10K",
-    unknown: "Unknown"
-  },
-  category: {
-    product_showcase: "Product Showcase",
-    tool_navigation: "Tool Navigation",
-    blog_newsletter: "Blog/Newsletter",
-    social_community: "Social Community",
-    media: "Media",
-    vertical_forum: "Vertical Forum",
-    design_platform: "Design Platform"
-  }
-};
-
-/**
- * 获取字段数据
- * @param locale - 语言环境
- * @returns 字段数据
- */
-function getFieldsData(locale: 'zh' | 'en') {
-  return locale === 'zh' ? zhFields : enFields;
-}
-
-/**
- * 获取站点字段的显示文本
- * @param fieldType - 字段类型
- * @param fieldKey - 字段键值
+ * 获取字段映射数据
  * @param locale - 语言环境 ('zh' | 'en')
- * @returns 对应的显示文本
+ * @returns 字段映射数据的 Promise
  */
-export function getFieldDisplayText(
-  fieldType: FieldType,
-  fieldKey: string,
-  locale: 'zh' | 'en'
-): string {
-  const fields = getFieldsData(locale);
-  const fieldData = fields[fieldType] as Record<string, string>;
-  return fieldData?.[fieldKey] || fieldKey;
+export async function getFieldsData(locale: 'zh' | 'en' = 'zh'): Promise<FieldOptions> {
+  try {
+    // 检查缓存
+    if (fieldsCache[locale]) {
+      return fieldsCache[locale];
+    }
+
+    // 在服务端环境中，直接读取文件而不是使用 fetch
+    if (typeof window === 'undefined') {
+      // 服务端环境，直接导入 i18n-data 函数
+      const { getI18nJsonData } = await import('./i18n-data');
+      const fieldsData = await getI18nJsonData('site-fields', locale);
+      
+      // 缓存数据
+      fieldsCache[locale] = fieldsData;
+      
+      return fieldsData;
+    } else {
+      // 客户端环境，使用 fetch
+      const response = await fetch(`/api/fields?locale=${locale}`, {
+        cache: 'force-cache', // 启用缓存
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Failed to fetch fields data: ${response.status}`);
+      }
+      
+      const fieldsData = await response.json();
+      
+      // 缓存数据
+      fieldsCache[locale] = fieldsData;
+      
+      return fieldsData;
+    }
+  } catch (error) {
+    console.error(`Failed to load fields data for locale ${locale}:`, error);
+    
+    // 返回空对象作为fallback
+    return {};
+  }
 }
 
 /**
- * 获取所有字段选项
+ * 获取字段显示文本
+ * @param fieldType - 字段类型
+ * @param fieldValue - 字段值
+ * @param locale - 语言环境
+ * @returns 显示文本
+ */
+export async function getFieldDisplayText(
+  fieldType: SiteFieldKey, 
+  fieldValue: string, 
+  locale: 'zh' | 'en' = 'zh'
+): Promise<string> {
+  try {
+    const fieldsData = await getFieldsData(locale);
+    
+    if (fieldsData[fieldType] && fieldsData[fieldType][fieldValue]) {
+      return fieldsData[fieldType][fieldValue];
+    }
+    
+    // 如果找不到对应的显示文本，返回原始值
+    return fieldValue;
+  } catch (error) {
+    console.error(`Failed to get field display text for ${fieldType}.${fieldValue}:`, error);
+    return fieldValue;
+  }
+}
+
+/**
+ * 获取字段的所有选项
  * @param fieldType - 字段类型
  * @param locale - 语言环境
  * @returns 字段选项数组
  */
-export function getFieldOptions(
-  fieldType: FieldType,
-  locale: 'zh' | 'en'
-): FieldOption[] {
-  const fields = getFieldsData(locale);
-  const fieldData = fields[fieldType] as Record<string, string> || {};
-  
-  return Object.entries(fieldData).map(([key, label]) => ({
-    key,
-    label: String(label)
-  }));
+export async function getFieldOptions(
+  fieldType: SiteFieldKey, 
+  locale: 'zh' | 'en' = 'zh'
+): Promise<Array<{ key: string; label: string }>> {
+  try {
+    const fieldsData = await getFieldsData(locale);
+    
+    if (fieldsData[fieldType]) {
+      return Object.entries(fieldsData[fieldType]).map(([key, label]) => ({
+        key,
+        label: label as string
+      }));
+    }
+    
+    return [];
+  } catch (error) {
+    console.error(`Failed to get field options for ${fieldType}:`, error);
+    return [];
+  }
 }
 
 /**
  * 验证字段值是否有效
  * @param fieldType - 字段类型
- * @param fieldKey - 字段键值
+ * @param fieldValue - 字段值
+ * @param locale - 语言环境
  * @returns 是否有效
  */
-export function isValidFieldKey(
-  fieldType: FieldType,
-  fieldKey: string
-): boolean {
-  const zhFieldsData = getFieldsData('zh');
-  const fieldData = zhFieldsData[fieldType] as Record<string, string> || {};
-  return fieldKey in fieldData;
+export async function isValidFieldKey(
+  fieldType: SiteFieldKey, 
+  fieldValue: string, 
+  locale: 'zh' | 'en' = 'zh'
+): Promise<boolean> {
+  try {
+    const fieldsData = await getFieldsData(locale);
+    return !!(fieldsData[fieldType] && fieldsData[fieldType][fieldValue]);
+  } catch (error) {
+    console.error(`Failed to validate field key ${fieldType}.${fieldValue}:`, error);
+    return false;
+  }
 }

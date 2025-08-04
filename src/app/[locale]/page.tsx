@@ -26,11 +26,15 @@ export default async function HomePage({ params }: HomePageProps) {
   // 获取多语言数据
   const resources = getI18nJsonData('sitelists.json', locale)
   const allPostsData = getI18nArticlesList(locale)
-  const sites = getI18nSitesList(locale)
+  const sites = await getI18nSitesList(locale)
   
   // 获取最新的8个站点，按日期排序
   const latestSites = sites
-    .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .sort((a: any, b: any) => {
+      const dateA = a.date ? new Date(a.date).getTime() : 0
+      const dateB = b.date ? new Date(b.date).getTime() : 0
+      return dateB - dateA
+    })
     .slice(0, 8)
   
   // 获取最新的4篇文章

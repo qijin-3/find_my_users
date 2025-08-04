@@ -18,7 +18,7 @@ export default async function SitePage({ params }: SitePageProps) {
   setRequestLocale(locale)
   
   // 获取完整的站点数据（合并 sitelists.json 和 Site 目录下的详细信息）
-  const resources = getI18nSitesList(locale)
+  const resources = await getI18nSitesList(locale)
 
   return <SitePageContent resources={resources} locale={locale} />
 }

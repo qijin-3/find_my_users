@@ -12,6 +12,7 @@ interface Site {
   url: string;
   slug: string;
   category: string;
+  type: string;  // 站点类型，用于分类筛选
   date: string;
   lastModified: string;
 }
