@@ -23,6 +23,28 @@ export interface FieldOptions {
 let fieldsCache: { [locale: string]: any } = {};
 
 /**
+ * 将统一格式转换为语言特定格式
+ * @param unifiedData - 统一格式的字段数据
+ * @param locale - 目标语言环境
+ * @returns 转换后的语言特定格式数据
+ */
+function transformUnifiedToLocaleFormat(unifiedData: any, locale: string): FieldOptions {
+  const result: any = {}
+  
+  for (const [fieldType, fieldValues] of Object.entries(unifiedData)) {
+    result[fieldType] = {}
+    
+    for (const [key, translations] of Object.entries(fieldValues as any)) {
+      // 优先使用指定语言，fallback到中文
+      const translationObj = translations as { [key: string]: string }
+      result[fieldType][key] = translationObj[locale] || translationObj['zh']
+    }
+  }
+  
+  return result
+}
+
+/**
  * 获取字段映射数据
  * @param locale - 语言环境 ('zh' | 'en')
  * @returns 字段映射数据的 Promise
@@ -38,14 +60,17 @@ export async function getFieldsData(locale: 'zh' | 'en' = 'zh'): Promise<FieldOp
     if (typeof window === 'undefined') {
       // 服务端环境，直接导入 i18n-data 函数
       const { getI18nJsonData } = await import('./i18n-data');
-      const fieldsData = await getI18nJsonData('site-fields', locale);
+      // 读取统一的字段文件（固定从根目录读取）
+      const unifiedData = await getI18nJsonData('site-fields.json', 'zh');
+      // 转换为语言特定格式
+      const fieldsData = transformUnifiedToLocaleFormat(unifiedData, locale);
       
       // 缓存数据
       fieldsCache[locale] = fieldsData;
       
       return fieldsData;
     } else {
-      // 客户端环境，使用 fetch
+      // 客户端环境，使用 fetch（API已经处理了转换）
       const response = await fetch(`/api/fields?locale=${locale}`, {
         cache: 'force-cache', // 启用缓存
       });

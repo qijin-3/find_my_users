@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { useLocale } from 'next-intl'
-import messagesDataZh from '../../data/json/zh/people-messages.json'
-import messagesDataEn from '../../data/json/en/people-messages.json'
+import messagesData from '../../data/json/people-messages.json'
 
 interface ChatBubbleProps {
   message: string
@@ -51,8 +50,7 @@ const PeopleIllustration = () => {
   useEffect(() => {
     // 获取随机消息的函数
     const getRandomMessage = () => {
-      const messagesData = locale === 'en' ? messagesDataEn : messagesDataZh
-      const messages = messagesData.messages
+      const messages = messagesData.messages[locale as 'zh' | 'en'] || messagesData.messages.zh
       return messages[Math.floor(Math.random() * messages.length)]
     }
 
