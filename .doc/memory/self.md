@@ -1240,9 +1240,41 @@ bg-[rgb(var(--border))]
 - 代码结构更加简洁
 - 变量命名更加语义化
 
-**技术要点：**
+**技术按键：**
 1. **变量合并原则**：相同功能的变量应该合并，避免冗余
 2. **格式统一**：选择合适的颜色格式以保持与相关变量的一致性
 3. **主题支持**：确保亮色和暗色模式都正确合并
 4. **注释更新**：合并后的变量注释应说明所有用途
 5. **引用更新**：确保所有使用旧变量的地方都更新为新变量
+
+### 案例9：Badge组件hover效果优化
+
+**问题描述**：
+用户希望ResourceCard组件中的标签在hover时文字颜色变为globals.css中定义的foreground颜色（黑色），以提升交互体验。
+
+**解决方案**：
+1. 修改badge.tsx组件的secondary变体样式
+2. 为hover状态添加text-foreground类，使文字颜色在hover时变为foreground变量定义的颜色
+3. 保持原有的背景色hover效果（hover:bg-secondary/80）
+
+**代码变更**：
+```typescript
+// 修改前
+secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+
+// 修改后  
+secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-foreground",
+```
+
+**验证结果**：
+- 编译成功，无TypeScript错误
+- Badge组件在hover时文字颜色正确变为foreground颜色
+- 保持了原有的背景色渐变效果
+- 交互体验得到提升
+
+**技术要点**：
+1. **CSS类组合**：通过添加hover:text-foreground实现hover状态下的文字颜色变化
+2. **变量引用**：使用CSS变量foreground确保颜色与主题系统一致
+3. **渐进增强**：在保持原有效果基础上增加新的交互反馈
+4. **组件复用**：修改基础Badge组件影响所有使用secondary变体的标签
+5. **主题兼容**：foreground变量在亮色和暗色模式下都有对应定义，确保主题切换时效果正常
