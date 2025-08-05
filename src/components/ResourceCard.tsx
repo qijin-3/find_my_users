@@ -4,7 +4,6 @@ import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ArrowRight } from '@phosphor-icons/react'
 import { useFieldData } from '@/hooks/useFieldData'
 
 /**
@@ -79,59 +78,59 @@ export default function ResourceCard({
 
   return (
     <Link href={`/site/${resource.slug}`} className={`block group ${className}`}>
-      <Card className="h-72 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden">
+      <Card className="h-72 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a]">
         {/* 网站缩略截图 - 占满卡片宽度 */}
         <div className="relative w-full h-32 overflow-hidden">
           <Image
             src={getWebsiteScreenshotUrl(resource.url)}
             alt={`${resource.name} screenshot`}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-300 group-hover:scale-105 h-[128px]"
             unoptimized
           />
         </div>
         
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-3 pt-2">
           <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <CardTitle className="text-lg font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200 mb-2">
+            <div className="flex-1 aspect-auto h-8">
+              <CardTitle className="text-[20px] font-semibold leading-[32px] text-gray-900 dark:text-gray-100 mb-2">
                 {resource.name}
               </CardTitle>
             </div>
-            <ArrowRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all duration-200 flex-shrink-0 ml-2" />
           </div>
         </CardHeader>
         <CardContent className="pt-0 flex flex-col justify-between flex-1">
           <div className="space-y-3">
-            {/* 描述限制为两行 */}
-            <p className="text-sm text-gray-600 dark:text-gray-300 overflow-hidden" 
+            {/* 描述限制为两行，固定高度48px */}
+            <p className="font-medium text-[#1a1a1a82] text-[16px] overflow-hidden h-12" 
                style={{
                  display: '-webkit-box',
                  WebkitLineClamp: 2,
                  WebkitBoxOrient: 'vertical' as const,
-                 lineHeight: '1.4em',
-                 maxHeight: '2.8em'
+                 lineHeight: '1.4em'
                }}>
               {resource.description}
             </p>
             
-            {/* 产品种类标签放在描述下方 */}
-            {showCategory && resource.type && (
-              <Badge variant="secondary" className="text-xs">
-                {getCategoryDisplayName(resource.type, locale)}
-              </Badge>
-            )}
-            
-            {/* 其他标签区域 */}
-            {resource.tags && resource.tags.length > 0 && (
-              <div className="flex flex-wrap gap-1">
-                {resource.tags.slice(0, 2).map((tag, index) => (
-                  <Badge key={index} variant="outline" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-            )}
+            {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
+            <div className="pb-6">
+              {showCategory && resource.type && (
+                <Badge variant="secondary" className="text-[16px] font-normal leading-[18px] bg-[#f1f5f900] border border-[#000000]">
+                  {getCategoryDisplayName(resource.type, locale)}
+                </Badge>
+              )}
+              
+              {/* 其他标签区域 */}
+              {resource.tags && resource.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {resource.tags.slice(0, 2).map((tag, index) => (
+                    <Badge key={index} variant="outline" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>

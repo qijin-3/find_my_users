@@ -271,13 +271,26 @@ src/
 ##### 布局组件
 - **Layout.js**: 主布局组件，包含导航和页脚
 - **Navigation.tsx**: 顶部导航栏，包含菜单和用户状态 (TypeScript)
+  - 支持自定义容器样式：边框、内外边距、背景色、12px圆角
+  - Logo 图片显示：40px 高度，与标题间距 12px
+  - Logo 文字大小调整为 24px
+  - 移除 header 下划线，保持简洁外观
+  - 使用 CSS 变量替代硬编码颜色值，支持主题自动适配
+  - Header 固定定位：页面滚动时与顶部保持固定 24px 距离，透明背景
+  - 响应式设计，支持多语言切换
+  - 集成主题切换和语言切换功能
 - **Footer.js**: 页脚组件，包含链接和版权信息
 
 ##### 功能组件
 - **ArticleEditor.js**: 文章编辑器，支持 Markdown 编辑
 - **ArticleList.js**: 文章列表展示组件
 - **ResourceList.js**: 资源列表展示组件
-- **ResourceCard.js**: 资源卡片组件，用于展示单个资源
+- **ResourceCard.tsx**: 资源卡片组件，用于展示单个资源
+  - 支持自定义边框样式 (border-2 border-[#1a1a1a])
+  - 标题字体大小 20px，行高 32px
+  - 描述文字使用半透明色彩 (#1a1a1a82)
+  - Badge 组件支持透明背景和黑色边框
+  - 图片高度固定为 128px
 - **SitePageContent.js**: 站点页面内容组件
 - **LoginModal.js**: 登录模态框组件
 - **PeopleIllustration.tsx**: 首页小人插画动效组件，使用 Framer Motion 实现
@@ -460,6 +473,30 @@ const buttonVariants = cva(
 - **sitelists.json 扩展**: 添加 status, type, region, submitMethod, reviewTime, expectedExposure 字段
 - **站点详情统一**: 所有站点详情文件使用统一的字段变量
 - **批量更新**: 使用脚本批量更新现有数据文件
+
+### 2025-01-31 ResourceCard 样式优化
+#### 视觉设计增强
+- **边框系统**: 为 ResourceCard 添加 2px 深色边框 (#1a1a1a)
+- **字体层级优化**: 
+  - 标题字体调整为 20px，行高 32px，增强视觉层次
+  - 描述文字使用 16px 字体，半透明色彩 (#1a1a1a82) 提升可读性
+- **Badge 组件定制**: 
+  - 支持透明背景 (bg-[#f1f5f900])
+  - 黑色边框设计，与整体风格保持一致
+  - 字体大小调整为 16px，行高 18px
+- **布局微调**: 
+  - 图片容器高度固定为 128px
+  - CardHeader 添加 pt-2 间距优化
+  - 标题容器增加 aspect-auto h-8 约束
+
+#### 交互体验优化
+- **固定间距设计**: tag 和卡片底部间距固定为 24px (pb-6)，确保布局一致性
+- **简化 hover 效果**: 
+  - 移除 hover 时卡片 header 的颜色变化
+  - 移除 hover 时出现的箭头图标
+  - 保持卡片缩放和阴影效果，提供适度的交互反馈
+- **描述文字固定高度**: 设置描述文字 p 元素高度为固定的 48px (h-12)，确保卡片高度一致性
+- **代码优化**: 移除不必要的 ArrowRight 图标导入，减少包体积
 
 #### 维护便利性
 - **统一修改**: 修改字段显示文本只需更新字段定义文件

@@ -5,6 +5,7 @@ import { Link, usePathname } from '@/i18n/navigation'
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageToggle } from '@/components/language-toggle'
+import Image from 'next/image'
 
 /**
  * 导航组件
@@ -21,11 +22,18 @@ export function Navigation() {
   ]
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="sticky top-6 z-40 w-full">
+      <div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
         <div className="flex gap-6 md:gap-10">
-          <Link href="/" className="flex items-center space-x-2">
-            <span className="inline-block font-bold">FindMyUsers</span>
+          <Link href="/" className="flex items-center space-x-3">
+            <Image 
+              src="/Logo/Logo.svg" 
+              alt="FindMyUsers Logo" 
+              width={40} 
+              height={40}
+              className="h-10 w-auto"
+            />
+            <span className="inline-block font-bold w-[auto] text-[24px]">FindMyUsers</span>
           </Link>
           <nav className="hidden md:flex gap-6">
             {navItems.map((item) => (

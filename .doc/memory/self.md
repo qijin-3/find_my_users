@@ -164,7 +164,95 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
-### 错误：字段映射不完整导致显示变量名而非翻译文本
+### 错误：Navigation 组件样式更新记录
+**修改内容**：
+```typescript
+// 2025-01-31 Navigation 导航栏样式更新
+// 1. 为 container div 添加边框、内外边距和背景样式
+// 2. 为 FindMyUsers logo 文字调整字体大小
+// 3. 为 container div 添加 12px 圆角
+// 4. 移除 header 中的下划线
+// 5. 将硬编码颜色值替换为 CSS 变量以保持主题一致性
+// 6. 在标题左侧添加 Logo 图片，高度 40px，间距 12px
+// 7. 设置 header 为透明背景，实现固定定位时的透明效果
+// 8. 修复 header 与页面顶部距离，确保固定为 24px
+```
+
+**具体修改**：
+```typescript
+// header 固定定位，与页面顶部保持 24px 距离
+<header className="sticky top-6 z-40 w-full">
+
+// container div 样式更新，移除 mt-6，避免重复间距
+<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
+
+// Logo 和标题组合，添加 Logo 图片
+<Link href="/" className="flex items-center space-x-3">
+  <Image 
+    src="/Logo/Logo.svg" 
+    alt="FindMyUsers Logo" 
+    width={40} 
+    height={40}
+    className="h-10 w-auto"
+  />
+  <span className="inline-block font-bold w-[auto] text-[24px]">FindMyUsers</span>
+</Link>
+```
+
+**Header 固定定位特性**：
+- 使用 `sticky top-6` 实现页面滚动时与顶部保持固定 24px 距离
+- 移除 container 的 `mt-6`，避免与 sticky top-6 产生重复间距
+- 移除 `bg-background` 背景色，实现透明效果
+- 保持 `z-40` 层级确保在其他内容之上
+- 在 globals.css 中添加 `.header-sticky` 透明背景样式
+
+**Logo 添加特性**：
+- Logo 图片路径：`/Logo/Logo.svg`
+- 图片尺寸：40px 高度，宽度自适应
+- 与标题间距：12px（space-x-3）
+- 使用 Next.js Image 组件优化加载
+- 包含适当的 alt 属性以提升可访问性
+
+**颜色变量优化**：
+- 边框颜色：从 `#1a1a1a` 硬编码值改为 `border-border` CSS 变量
+- 背景色：从 `#ffffff` 硬编码值改为 `bg-background` CSS 变量
+- 这样可以确保在明暗主题切换时颜色自动适配
+
+### 错误：ResourceCard 组件样式更新记录
+**修改内容**：
+```typescript
+// 2025-01-31 样式优化更新
+// 1. 固定 tag 和卡片底部间距为 24px
+// 2. 移除 hover 时卡片 header 的颜色变化
+// 3. 移除 hover 时出现的箭头图标
+// 4. 固定描述文字 p 元素高度为 48px
+```
+
+**具体修改**：
+```typescript
+// 移除 ArrowRight 图标导入
+// 移除 CardTitle 的 hover 颜色变化类名
+// 移除 ArrowRight 组件渲染
+// 使用 pb-6 (24px) 固定标签区域与卡片底部间距
+<div className="pb-6">
+  {showCategory && resource.type && (
+    <Badge variant="secondary" className="text-[16px] font-normal leading-[18px] bg-[#f1f5f900] border border-[#000000]">
+      {getCategoryDisplayName(resource.type, locale)}
+    </Badge>
+  )}
+</div>
+
+// 固定描述文字高度为 48px (h-12)，移除 maxHeight 样式
+<p className="font-medium text-[#1a1a1a82] text-[16px] overflow-hidden h-12" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.4em'
+   }}>
+  {resource.description}
+</p>
+```
 **错误做法**：
 ```typescript
 // field-utils.ts 中缺少实际数据中使用的字段值映射

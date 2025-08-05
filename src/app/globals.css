@@ -4,13 +4,13 @@
  
 @layer base {
   :root {
-    --background: 40, 20%, 91.18%;
+    --background: 60, 100%, 96.47%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 40, 20%, 91.18%;
+    --card: 0, 0%, 100%;
     --card-foreground: 222.2 84% 4.9%;
  
-    --popover: 40, 20%, 91.18%;
+    --popover: 60, 100%, 96.47%;
     --popover-foreground: 222.2 84% 4.9%;
  
     --primary: 222.2 47.4% 11.2%;
@@ -28,7 +28,7 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
+    --border: 0, 0%, 10.2%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
  
@@ -73,4 +73,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Header sticky 样式 */
+.header-sticky {
+  background-color: transparent;
 }
