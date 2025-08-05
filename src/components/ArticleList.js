@@ -1,6 +1,8 @@
 // components/ArticleList.js
 'use client'
 import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
+import { Calendar } from '@phosphor-icons/react'
 import {
   Card,
   CardHeader,
@@ -14,6 +16,7 @@ import {
  * @param {boolean} showMoreLink - 是否显示更多链接
  */
 export default function ArticleList({ articles, showMoreLink = true }) {
+  const t = useTranslations('articles')
   return (
     <section>
       <div className="flex justify-between items-center mb-6">
@@ -27,8 +30,9 @@ export default function ArticleList({ articles, showMoreLink = true }) {
           <Card key={slug} className="border-2 rounded-[24px] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 group">
             <CardHeader className="border-0">
               {lastModified && (
-                <div className="text-sm mb-2 text-muted-foreground">
-                  最后修改: {new Date(lastModified).toLocaleDateString('zh-CN', {
+                <div className="text-sm mb-2 text-muted-foreground flex items-center gap-2">
+                  <Calendar size={16} />
+                  {t('lastModified')}: {new Date(lastModified).toLocaleDateString('zh-CN', {
                     year: 'numeric',
                     month: '2-digit',
                     day: '2-digit'
@@ -40,7 +44,6 @@ export default function ArticleList({ articles, showMoreLink = true }) {
                 className="text-muted-foreground hover:text-foreground/80 transition-colors inline-flex items-center gap-1"
               >
                 <CardTitle className="text-[20px] text-foreground">{title}</CardTitle>
-                →
               </Link>
               <CardDescription className="text-muted-foreground">{description}</CardDescription>
             </CardHeader>

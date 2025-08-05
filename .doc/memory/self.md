@@ -176,6 +176,7 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 // 6. 在标题左侧添加 Logo 图片，高度 40px，间距 12px
 // 7. 设置 header 为透明背景，实现固定定位时的透明效果
 // 8. 修复 header 与页面顶部距离，确保固定为 24px
+// 9. 添加与 ResourceCard 相同的 hover 效果
 ```
 
 **具体修改**：
@@ -183,8 +184,8 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 // header 固定定位，与页面顶部保持 24px 距离
 <header className="sticky top-6 z-40 w-full">
 
-// container div 样式更新，移除 mt-6，避免重复间距
-<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
+// container div 样式更新，添加 hover 效果
+<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105">
 
 // Logo 和标题组合，添加 Logo 图片
 <Link href="/" className="flex items-center space-x-3">
@@ -198,6 +199,29 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
   <span className="inline-block font-bold w-[auto] text-[24px]">FindMyUsers</span>
 </Link>
 ```
+
+### 错误：Navigation 组件 hover 效果优化
+**问题描述**：
+用户要求为 Navigation 组件添加与 ResourceCard 组件相同的 hover 效果。
+
+**解决方案**：
+为 Navigation 组件的 container div 添加 `transition-all duration-300 hover:shadow-lg hover:scale-105` 类名，实现与 ResourceCard 一致的悬停效果。
+
+**代码变更**：
+```typescript
+// 原始代码
+<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
+
+// 修改后代码
+<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105">
+```
+
+**技术要点**：
+1. **过渡效果**：使用 `transition-all duration-300` 实现平滑的过渡动画
+2. **阴影效果**：使用 `hover:shadow-lg` 在悬停时添加大阴影
+3. **缩放效果**：使用 `hover:scale-105` 在悬停时轻微放大（5%）
+4. **一致性**：与 ResourceCard 组件保持相同的 hover 效果样式
+5. **用户体验**：提供视觉反馈，增强交互性
 
 **Header 固定定位特性**：
 - 使用 `sticky top-6` 实现页面滚动时与顶部保持固定 24px 距离
@@ -780,7 +804,7 @@ import Image from 'next/image'
    - 使用 `generateStaticParams` 预生成静态路由
    - 通过 `getSiteData` 方法加载详情数据
 
-**技术要点**：
+**技术按键**：
 - 保持 slug 字段的唯一性和一致性
 - 时间戳使用 ISO 8601 格式确保标准化
 - 新字段不影响现有功能的正常运行
@@ -1312,7 +1336,7 @@ secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-s
 - 鼠标悬停时有阴影和缩放效果，与ResourceCard保持一致
 - 页面正常渲染，无编译错误
 
-### 技术要点
+### 技术按键
 1. **样式一致性**：确保不同组件间的视觉效果保持统一
 2. **Tailwind CSS类组合**：合理组合多个工具类实现复杂效果
 3. **过渡动画**：使用transition-all和duration-300实现平滑的动画效果
@@ -1609,53 +1633,183 @@ secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-s
 4. **组件复用**：修改基础Badge组件影响所有使用secondary变体的标签
 5. **主题兼容**：foreground变量在亮色和暗色模式下都有对应定义，确保主题切换时效果正常
 
-## 案例13：组件颜色变量统一优化（2024-01-03）
+## 案例16：ArticleList 组件添加日期图标优化 (2025-01-31)
+
+**问题描述**：
+用户要求在 ArticleList 组件的"最后修改"文本前添加一个日期图标，使用 Phosphor Icons 库。
+
+**解决方案**：
+1. **导入 Calendar 图标**：从 `@phosphor-icons/react` 导入 Calendar 组件
+2. **更新布局样式**：使用 flex 布局和 gap 来保持图标与文本的间距
+3. **设置图标尺寸**：使用 `size={16}` 设置图标大小，与文本大小协调
+
+**代码变更**：
+```javascript
+// 导入 Calendar 图标
+import { Calendar } from '@phosphor-icons/react'
+
+// 更新"最后修改"显示区域
+{lastModified && (
+  <div className="text-sm mb-2 text-muted-foreground flex items-center gap-2">
+    <Calendar size={16} />
+    {t('lastModified')}: {new Date(lastModified).toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    })}
+  </div>
+)}
+```
+
+**具体样式说明**：
+- `flex items-center gap-2`：使用 flex 布局，垂直居中对齐，图标与文本间距 8px
+- `Calendar size={16}`：设置图标尺寸为 16px，与小号文本协调
+- 保持原有的 `text-muted-foreground` 颜色样式
+
+**验证结果**：
+- ✅ 成功添加日期图标到"最后修改"文本前
+- ✅ 图标与文本对齐良好，间距合适
+- ✅ 使用 Phosphor Icons 库，符合项目图标规范
+- ✅ 开发服务器正常运行，无编译错误
+
+**技术要点**：
+- 使用 Phosphor Icons React 包中的 Calendar 图标
+- 通过 flex 布局实现图标与文本的完美对齐
+- 图标尺寸与文本大小协调，提升视觉体验
+- 保持与现有设计系统的一致性
+
+## 修复案例 5: ResourceCard.tsx 组件圆角修改
 
 ### 问题描述
-用户要求修改多个组件中的颜色，将特定元素的颜色统一为指定的RGB值，并使用globals.css中现有的颜色变量进行维护。
+用户要求修改 `ResourceCard.tsx` 组件的圆角设置：
+1. 卡片容器 (`Card`) 的圆角设置为 24px
+2. 内部缩略图容器 (`div`) 的圆角设置为 12px
 
-### 具体要求
-1. `div:nth-of-type(1).rounded-lg > div.flex > a.text-muted-foreground > h3.card-title` 修改为 `text-[rgb(17,_24,_39)]`
-2. `a:nth-of-type(5).block > div.bg-card > div:nth-of-type(3).p-6 > div.space-y-3 > p.font-medium` 修改为 `text-[rgb(100,_116,_139)]`
-3. `p.mt-2` 修改为 `text-[rgb(100,_116,_139)]`
+### 分析
+这是一个视觉优化需求，通过调整圆角大小来改善卡片的视觉效果：
+- 外层卡片使用较大的圆角 (24px) 营造现代感
+- 内层图片容器使用较小的圆角 (12px) 保持层次感
+- 需要使用 Tailwind CSS 的任意值语法来实现精确的圆角控制
 
 ### 解决方案
-使用globals.css中现有的颜色变量：
-- `--foreground: 222.2 84% 4.9%` 对应 `rgb(17,24,39)`
-- `--muted-foreground: 215.4 16.3% 46.9%` 对应 `rgb(100,116,139)`
+修改 `ResourceCard.tsx` 组件中的样式类名：
+1. **Card 组件**：添加 `rounded-[24px]` 类名
+2. **图片容器 div**：添加 `rounded-[12px]` 类名
 
 ### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第80行：Card 组件添加 `rounded-[24px]` 类名
+  - 第82行：图片容器 div 添加 `rounded-[12px]` 类名
 
-#### ArticleList.js
-```javascript
-// 修改CardTitle颜色
-<CardTitle className="text-[20px] text-foreground">{title}</CardTitle>
+### 具体修改
+```tsx
+// 修改前
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a]">
+  <div className="relative w-full h-32 overflow-hidden">
+
+// 修改后  
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a] rounded-[24px]">
+  <div className="relative w-full h-32 overflow-hidden rounded-[12px]">
 ```
-
-#### ResourceCard.tsx
-```typescript
-// 修改CardTitle颜色
-<CardTitle className="text-[20px] font-semibold leading-[32px] text-foreground mb-2">
-  {resource.name}
-</CardTitle>
-
-// 修改描述文本颜色
-<p className="font-medium text-muted-foreground text-[14px] overflow-hidden leading-[1.2] h-[33.6px]"
-
-// 修改标签容器颜色
-<div className="flex flex-wrap gap-1 mt-2 text-muted-foreground">
-```
-
-#### Navigation.tsx
-该组件已经正确使用了颜色变量，无需修改。
 
 ### 验证结果
-- 开发服务器在 http://localhost:3000 成功启动
-- 所有组件颜色已统一使用globals.css中的颜色变量
-- 页面正常渲染，无编译错误
+- ✅ 卡片外层圆角设置为24px正确应用
+- ✅ 图片容器圆角设置为12px正确应用
+- ✅ 保持原有的悬停效果和过渡动画
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面正常显示，视觉效果符合预期
 
-### 技术要点
-1. **颜色变量映射**：正确将RGB值映射到对应的CSS变量
-2. **组件一致性**：确保所有相关组件使用统一的颜色变量
-3. **Tailwind CSS类**：使用`text-foreground`和`text-muted-foreground`类
-4. **代码维护性**：通过变量统一管理颜色，便于后续维护
+### 技术按键
+- 使用 Tailwind CSS 任意值语法 `rounded-[Npx]` 实现精确圆角控制
+- 保持组件的响应式设计和交互效果不变
+- 圆角设置与现有的 `overflow-hidden` 属性配合良好
+
+## 修复案例 6: ResourceCard.tsx 组件文本行高优化
+
+### 问题描述
+用户反馈在 GitHub 卡片中，描述文本显示超过两行，在两行下方还显示了半行文字，需要确保 CardContent 内最多只显示两行文字，超出部分省略。
+
+### 分析
+这是一个文本显示精度问题：
+- 原有设置使用 `h-12` (48px) 和 `lineHeight: '1.4em'` 
+- 计算：14px × 1.4 × 2行 = 39.2px，但容器高度为48px
+- 多余的8.8px空间导致第三行文字部分显示
+- 需要精确控制行高和容器高度的匹配
+
+### 解决方案
+优化描述文本的行高和高度设置：
+1. **调整行高**：从 `1.4em` 改为 `1.2`
+2. **精确计算高度**：14px × 1.2 × 2行 = 33.6px
+3. **同步更新样式**：Tailwind 类名和内联样式保持一致
+
+### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第105行：修改行高为 `leading-[1.2]`
+  - 第105行：修改高度为 `h-[33.6px]`
+  - 第110行：内联样式 `lineHeight` 改为 `'1.2'`
+
+### 具体修改
+```tsx
+// 修改前
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden h-12" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.4em'
+   }}>
+
+// 修改后
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.2'
+   }}>
+```
+
+### 验证结果
+- ✅ 描述文本严格限制为两行显示
+- ✅ 超出部分正确省略，无第三行显示
+- ✅ 文字行高和容器高度精确匹配
+- ✅ 保持原有的文本截断效果
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面显示效果符合预期
+
+### 技术按键
+- 精确计算文本行高与容器高度的数学关系
+- 使用 Tailwind CSS 任意值语法进行像素级控制
+- 结合 CSS `-webkit-box` 属性实现多行文本截断
+- 保持 Tailwind 类名与内联样式的一致性
+
+## 案例7：ResourceCard组件颜色变量统一管理
+
+### 问题描述
+ResourceCard组件中使用了硬编码的颜色值，不利于主题切换和统一维护。
+
+### 分析过程
+1. 识别组件中的硬编码颜色：
+   - `#1a1a1a` - 卡片边框和标签背景色
+   - `#1a1a1a82` - 描述文本半透明色
+   - `#ffffff` - 标签文本白色
+2. 检查现有CSS变量结构，确定合并策略
+
+### 解决方案
+1. 在 `globals.css` 中添加ResourceCard专用颜色变量
+2. 使用尽可能少的变量，合并相似颜色
+3. 支持明暗主题切换
+4. 添加详细注释说明变量用途
+
+### 代码变更
+1. 在 `globals.css` 中添加颜色变量：
+```css
+/* ResourceCard 组件颜色变量 */
+--card-border: 26, 26, 26; /* #1a1a1a - 卡片边框和主要标签背景色 */
+--card-text-muted: 26, 26, 26, 0.51; /* #1a1a1a82 - 描述文本半透明色 */
+--card-text-white: 255, 255, 255; /* #ffffff - 标签文本白色 */
+```
+
+2. 在暗色模式中添加对应变量：
+```css
+/* ResourceCard
