@@ -40,6 +40,9 @@
     /* ResourceCard 组件颜色变量 */
     --card-text-muted: 26, 26, 26, 0.51; /* #1a1a1a82 - 描述文本半透明色 */
     --card-text-white: 255, 255, 255; /* #ffffff - 标签文本白色 */
+    
+    /* ArticleList 组件颜色变量 */
+    --article-date-text: 107, 114, 128; /* #6b7280 - 文章日期文本颜色 */
  
     --radius: 0.5rem;
   }
@@ -86,6 +89,9 @@
     /* ResourceCard 组件颜色变量 */
     --card-text-muted: 210, 40%, 98%, 0.51; /* 暗色模式下的描述文本半透明色 */
     --card-text-white: 222.2, 84%, 4.9%; /* 暗色模式下的标签文本色 */
+    
+    /* ArticleList 组件颜色变量 */
+    --article-date-text: 156, 163, 175; /* #9ca3af - 暗色模式下的文章日期文本颜色 */
   }
 }
  

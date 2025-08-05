@@ -17,6 +17,7 @@ interface PostData {
   title: string
   description?: string
   date?: string
+  lastModified?: string
   content: string
   locale: string
   slug: string
@@ -123,6 +124,15 @@ export default async function PostPage({ params }: PostPageProps) {
       
       {/* Meta information card */}
       <div className="bg-gray-100 rounded-lg p-6 mb-8">
+        {postData.lastModified && (
+          <p className="text-gray-600 mb-2">
+            最后修改: {new Date(postData.lastModified).toLocaleDateString('zh-CN', {
+              year: 'numeric',
+              month: '2-digit',
+              day: '2-digit'
+            })}
+          </p>
+        )}
         {postData.date && (
           <p className="text-gray-600 mb-2">
             {t('publishedOn')}: {new Date(postData.date).toLocaleDateString()}

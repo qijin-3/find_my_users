@@ -251,3 +251,78 @@ Navigation 组件的 header 使用 `sticky top-0` 固定定位，但在页面滚
 - 描述文本字号正确设置为 14px
 - 保持了卡片的悬停效果和过渡动画
 - 组件在不同主题下都能正确显示
+
+# 案例10：文章列表和详情页添加lastModified时间显示
+
+## 问题描述
+用户要求在文章列表和详情页面中显示 `articles.json` 文件中的 `lastModified` 时间，需要将该时间显示在标题上方。
+
+## 解决方案
+1. 修改 `ArticleList.js` 组件，在文章卡片的标题上方添加 `lastModified` 时间显示
+2. 修改文章详情页面 `page.tsx`，在Meta信息卡片中添加 `lastModified` 时间显示
+3. 更新 `PostData` 接口，添加 `lastModified` 字段的类型定义
+
+## 代码变更
+
+### ArticleList.js 组件修改
+```javascript
+// 在文章映射中添加 lastModified 参数
+{articles.map(({ slug, title, description, lastModified }) => (
+  <Card key={slug}>
+    <CardHeader>
+      {lastModified && (
+        <div className="text-sm text-gray-500 mb-2">
+          最后修改: {new Date(lastModified).toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+          })}
+        </div>
+      )}
+      <Link href={`/posts/${slug}`}>
+        <CardTitle>{title}</CardTitle>
+      </Link>
+      <CardDescription>{description}</CardDescription>
+    </CardHeader>
+  </Card>
+))}
+```
+
+### 文章详情页面修改
+```typescript
+// 更新 PostData 接口
+interface PostData {
+  title: string
+  description?: string
+  date?: string
+  lastModified?: string  // 新增字段
+  content: string
+  locale: string
+  slug: string
+}
+
+// 在Meta信息卡片中添加显示
+{postData.lastModified && (
+  <p className="text-gray-600 mb-2">
+    最后修改: {new Date(postData.lastModified).toLocaleDateString('zh-CN', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    })}
+  </p>
+)}
+```
+
+## 验证结果
+- 开发服务器成功启动在 http://localhost:3001
+- 文章列表页面正确显示 `lastModified` 时间
+- 文章详情页面在Meta信息卡片中正确显示 `lastModified` 时间
+- TypeScript类型检查通过，无编译错误
+
+## 技术要点
+1. **数据解构**：在组件中正确解构 `lastModified` 字段
+2. **条件渲染**：使用条件渲染确保只在有 `lastModified` 数据时显示
+3. **日期格式化**：使用 `toLocaleDateString` 方法格式化日期显示
+4. **类型安全**：更新TypeScript接口确保类型安全
+5. **用户体验**：在标题上方显示时间信息，提供清晰的视觉层次
+6. **国际化支持**：使用中文日期格式，符合用户需求

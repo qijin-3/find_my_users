@@ -141,3 +141,82 @@
 - 删除冗余的分离文件和目录结构
 - 支持中英文内容不同的情况
 - 将函数改为异步函数以正确处理 Promise
+
+
+# 案例11：ArticleList组件样式修改和颜色变量优化
+
+## 问题描述
+用户要求对 `ArticleList.js` 组件进行以下样式修改：
+1. Card组件添加 `border-2` 样式
+2. CardHeader组件添加 `border-0` 样式  
+3. CardTitle标题文字大小改为 `text-[20px]`
+4. 将组件中的硬编码颜色提取到 `globals.css` 中作为CSS变量
+
+## 解决方案
+1. 修改 `ArticleList.js` 组件，应用用户要求的样式修改
+2. 在 `globals.css` 中添加新的颜色变量 `--article-date-text`
+3. 将硬编码的 `text-gray-500` 替换为CSS变量
+4. 为组件添加函数级注释
+
+## 代码变更
+
+### globals.css 颜色变量添加
+```css
+/* 亮色模式 */
+/* ArticleList 组件颜色变量 */
+--article-date-text: 107, 114, 128; /* #6b7280 - 文章日期文本颜色 */
+
+/* 暗色模式 */
+/* ArticleList 组件颜色变量 */
+--article-date-text: 156, 163, 175; /* #9ca3af - 暗色模式下的文章日期文本颜色 */
+```
+
+### ArticleList.js 组件修改
+```javascript
+/**
+ * ArticleList 组件 - 显示文章列表
+ * @param {Array} articles - 文章数据数组
+ * @param {boolean} showMoreLink - 是否显示更多链接
+ */
+export default function ArticleList({ articles, showMoreLink = true }) {
+  return (
+    <section>
+      {/* ... */}
+      <div className="space-y-6">
+        {articles.map(({ slug, title, description, lastModified }) => (
+          <Card key={slug} className="border-2">
+            <CardHeader className="border-0">
+              {lastModified && (
+                <div className="text-sm mb-2" style={{ color: 'rgb(var(--article-date-text))' }}>
+                  {/* 日期显示 */}
+                </div>
+              )}
+              <Link href={`/posts/${slug}`}>
+                <CardTitle className="text-[20px]">{title}</CardTitle>
+                →
+              </Link>
+              <CardDescription>{description}</CardDescription>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+    </section>
+  )
+}
+```
+
+## 验证结果
+- 开发服务器成功编译，无错误
+- Card组件正确显示2px边框
+- CardHeader移除了边框样式
+- 标题文字大小调整为20px
+- 日期文本颜色使用CSS变量，支持主题切换
+- 预览页面正常显示，样式修改生效
+
+## 技术要点
+1. **样式覆盖**：通过className属性覆盖Shadcn/ui组件默认样式
+2. **CSS变量使用**：使用 `rgb(var(--variable-name))` 格式应用颜色变量
+3. **主题兼容性**：为亮色和暗色模式分别定义颜色变量
+4. **组件文档**：添加JSDoc注释提高代码可维护性
+5. **颜色变量命名**：使用语义化命名 `--article-date-text` 便于理解和维护
+6. **样式继承**：保持与现有设计系统的一致性
