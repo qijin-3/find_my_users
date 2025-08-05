@@ -93,7 +93,7 @@ export default function ResourceCard({
         <CardHeader className="pl-0 pr-0 pt-2 pb-2 mt-2">
           <div className="flex items-start justify-between">
             <div className="flex-1 aspect-auto h-8">
-              <CardTitle className="text-[20px] font-semibold leading-[32px] text-gray-900 dark:text-gray-100 mb-2">
+              <CardTitle className="text-[20px] font-semibold leading-[32px] text-foreground mb-2">
                 {resource.name}
               </CardTitle>
             </div>
@@ -102,7 +102,7 @@ export default function ResourceCard({
         <CardContent className="pl-0 pr-0 h-[auto] pb-0 flex flex-col justify-between flex-1">
           <div className="space-y-3">
             {/* 描述限制为两行，精确控制高度 */}
-            <p className="font-medium text-[rgba(var(--card-text-muted))] text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
+            <p className="font-medium text-muted-foreground text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
                style={{
                  display: '-webkit-box',
                  WebkitLineClamp: 2,
@@ -122,7 +122,7 @@ export default function ResourceCard({
               
               {/* 其他标签区域 */}
               {resource.tags && resource.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2">
+                <div className="flex flex-wrap gap-1 mt-2 text-muted-foreground">
                   {resource.tags.slice(0, 2).map((tag, index) => (
                     <Badge key={index} variant="outline" className="text-xs">
                       {tag}

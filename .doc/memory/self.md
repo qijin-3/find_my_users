@@ -524,7 +524,7 @@ const zhFields = {
    - 添加分类计数显示
    - 设置 `showCategory={true}` 显示分类标签
 
-**技术要点**:
+**技术按键**:
 - 使用 `useMemo` 优化分类筛选性能
 - 分类ID到显示名称的映射转换
 - 统一的卡片样式和交互效果
@@ -915,7 +915,7 @@ const getWebsiteScreenshotUrl = (url: string): string => {
 
 **修复要点**：
 1. **层级规划** - 在复杂布局中提前规划 z-index 层级
-2. **容器层级** - 父容器和子元素都需要设置合适的 z-index
+2. **容器层级** - 父容器和子元素都需要设置适当的 z-index
 3. **交互保护** - 确保动画和悬停效果不会破坏视觉层次
 4. **渐进式层级** - 使用递增的 z-index 值 (z-10, z-20, z-30)
 
@@ -1272,9 +1272,390 @@ secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-s
 - 保持了原有的背景色渐变效果
 - 交互体验得到提升
 
-**技术要点**：
+**技术按键**：
 1. **CSS类组合**：通过添加hover:text-foreground实现hover状态下的文字颜色变化
 2. **变量引用**：使用CSS变量foreground确保颜色与主题系统一致
 3. **渐进增强**：在保持原有效果基础上增加新的交互反馈
 4. **组件复用**：修改基础Badge组件影响所有使用secondary变体的标签
 5. **主题兼容**：foreground变量在亮色和暗色模式下都有对应定义，确保主题切换时效果正常
+
+## 案例14：ArticleList组件圆角和hover效果优化（2024-01-03）
+
+### 问题描述
+用户要求修改ArticleList.js组件的圆角为24px，并增加和ResourceCard.tsx一样的卡片hover效果。
+
+### 解决方案
+参考ResourceCard.tsx中的hover效果实现，为ArticleList.js中的Card组件添加相同的样式类。
+
+### 代码变更
+
+#### ArticleList.js
+```javascript
+// 修改前
+<Card key={slug} className="border-2">
+
+// 修改后
+<Card key={slug} className="border-2 rounded-[24px] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 group">
+```
+
+### 具体样式说明
+1. **圆角设置**：`rounded-[24px]` - 设置24px圆角，与ResourceCard保持一致
+2. **鼠标指针**：`cursor-pointer` - 鼠标悬停时显示手型指针
+3. **过渡动画**：`transition-all duration-300` - 所有属性300ms过渡动画
+4. **悬停阴影**：`hover:shadow-lg` - 悬停时显示大阴影效果
+5. **悬停缩放**：`hover:scale-105` - 悬停时轻微放大(1.05倍)
+6. **组合选择器**：`group` - 为子元素提供组合hover状态
+
+### 验证结果
+- 开发服务器在 http://localhost:3000 正常运行
+- ArticleList组件卡片现在具有24px圆角
+- 鼠标悬停时有阴影和缩放效果，与ResourceCard保持一致
+- 页面正常渲染，无编译错误
+
+### 技术要点
+1. **样式一致性**：确保不同组件间的视觉效果保持统一
+2. **Tailwind CSS类组合**：合理组合多个工具类实现复杂效果
+3. **过渡动画**：使用transition-all和duration-300实现平滑的动画效果
+4. **组合状态**：使用group类为子元素提供父级hover状态的访问
+
+### 解决方案
+1. **修改 `globals.css` 文件**：
+   - 添加 Badge 组件专用的颜色变量
+   - 亮色主题：`--badge-bg: 0, 0%, 10.2%` 和 `--badge-text: 0, 0%, 100%`
+   - 暗色主题：`--badge-bg: 210 40% 98%` 和 `--badge-text: 222.2 84% 4.9%`
+
+2. **修改 `ResourceCard.tsx` 组件**：
+   - 卡片容器：添加 `pl-4 pr-4 pt-4 pb-4 h-[auto]` 类名
+   - 图片区域：添加 `aspect-auto` 属性
+   - 标题区域：调整为 `pl-0 pr-0 pt-2 pb-2 mt-2`
+   - 内容区域：设置 `h-[auto] pb-0`
+   - 描述文本：字号改为 `text-[14px]`
+   - Badge 标签：应用深色主题 `border-[#1a1a1a] bg-[#1a1a1a] text-[#ffffff]`
+
+### 代码变更
+- **文件**: `src/app/globals.css`
+  - 新增 Badge 组件颜色变量定义
+- **文件**: `src/components/ResourceCard.tsx`
+  - 更新卡片容器样式类名
+  - 调整图片、标题、内容区域的布局属性
+  - 修改文本字号和标签主题色彩
+
+### 验证结果
+- ✅ 卡片容器内边距和高度自适应正确应用
+- ✅ 图片区域宽高比设置生效
+- ✅ 标题和内容区域间距调整符合预期
+- ✅ 描述文本字号改为14px，保持两行截断效果
+- ✅ Badge 标签深色主题样式正确显示
+- ✅ 整体布局保持响应式设计和悬停效果
+- ✅ 开发服务器编译成功，无样式冲突
+
+### 技术按键
+- 使用 Tailwind CSS 任意值语法进行精确样式控制
+- 通过调整盒模型属性优化卡片布局
+- 保留原有的响应式设计和交互效果
+- 统一组件主题色彩，提升视觉一致性
+
+## 修复案例 5: ResourceCard.tsx 组件圆角修改
+
+### 问题描述
+用户要求修改 `ResourceCard.tsx` 组件的圆角设置：
+1. 卡片容器 (`Card`) 的圆角设置为 24px
+2. 内部缩略图容器 (`div`) 的圆角设置为 12px
+
+### 分析
+这是一个视觉优化需求，通过调整圆角大小来改善卡片的视觉效果：
+- 外层卡片使用较大的圆角 (24px) 营造现代感
+- 内层图片容器使用较小的圆角 (12px) 保持层次感
+- 需要使用 Tailwind CSS 的任意值语法来实现精确的圆角控制
+
+### 解决方案
+修改 `ResourceCard.tsx` 组件中的样式类名：
+1. **Card 组件**：添加 `rounded-[24px]` 类名
+2. **图片容器 div**：添加 `rounded-[12px]` 类名
+
+### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第80行：Card 组件添加 `rounded-[24px]` 类名
+  - 第82行：图片容器 div 添加 `rounded-[12px]` 类名
+
+### 具体修改
+```tsx
+// 修改前
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a]">
+  <div className="relative w-full h-32 overflow-hidden">
+
+// 修改后  
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a] rounded-[24px]">
+  <div className="relative w-full h-32 overflow-hidden rounded-[12px]">
+```
+
+### 验证结果
+- ✅ 卡片外层圆角设置为24px正确应用
+- ✅ 图片容器圆角设置为12px正确应用
+- ✅ 保持原有的悬停效果和过渡动画
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面正常显示，视觉效果符合预期
+
+### 技术按键
+- 使用 Tailwind CSS 任意值语法 `rounded-[Npx]` 实现精确圆角控制
+- 保持组件的响应式设计和交互效果不变
+- 圆角设置与现有的 `overflow-hidden` 属性配合良好
+
+## 修复案例 6: ResourceCard.tsx 组件文本行高优化
+
+### 问题描述
+用户反馈在 GitHub 卡片中，描述文本显示超过两行，在两行下方还显示了半行文字，需要确保 CardContent 内最多只显示两行文字，超出部分省略。
+
+### 分析
+这是一个文本显示精度问题：
+- 原有设置使用 `h-12` (48px) 和 `lineHeight: '1.4em'` 
+- 计算：14px × 1.4 × 2行 = 39.2px，但容器高度为48px
+- 多余的8.8px空间导致第三行文字部分显示
+- 需要精确控制行高和容器高度的匹配
+
+### 解决方案
+优化描述文本的行高和高度设置：
+1. **调整行高**：从 `1.4em` 改为 `1.2`
+2. **精确计算高度**：14px × 1.2 × 2行 = 33.6px
+3. **同步更新样式**：Tailwind 类名和内联样式保持一致
+
+### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第105行：修改行高为 `leading-[1.2]`
+  - 第105行：修改高度为 `h-[33.6px]`
+  - 第110行：内联样式 `lineHeight` 改为 `'1.2'`
+
+### 具体修改
+```tsx
+// 修改前
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden h-12" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.4em'
+   }}>
+
+// 修改后
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.2'
+   }}>
+```
+
+### 验证结果
+- ✅ 描述文本严格限制为两行显示
+- ✅ 超出部分正确省略，无第三行显示
+- ✅ 文字行高和容器高度精确匹配
+- ✅ 保持原有的文本截断效果
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面显示效果符合预期
+
+### 技术按键
+- 精确计算文本行高与容器高度的数学关系
+- 使用 Tailwind CSS 任意值语法进行像素级控制
+- 结合 CSS `-webkit-box` 属性实现多行文本截断
+- 保持 Tailwind 类名与内联样式的一致性
+
+## 案例7：ResourceCard组件颜色变量统一管理
+
+### 问题描述
+ResourceCard组件中使用了硬编码的颜色值，不利于主题切换和统一维护。
+
+### 分析过程
+1. 识别组件中的硬编码颜色：
+   - `#1a1a1a` - 卡片边框和标签背景色
+   - `#1a1a1a82` - 描述文本半透明色
+   - `#ffffff` - 标签文本白色
+2. 检查现有CSS变量结构，确定合并策略
+
+### 解决方案
+1. 在 `globals.css` 中添加ResourceCard专用颜色变量
+2. 使用尽可能少的变量，合并相似颜色
+3. 支持明暗主题切换
+4. 添加详细注释说明变量用途
+
+### 代码变更
+1. 在 `globals.css` 中添加颜色变量：
+```css
+/* ResourceCard 组件颜色变量 */
+--card-border: 26, 26, 26; /* #1a1a1a - 卡片边框和主要标签背景色 */
+--card-text-muted: 26, 26, 26, 0.51; /* #1a1a1a82 - 描述文本半透明色 */
+--card-text-white: 255, 255, 255; /* #ffffff - 标签文本白色 */
+```
+
+2. 在暗色模式中添加对应变量：
+```css
+/* ResourceCard 组件颜色变量 */
+--card-border: 210, 40%, 98%; /* 暗色模式下的卡片边框和主要标签背景色 */
+--card-text-muted: 210, 40%, 98%, 0.51; /* 暗色模式下的描述文本半透明色 */
+--card-text-white: 222.2, 84%, 4.9%; /* 暗色模式下的标签文本色 */
+```
+
+3. 更新 `ResourceCard.tsx` 中的颜色引用：
+```tsx
+// 卡片边框
+border-[rgb(var(--card-border))]
+
+// 描述文本
+text-[rgba(var(--card-text-muted))]
+
+// 标签样式
+bg-[rgb(var(--card-border))] text-[rgb(var(--card-text-white))]
+```
+
+### 验证结果
+- 颜色变量成功应用，视觉效果保持一致
+- 支持明暗主题自动切换
+- 编译无错误，预览正常
+
+### 技术按键
+- 使用RGB格式便于透明度控制
+- 变量命名语义化，便于维护
+- 统一管理提高代码可维护性
+- 支持主题系统扩展
+
+### 案例8：合并重复的CSS变量以优化代码结构
+
+**问题描述：**
+在 `globals.css` 中存在两个功能相似的颜色变量：
+- 亮色模式：`--border` (HSL格式：0,0%,10.2%) 和 `--card-border` (RGB格式：26,26,26)
+- 暗色模式：`--border` (HSL格式：217.2,32.6%,17.5%) 和 `--card-border` (HSL格式：210,40%,98%)
+
+两个变量都表示边框颜色，造成了代码冗余。
+
+**解决方案：**
+1. 将 `--card-border` 变量合并到 `--border` 变量中
+2. 亮色模式统一使用RGB格式 (26,26,26) 以保持与其他ResourceCard变量的一致性
+3. 暗色模式统一使用HSL格式 (210,40%,98%) 以保持与ResourceCard变量的一致性
+4. 更新变量注释说明其多重用途
+5. 修改ResourceCard组件中的变量引用
+
+**代码变更：**
+
+globals.css 变更：
+```css
+/* 亮色模式 - 合并前 */
+--border: 0, 0%, 10.2%;
+--card-border: 26, 26, 26; /* #1a1a1a - 卡片边框和主要标签背景色 */
+
+/* 亮色模式 - 合并后 */
+--border: 26, 26, 26; /* #1a1a1a - 边框颜色，同时用于卡片边框和主要标签背景色 */
+
+/* 暗色模式 - 合并前 */
+--border: 217.2 32.6% 17.5%;
+--card-border: 210, 40%, 98%; /* 暗色模式下的卡片边框和主要标签背景色 */
+
+/* 暗色模式 - 合并后 */
+--border: 210, 40%, 98%; /* 暗色模式下的边框颜色，同时用于卡片边框和主要标签背景色 */
+```
+
+ResourceCard.tsx 变更：
+```tsx
+/* 合并前 */
+border-[rgb(var(--card-border))]
+bg-[rgb(var(--card-border))]
+
+/* 合并后 */
+border-[rgb(var(--border))]
+bg-[rgb(var(--border))]
+```
+
+**验证结果：**
+- 编译成功，无错误
+- 亮色和暗色模式视觉效果保持一致
+- 代码结构更加简洁
+- 变量命名更加语义化
+
+**技术按键：**
+1. **变量合并原则**：相同功能的变量应该合并，避免冗余
+2. **格式统一**：选择合适的颜色格式以保持与相关变量的一致性
+3. **主题支持**：确保亮色和暗色模式都正确合并
+4. **注释更新**：合并后的变量注释应说明所有用途
+5. **引用更新**：确保所有使用旧变量的地方都更新为新变量
+
+### 案例9：Badge组件hover效果优化
+
+**问题描述**：
+用户希望ResourceCard组件中的标签在hover时文字颜色变为globals.css中定义的foreground颜色（黑色），以提升交互体验。
+
+**解决方案**：
+1. 修改badge.tsx组件的secondary变体样式
+2. 为hover状态添加text-foreground类，使文字颜色在hover时变为foreground变量定义的颜色
+3. 保持原有的背景色hover效果（hover:bg-secondary/80）
+
+**代码变更**：
+```typescript
+// 修改前
+secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80",
+
+// 修改后  
+secondary: "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-foreground",
+```
+
+**验证结果**：
+- 编译成功，无TypeScript错误
+- Badge组件在hover时文字颜色正确变为foreground颜色
+- 保持了原有的背景色渐变效果
+- 交互体验得到提升
+
+**技术按键**：
+1. **CSS类组合**：通过添加hover:text-foreground实现hover状态下的文字颜色变化
+2. **变量引用**：使用CSS变量foreground确保颜色与主题系统一致
+3. **渐进增强**：在保持原有效果基础上增加新的交互反馈
+4. **组件复用**：修改基础Badge组件影响所有使用secondary变体的标签
+5. **主题兼容**：foreground变量在亮色和暗色模式下都有对应定义，确保主题切换时效果正常
+
+## 案例13：组件颜色变量统一优化（2024-01-03）
+
+### 问题描述
+用户要求修改多个组件中的颜色，将特定元素的颜色统一为指定的RGB值，并使用globals.css中现有的颜色变量进行维护。
+
+### 具体要求
+1. `div:nth-of-type(1).rounded-lg > div.flex > a.text-muted-foreground > h3.card-title` 修改为 `text-[rgb(17,_24,_39)]`
+2. `a:nth-of-type(5).block > div.bg-card > div:nth-of-type(3).p-6 > div.space-y-3 > p.font-medium` 修改为 `text-[rgb(100,_116,_139)]`
+3. `p.mt-2` 修改为 `text-[rgb(100,_116,_139)]`
+
+### 解决方案
+使用globals.css中现有的颜色变量：
+- `--foreground: 222.2 84% 4.9%` 对应 `rgb(17,24,39)`
+- `--muted-foreground: 215.4 16.3% 46.9%` 对应 `rgb(100,116,139)`
+
+### 代码变更
+
+#### ArticleList.js
+```javascript
+// 修改CardTitle颜色
+<CardTitle className="text-[20px] text-foreground">{title}</CardTitle>
+```
+
+#### ResourceCard.tsx
+```typescript
+// 修改CardTitle颜色
+<CardTitle className="text-[20px] font-semibold leading-[32px] text-foreground mb-2">
+  {resource.name}
+</CardTitle>
+
+// 修改描述文本颜色
+<p className="font-medium text-muted-foreground text-[14px] overflow-hidden leading-[1.2] h-[33.6px]"
+
+// 修改标签容器颜色
+<div className="flex flex-wrap gap-1 mt-2 text-muted-foreground">
+```
+
+#### Navigation.tsx
+该组件已经正确使用了颜色变量，无需修改。
+
+### 验证结果
+- 开发服务器在 http://localhost:3000 成功启动
+- 所有组件颜色已统一使用globals.css中的颜色变量
+- 页面正常渲染，无编译错误
+
+### 技术要点
+1. **颜色变量映射**：正确将RGB值映射到对应的CSS变量
+2. **组件一致性**：确保所有相关组件使用统一的颜色变量
+3. **Tailwind CSS类**：使用`text-foreground`和`text-muted-foreground`类
+4. **代码维护性**：通过变量统一管理颜色，便于后续维护

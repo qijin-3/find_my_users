@@ -143,7 +143,44 @@
 - 将函数改为异步函数以正确处理 Promise
 
 
-# 案例11：ArticleList组件样式修改和颜色变量优化
+# 案例12：ArticleList组件颜色变量统一优化
+
+## 问题描述
+用户要求将 `ArticleList.js` 组件中的 `a`、`p`、`div` 等组件的颜色统一为 `--muted-foreground: 215.4 16.3% 46.9%`，并删除无用的颜色变量。
+
+## 解决方案
+1. 将 `ArticleList.js` 组件中所有文本元素的颜色统一使用 `text-muted-foreground` 类
+2. 删除 `globals.css` 中不再使用的 `--article-date-text` 颜色变量
+3. 利用现有的 `--muted-foreground` 变量实现颜色统一
+
+## 代码变更
+
+### ArticleList.js 组件修改
+```javascript
+// 统一使用 text-muted-foreground 类
+<div className="text-sm mb-2 text-muted-foreground">  // lastModified 时间
+<Link className="text-muted-foreground hover:text-foreground/80">  // 文章链接
+<Link href="/posts" className="text-muted-foreground hover:text-foreground/80">  // More articles 链接
+<CardDescription className="text-muted-foreground">  // 文章描述
+```
+
+### globals.css 变量清理
+```css
+/* 删除不再使用的颜色变量 */
+/* --article-date-text: 107, 114, 128; */ // 亮色模式
+/* --article-date-text: 156, 163, 175; */ // 暗色模式
+```
+
+## 验证结果
+- 开发服务器在 `http://localhost:3001` 成功启动
+- 所有文本元素颜色统一为 `--muted-foreground`
+- 删除了冗余的颜色变量，简化了维护
+
+## 技术要点
+1. **颜色统一性**: 使用统一的 `--muted-foreground` 变量确保视觉一致性
+2. **变量清理**: 删除不再使用的自定义颜色变量，减少维护成本
+3. **主题兼容**: 利用现有的主题系统，自动支持亮/暗模式切换
+4. **代码简化**: 使用 Tailwind CSS 类替代内联样式，提高代码可读性
 
 ## 问题描述
 用户要求对 `ArticleList.js` 组件进行以下样式修改：
