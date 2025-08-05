@@ -41,17 +41,17 @@ export default async function HomePage({ params }: HomePageProps) {
   const latestArticles = allPostsData.slice(0, 4)
 
   return (
-    <div className="container mx-auto py-12 space-y-16">
-      <section className="text-center pt-8">
+    <div className="pl-20 pr-20 ml-0 mr-0 py-12 space-y-16">
+      <section className="text-center pt-8 w-[auto] aspect-auto box-border">
         {/* 小人插画 */}
         <PeopleIllustration />
         
         {/* 标题和描述 */}
         <div>
-          <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
+          <h1 className="h-[72px] font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
             {t('title')}
           </h1>
-          <h2 className="mt-2 text-2xl tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
+          <h2 className="mt-2 text-[24px] font-medium tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
             {t('subtitle')}
           </h2>
           <p className="mt-2 mx-auto max-w-[700px] text-gray-500 md:text-xl">

@@ -78,19 +78,19 @@ export default function ResourceCard({
 
   return (
     <Link href={`/site/${resource.slug}`} className={`block group ${className}`}>
-      <Card className="h-72 cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a]">
+      <Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[rgb(var(--border))] rounded-[24px]">
         {/* 网站缩略截图 - 占满卡片宽度 */}
-        <div className="relative w-full h-32 overflow-hidden">
+        <div className="relative w-full h-32 overflow-hidden rounded-[12px]">
           <Image
             src={getWebsiteScreenshotUrl(resource.url)}
             alt={`${resource.name} screenshot`}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105 h-[128px]"
+            className="object-cover aspect-auto transition-transform duration-300 group-hover:scale-105 h-[128px]"
             unoptimized
           />
         </div>
         
-        <CardHeader className="pb-3 pt-2">
+        <CardHeader className="pl-0 pr-0 pt-2 pb-2 mt-2">
           <div className="flex items-start justify-between">
             <div className="flex-1 aspect-auto h-8">
               <CardTitle className="text-[20px] font-semibold leading-[32px] text-gray-900 dark:text-gray-100 mb-2">
@@ -99,23 +99,23 @@ export default function ResourceCard({
             </div>
           </div>
         </CardHeader>
-        <CardContent className="pt-0 flex flex-col justify-between flex-1">
+        <CardContent className="pl-0 pr-0 h-[auto] pb-0 flex flex-col justify-between flex-1">
           <div className="space-y-3">
-            {/* 描述限制为两行，固定高度48px */}
-            <p className="font-medium text-[#1a1a1a82] text-[16px] overflow-hidden h-12" 
+            {/* 描述限制为两行，精确控制高度 */}
+            <p className="font-medium text-[rgba(var(--card-text-muted))] text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
                style={{
                  display: '-webkit-box',
                  WebkitLineClamp: 2,
                  WebkitBoxOrient: 'vertical' as const,
-                 lineHeight: '1.4em'
+                 lineHeight: '1.2'
                }}>
               {resource.description}
             </p>
             
             {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
-            <div className="pb-6">
+            <div className="h-[auto] mt-0 mb-0 pb-0">
               {showCategory && resource.type && (
-                <Badge variant="secondary" className="text-[16px] font-normal leading-[18px] bg-[#f1f5f900] border border-[#000000]">
+                <Badge variant="secondary" className="text-[16px] font-normal leading-[18px] border-t-[rgb(var(--border))] border-b-[rgb(var(--border))] border-l-[rgb(var(--border))] border-r-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]">
                   {getCategoryDisplayName(resource.type, locale)}
                 </Badge>
               )}

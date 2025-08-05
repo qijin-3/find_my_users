@@ -449,7 +449,7 @@ const zhFields = {
 - 右侧"提交工具"按钮已作为占位实现
 - 响应式布局在不同屏幕尺寸下正常工作
 
-### 技术要点
+### 技术按键
 - 使用Shadcn/ui组件库（Card、Button、Badge）
 - 集成Lucide图标库
 - 客户端组件实现交互功能
@@ -968,3 +968,281 @@ initial={{ y: 120 }}  // 前排从最下方开始
 - 使用描述性的变量名表达动画意图
 - 为复杂动画制作原型或草图确认效果
 - 保持动画参数的可配置性以便快速调整
+
+## 修复案例 4: ResourceCard.tsx 组件样式修改
+
+### 问题描述
+用户要求修改 `ResourceCard.tsx` 组件的多个样式细节，包括：
+1. 卡片容器内边距设置为 `pl-4 pr-4 pt-4 pb-4`，高度设置为 `h-[auto]`
+2. 图片区域宽高比设置为 `aspect-auto`
+3. 标题区域边距调整为 `pl-0 pr-0 pt-2 pb-2 mt-2`
+4. 内容区域高度设置为 `h-[auto]`，移除底部内边距 `pb-0`
+5. 标签区域应用深色主题样式 `border-[#1a1a1a] bg-[#1a1a1a] text-[#ffffff]`
+6. 描述文本字号改为14px `text-[14px]`
+
+### 分析
+这是一个综合性的UI样式优化需求，涉及：
+- 卡片布局的间距和高度自适应
+- 图片显示的宽高比控制
+- 文本样式的字号调整
+- 标签组件的主题色彩统一
+- 整体视觉层次的优化
+
+### 解决方案
+1. **修改 `globals.css` 文件**：
+   - 添加 Badge 组件专用的颜色变量
+   - 亮色主题：`--badge-bg: 0, 0%, 10.2%` 和 `--badge-text: 0, 0%, 100%`
+   - 暗色主题：`--badge-bg: 210 40% 98%` 和 `--badge-text: 222.2 84% 4.9%`
+
+2. **修改 `ResourceCard.tsx` 组件**：
+   - 卡片容器：添加 `pl-4 pr-4 pt-4 pb-4 h-[auto]` 类名
+   - 图片区域：添加 `aspect-auto` 属性
+   - 标题区域：调整为 `pl-0 pr-0 pt-2 pb-2 mt-2`
+   - 内容区域：设置 `h-[auto] pb-0`
+   - 描述文本：字号改为 `text-[14px]`
+   - Badge 标签：应用深色主题 `border-[#1a1a1a] bg-[#1a1a1a] text-[#ffffff]`
+
+### 代码变更
+- **文件**: `src/app/globals.css`
+  - 新增 Badge 组件颜色变量定义
+- **文件**: `src/components/ResourceCard.tsx`
+  - 更新卡片容器样式类名
+  - 调整图片、标题、内容区域的布局属性
+  - 修改文本字号和标签主题色彩
+
+### 验证结果
+- ✅ 卡片容器内边距和高度自适应正确应用
+- ✅ 图片区域宽高比设置生效
+- ✅ 标题和内容区域间距调整符合预期
+- ✅ 描述文本字号改为14px，保持两行截断效果
+- ✅ Badge 标签深色主题样式正确显示
+- ✅ 整体布局保持响应式设计和悬停效果
+- ✅ 开发服务器编译成功，无样式冲突
+
+### 技术按键
+- 使用 Tailwind CSS 任意值语法进行精确样式控制
+- 通过调整盒模型属性优化卡片布局
+- 保留原有的响应式设计和交互效果
+- 统一组件主题色彩，提升视觉一致性
+
+## 修复案例 5: ResourceCard.tsx 组件圆角修改
+
+### 问题描述
+用户要求修改 `ResourceCard.tsx` 组件的圆角设置：
+1. 卡片容器 (`Card`) 的圆角设置为 24px
+2. 内部缩略图容器 (`div`) 的圆角设置为 12px
+
+### 分析
+这是一个视觉优化需求，通过调整圆角大小来改善卡片的视觉效果：
+- 外层卡片使用较大的圆角 (24px) 营造现代感
+- 内层图片容器使用较小的圆角 (12px) 保持层次感
+- 需要使用 Tailwind CSS 的任意值语法来实现精确的圆角控制
+
+### 解决方案
+修改 `ResourceCard.tsx` 组件中的样式类名：
+1. **Card 组件**：添加 `rounded-[24px]` 类名
+2. **图片容器 div**：添加 `rounded-[12px]` 类名
+
+### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第80行：Card 组件添加 `rounded-[24px]` 类名
+  - 第82行：图片容器 div 添加 `rounded-[12px]` 类名
+
+### 具体修改
+```tsx
+// 修改前
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a]">
+  <div className="relative w-full h-32 overflow-hidden">
+
+// 修改后  
+<Card className="pl-4 pr-4 pt-4 pb-4 h-[auto] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 overflow-hidden border-2 border-[#1a1a1a] rounded-[24px]">
+  <div className="relative w-full h-32 overflow-hidden rounded-[12px]">
+```
+
+### 验证结果
+- ✅ 卡片外层圆角设置为24px正确应用
+- ✅ 图片容器圆角设置为12px正确应用
+- ✅ 保持原有的悬停效果和过渡动画
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面正常显示，视觉效果符合预期
+
+### 技术按键
+- 使用 Tailwind CSS 任意值语法 `rounded-[Npx]` 实现精确圆角控制
+- 保持组件的响应式设计和交互效果不变
+- 圆角设置与现有的 `overflow-hidden` 属性配合良好
+
+## 修复案例 6: ResourceCard.tsx 组件文本行高优化
+
+### 问题描述
+用户反馈在 GitHub 卡片中，描述文本显示超过两行，在两行下方还显示了半行文字，需要确保 CardContent 内最多只显示两行文字，超出部分省略。
+
+### 分析
+这是一个文本显示精度问题：
+- 原有设置使用 `h-12` (48px) 和 `lineHeight: '1.4em'` 
+- 计算：14px × 1.4 × 2行 = 39.2px，但容器高度为48px
+- 多余的8.8px空间导致第三行文字部分显示
+- 需要精确控制行高和容器高度的匹配
+
+### 解决方案
+优化描述文本的行高和高度设置：
+1. **调整行高**：从 `1.4em` 改为 `1.2`
+2. **精确计算高度**：14px × 1.2 × 2行 = 33.6px
+3. **同步更新样式**：Tailwind 类名和内联样式保持一致
+
+### 代码变更
+- **文件**: `src/components/ResourceCard.tsx`
+  - 第105行：修改行高为 `leading-[1.2]`
+  - 第105行：修改高度为 `h-[33.6px]`
+  - 第110行：内联样式 `lineHeight` 改为 `'1.2'`
+
+### 具体修改
+```tsx
+// 修改前
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden h-12" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.4em'
+   }}>
+
+// 修改后
+<p className="font-medium text-[#1a1a1a82] text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
+   style={{
+     display: '-webkit-box',
+     WebkitLineClamp: 2,
+     WebkitBoxOrient: 'vertical' as const,
+     lineHeight: '1.2'
+   }}>
+```
+
+### 验证结果
+- ✅ 描述文本严格限制为两行显示
+- ✅ 超出部分正确省略，无第三行显示
+- ✅ 文字行高和容器高度精确匹配
+- ✅ 保持原有的文本截断效果
+- ✅ 开发服务器编译成功，无样式冲突
+- ✅ 预览页面显示效果符合预期
+
+### 技术按键
+- 精确计算文本行高与容器高度的数学关系
+- 使用 Tailwind CSS 任意值语法进行像素级控制
+- 结合 CSS `-webkit-box` 属性实现多行文本截断
+- 保持 Tailwind 类名与内联样式的一致性
+
+## 案例7：ResourceCard组件颜色变量统一管理
+
+### 问题描述
+ResourceCard组件中使用了硬编码的颜色值，不利于主题切换和统一维护。
+
+### 分析过程
+1. 识别组件中的硬编码颜色：
+   - `#1a1a1a` - 卡片边框和标签背景色
+   - `#1a1a1a82` - 描述文本半透明色
+   - `#ffffff` - 标签文本白色
+2. 检查现有CSS变量结构，确定合并策略
+
+### 解决方案
+1. 在 `globals.css` 中添加ResourceCard专用颜色变量
+2. 使用尽可能少的变量，合并相似颜色
+3. 支持明暗主题切换
+4. 添加详细注释说明变量用途
+
+### 代码变更
+1. 在 `globals.css` 中添加颜色变量：
+```css
+/* ResourceCard 组件颜色变量 */
+--card-border: 26, 26, 26; /* #1a1a1a - 卡片边框和主要标签背景色 */
+--card-text-muted: 26, 26, 26, 0.51; /* #1a1a1a82 - 描述文本半透明色 */
+--card-text-white: 255, 255, 255; /* #ffffff - 标签文本白色 */
+```
+
+2. 在暗色模式中添加对应变量：
+```css
+/* ResourceCard 组件颜色变量 */
+--card-border: 210, 40%, 98%; /* 暗色模式下的卡片边框和主要标签背景色 */
+--card-text-muted: 210, 40%, 98%, 0.51; /* 暗色模式下的描述文本半透明色 */
+--card-text-white: 222.2, 84%, 4.9%; /* 暗色模式下的标签文本色 */
+```
+
+3. 更新 `ResourceCard.tsx` 中的颜色引用：
+```tsx
+// 卡片边框
+border-[rgb(var(--card-border))]
+
+// 描述文本
+text-[rgba(var(--card-text-muted))]
+
+// 标签样式
+bg-[rgb(var(--card-border))] text-[rgb(var(--card-text-white))]
+```
+
+### 验证结果
+- 颜色变量成功应用，视觉效果保持一致
+- 支持明暗主题自动切换
+- 编译无错误，预览正常
+
+### 技术按键
+- 使用RGB格式便于透明度控制
+- 变量命名语义化，便于维护
+- 统一管理提高代码可维护性
+- 支持主题系统扩展
+
+### 案例8：合并重复的CSS变量以优化代码结构
+
+**问题描述：**
+在 `globals.css` 中存在两个功能相似的颜色变量：
+- 亮色模式：`--border` (HSL格式：0,0%,10.2%) 和 `--card-border` (RGB格式：26,26,26)
+- 暗色模式：`--border` (HSL格式：217.2,32.6%,17.5%) 和 `--card-border` (HSL格式：210,40%,98%)
+
+两个变量都表示边框颜色，造成了代码冗余。
+
+**解决方案：**
+1. 将 `--card-border` 变量合并到 `--border` 变量中
+2. 亮色模式统一使用RGB格式 (26,26,26) 以保持与其他ResourceCard变量的一致性
+3. 暗色模式统一使用HSL格式 (210,40%,98%) 以保持与ResourceCard变量的一致性
+4. 更新变量注释说明其多重用途
+5. 修改ResourceCard组件中的变量引用
+
+**代码变更：**
+
+globals.css 变更：
+```css
+/* 亮色模式 - 合并前 */
+--border: 0, 0%, 10.2%;
+--card-border: 26, 26, 26; /* #1a1a1a - 卡片边框和主要标签背景色 */
+
+/* 亮色模式 - 合并后 */
+--border: 26, 26, 26; /* #1a1a1a - 边框颜色，同时用于卡片边框和主要标签背景色 */
+
+/* 暗色模式 - 合并前 */
+--border: 217.2 32.6% 17.5%;
+--card-border: 210, 40%, 98%; /* 暗色模式下的卡片边框和主要标签背景色 */
+
+/* 暗色模式 - 合并后 */
+--border: 210, 40%, 98%; /* 暗色模式下的边框颜色，同时用于卡片边框和主要标签背景色 */
+```
+
+ResourceCard.tsx 变更：
+```tsx
+/* 合并前 */
+border-[rgb(var(--card-border))]
+bg-[rgb(var(--card-border))]
+
+/* 合并后 */
+border-[rgb(var(--border))]
+bg-[rgb(var(--border))]
+```
+
+**验证结果：**
+- 编译成功，无错误
+- 亮色和暗色模式视觉效果保持一致
+- 代码结构更加简洁
+- 变量命名更加语义化
+
+**技术要点：**
+1. **变量合并原则**：相同功能的变量应该合并，避免冗余
+2. **格式统一**：选择合适的颜色格式以保持与相关变量的一致性
+3. **主题支持**：确保亮色和暗色模式都正确合并
+4. **注释更新**：合并后的变量注释应说明所有用途
+5. **引用更新**：确保所有使用旧变量的地方都更新为新变量
