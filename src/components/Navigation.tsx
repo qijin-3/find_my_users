@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { ThemeToggle } from '@/components/theme-toggle'
 import { LanguageToggle } from '@/components/language-toggle'
 import Image from 'next/image'
+import AnimatedText from '@/components/ui/animated-text'
 
 /**
  * 导航组件
@@ -33,7 +34,15 @@ export function Navigation() {
               height={40}
               className="h-10 w-auto"
             />
-            <span className="inline-block font-bold w-[auto] text-[24px]">FindMyUsers</span>
+            <AnimatedText
+              text="FindMyUsers"
+              className="inline-block font-bold w-[auto] text-[24px]"
+              autoPlay={true}
+              animateOnHover={true}
+              stagger={80}
+              duration={0.2}
+              yOffset={-4}
+            />
           </Link>
           <nav className="hidden md:flex gap-6">
             {navItems.map((item) => (
@@ -45,7 +54,15 @@ export function Navigation() {
                   item.path === pathname && "text-foreground"
                 )}
               >
-                {item.label}
+                <AnimatedText
+                  text={item.label}
+                  className=""
+                  animateOnHover={true}
+                  autoPlay={false}
+                  stagger={60}
+                  duration={0.15}
+                  yOffset={-3}
+                />
               </Link>
             ))}
           </nav>

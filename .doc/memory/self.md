@@ -4,6 +4,41 @@
 
 本文件记录在 FindMyUsers 项目开发过程中遇到的错误和相应的修复方法，以避免重复犯同样的错误。
 
+### 错误：AnimatedText 组件属性使用错误
+**错误做法**：
+```typescript
+// 使用不存在的 animation 和 delay 属性
+<AnimatedText
+  text="FindMyUsers"
+  className="inline-block font-bold w-[auto] text-[24px]"
+  animation="fadeInUp"
+  delay={0.1}
+/>
+```
+
+**正确做法**：
+```typescript
+// 使用正确的 AnimatedText 组件属性
+<AnimatedText
+  text="FindMyUsers"
+  className="inline-block font-bold w-[auto] text-[24px]"
+  autoPlay={true}
+  animateOnHover={true}
+  stagger={80}
+  duration={0.2}
+  yOffset={-4}
+/>
+```
+
+**技术要点**：
+- AnimatedText 组件不支持 `animation` 和 `delay` 属性
+- 正确的属性包括：`autoPlay`、`animateOnHover`、`stagger`、`duration`、`yOffset`、`ease`
+- `autoPlay` 控制是否自动播放动画
+- `animateOnHover` 控制是否在 hover 时触发动画
+- `stagger` 控制字符间的动画延迟间隔（毫秒）
+- `duration` 控制单个字符的动画持续时间（秒）
+- `yOffset` 控制 Y 轴跳跃高度（像素）
+
 ### 错误：TypeScript 类型定义不完整
 **错误做法**：
 ```typescript

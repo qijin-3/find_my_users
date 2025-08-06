@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, usePathname } from '@/i18n/navigation'
 import { Button } from '@/components/ui/button'
 import { Globe } from '@phosphor-icons/react'
+import AnimatedText from '@/components/ui/animated-text'
 
 /**
  * 语言切换组件
@@ -33,7 +34,15 @@ export function LanguageToggle() {
       aria-label={`Switch to ${locale === 'en' ? 'Chinese' : 'English'}`}
     >
       <Globe className="h-[1.2rem] w-[1.2rem] mr-1" />
-      {locale === 'en' ? t('chinese') : t('english')}
+      <AnimatedText
+        text={locale === 'en' ? t('chinese') : t('english')}
+        className=""
+        animateOnHover={true}
+        autoPlay={false}
+        stagger={50}
+        duration={0.12}
+        yOffset={-2}
+      />
     </Button>
   )
 }
