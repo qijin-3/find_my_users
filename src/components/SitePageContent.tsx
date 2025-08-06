@@ -81,16 +81,16 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
   }, [resources, selectedCategory])
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f9fafb00]">
       {/* 顶部标题栏 */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+      <div className="bg-[#ffffff00] h-[auto] pt-4">
+        <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0">
+          <div className="flex items-center justify-between pt-0">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{t('title')}</h1>
-              <p className="text-sm text-gray-500">{t('description')}</p>
+              <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
+              <p className="text-sm text-muted-foreground">{t('description')}</p>
             </div>
-            <Button className="bg-black text-white hover:bg-gray-800">
+            <Button className="bg-card border-2 border-border text-foreground hover:bg-gray-800 rounded-[12px]">
               <Plus className="w-4 h-4 mr-2" />
               {t('submitTool')}
             </Button>
@@ -98,11 +98,11 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 py-8">
         <div className="flex gap-8">
           {/* 左侧分类菜单 */}
           <div className="w-64 flex-shrink-0">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+            <div className="bg-white rounded-[24px] shadow-sm border-2 border-border p-4">
               <nav className="space-y-2">
                 {siteCategories.map((category) => {
                   const IconComponent = category.icon
@@ -115,10 +115,10 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm rounded-md transition-colors ${
+                      className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm transition-colors ${
                         isSelected 
-                          ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-500' 
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'border-2 border-text-dark text-foreground bg-muted rounded-[12px]' 
+                          : 'text-muted-foreground hover:bg-muted rounded-[12px]'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -127,8 +127,8 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                       </div>
                       <span className={`text-xs px-2 py-1 rounded-full ${
                         isSelected 
-                          ? 'bg-blue-100 text-blue-600' 
-                          : 'bg-gray-100 text-gray-500'
+                          ? 'bg-muted text-muted-foreground' 
+                          : 'bg-muted text-muted-foreground'
                       }`}>
                         {categoryCount}
                       </span>

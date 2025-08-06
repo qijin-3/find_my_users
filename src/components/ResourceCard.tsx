@@ -115,7 +115,7 @@ export default function ResourceCard({
             {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
             <div className="h-[auto] mt-0 mb-0 pb-0">
               {showCategory && resource.type && (
-                <Badge variant="secondary" className="text-[16px] font-normal leading-[18px] border-t-[rgb(var(--border))] border-b-[rgb(var(--border))] border-l-[rgb(var(--border))] border-r-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]">
+                <Badge variant="secondary" className="text-[12px] font-normal leading-[18px] border-t-[rgb(var(--border))] border-b-[rgb(var(--border))] border-l-[rgb(var(--border))] border-r-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]">
                   {getCategoryDisplayName(resource.type, locale)}
                 </Badge>
               )}

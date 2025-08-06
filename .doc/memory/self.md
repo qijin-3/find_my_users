@@ -164,41 +164,79 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
-### 错误：Navigation 组件样式更新记录
+### 错误：SitePageContent 组件样式更新记录
 **修改内容**：
 ```typescript
-// 2025-01-31 Navigation 导航栏样式更新
-// 1. 为 container div 添加边框、内外边距和背景样式
-// 2. 为 FindMyUsers logo 文字调整字体大小
-// 3. 为 container div 添加 12px 圆角
-// 4. 移除 header 中的下划线
-// 5. 将硬编码颜色值替换为 CSS 变量以保持主题一致性
-// 6. 在标题左侧添加 Logo 图片，高度 40px，间距 12px
-// 7. 设置 header 为透明背景，实现固定定位时的透明效果
-// 8. 修复 header 与页面顶部距离，确保固定为 24px
-// 9. 添加与 ResourceCard 相同的 hover 效果
+// 2025-01-31 SitePageContent 组件样式更新
+// 1. 主容器背景色改为透明：bg-[#f9fafb00]
+// 2. 顶部标题栏背景色改为透明：bg-[#ffffff00]，高度改为自动：h-[auto]，添加顶部内边距：pt-4
+// 3. 容器左右外边距调整：ml-[80px] mr-[80px]，移除内边距：pl-0 pr-0
+// 4. 左侧分类菜单边框加粗：border-2 border-border
+// 5. 顶部标题栏内容区域移除内边距：pt-0
+// 6. 提交工具按钮样式更新：使用 bg-card border-2 border-border text-foreground 替代硬编码颜色
+// 7. h1 标题添加底部内边距：pb-2
+// 8. header 顶部标题栏容器添加左右80px margin，与下方内容区域保持一致
+// 9. 按钮圆角调整为12px：rounded-[12px]
+// 10. h1标题颜色改为CSS变量：text-foreground（对应 --foreground: 222.2 84% 4.9%）
+// 11. p描述文字颜色改为CSS变量：text-muted-foreground（对应 --muted-foreground: 215.4 16.3% 46.9%）
+// 12. 移除顶部标题栏下划线：删除 border-b border-gray-200 样式
+// 13. 侧边栏菜单项选中状态样式更新：
+//     - 添加四边2px边框：border-2 border-text-dark（对应 --text-dark: 0, 0%, 10.2% = #1a1a1a）
+//     - 文字颜色改为：text-text-dark（对应 --text-dark: 0, 0%, 10.2% = #1a1a1a）
+//     - 背景色改为：bg-secondary（对应 --secondary: 210 40% 96.1% = #f1f5f9）
+//     - 移除原有的蓝色系样式：bg-blue-50 text-blue-700 border-l-4 border-blue-500
+// 14. 侧边栏圆角调整为24px：rounded-[24px]
+// 15. 侧边栏菜单项选中状态样式进一步优化：
+//     - 边框圆角调整为12px：rounded-[12px]
+//     - 文字颜色改为：text-foreground（对应 --foreground: 222.2 84% 4.9%）
+//     - 背景色改为：bg-muted（对应 --muted: 210 40% 96.1% = #f1f5f9）
+//     - 非选中状态保持原有圆角：rounded-md
+// 16. 侧边栏菜单项颜色系统统一优化：
+//     - 未选中菜单项文字颜色：text-muted-foreground（对应 --muted-foreground: 215.4 16.3% 46.9%）
+//     - 鼠标悬停背景色：hover:bg-muted（对应 --muted: 210 40% 96.1%）
+//     - 选中和未选中计数标签统一使用：bg-muted text-muted-foreground
+//     - 移除所有硬编码颜色值（gray-700, gray-50, blue-100, blue-600, gray-100, gray-500）
+//     - 实现完全基于CSS变量的颜色系统，确保主题兼容性和设计一致性
+// 17. 侧边栏菜单项hover状态圆角统一优化：
+//     - 未选中状态hover圆角从rounded-md改为rounded-[12px]
+//     - 与选中状态的rounded-[12px]保持一致
+//     - 实现选中和hover状态的视觉统一性
 ```
 
 **具体修改**：
 ```typescript
-// header 固定定位，与页面顶部保持 24px 距离
-<header className="sticky top-6 z-40 w-full">
+// 主容器透明背景
+<div className="min-h-screen bg-[#f9fafb00]">
 
-// container div 样式更新，添加 hover 效果
-<div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105">
+// 顶部标题栏透明背景和自动高度
+<div className="bg-[#ffffff00] h-[auto] pt-4 border-b border-gray-200">
 
-// Logo 和标题组合，添加 Logo 图片
-<Link href="/" className="flex items-center space-x-3">
-  <Image 
-    src="/Logo/Logo.svg" 
-    alt="FindMyUsers Logo" 
-    width={40} 
-    height={40}
-    className="h-10 w-auto"
-  />
-  <span className="inline-block font-bold w-[auto] text-[24px]">FindMyUsers</span>
-</Link>
+// header 容器边距调整，与下方内容区域保持一致
+<div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0">
+
+// 下方内容区域容器边距调整
+<div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 py-8">
+
+// 左侧菜单边框加粗
+<div className="bg-white rounded-lg shadow-sm border-2 border-border p-4">
+
+// 按钮样式使用CSS变量，添加12px圆角
+<Button className="bg-card border-2 border-border text-foreground hover:bg-gray-800 rounded-[12px]">
+
+// 标题使用CSS变量颜色
+<h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
+
+// 描述文字使用CSS变量颜色
+<p className="text-muted-foreground">{t('description')}</p>
 ```
+
+**技术要点**：
+- 复用 globals.css 中现有的 CSS 变量（border-border, bg-card, text-foreground, text-muted-foreground）
+- 使用透明背景色实现视觉层次
+- 保持响应式设计和主题兼容性
+- 遵循 Shadcn/ui 组件规范
+- header 和内容区域使用一致的左右边距，确保视觉对齐
+- 颜色系统完全使用CSS变量，支持明暗主题自动切换
 
 ### 错误：Navigation 组件 hover 效果优化
 **问题描述**：

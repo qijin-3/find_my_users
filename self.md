@@ -252,6 +252,33 @@ Navigation 组件的 header 使用 `sticky top-0` 固定定位，但在页面滚
 - 保持了卡片的悬停效果和过渡动画
 - 组件在不同主题下都能正确显示
 
+## 最新变更记录
+
+### globals.css 颜色系统文档化 (2024-12-19)
+- **完成全面的颜色使用场景标注**: 为所有CSS变量添加详细的使用场景和规范注释
+- **颜色系统分类**:
+  1. 基础颜色系统 (Shadcn/ui 标准): background/foreground, card, primary, secondary, muted, accent, destructive
+  2. 界面元素颜色: border, input, ring (焦点指示)
+  3. 自定义业务颜色: text-dark, badge, card-text-muted/white (ResourceCard专用)
+- **明暗模式支持**: 详细标注了明暗主题下的颜色变量对应关系和使用场景
+- **十六进制值参考**: 为每个颜色变量添加了对应的十六进制颜色值，便于设计师参考
+- **组件应用示例**: 提供了具体的组件使用示例，如 Navigation、Button、Card 等
+- **使用规范总结**: 在文件末尾添加了完整的颜色使用规范和最佳实践指南
+
+### SitePageContent 组件样式更新 (2024-12-19)
+- **主容器样式**: 设置透明背景 `bg-[#f9fafb00]`，避免与页面背景冲突
+- **顶部标题栏样式**: 
+  - 透明背景: `bg-[#ffffff00]`
+  - 自动高度: `h-[auto] pt-4`
+  - 容器边距: `ml-[80px] mr-[80px]` (与下方内容区域保持一致)
+- **左侧菜单边框**: 使用 `border-2 border-border` 加粗边框，提升视觉层次
+- **按钮样式**: 使用CSS变量 `bg-card border-border text-foreground`，确保主题一致性
+
+### Header 顶部标题栏容器样式调整 (2024-12-19)
+- **容器边距**: 添加80px左右外边距 `max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0`
+- **目的**: 确保header与下方内容区域保持一致的视觉对齐
+- **效果**: 实现了整体布局的视觉统一性，同时保持响应式设计特性
+
 # 案例10：文章列表和详情页添加lastModified时间显示
 
 ## 问题描述

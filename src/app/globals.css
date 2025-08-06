@@ -1,104 +1,203 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ========================================================================
+   FindMyUsers 项目 - 全局颜色系统规范文档
+   ========================================================================
+   
+   本文件定义了整个项目的颜色系统，基于 Shadcn/ui 设计规范，
+   支持明暗主题自动切换，确保设计一致性和可访问性。
+   
+   颜色值格式：HSL (色相 饱和度% 亮度%)
+   使用方式：通过 Tailwind CSS 类名调用，如 bg-card、text-foreground
+   
+   ======================================================================== */
  
 @layer base {
   :root {
-    --background: 60, 100%, 96.47%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0, 0%, 100%;
-    --card-foreground: 222.2 84% 4.9%;
- 
-    --popover: 60, 100%, 96.47%;
-    --popover-foreground: 222.2 84% 4.9%;
- 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
- 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
- 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
- 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
- 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 26, 26, 26; /* #1a1a1a - 边框颜色，同时用于卡片边框和主要标签背景色 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* ========== 基础颜色系统 ========== */
     
-    /* 自定义颜色变量 */
-    --text-dark: 0, 0%, 10.2%;
-    --badge-bg: 0, 0%, 10.2%;
-    --badge-text: 0, 0%, 100%;
-    
-    /* ResourceCard 组件颜色变量 */
-    --card-text-muted: 26, 26, 26, 0.51; /* #1a1a1a82 - 描述文本半透明色 */
-    --card-text-white: 255, 255, 255; /* #ffffff - 标签文本白色 */
+    /* 页面背景和前景色 - 用于整体页面布局 */
+    --background: 60, 100%, 96.47%; /* 浅灰色背景 (#f9fafb) - 用于页面主背景 (Layout.js, body元素) */
+    --foreground: 222.2 84% 4.9%; /* 深色文字 (#0f172a) - 用于主要文本内容 (ArticleList.js, ResourceCard.tsx) */
+
+    /* 卡片系统颜色 - 用于所有卡片组件 */
+    --card: 0, 0%, 100%; /* 白色卡片背景 (#ffffff) - 用于Card组件、Navigation组件、SitePageContent按钮 */
+    --card-foreground: 222.2 84% 4.9%; /* 卡片内文字颜色 (#0f172a) - 用于卡片内的主要文本 */
  
-    --radius: 0.5rem;
+    /* 弹出层颜色 - 用于下拉菜单、工具提示等 */
+    --popover: 60, 100%, 96.47%; /* 弹出层背景色 (#f9fafb) - 与页面背景保持一致 */
+    --popover-foreground: 222.2 84% 4.9%; /* 弹出层文字颜色 (#0f172a) */
+ 
+    /* 主要操作颜色 - 用于重要按钮和强调元素 */
+    --primary: 222.2 47.4% 11.2%; /* 深色主色调 (#0f172a) - 用于主要按钮背景 (Button组件default变体) */
+    --primary-foreground: 210 40% 98%; /* 主色调文字 (#f8fafc) - 用于主要按钮文字 */
+ 
+    /* 次要操作颜色 - 用于次要按钮和辅助元素 */
+    --secondary: 210 40% 96.1%; /* 浅灰色次要背景 (#f1f5f9) - 用于次要按钮 (Button组件secondary变体, Badge组件) */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* 次要元素文字颜色 (#0f172a) */
+ 
+    /* 静音/弱化颜色 - 用于辅助信息和占位符 */
+    --muted: 210 40% 96.1%; /* 静音背景色 (#f1f5f9) - 用于不重要的背景区域 */
+    --muted-foreground: 215.4 16.3% 46.9%; /* 静音文字 (#64748b) - 用于描述文本、时间戳等辅助信息 (ArticleList.js, ResourceCard.tsx, Table组件) */
+ 
+    /* 强调色 - 用于高亮和焦点状态 */
+    --accent: 210 40% 96.1%; /* 强调背景色 (#f1f5f9) - 用于hover状态 */
+    --accent-foreground: 222.2 47.4% 11.2%; /* 强调文字颜色 (#0f172a) */
+ 
+    /* 危险/错误颜色 - 用于错误状态和危险操作 */
+    --destructive: 0 84.2% 60.2%; /* 红色危险背景 (#ef4444) - 用于错误提示和删除按钮 */
+    --destructive-foreground: 210 40% 98%; /* 危险操作文字颜色 (#f8fafc) */
+
+    /* ========== 界面元素颜色 ========== */
+    
+    /* 边框颜色 - 用于所有边框元素 */
+    --border: 26, 26, 26; /* 深色边框 (#1a1a1a) - 用于卡片边框、Navigation组件边框、SitePageContent菜单边框 */
+    
+    /* 输入框颜色 - 用于表单元素 */
+    --input: 214.3 31.8% 91.4%; /* 输入框背景色 (#e2e8f0) - 用于Input、Textarea组件 */
+    
+    /* 焦点环颜色 - 用于键盘导航焦点指示 */
+    --ring: 222.2 84% 4.9%; /* 焦点环颜色 (#0f172a) - 用于可访问性焦点指示 */
+    
+    /* ========== 自定义业务颜色 ========== */
+    
+    /* 文本颜色变量 - 用于特定文本样式 */
+    --text-dark: 0, 0%, 10.2%; /* 深色文本 (#1a1a1a) - 用于强调文本 */
+    --badge-bg: 0, 0%, 10.2%; /* 徽章背景色 (#1a1a1a) - 用于标签背景 */
+    --badge-text: 0, 0%, 100%; /* 徽章文字 (#ffffff) - 用于标签文字 */
+    
+    /* ResourceCard 组件专用颜色 - 用于资源卡片组件 */
+    --card-text-muted: 26, 26, 26, 0.51; /* 半透明描述文本 (#1a1a1a82) - 用于ResourceCard描述文字 */
+    --card-text-white: 255, 255, 255; /* 白色标签文本 (#ffffff) - 用于ResourceCard标签文字 */
+ 
+    /* 圆角半径 - 用于所有圆角元素 */
+    --radius: 0.5rem; /* 8px圆角 - 用于按钮、卡片、输入框等元素的圆角 */
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
- 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
- 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
- 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 84% 4.9%;
- 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
- 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
- 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
- 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
- 
-    --border: 210, 40%, 98%; /* 暗色模式下的边框颜色，同时用于卡片边框和主要标签背景色 */
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* ========== 暗色模式基础颜色系统 ========== */
     
-    /* 自定义颜色变量 */
-    --text-dark: 210 40% 98%;
-    --badge-bg: 210 40% 98%;
-    --badge-text: 222.2 84% 4.9%;
+    /* 页面背景和前景色 - 暗色模式下的整体页面布局 */
+    --background: 222.2 84% 4.9%; /* 深色背景 (#0f172a) - 暗色模式页面主背景 */
+    --foreground: 210 40% 98%; /* 浅色文字 (#f8fafc) - 暗色模式主要文本内容 */
+ 
+    /* 卡片系统颜色 - 暗色模式下的卡片组件 */
+    --card: 222.2 84% 4.9%; /* 深色卡片背景 (#0f172a) - 暗色模式Card组件背景 */
+    --card-foreground: 210 40% 98%; /* 卡片内浅色文字 (#f8fafc) - 暗色模式卡片文本 */
+ 
+    /* 弹出层颜色 - 暗色模式下的弹出元素 */
+    --popover: 222.2 84% 4.9%; /* 深色弹出层背景 (#0f172a) - 与暗色页面背景保持一致 */
+    --popover-foreground: 210 40% 98%; /* 弹出层浅色文字 (#f8fafc) */
+ 
+    /* 主要操作颜色 - 暗色模式下的重要按钮 */
+    --primary: 210 40% 98%; /* 浅色主色调 (#f8fafc) - 暗色模式主要按钮背景 */
+    --primary-foreground: 222.2 84% 4.9%; /* 主色调深色文字 (#0f172a) - 暗色模式按钮文字 */
+ 
+    /* 次要操作颜色 - 暗色模式下的次要元素 */
+    --secondary: 217.2 32.6% 17.5%; /* 中等深色次要背景 (#1e293b) - 暗色模式次要按钮 */
+    --secondary-foreground: 210 40% 98%; /* 次要元素浅色文字 (#f8fafc) */
+ 
+    /* 静音/弱化颜色 - 暗色模式下的辅助信息 */
+    --muted: 217.2 32.6% 17.5%; /* 静音深色背景 (#1e293b) - 暗色模式不重要区域 */
+    --muted-foreground: 215 20.2% 65.1%; /* 静音中等亮度文字 (#94a3b8) - 暗色模式描述文本、辅助信息 */
+ 
+    /* 强调色 - 暗色模式下的高亮状态 */
+    --accent: 217.2 32.6% 17.5%; /* 强调深色背景 (#1e293b) - 暗色模式hover状态 */
+    --accent-foreground: 210 40% 98%; /* 强调浅色文字 (#f8fafc) */
+ 
+    /* 危险/错误颜色 - 暗色模式下的错误状态 */
+    --destructive: 0 62.8% 30.6%; /* 深红色危险背景 (#991b1b) - 暗色模式错误提示 */
+    --destructive-foreground: 210 40% 98%; /* 危险操作浅色文字 (#f8fafc) */
+ 
+    /* ========== 暗色模式界面元素颜色 ========== */
     
-    /* ResourceCard 组件颜色变量 */
-    --card-text-muted: 210, 40%, 98%, 0.51; /* 暗色模式下的描述文本半透明色 */
-    --card-text-white: 222.2, 84%, 4.9%; /* 暗色模式下的标签文本色 */
+    /* 边框颜色 - 暗色模式下的边框元素 */
+    --border: 210, 40%, 98%; /* 浅色边框 (#f8fafc) - 暗色模式下卡片边框、组件边框 */
+    
+    /* 输入框颜色 - 暗色模式下的表单元素 */
+    --input: 217.2 32.6% 17.5%; /* 深色输入框背景 (#1e293b) - 暗色模式Input、Textarea组件 */
+    
+    /* 焦点环颜色 - 暗色模式下的焦点指示 */
+    --ring: 212.7 26.8% 83.9%; /* 浅色焦点环 (#cbd5e1) - 暗色模式可访问性焦点指示 */
+    
+    /* ========== 图表颜色系统 ========== */
+    /* 用于数据可视化图表的颜色方案 */
+    --chart-1: 220 70% 50%; /* 蓝色图表色 (#3b82f6) - 用于图表第一数据系列 */
+    --chart-2: 160 60% 45%; /* 绿色图表色 (#10b981) - 用于图表第二数据系列 */
+    --chart-3: 30 80% 55%; /* 橙色图表色 (#f59e0b) - 用于图表第三数据系列 */
+    --chart-4: 280 65% 60%; /* 紫色图表色 (#8b5cf6) - 用于图表第四数据系列 */
+    --chart-5: 340 75% 55%; /* 粉色图表色 (#ec4899) - 用于图表第五数据系列 */
+    
+    /* ========== 暗色模式自定义业务颜色 ========== */
+    
+    /* 文本颜色变量 - 暗色模式下的特定文本样式 */
+    --text-dark: 210 40% 98%; /* 暗色模式下的"深色"文本实际为浅色 (#f8fafc) */
+    --badge-bg: 210 40% 98%; /* 暗色模式徽章背景 (#f8fafc) - 浅色背景 */
+    --badge-text: 222.2 84% 4.9%; /* 暗色模式徽章文字 (#0f172a) - 深色文字 */
+    
+    /* ResourceCard 组件专用颜色 - 暗色模式下的资源卡片 */
+    --card-text-muted: 210, 40%, 98%, 0.51; /* 暗色模式半透明描述文本 - 浅色半透明 */
+    --card-text-white: 222.2, 84%, 4.9%; /* 暗色模式"白色"标签文本实际为深色 (#0f172a) */
   }
 }
  
 @layer base {
+  /* ========== 全局基础样式 ========== */
+  
+  /* 为所有元素应用统一的边框样式 */
   * {
-    @apply border-border;
+    @apply border-border; /* 使用CSS变量定义的边框颜色，确保明暗主题一致性 */
   }
+  
+  /* 页面主体样式 - 应用主题背景和文字颜色 */
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground; /* 使用CSS变量，支持明暗主题自动切换 */
   }
 }
 
-/* Header sticky 样式 */
+/* ========== 自定义组件样式 ========== */
+
+/* Header sticky 样式 - 用于导航栏透明背景效果 */
 .header-sticky {
-  background-color: transparent;
+  background-color: transparent; /* 透明背景 - 用于Navigation组件的粘性定位效果 */
 }
+
+/* ========================================================================
+   颜色使用规范总结
+   ========================================================================
+   
+   1. 基础颜色系统 (Shadcn/ui 标准)：
+      - background/foreground: 页面主背景和文字
+      - card/card-foreground: 卡片背景和文字
+      - primary/primary-foreground: 主要操作按钮
+      - secondary/secondary-foreground: 次要操作按钮
+      - muted/muted-foreground: 弱化信息显示
+      - accent/accent-foreground: 强调和hover状态
+      - destructive/destructive-foreground: 错误和危险操作
+   
+   2. 界面元素颜色：
+      - border: 统一边框颜色，确保视觉一致性
+      - input: 表单输入框背景
+      - ring: 焦点指示环，提升可访问性
+   
+   3. 自定义业务颜色：
+      - text-dark/badge-bg/badge-text: 徽章和强调文本
+      - card-text-muted/card-text-white: ResourceCard组件专用
+   
+   4. 使用原则：
+      - 优先使用语义化颜色变量而非硬编码值
+      - 确保明暗主题下的颜色对比度符合WCAG标准
+      - 保持设计系统的一致性和可维护性
+      - 支持主题切换的自动适配
+   
+   5. 组件应用示例：
+      - Navigation: bg-card border-border
+      - Button: bg-primary text-primary-foreground
+      - Card: bg-card text-card-foreground border-border
+      - Badge: bg-secondary text-secondary-foreground
+      - Input: bg-input border-border
+      - 描述文本: text-muted-foreground
+   
+   ======================================================================== */
