@@ -1,7 +1,7 @@
 {
   "navigation": {
     "home": "Home",
-    "site": "Site",
+    "site": "Sites",
     "articles": "Articles"
   },
   "common": {
@@ -22,7 +22,7 @@
     "description": "FindMyUsers is a curated directory of promotion channels built for indie developers. We continuously collect and review real, actionable channels from around the world to help you reach your first users, validate your product idea, and confidently take your first step out of cold start."
   },
   "site": {
-    "title": "Site",
+    "title": "Sites",
     "description": "Explore our curated list of sites for web development, GitHub, and more.",
     "submitTool": "Submit Tool",
     "categories": {
@@ -41,6 +41,7 @@
   },
   "articles": {
     "title": "Articles",
+    "description": "Explore insights and experiences",
     "backToList": "Back to article list",
     "publishedOn": "Published on",
     "lastModified": "Last modified"

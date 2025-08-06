@@ -164,40 +164,86 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
-### 错误：SitePageContent 组件样式更新记录
+### 错误：PostsPageContent 布局嵌套过度导致对齐问题
+**错误做法**：
+```typescript
+// 过度嵌套的布局结构，导致文章卡片与外层容器不对齐
+<div className="max-w-7xl mx-auto pt-6 pb-12">
+  <main className="flex-1">
+    <div className="ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]">
+      <ArticleList articles={articles} showMoreLink={false} />
+    </div>
+  </main>
+</div>
+```
+
+**正确做法**：
+```typescript
+// 简化布局结构，与 SitePageContent 保持一致
+<div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 pt-6 pb-12">
+  <ArticleList articles={articles} showMoreLink={false} />
+</div>
+```
+
+**技术要点**：
+- 避免不必要的嵌套容器，特别是 `<main>` 和额外的 `<div>` 包装
+- 保持与其他页面组件（如 SitePageContent）的布局结构一致性
+- 将边距和间距属性直接应用到主容器上，减少布局复杂度
+- 移除冗余的 `w-[auto]` 类，因为这是默认行为
+
+### 错误：Tailwind container 类导致的布局间距问题
+**错误做法**：
+```typescript
+// 使用 container 类导致不必要的内边距
+<div className="container ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]">
+  <ArticleList articles={articles} showMoreLink={false} />
+</div>
+```
+
+**正确做法**：
+```typescript
+// 移除 container 类，避免默认的 2rem 内边距
+<div className="ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]">
+  <ArticleList articles={articles} showMoreLink={false} />
+</div>
+```
+
+**技术要点**：
+- Tailwind CSS 的 `container` 类默认包含 `padding: 2rem`
+- 当需要精确控制边距时，应避免使用 `container` 类
+- 使用自定义的边距类（如 `ml-[80px] mr-[80px]`）可以更精确地控制布局
+- 即使设置了 `pl-0 pr-0`，`container` 类的默认内边距仍可能影响布局
+
+### 错误：PostsPageContent组件创建和布局优化
 **修改内容**：
 ```typescript
-// 2025-01-31 SitePageContent 组件样式更新
-// 1. 主容器背景色改为透明：bg-[#f9fafb00]
-// 2. 顶部标题栏背景色改为透明：bg-[#ffffff00]，高度改为自动：h-[auto]，添加顶部内边距：pt-4
-// 3. 容器左右外边距调整：ml-[80px] mr-[80px]，移除内边距：pl-0 pr-0
-// 4. 左侧分类菜单边框加粗：border-2 border-border
-// 5. 顶部标题栏内容区域移除内边距：pt-0
-// 6. 提交工具按钮样式更新：使用 bg-card border-2 border-border text-foreground 替代硬编码颜色
-// 7. h1 标题添加底部内边距：pb-2
-// 8. header 顶部标题栏容器添加左右80px margin，与下方内容区域保持一致
-// 9. 按钮圆角调整为12px：rounded-[12px]
-// 10. h1标题颜色改为CSS变量：text-foreground（对应 --foreground: 222.2 84% 4.9%）
-// 11. p描述文字颜色改为CSS变量：text-muted-foreground（对应 --muted-foreground: 215.4 16.3% 46.9%）
-// 12. 移除顶部标题栏下划线：删除 border-b border-gray-200 样式
-// 13. 侧边栏菜单项选中状态样式更新：
-//     - 添加四边2px边框：border-2 border-text-dark（对应 --text-dark: 0, 0%, 10.2% = #1a1a1a）
-//     - 文字颜色改为：text-text-dark（对应 --text-dark: 0, 0%, 10.2% = #1a1a1a）
-//     - 背景色改为：bg-secondary（对应 --secondary: 210 40% 96.1% = #f1f5f9）
-//     - 移除原有的蓝色系样式：bg-blue-50 text-blue-700 border-l-4 border-blue-500
-// 14. 侧边栏圆角调整为24px：rounded-[24px]
-// 15. 侧边栏菜单项选中状态样式进一步优化：
-//     - 边框圆角调整为12px：rounded-[12px]
-//     - 文字颜色改为：text-foreground（对应 --foreground: 222.2 84% 4.9%）
-//     - 背景色改为：bg-muted（对应 --muted: 210 40% 96.1% = #f1f5f9）
-//     - 非选中状态保持原有圆角：rounded-md
-// 16. 侧边栏菜单项颜色系统统一优化：
-//     - 未选中菜单项文字颜色：text-muted-foreground（对应 --muted-foreground: 215.4 16.3% 46.9%）
-//     - 鼠标悬停背景色：hover:bg-muted（对应 --muted: 210 40% 96.1%）
-//     - 选中和未选中计数标签统一使用：bg-muted text-muted-foreground
-//     - 移除所有硬编码颜色值（gray-700, gray-50, blue-100, blue-600, gray-100, gray-500）
-//     - 实现完全基于CSS变量的颜色系统，确保主题兼容性和设计一致性
-// 17. 侧边栏菜单项hover状态圆角统一优化：
+// 2025-01-31 创建PostsPageContent组件，实现与SitePageContent相同的布局结构
+// 1. 创建新组件 /src/components/PostsPageContent.tsx
+// 2. 采用与SitePageContent相同的布局结构和样式规范：
+//    - 顶层容器：min-h-screen bg-[#f9fafb00]
+//    - 顶部标题栏：bg-[#ffffff00] h-[auto] pt-12
+//    - 标题栏容器：max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0
+//    - 主要内容区域：max-w-7xl mx-auto pt-6 pb-12
+//    - 内容容器：container ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]
+// 3. 修复ArticleList组件类型检查错误：使用@ts-ignore注释忽略JS文件的类型检查
+// 4. 更新posts页面使用新的PostsPageContent组件
+// 5. 添加缺失的多语言翻译键值：
+//    - zh.json: articles.description = "探索独立开发者的经验分享与技术洞察"
+//    - en.json: articles.description = "Explore insights and experiences shared by indie developers"
+// 6. 2025-01-31 优化ArticleList组件显示逻辑：
+//    - 修改showMoreLink参数控制header和More articles的显示
+//    - 在文章列表页面中设置showMoreLink=false隐藏重复的标题和链接
+//    - 保持首页显示完整的Articles标题和More articles链接
+```
+
+**技术要点**：
+- 复用SitePageContent的成功布局模式和样式规范
+- 保持与现有组件的视觉一致性和设计统一性
+- 使用@ts-ignore处理JS/TS混合项目的类型检查问题
+- 确保多语言支持的完整性和一致性
+- 遵循项目的响应式设计和主题兼容性要求
+- 通过条件渲染避免在专门的列表页面中显示重复的标题和导航元素
+
 //     - 未选中状态hover圆角从rounded-md改为rounded-[12px]
 //     - 与选中状态的rounded-[12px]保持一致
 //     - 实现选中和hover状态的视觉统一性

@@ -231,9 +231,12 @@ src/
 │   ├── Layout.js         # 布局组件
 │   ├── LoginModal.js     # 登录模态框
 │   ├── Navigation.tsx    # 导航组件 (TypeScript)
-│   ├── ResourceCard.js   # 资源卡片组件
+│   ├── PeopleIllustration.tsx # 首页小人插画动效组件
+│   ├── PostsPageContent.tsx # 文章页面内容组件
+│   ├── ResourceCard.tsx  # 资源卡片组件
 │   ├── ResourceList.js   # 资源列表
-│   ├── SitePageContent.js # 站点页面内容组件
+│   ├── SiteList.tsx      # 站点列表组件
+│   ├── SitePageContent.tsx # 站点页面内容组件
 │   ├── language-toggle.tsx # 语言切换组件
 │   ├── providers.tsx     # 全局提供者组件
 │   └── theme-toggle.tsx  # 主题切换组件
@@ -291,9 +294,20 @@ src/
   - 描述文字使用半透明色彩 (#1a1a1a82)
   - Badge 组件支持透明背景和黑色边框
   - 图片高度固定为 128px
-- **SitePageContent.js**: 站点页面内容组件
+- **SiteList.tsx**: 站点列表组件，展示站点资源网格布局
+- **SitePageContent.tsx**: 站点页面内容组件，提供统一的页面布局结构
+- **PostsPageContent.tsx**: 文章页面内容组件，采用与 SitePageContent 相同的布局规范
+  - 顶层容器使用 `pt-12` 上边距
+  - 内容区域使用 `pt-6 pb-12` 上下边距
+  - 主内容区设置 `ml-[80px] mr-[80px]` 边距
+  - 集成 ArticleList 组件，支持多语言显示
 - **LoginModal.js**: 登录模态框组件
 - **PeopleIllustration.tsx**: 首页小人插画动效组件，使用 Framer Motion 实现
+  - 支持9个小人角色的依次出现动画
+  - 从下往上的俏皮动画效果
+  - 两排布局，-100px 重叠间距
+  - 响应式设计，适配不同屏幕尺寸
+  - 悬停交互效果和持续浮动动画
 
 ##### 主题和国际化组件
 - **theme-toggle.tsx**: 明暗主题切换组件
@@ -502,3 +516,86 @@ const buttonVariants = cva(
 - **统一修改**: 修改字段显示文本只需更新字段定义文件
 - **多语言一致性**: 确保中英文字段定义的键名完全一致
 - **向后兼容**: 保持现有数据结构的兼容性
+
+### 2025-01-31 PostsPageContent 组件创建
+#### 布局系统统一
+- **新增组件**: 创建 `PostsPageContent.tsx` 组件，路径为 `/src/components/PostsPageContent.tsx`
+- **布局复用**: 采用与 `SitePageContent` 相同的布局结构和样式规范
+  - 顶层容器：`min-h-screen bg-[#f9fafb00]` (透明背景)
+  - 顶部标题栏：`bg-[#ffffff00] h-[auto] pt-12` (12px 顶部间距)
+  - 标题栏容器：`max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0`
+  - 主要内容区域：`max-w-7xl mx-auto pt-6 pb-12` (6px 顶部间距，12px 底部间距)
+  - 内容容器：`container ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]`
+
+#### 技术实现优化
+- **类型安全处理**: 使用 `@ts-ignore` 注释解决 JavaScript 组件 `ArticleList` 的 TypeScript 类型检查错误
+- **页面集成**: 更新 `/src/app/[locale]/posts/page.tsx` 使用新的 `PostsPageContent` 组件
+- **多语言支持**: 添加缺失的翻译键值
+  - `zh.json`: `articles.description = "探索独立开发者的经验分享与技术洞察"`
+  - `en.json`: `articles.description = "Explore insights and experiences shared by indie developers"`
+
+#### 设计一致性保证
+- **视觉统一**: 与 `SitePageContent` 保持完全一致的布局模式
+- **响应式设计**: 使用相同的容器约束和间距系统
+- **主题兼容**: 支持明暗主题切换，使用 CSS 变量
+- **组件复用**: 继续使用现有的 `ArticleList` 组件，保持功能完整性
+
+#### 架构改进意义
+- **模块化设计**: 将页面布局逻辑从路由组件中分离
+- **可维护性**: 统一的布局组件便于后续样式调整和维护
+- **扩展性**: 为其他页面类型提供了标准化的布局模板
+- **代码复用**: 减少重复代码，提高开发效率
+
+### 2025-01-31 ArticleList 组件显示优化
+#### 条件渲染逻辑
+- **参数控制**: 修改 `showMoreLink` 参数功能，控制 header 和 "More articles" 链接的显示
+- **组件更新**: 在 `ArticleList.js` 中添加条件渲染逻辑
+  ```javascript
+  {showMoreLink && (
+    <div className="flex justify-between items-center mb-6">
+      <h2 className="text-[24px] font-bold tracking-tighter">Articles</h2>
+      <Link href="/posts" className="text-muted-foreground hover:text-foreground/80 transition-colors">
+        More articles →
+      </Link>
+    </div>
+  )}
+  ```
+
+#### 使用场景优化
+- **首页显示**: 保持 `showMoreLink=true`，显示完整的 "Articles" 标题和 "More articles" 链接
+- **文章列表页**: 设置 `showMoreLink=false`，隐藏重复的标题和导航链接
+- **避免重复**: 防止在专门的文章列表页面中出现重复的标题和导航元素
+
+#### 用户体验改进
+- **页面清洁**: 文章列表页面不再显示冗余的 "Articles" 标题
+- **导航简化**: 移除不必要的 "More articles" 链接，因为用户已经在文章列表页
+- **视觉统一**: 保持与其他页面组件的布局一致性
+
+### 2025-01-31 PostsPageContent 布局间距修复
+#### 问题识别
+- **间距问题**: 文章卡片宽度与父容器 `div` 未对齐，存在隐藏间距
+- **根本原因**: Tailwind CSS 的 `container` 类默认包含 `padding: 2rem` 内边距
+- **影响范围**: 导致 `ArticleList` 组件内的文章卡片无法与外层容器完全对齐
+
+#### 技术修复
+- **移除 container 类**: 从 `PostsPageContent.tsx` 的主要内容容器中移除 `container` 类
+- **修改前**:
+  ```typescript
+  <div className="container ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]">
+  ```
+- **修改后**:
+  ```typescript
+  <div className="ml-[80px] mr-[80px] pl-0 pr-0 w-[auto]">
+  ```
+
+#### 布局优化效果
+- **精确对齐**: 文章卡片现在与父容器完全对齐，无多余间距
+- **视觉一致**: 保持与设计规范的完全一致性
+- **响应式保持**: 自定义边距类（`ml-[80px] mr-[80px]`）确保响应式布局正常工作
+- **样式控制**: 通过移除默认内边距，实现更精确的布局控制
+
+#### 技术要点记录
+- **Tailwind container 陷阱**: `container` 类的默认内边距可能干扰精确布局控制
+- **边距优先级**: 即使设置 `pl-0 pr-0`，`container` 类的默认样式仍可能产生影响
+- **布局调试**: 当遇到意外间距时，检查是否使用了带有默认样式的 Tailwind 工具类
+- **最佳实践**: 需要精确控制时，使用自定义边距类替代 `container` 类

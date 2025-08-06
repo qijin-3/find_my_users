@@ -1,7 +1,7 @@
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { getI18nArticlesList } from '@/lib/i18n-data'
-import ArticleList from '@/components/ArticleList'
+import PostsPageContent from '@/components/PostsPageContent'
 
 interface ArticlesPageProps {
   params: Promise<{ locale: string }>
@@ -24,9 +24,7 @@ export default async function ArticlesPage({ params }: ArticlesPageProps) {
   const allPostsData = getI18nArticlesList(locale)
 
   return (
-    <div className="container mx-auto py-12">
-      <ArticleList articles={allPostsData} showMoreLink={false} />
-    </div>
+    <PostsPageContent articles={allPostsData} locale={locale} />
   )
 }
 

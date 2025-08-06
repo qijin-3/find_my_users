@@ -1,7 +1,7 @@
 {
   "navigation": {
     "home": "首页",
-    "site": "分类",
+    "site": "站点",
     "articles": "文章"
   },
   "common": {
@@ -22,7 +22,7 @@
     "description": "FindMyUsers 是专为独立开发者打造的推广渠道导航站，持续收录并评测国内外真实、可操作的产品推广渠道。帮助开发者找到首批用户、验证产品可行性，轻松迈出冷启动第一步。"
   },
   "site": {
-    "title": "分类",
+    "title": "站点",
     "description": "独立开发者工具站 | 全球产品必备工具资源源",
     "submitTool": "提交工具",
     "categories": {
@@ -41,6 +41,7 @@
   },
   "articles": {
     "title": "文章",
+    "description": "一些经验的分享",
     "backToList": "返回文章列表",
     "publishedOn": "发布于",
     "lastModified": "最后修改"
