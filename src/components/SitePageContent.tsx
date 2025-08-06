@@ -83,7 +83,7 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
   return (
     <div className="min-h-screen bg-[#f9fafb00]">
       {/* 顶部标题栏 */}
-      <div className="bg-[#ffffff00] h-[auto] pt-4">
+      <div className="bg-[#ffffff00] h-[auto] pt-12">
         <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0">
           <div className="flex items-center justify-between pt-0">
             <div>
@@ -98,7 +98,7 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 py-8">
+      <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 pt-6 pb-12">
         <div className="flex gap-8">
           {/* 左侧分类菜单 */}
           <div className="w-64 flex-shrink-0">

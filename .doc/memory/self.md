@@ -227,8 +227,7 @@ const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
 
 // 描述文字使用CSS变量颜色
-<p className="text-muted-foreground">{t('description')}</p>
-```
+<p className="text-muted-foreground">{t('description')}</p>```
 
 **技术要点**：
 - 复用 globals.css 中现有的 CSS 变量（border-border, bg-card, text-foreground, text-muted-foreground）
