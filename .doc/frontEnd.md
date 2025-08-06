@@ -232,6 +232,8 @@ src/
 │   ├── LoginModal.js     # 登录模态框
 │   ├── Navigation.tsx    # 导航组件 (TypeScript)
 │   ├── PeopleIllustration.tsx # 首页小人插画动效组件
+│   ├── ui/
+│   │   ├── animated-text.tsx  # 可复用文字跳跃流动动画组件
 │   ├── PostsPageContent.tsx # 文章页面内容组件
 │   ├── ResourceCard.tsx  # 资源卡片组件
 │   ├── ResourceList.js   # 资源列表
@@ -597,5 +599,51 @@ const buttonVariants = cva(
 #### 技术要点记录
 - **Tailwind container 陷阱**: `container` 类的默认内边距可能干扰精确布局控制
 - **边距优先级**: 即使设置 `pl-0 pr-0`，`container` 类的默认样式仍可能产生影响
+
+### 2025-01-31 AnimatedText 组件开发
+#### 组件概述
+基于 Framer Motion 实现的可复用文字逐字符跳跃流动动画组件，支持hover触发和自动播放两种模式。
+
+#### 技术特性
+- **逐字符动画**: 文本按字符分割，每个字符独立进行跳跃动画
+- **Stagger效果**: 字符按从左到右的顺序依次播放动画，形成流动效果
+- **可配置参数**: 支持自定义延迟间隔、动画持续时间、跳跃高度等
+- **性能优化**: 使用 `transform` 属性和 `willChange` 优化动画性能
+- **类型安全**: 完整的 TypeScript 类型定义和接口约束
+
+#### 动画机制
+```typescript
+// 容器变体 - 控制子元素的stagger效果
+const containerVariants = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: stagger / 1000, // 字符间延迟
+    },
+  },
+}
+
+// 字符变体 - 单个字符的跳跃轨迹
+const characterVariants = {
+  initial: { y: 0 },
+  animate: {
+    y: [0, yOffset, 0], // 起始 -> 最高点 -> 回归
+    transition: { duration, ease },
+  },
+}
+```
+
+#### 使用场景应用
+- **SitePageContent**: 应用到"提交工具"按钮和分类菜单项
+- **支持任意容器**: 可包装在按钮、标签、标题等任意元素中
+- **Hover交互**: 默认hover触发，提供自然的用户反馈
+- **自动播放**: 支持页面加载时自动播放动画效果
+
+#### 设计理念遵循
+- **性能优先**: 优先使用 transform 属性，避免回流重绘
+- **语义化动画**: 动画增强用户体验，不干扰内容理解
+- **可配置性**: 提供丰富的配置选项适应不同使用场景
+- **渐进增强**: 动画失效时不影响基本文本显示功能
+- **响应式友好**: 动画在不同设备尺寸下表现一致
 - **布局调试**: 当遇到意外间距时，检查是否使用了带有默认样式的 Tailwind 工具类
 - **最佳实践**: 需要精确控制时，使用自定义边距类替代 `container` 类

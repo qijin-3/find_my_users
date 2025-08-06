@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
+import AnimatedText from '@/components/ui/animated-text'
 import ResourceCard from '@/components/ResourceCard'
 import { 
   Globe, 
@@ -90,9 +91,18 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
               <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
               <p className="text-sm text-muted-foreground">{t('description')}</p>
             </div>
-            <Button className="bg-card border-2 border-border text-foreground hover:bg-gray-800 rounded-[12px]">
-              <Plus className="w-4 h-4 mr-2" />
-              {t('submitTool')}
+            <Button 
+              className="bg-card border-2 border-border text-foreground rounded-[12px] group transition-transform hover:-translate-y-1 hover:bg-card"
+              style={{ 
+                // 确保按钮内容能够正常进行transform动画
+                transform: 'none',
+                willChange: 'auto',
+                // 移除hover背景色变化，保持原始颜色
+                transition: 'transform 0.2s ease-out'
+              }}
+            >
+              <Plus className="w-4 h-4 mr-2 transition-transform group-hover:-translate-y-0.5" />
+              <AnimatedText text={t('submitTool')} />
             </Button>
           </div>
         </div>
@@ -120,10 +130,22 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                           ? 'border-2 border-text-dark text-foreground bg-muted rounded-[12px]' 
                           : 'text-muted-foreground hover:bg-muted rounded-[12px]'
                       }`}
+                      style={{
+                        // 确保按钮内容能够正常进行transform动画
+                        transform: 'none',
+                        willChange: 'auto'
+                      }}
                     >
-                      <div className="flex items-center gap-3">
+                      <div 
+                        className="flex items-center gap-3"
+                        style={{
+                          // 确保div容器不影响子元素的transform
+                          transform: 'none',
+                          willChange: 'auto'
+                        }}
+                      >
                         <IconComponent className="w-4 h-4" />
-                        {category.name}
+                        <AnimatedText text={category.name} />
                       </div>
                       <span className={`text-xs px-2 py-1 rounded-full ${
                         isSelected 
