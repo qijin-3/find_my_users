@@ -5,6 +5,7 @@ import ResourceList from '@/components/ResourceList'
 import ArticleList from '@/components/ArticleList'
 import SiteList from '@/components/SiteList'
 import PeopleIllustration from '@/components/PeopleIllustration'
+import AnimatedText from '@/components/ui/animated-text'
 
 interface HomePageProps {
   params: Promise<{ locale: string }>
@@ -49,7 +50,14 @@ export default async function HomePage({ params }: HomePageProps) {
         {/* 标题和描述 */}
         <div>
           <h1 className="h-[72px] font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
-            {t('title')}
+            <AnimatedText 
+              text={t('title')} 
+              autoPlay={false}
+              animateOnHover={true}
+              stagger={100}
+              duration={0.3}
+              yOffset={-8}
+            />
           </h1>
           <h2 className="mt-2 text-[24px] font-medium tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
             {t('subtitle')}
@@ -62,7 +70,8 @@ export default async function HomePage({ params }: HomePageProps) {
 
       <ResourceList {...resources} />
       <SiteList sites={latestSites} locale={locale} />
-      <ArticleList articles={latestArticles} />
+      {/* @ts-ignore - ArticleList 组件使用 .js 文件，类型检查暂时忽略 */}
+      <ArticleList articles={latestArticles} showMoreLink={true} />
     </div>
   )
 }
