@@ -8,16 +8,13 @@ import { Link } from '@/i18n/navigation'
 import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { remark } from 'remark'
 import html from 'remark-html'
+import { getI18nArticleMeta } from '@/lib/i18n-data'
 
 interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>
 }
 
 interface PostData {
-  title: string
-  description?: string
-  date?: string
-  lastModified?: string
   content: string
   locale: string
   slug: string
@@ -33,11 +30,8 @@ function getArticleData(slug: string, locale: string): PostData | null {
     
     if (fs.existsSync(localePath)) {
       const content = fs.readFileSync(localePath, 'utf8')
-      const { data, content: articleContent } = matter(content)
+      const { content: articleContent } = matter(content)
       return {
-        title: data.title || slug,
-        description: data.description,
-        date: data.date,
         content: articleContent,
         locale: locale,
         slug: slug
@@ -49,11 +43,8 @@ function getArticleData(slug: string, locale: string): PostData | null {
     
     if (fs.existsSync(fallbackPath)) {
       const content = fs.readFileSync(fallbackPath, 'utf8')
-      const { data, content: articleContent } = matter(content)
+      const { content: articleContent } = matter(content)
       return {
-        title: data.title || slug,
-        description: data.description,
-        date: data.date,
         content: articleContent,
         locale: 'zh', // 标记实际使用的语言
         slug: slug
@@ -71,17 +62,16 @@ function getArticleData(slug: string, locale: string): PostData | null {
  */
 export async function generateMetadata({ params }: PostPageProps) {
   const { locale, slug } = await params
-  const postData = getArticleData(slug, locale)
-  
-  if (!postData) {
+  const meta = getI18nArticleMeta(slug, locale)
+  if (!meta) {
     return {
       title: 'Article Not Found',
     }
   }
 
   return {
-    title: `${postData.title}`,
-    description: postData.description || `Read about ${postData.title} on FindMyUsers`,
+    title: `${meta.title}`,
+    description: meta.description || `Read about ${meta.title} on FindMyUsers`,
   }
 }
 
@@ -100,8 +90,12 @@ export default async function PostPage({ params }: PostPageProps) {
   
   // 获取文章数据
   const postData = getArticleData(slug, locale)
+  const meta = getI18nArticleMeta(slug, locale)
   
   if (!postData) {
+    notFound()
+  }
+  if (!meta) {
     notFound()
   }
 
@@ -119,27 +113,23 @@ export default async function PostPage({ params }: PostPageProps) {
         <CaretRight className="mx-2" size={16} />
         <Link href="/posts" className="hover:text-blue-600">{t('title')}</Link>
         <CaretRight className="mx-2" size={16} />
-        <span className="text-gray-900">{postData.title}</span>
+        <span className="text-gray-900">{meta.title}</span>
       </nav>
       
       {/* Meta information card */}
       <div className="bg-gray-100 rounded-lg p-6 mb-8">
-        {postData.lastModified && (
+        {meta.lastModified && (
           <p className="text-gray-600 mb-2">
-            最后修改: {new Date(postData.lastModified).toLocaleDateString('zh-CN', {
-              year: 'numeric',
-              month: '2-digit',
-              day: '2-digit'
-            })}
+            {t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}
           </p>
         )}
-        {postData.date && (
+        {meta.date && (
           <p className="text-gray-600 mb-2">
-            {t('publishedOn')}: {new Date(postData.date).toLocaleDateString()}
+            {t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}
           </p>
         )}
-        {postData.description && (
-          <p className="text-gray-800">{postData.description}</p>
+        {meta.description && (
+          <p className="text-gray-800">{meta.description}</p>
         )}
         {postData.locale !== locale && (
           <p className="text-yellow-600 text-sm mt-2">

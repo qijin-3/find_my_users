@@ -1,9 +1,3 @@
----
-title: "Installing and Deploying FindMyUsers: A Step-by-Step Guide"
-description: "A comprehensive guide for setting up FindMyUsers locally and deploying it to Vercel, suitable for beginners."
-date: "2024-08-11"
----
-
 # Installing and Deploying FindMyUsers: A Step-by-Step Guide
 
 This guide will walk you through the process of setting up FindMyUsers on your local machine and deploying it to Vercel. Even if you're new to web development, you should be able to follow these steps to get your FindMyUsers instance up and running.

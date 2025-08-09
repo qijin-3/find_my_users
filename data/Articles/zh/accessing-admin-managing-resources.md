@@ -1,9 +1,3 @@
----
-title: Accessing the Admin Panel and Managing Resources in FindMyUsers
-description: How to access the admin panel and manage your resource list in FindMyUsers
-date: '2024-08-11T13:14:40.737Z'
-lastModified: '2024-11-06T03:24:55.263Z'
----
 # Accessing the Admin Panel and Managing Resources in FindMyUsers
 
 FindMyUsers provides a user-friendly admin interface for managing your website's resources. This guide will walk you through the process of accessing the admin panel and managing your resources effectively.

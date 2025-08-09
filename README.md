@@ -81,6 +81,10 @@ For a detailed deployment guide, please refer to our [Installation and Deploymen
 - Manage resources in the admin panel.
 - All changes are automatically synced with your GitHub repository.
 
+### Article metadata sync (2025-08-09)
+- Article front matter (`data/Articles/{zh,en}/*.md`) now syncs `date`, `lastModified`, and `description` from `data/json/articles.json` by matching `slug`.
+- i18n: Chinese uses `description_zh`; English uses `description_en`. Missing values follow the project's i18n fallback rules.
+
 ## Contributing
 
 We welcome contributions to FindMyUsers! Please read our [Contributing Guide](https://findmyusers.app/posts/how-to-contributing-to-findmyusers) for details on our code of conduct and the process for submitting pull requests.

@@ -1,9 +1,3 @@
----
-title: "FindMyUsers: A Dynamic, Database-Free Website Solution"
-description: "Explore the features and implementation of FindMyUsers, an innovative open-source project that combines Next.js, Tailwind CSS, and GitHub API for content management."
-date: "2024-08-11"
----
-
 # FindMyUsers: A Dynamic, Database-Free Website Solution
 
 FindMyUsers is an innovative open-source project that offers a unique approach to building dynamic websites without the need for a traditional database. By leveraging the power of Next.js, Tailwind CSS, and the GitHub API, FindMyUsers provides a flexible and efficient solution for content management and website development.

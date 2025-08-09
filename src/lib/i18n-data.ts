@@ -36,6 +36,34 @@ export function getI18nJsonData(filename: string, locale: string = 'zh'): any {
 }
 
 /**
+ * 根据 slug 获取文章元数据（标题/描述/时间），来源：data/json/articles.json
+ * 按 locale 选择对应语言字段，未命中返回 null
+ */
+export function getI18nArticleMeta(slug: string, locale: string = 'zh') {
+  try {
+    const articlesPath = path.join(process.cwd(), 'data', 'json', 'articles.json');
+    if (!fs.existsSync(articlesPath)) return null;
+    const content = fs.readFileSync(articlesPath, 'utf8');
+    const list = JSON.parse(content);
+    if (!Array.isArray(list)) return null;
+    const item = list.find((it: any) => it.slug === slug);
+    if (!item) return null;
+    const title = locale === 'en' ? item.title_en : item.title_zh;
+    const description = locale === 'en' ? item.description_en : item.description_zh;
+    return {
+      title: title || slug,
+      description: description || '',
+      date: item.date || undefined,
+      lastModified: item.lastModified || undefined,
+      slug: item.slug
+    };
+  } catch (error) {
+    console.error(`Error reading article meta for ${slug} (${locale})`, error);
+    return null;
+  }
+}
+
+/**
  * 获取多语言文章数据
  * 如果指定语言的文章不存在，则fallback到中文版本
  * @param slug - 文章slug

@@ -4,6 +4,11 @@
 
 FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站，无需传统数据库。
 
+### 文章元数据同步策略（2025-08-09）
+- 统一以 `data/json/articles.json` 为权威来源同步每篇文章的 `date`、`lastModified`、`description`
+- 中英文描述分别绑定 `description_zh` 和 `description_en`
+- 保持 ISO 8601 时间格式，便于前端格式化显示
+
 ## 核心技术栈
 
 ### 前端框架

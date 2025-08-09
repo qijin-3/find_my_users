@@ -406,6 +406,14 @@ const buttonVariants = cva(
 
 ## 项目更新记录
 
+### 2025-08-09 文章元数据同步
+- **元数据来源统一**：`data/Articles/{zh,en}/*.md` 的 front matter 中 `date`、`lastModified` 与 `description` 现已统一由 `data/json/articles.json` 驱动并同步。
+- **国际化约定**：
+  - 中文文章（`zh/`）使用 `description_zh`
+  - 英文文章（`en/`）使用 `description_en`
+  - 若对应语言缺失，遵循 `.trae/rules/I18n.md` 的 fallback 规则
+- **影响范围**：不改动渲染逻辑，仅确保展示数据与列表元数据一致；文章详情页时间与描述显示将与列表保持一致性。
+
 ### 2025-01-28 架构重构
 #### 路由结构调整
 - **resources → site**: 将资源页面路由从 `/resources` 更改为 `/site`
