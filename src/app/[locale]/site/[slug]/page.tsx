@@ -194,19 +194,33 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 href={siteData.url} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm group"
               >
                 <Globe size={16} />
-                {t('visitWebsite')}
+                <AnimatedText 
+                  text={t('visitWebsite')}
+                  animateOnHover={true}
+                  autoPlay={false}
+                  stagger={50}
+                  duration={0.15}
+                  yOffset={-3}
+                />
               </a>
               <a 
                 href={siteData.submitUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm group"
               >
                 <ArrowSquareOut size={16} />
-                {t('submitProduct')}
+                <AnimatedText 
+                  text={t('submitProduct')}
+                  animateOnHover={true}
+                  autoPlay={false}
+                  stagger={50}
+                  duration={0.15}
+                  yOffset={-3}
+                />
               </a>
             </div>
           </div>

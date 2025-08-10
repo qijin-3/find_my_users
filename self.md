@@ -836,6 +836,76 @@ interface PostData {
 - 条件渲染的正确使用
 - 保持向后兼容性的重要性
 
+## 案例37：站点详情页按钮添加AnimatedText hover效果
+
+### 问题描述
+用户要求为站点详情页面中的"访问官网"和"提交产品"两个按钮添加AnimatedText组件的hover效果，实现文字逐字符跳跃流动动画。
+
+### 分析
+在站点详情页面(`/src/app/[locale]/site/[slug]/page.tsx`)中，两个按钮使用了静态文本显示：
+- "访问官网"按钮：`{t('visitWebsite')}`
+- "提交产品"按钮：`{t('submitProduct')}`
+
+需要将这些静态文本替换为AnimatedText组件，实现hover时的动画效果。
+
+### 解决方案
+1. **保持现有导入**：AnimatedText组件已在页面顶部导入
+2. **替换按钮文本**：将静态文本替换为AnimatedText组件
+3. **添加group类**：为按钮容器添加`group`类以支持hover触发
+4. **配置动画参数**：设置合适的动画参数（stagger: 50ms, duration: 0.15s, yOffset: -3px）
+
+### 代码变更
+**修改前**：
+```tsx
+<a className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm">
+  <Globe size={16} />
+  {t('visitWebsite')}
+</a>
+<a className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm">
+  <ArrowSquareOut size={16} />
+  {t('submitProduct')}
+</a>
+```
+
+**修改后**：
+```tsx
+<a className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm group">
+  <Globe size={16} />
+  <AnimatedText 
+    text={t('visitWebsite')}
+    animateOnHover={true}
+    autoPlay={false}
+    stagger={50}
+    duration={0.15}
+    yOffset={-3}
+  />
+</a>
+<a className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm group">
+  <ArrowSquareOut size={16} />
+  <AnimatedText 
+    text={t('submitProduct')}
+    animateOnHover={true}
+    autoPlay={false}
+    stagger={50}
+    duration={0.15}
+    yOffset={-3}
+  />
+</a>
+```
+
+### 验证结果
+- ✅ 两个按钮在hover时显示文字跳跃动画效果
+- ✅ 动画参数设置合理，视觉效果流畅
+- ✅ 保持原有按钮样式和功能不变
+- ✅ 支持多语言文本动画
+
+### 技术要点
+1. **组件复用**：使用项目中已有的AnimatedText组件
+2. **hover触发**：通过`animateOnHover={true}`和`group`类实现hover触发
+3. **动画参数**：合理设置stagger、duration和yOffset参数
+4. **国际化支持**：动画文本来自翻译函数，支持多语言
+5. **样式保持**：添加动画效果的同时保持原有按钮样式
+
 ## 案例36：SiteBadge双badge显示修复
 
 ### 问题描述
