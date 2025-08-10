@@ -143,7 +143,63 @@
 - 将函数改为异步函数以正确处理 Promise
 
 
-# 案例12：ArticleList组件颜色变量统一优化
+# 案例17：文章详情页多语言文本维护优化
+
+## 问题描述
+用户要求将 `/Users/jin/SynologyDrive/Working/Dev/Project/find_my_users/src/app/[locale]/posts/[slug]/page.tsx` 文件中第157行的硬编码文本字段维护到 `/Users/jin/SynologyDrive/Working/Dev/Project/find_my_users/messages` 目录下的多语言文件中。
+
+## 解决方案
+1. 在 `messages/zh.json` 和 `messages/en.json` 中的 `articles` 命名空间添加 `workingOnTranslation` 字段
+2. 将页面中的硬编码三元表达式替换为使用 `t('workingOnTranslation')` 的多语言文本
+3. 遵循项目的i18n规范，确保文本的多语言一致性
+
+## 代码变更
+
+### messages/zh.json 文件修改
+```json
+"articles": {
+  "title": "文章",
+  "description": "一些经验的分享",
+  "backToList": "返回文章列表",
+  "publishedOn": "发布于",
+  "lastModified": "最后修改",
+  "workingOnTranslation": "🧑‍💻 正在制作英文版本中。"
+}
+```
+
+### messages/en.json 文件修改
+```json
+"articles": {
+  "title": "Articles",
+  "description": "Explore insights and experiences",
+  "backToList": "Back to article list",
+  "publishedOn": "Published on",
+  "lastModified": "Last modified",
+  "workingOnTranslation": "🧑‍💻 Currently working on the English version."
+}
+```
+
+### page.tsx 文件修改
+```typescript
+// 修改前：硬编码的三元表达式
+🧑‍💻 {locale === 'en' ? 'Currently working on the English version.' : '正在制作英文版本中。'}
+
+// 修改后：使用多语言文本
+{t('workingOnTranslation')}
+```
+
+## 验证结果
+- 成功将硬编码文本提取到多语言文件中
+- 页面正常显示对应语言的提示文本
+- 符合项目i18n规范和最佳实践
+
+## 技术要点
+1. **多语言维护**: 将硬编码文本统一维护到messages文件中，便于管理和翻译
+2. **命名空间组织**: 在articles命名空间下添加相关字段，保持逻辑分组
+3. **代码简化**: 使用t()函数替代复杂的三元表达式，提高代码可读性
+4. **i18n规范**: 遵循next-intl的最佳实践，确保多语言功能的一致性
+5. **文本一致性**: 确保中英文提示信息的语义和格式保持一致
+
 
 ## 问题描述
 用户要求将 `ArticleList.js` 组件中的 `a`、`p`、`div` 等组件的颜色统一为 `--muted-foreground: 215.4 16.3% 46.9%`，并删除无用的颜色变量。
@@ -257,3 +313,80 @@ export default function ArticleList({ articles, showMoreLink = true }) {
 4. **组件文档**：添加JSDoc注释提高代码可维护性
 5. **颜色变量命名**：使用语义化命名 `--article-date-text` 便于理解和维护
 6. **样式继承**：保持与现有设计系统的一致性
+
+# 案例15：面包屑导航hover颜色保持一致性优化
+
+## 问题描述
+用户要求修改文章详情页面包屑导航的hover效果，将颜色从 `group-hover:text-blue-600` 改为保持 `text-muted-foreground`，确保hover时颜色不变化，只有AnimatedText的跳跃动画效果。
+
+## 解决方案
+1. 修改面包屑导航中两个 `AnimatedText` 组件的className
+2. 将 `text-gray-500 group-hover:text-blue-600` 改为 `text-muted-foreground group-hover:text-muted-foreground`
+3. 保持 `transition-colors` 效果以确保动画流畅性
+4. 确保hover时只有跳跃动画，颜色保持不变
+
+## 代码变更
+
+### page.tsx 面包屑导航修改
+```tsx
+// 修改前
+className="text-gray-500 group-hover:text-blue-600 transition-colors"
+
+// 修改后  
+className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+```
+
+## 验证结果
+- 面包屑导航hover时颜色保持为 `--muted-foreground`
+- AnimatedText组件的跳跃动画正常工作
+- 颜色过渡效果流畅，无突兀变化
+- 整体视觉效果更加统一和谐
+
+## 技术要点
+1. **颜色一致性**: 使用 `text-muted-foreground` 确保hover前后颜色一致
+2. **动画分离**: 颜色保持不变，只保留AnimatedText的跳跃动画效果
+3. **过渡效果**: 保留 `transition-colors` 确保动画流畅性
+4. **用户体验**: hover时只有文字跳跃动画，视觉效果更加精致
+5. **主题兼容**: 使用语义化颜色变量，自动适配亮/暗主题
+
+# 案例16：文章详情页Meta信息卡片样式优化
+
+## 问题描述
+用户要求修改文章详情页面的Meta information card样式：
+1. 将背景颜色从 `bg-gray-100` 改为使用 `--card` CSS变量
+2. 将圆角从 `rounded-lg` 改为 `rounded-[24px]` (24px圆角)
+
+## 解决方案
+1. 修改Meta information card的className属性
+2. 将 `bg-gray-100 rounded-lg` 改为 `bg-card rounded-[24px]`
+3. 保持其他样式属性不变（padding、margin、border等）
+
+## 代码变更
+
+### page.tsx Meta information card修改
+```tsx
+// 修改前
+<div className="bg-gray-100 rounded-lg p-6 mb-12 border-2">
+
+// 修改后
+<div className="bg-card rounded-[24px] p-6 mb-12 border-2">
+```
+
+## 验证结果
+- Meta information card背景颜色使用 `--card` 变量，支持主题切换
+- 圆角半径调整为24px，视觉效果更加圆润
+- 卡片样式与整体设计系统保持一致
+- 明暗主题下都能正确显示
+
+## 技术要点
+1. **语义化颜色**: 使用 `bg-card` 替代硬编码的 `bg-gray-100`，确保主题一致性
+2. **自定义圆角**: 使用 `rounded-[24px]` 实现精确的24px圆角值
+3. **主题兼容**: `--card` 变量在明暗主题下有不同的值，自动适配
+4. **设计一致性**: 与其他卡片组件保持统一的背景颜色规范
+5. **Tailwind CSS**: 利用Tailwind的任意值语法 `[24px]` 实现自定义尺寸
+
+## 最佳实践
+- 优先使用globals.css中定义的语义化颜色变量而非硬编码颜色
+- 使用Tailwind CSS的任意值语法实现精确的设计要求
+- 保持组件样式与整体设计系统的一致性
+- 确保样式修改支持明暗主题切换

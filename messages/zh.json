@@ -44,7 +44,8 @@
     "description": "一些经验的分享",
     "backToList": "返回文章列表",
     "publishedOn": "发布于",
-    "lastModified": "最后修改"
+    "lastModified": "最后修改",
+    "workingOnTranslation": "🧑‍💻 正在制作英文版本中。"
   },
   "footer": {
     "poweredBy": "由 {technology} 驱动",

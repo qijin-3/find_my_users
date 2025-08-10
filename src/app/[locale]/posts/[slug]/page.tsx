@@ -9,6 +9,7 @@ import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import { remark } from 'remark'
 import html from 'remark-html'
 import { getI18nArticleMeta } from '@/lib/i18n-data'
+import AnimatedText from '@/components/ui/animated-text'
 
 interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -109,46 +110,74 @@ export default async function PostPage({ params }: PostPageProps) {
     <article className="container mx-auto px-4 py-12 max-w-3xl">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-blue-600">{t('backToList')}</Link>
+        <Link href="/" className="group">
+          <AnimatedText 
+            text={t('backToList')}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
+        </Link>
         <CaretRight className="mx-2" size={16} />
-        <Link href="/posts" className="hover:text-blue-600">{t('title')}</Link>
+        <Link href="/posts" className="group">
+          <AnimatedText 
+            text={t('title')}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
+        </Link>
         <CaretRight className="mx-2" size={16} />
-        <span className="text-gray-900">{meta.title}</span>
+        <span className="text-foreground">{meta.title}</span>
       </nav>
       
       {/* Meta information card */}
-      <div className="bg-gray-100 rounded-lg p-6 mb-8">
+      <div className="bg-card rounded-[24px] p-6 mb-12 border-2">
         {meta.lastModified && (
-          <p className="text-gray-600 mb-2">
+          <p className="text-[14px] text-muted-foreground mb-2">
             {t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}
           </p>
         )}
         {meta.date && (
-          <p className="text-gray-600 mb-2">
+          <p className="text-[14px] text-muted-foreground mb-2">
             {t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}
           </p>
         )}
         {meta.description && (
-          <p className="text-gray-800">{meta.description}</p>
+          <p className="text-[16px] text-foreground">{meta.description}</p>
         )}
         {postData.locale !== locale && (
-          <p className="text-yellow-600 text-sm mt-2">
-            ⚠️ {locale === 'en' ? 'This article is displayed in Chinese as no English version is available.' : '此文章以中文显示，因为没有英文版本。'}
+          <p className="text-destructive text-sm mt-2">
+            {t('workingOnTranslation')}
           </p>
         )}
       </div>
       
       {/* Article content */}
       <div 
-        className="prose prose-lg max-w-none"
+        className="prose prose-lg max-w-none box-border"
         dangerouslySetInnerHTML={{ __html: contentHtml }} 
       />
       
       {/* Back to articles link */}
       <div className="mt-12">
-        <Link href="/posts" className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
-          <ArrowLeft size={20} />
-          {t('backToList')}
+        <Link href="/posts" className="group inline-flex items-center gap-2">
+          <ArrowLeft size={20} className="text-muted-foreground group-hover:text-muted-foreground transition-colors" />
+          <AnimatedText 
+            text={t('backToList')}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
         </Link>
       </div>
     </article>

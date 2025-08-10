@@ -44,7 +44,8 @@
     "description": "Explore insights and experiences",
     "backToList": "Back to article list",
     "publishedOn": "Published on",
-    "lastModified": "Last modified"
+    "lastModified": "Last modified",
+    "workingOnTranslation": "🧑‍💻 Currently working on the English version."
   },
   "footer": {
     "poweredBy": "Powered by {technology}",

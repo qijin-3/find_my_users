@@ -199,6 +199,64 @@ const githubToken = process.env.GITHUB_TOKEN // 仅在服务端使用
 const publicApiUrl = process.env.NEXT_PUBLIC_API_URL
 ```
 
+### 最佳实践：面包屑导航使用 AnimatedText 组件实现 hover 动画
+**错误做法**：
+```jsx
+// 使用简单的颜色变化作为 hover 效果
+<Link href="/" className="hover:text-blue-600">{t('backToList')}</Link>
+<Link href="/posts" className="hover:text-blue-600">{t('title')}</Link>
+```
+
+**正确做法**：
+```jsx
+// 使用 AnimatedText 组件实现 hover 时的跳跃动画效果
+<Link href="/" className="group">
+  <AnimatedText 
+    text={t('backToList')}
+    className="text-gray-500 group-hover:text-blue-600 transition-colors"
+    animateOnHover={true}
+    autoPlay={false}
+    stagger={30}
+    duration={0.15}
+    yOffset={-2}
+  />
+</Link>
+```
+
+**技术要点**：
+- 使用 `group` 类名在父元素上，配合 `group-hover:` 前缀实现组合 hover 效果
+- AnimatedText 组件的 `animateOnHover={true}` 启用 hover 触发动画
+- `autoPlay={false}` 确保动画仅在 hover 时触发，不自动播放
+- `stagger={30}` 设置较快的字符间延迟，适合短文本
+- `duration={0.15}` 设置较短的动画持续时间，保持响应性
+- `yOffset={-2}` 设置较小的跳跃高度，适合小字体文本
+- 保持颜色变化的 `transition-colors` 效果，与动画效果结合
+**错误做法**：
+```jsx
+// 直接使用硬编码的颜色值
+<p className="text-gray-600 mb-2">
+<p className="text-gray-800">
+<span className="text-gray-900">
+```
+
+**正确做法**：
+```jsx
+// 使用 globals.css 中定义的语义化颜色变量
+<p className="text-muted-foreground mb-2">  // 替代 text-gray-600
+<p className="text-foreground">             // 替代 text-gray-800
+<span className="text-foreground">          // 替代 text-gray-900
+```
+
+**技术要点**：
+- 优先使用 globals.css 中定义的语义化颜色变量，确保主题一致性
+- `text-muted-foreground` 用于辅助信息和描述文本
+- `text-foreground` 用于主要文本内容
+- 支持明暗主题自动切换
+- 确保颜色对比度符合 WCAG 可访问性标准
+- 使用 `text-[14px]`、`text-[16px]` 等精确字体大小控制
+- 边框样式使用 `border-t-2 border-b-2 border-l-2 border-r-2` 或简化为 `border-2`
+- 外边距调整使用 `mb-12` 等 Tailwind 标准间距
+
 ### 错误：PostsPageContent 布局嵌套过度导致对齐问题
 **错误做法**：
 ```typescript
