@@ -27,21 +27,16 @@
     "submitTool": "提交工具",
     "visitWebsite": "访问官网",
     "submitProduct": "提交产品",
-    "categories": {
-      "product-showcase": "产品展示页",
-      "tool-navigation": "工具导航",
-      "blog-newsletter": "博客/周刊",
-      "social-platform": "社交平台",
-      "media": "媒体",
-      "vertical-forum": "垂直论坛",
-      "design-platform": "设计平台"
-    },
+    
     "empty": {
       "title": "暂无工具",
       "description": "该分类下暂时没有工具，敬请期待"
     },
     "detail": {
       "submitGuidelines": "提交说明",
+      "expectedExposure": "预期曝光（周）",
+      "submitMethod": "提交方式",
+      "review": "是否审核",
       "summary": "总结",
       "backToSiteList": "返回站点列表",
       "breadcrumb": {

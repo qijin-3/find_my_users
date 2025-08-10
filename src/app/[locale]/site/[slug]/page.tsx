@@ -2,6 +2,7 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
+import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
 import { ArrowLeft, ArrowSquareOut, Globe, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import AnimatedText from '@/components/ui/animated-text'
@@ -233,7 +234,20 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <h2>{t('detail.submitGuidelines')}</h2>
         <p className="text-foreground leading-relaxed">{siteData.submitRequirements}</p>
         
+        <h2>{t('detail.expectedExposure')}</h2>
+        <p className="text-foreground leading-relaxed">
+          {await getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}
+        </p>
         
+        <h2>{t('detail.submitMethod')}</h2>
+        <p className="text-foreground leading-relaxed">
+          {await getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}
+        </p>
+        
+        <h2>{t('detail.review')}</h2>
+        <p className="text-foreground leading-relaxed">
+          {siteData.review === 'Y' ? (locale === 'zh' ? '需要审核' : 'Review Required') : (locale === 'zh' ? '无需审核' : 'No Review Required')}
+        </p>
         
         <h2>{t('detail.summary')}</h2>
         <p className="text-foreground leading-relaxed">{siteData.rating}</p>

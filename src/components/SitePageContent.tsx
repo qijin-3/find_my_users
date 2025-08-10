@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useTranslations } from 'next-intl'
 import { Button } from '@/components/ui/button'
 import AnimatedText from '@/components/ui/animated-text'
 import ResourceCard from '@/components/ResourceCard'
+import { useFieldData } from '@/hooks/useFieldData'
 import { 
   Globe, 
   Wrench, 
@@ -46,16 +47,16 @@ interface SitePageContentProps {
  * 站点分类配置
  * 定义左侧菜单的分类项目和对应图标
  * 注意：分类 ID 必须与 site-fields.json 中的 type 字段键值完全一致
- * @param t - 翻译函数
+ * @param fieldsData - 字段数据
  */
-const getSiteCategories = (t: any) => [
-  { id: 'product_showcase', name: t('categories.product-showcase'), icon: Globe },
-  { id: 'tool_navigation', name: t('categories.tool-navigation'), icon: Wrench },
-  { id: 'blog_newsletter', name: t('categories.blog-newsletter'), icon: BookOpen },
-  { id: 'social_platform', name: t('categories.social-platform'), icon: Users },
-  { id: 'media', name: t('categories.media'), icon: Radio },
-  { id: 'vertical_forum', name: t('categories.vertical-forum'), icon: ChatCircle },
-  { id: 'design_platform', name: t('categories.design-platform'), icon: Palette },
+const getSiteCategories = (fieldsData: any) => [
+  { id: 'product_showcase', name: fieldsData?.type?.product_showcase || 'Product Showcase', icon: Globe },
+  { id: 'tool_navigation', name: fieldsData?.type?.tool_navigation || 'Tool Navigation', icon: Wrench },
+  { id: 'blog_newsletter', name: fieldsData?.type?.blog_newsletter || 'Blog/Newsletter', icon: BookOpen },
+  { id: 'social_platform', name: fieldsData?.type?.social_platform || 'Social Platform', icon: Users },
+  { id: 'media', name: fieldsData?.type?.media || 'Media', icon: Radio },
+  { id: 'vertical_forum', name: fieldsData?.type?.vertical_forum || 'Vertical Forum', icon: ChatCircle },
+  { id: 'design_platform', name: fieldsData?.type?.design_platform || 'Design Platform', icon: Palette },
 ]
 
 /**
@@ -66,9 +67,12 @@ const getSiteCategories = (t: any) => [
 export default function SitePageContent({ resources, locale = 'zh' }: SitePageContentProps) {
   const t = useTranslations('site')
   const [selectedCategory, setSelectedCategory] = useState('product_showcase')
+  
+  // 使用 useFieldData hook 获取字段数据
+  const { fieldsData, loading, error } = useFieldData(locale as 'zh' | 'en')
 
   // 获取本地化的分类配置
-  const siteCategories = getSiteCategories(t)
+  const siteCategories = useMemo(() => getSiteCategories(fieldsData), [fieldsData])
 
   /**
    * 根据选中的分类筛选资源

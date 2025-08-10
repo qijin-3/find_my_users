@@ -27,21 +27,16 @@
     "submitTool": "Submit Tool",
     "visitWebsite": "Visit",
     "submitProduct": "Submit",
-    "categories": {
-      "product-showcase": "Product Showcase",
-      "tool-navigation": "Tool Navigation",
-      "blog-newsletter": "Blog/Newsletter",
-      "social-platform": "Social Platform",
-      "media": "Media",
-      "vertical-forum": "Vertical Forum",
-      "design-platform": "Design Platform"
-    },
+
     "empty": {
       "title": "No Tools Available",
       "description": "No tools are available in this category at the moment. Please check back later."
     },
     "detail": {
       "submitGuidelines": "Submit Guidelines",
+      "expectedExposure": "Expected Exposure",
+      "submitMethod": "Submit Method",
+      "review": "Review Required",
       "summary": "Summary",
       "backToSiteList": "Back to site list",
       "breadcrumb": {
