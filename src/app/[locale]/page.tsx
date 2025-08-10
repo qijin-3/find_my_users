@@ -62,7 +62,7 @@ export default async function HomePage({ params }: HomePageProps) {
           <h2 className="mt-2 text-[24px] font-medium tracking-tighter sm:text-3xl md:text-3xl lg:text-3xl">
             {t('subtitle')}
           </h2>
-          <p className="mt-2 mx-auto max-w-[700px] text-gray-500 md:text-xl">
+          <p className="mt-2 mx-auto max-w-[700px] text-muted-foreground md:text-xl">
             {t('description')}
           </p>
         </div>

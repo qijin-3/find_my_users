@@ -27,6 +27,7 @@
     "submitTool": "提交工具",
     "visitWebsite": "访问官网",
     "submitProduct": "提交产品",
+    "moreSites": "更多站点",
     
     "empty": {
       "title": "暂无工具",
@@ -50,6 +51,7 @@
     "backToList": "返回文章列表",
     "publishedOn": "发布于",
     "lastModified": "最后修改",
+    "moreArticles": "更多文章",
     "workingOnTranslation": "🧑‍💻 正在制作英文版本中。"
   },
   "footer": {

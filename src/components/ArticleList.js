@@ -3,6 +3,7 @@
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { Calendar } from '@phosphor-icons/react'
+import AnimatedText from '@/components/ui/animated-text'
 import {
   Card,
   CardHeader,
@@ -21,9 +22,14 @@ export default function ArticleList({ articles, showMoreLink = true }) {
     <section>
       {showMoreLink && (
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-[24px] font-bold tracking-tighter">Articles</h2>
-          <Link href="/posts" className="text-muted-foreground hover:text-foreground/80 transition-colors">
-            More articles →
+          <h2 className="text-[24px] font-bold tracking-tighter">{t('title')}</h2>
+          <Link href="/posts" className="text-muted-foreground hover:text-foreground/80 transition-colors group">
+            <AnimatedText 
+              text={`${t('moreArticles')} →`}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              animateOnHover={false}
+              useGroupHover={true}
+            />
           </Link>
         </div>
       )}

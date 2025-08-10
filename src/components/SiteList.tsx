@@ -1,7 +1,9 @@
 // components/SiteList.tsx
 'use client'
 import { Link } from '@/i18n/navigation'
+import { useTranslations } from 'next-intl'
 import ResourceCard from '@/components/ResourceCard'
+import AnimatedText from '@/components/ui/animated-text'
 
 /**
  * 站点数据接口定义
@@ -34,13 +36,20 @@ interface SiteListProps {
  * @returns 站点列表组件
  */
 export default function SiteList({ sites, showMoreLink = true, locale = 'zh' }: SiteListProps) {
+  const t = useTranslations('site')
+  
   return (
     <section>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-[24px] font-bold tracking-tighter">Sites</h2>
+        <h2 className="text-[24px] font-bold tracking-tighter">{t('title')}</h2>
         {showMoreLink && (
-          <Link href="/site" className="text-foreground hover:text-foreground/80 transition-colors">
-            More sites →
+          <Link href="/site" className="text-foreground hover:text-foreground/80 transition-colors group">
+            <AnimatedText 
+              text={`${t('moreSites')} →`}
+              className="text-foreground hover:text-foreground transition-colors"
+              animateOnHover={false}
+              useGroupHover={true}
+            />
           </Link>
         )}
       </div>

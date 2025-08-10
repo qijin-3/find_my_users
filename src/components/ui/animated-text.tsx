@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CSSProperties, useState, useEffect } from 'react'
+import { CSSProperties, useState, useEffect, useRef } from 'react'
 
 interface AnimatedTextProps {
   /**
@@ -96,10 +96,11 @@ const AnimatedText = ({
   // 将文本分割为字符数组，保留空格
   const characters = text.split('')
   const [isAnimating, setIsAnimating] = useState(autoPlay)
+  const spanRef = useRef<HTMLSpanElement>(null)
 
   // 监听 group-hover 状态
   useEffect(() => {
-    if (useGroupHover) {
+    if (useGroupHover && spanRef.current) {
       const handleGroupHover = () => {
         setIsAnimating(true)
         // 动画完成后重置状态
@@ -110,12 +111,28 @@ const AnimatedText = ({
         }, (characters.length * stagger) + (duration * 1000))
       }
 
-      // 查找父级 group 元素
-      const parentElement = document.querySelector('.group')
-      if (parentElement) {
-        parentElement.addEventListener('mouseenter', handleGroupHover)
+      const handleGroupLeave = () => {
+        if (!autoPlay) {
+          setIsAnimating(false)
+        }
+      }
+
+      // 查找最近的父级 group 元素
+      const findGroupParent = (element: HTMLElement | null): HTMLElement | null => {
+        if (!element) return null
+        if (element.classList.contains('group')) return element
+        return findGroupParent(element.parentElement)
+      }
+
+      // 从当前组件元素开始查找group父元素
+      const groupParent = findGroupParent(spanRef.current.parentElement)
+      
+      if (groupParent) {
+        groupParent.addEventListener('mouseenter', handleGroupHover)
+        groupParent.addEventListener('mouseleave', handleGroupLeave)
         return () => {
-          parentElement.removeEventListener('mouseenter', handleGroupHover)
+          groupParent.removeEventListener('mouseenter', handleGroupHover)
+          groupParent.removeEventListener('mouseleave', handleGroupLeave)
         }
       }
     }
@@ -135,6 +152,7 @@ const AnimatedText = ({
 
   return (
     <span
+      ref={spanRef}
       className={`inline-block ${className}`}
       style={{
         willChange: 'auto',

@@ -27,6 +27,7 @@
     "submitTool": "Submit Tool",
     "visitWebsite": "Visit",
     "submitProduct": "Submit",
+    "moreSites": "More sites",
 
     "empty": {
       "title": "No Tools Available",
@@ -50,6 +51,7 @@
     "backToList": "Back to article list",
     "publishedOn": "Published on",
     "lastModified": "Last modified",
+    "moreArticles": "More articles",
     "workingOnTranslation": "🧑‍💻 Currently working on the English version."
   },
   "footer": {
