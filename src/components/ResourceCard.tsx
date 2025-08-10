@@ -103,10 +103,11 @@ export default function ResourceCard({
             <div className="h-[auto] mt-0 mb-0 pb-0">
               {showCategory && resource.type && (
                 <SiteBadge 
-                  siteData={{ type: resource.type, status: resource.status }}
+                  siteData={{ type: resource.type, status: resource.status, region: resource.region }}
                   locale={locale}
                   showType={true}
                   showStatus={true}
+                  showRegion={true}
                   className="text-[12px] font-normal leading-[18px]"
                 />
               )}

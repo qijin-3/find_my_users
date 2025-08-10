@@ -125,7 +125,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
       {/* Breadcrumb navigation */}
-      <nav className="flex items-center text-sm text-gray-500 mb-6">
+      <nav className="flex items-center text-sm text-foreground mb-6">
         <Link href="/" className="group">
           <AnimatedText 
             text={locale === 'zh' ? '首页' : 'Home'}
@@ -175,13 +175,14 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             <div className="flex-1">
               <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
               
-              {/* 产品展示页和运行中状态标签 */}
+              {/* 产品展示页、运行中状态和地区标签 */}
               <div className="flex items-center gap-3 mb-4">
                 <SiteBadge 
-                  siteData={{ type: siteData.type, status: siteData.status }}
+                  siteData={{ type: siteData.type, status: siteData.status, region: siteData.region }}
                   locale={locale}
                   showType={true}
                   showStatus={true}
+                  showRegion={true}
                 />
               </div>
               

@@ -1,5 +1,118 @@
 # 修复记录
 
+## SiteBadge 类型 Badge 样式恢复原始设计 (2025-01-28)
+
+### 问题描述
+用户要求将 `SiteBadge` 组件中类型 Badge 的样式恢复为 shadcn/ui secondary variant 的原始样式，移除之前添加的自定义颜色覆盖。
+
+### 问题分析
+当前类型 Badge 使用了自定义的颜色样式：
+```typescript
+className="text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))] group-hover:opacity-90 transition-opacity"
+```
+
+这些自定义样式覆盖了 shadcn/ui Badge 组件 secondary variant 的原始设计，需要恢复为原始样式以保持设计系统的一致性。
+
+### 解决方案
+移除类型 Badge 中的自定义颜色样式，让 `variant="secondary"` 使用其原始的样式定义：
+- `border-transparent bg-secondary text-secondary-foreground`
+
+### 代码变更
+**文件**: `src/components/ui/site-badge.tsx`
+
+1. **SiteBadge 组件中的类型 Badge**：
+   ```typescript
+   // 修改前
+   className="text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))] group-hover:opacity-90 transition-opacity"
+   
+   // 修改后
+   className="text-[12px] font-normal leading-[18px] group-hover:opacity-90 transition-opacity"
+   ```
+
+2. **TypeBadge 组件**：
+   ```typescript
+   // 修改前
+   className={cn(
+     "text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]",
+     className
+   )}
+   
+   // 修改后
+   className={cn(
+     "text-[12px] font-normal leading-[18px]",
+     className
+   )}
+   ```
+
+### 技术要点
+1. **设计系统一致性**：使用 shadcn/ui 的原始 variant 样式，保持设计系统的一致性
+2. **主题适配**：secondary variant 会自动适配当前主题的颜色方案
+3. **样式简化**：移除冗余的自定义颜色定义，让组件更简洁
+4. **保持功能**：hover 动画和字体样式保持不变
+5. **向后兼容**：不影响其他 Badge（地区、状态）的样式
+
+### shadcn/ui Badge Secondary Variant 原始样式
+```typescript
+secondary: "border-transparent bg-secondary text-secondary-foreground"
+```
+
+### 验证结果
+- 类型 Badge 使用 secondary variant 的原始样式
+- 自动适配当前主题的颜色方案
+- 保持与设计系统的一致性
+- hover 动画效果正常工作
+- 地区和状态 Badge 的自定义样式不受影响
+
+### 影响范围
+此修改影响所有使用类型 Badge 的地方：
+- `SiteBadge` 组件中的类型显示
+- `TypeBadge` 独立组件
+- 首页资源卡片中的类型信息
+- 站点详情页面中的类型信息
+
+## SiteBadge 组件自动换行功能添加 (2025-01-28)
+
+### 问题描述
+用户要求在 `SiteBadge` 组件中增加一条规则：当所在容器宽度不够时，badge 应该自动换行，以确保在小屏幕或窄容器中能够正常显示所有 badge。
+
+### 问题分析
+当前 `SiteBadge` 组件使用 `flex items-center gap-2` 布局，所有 badge（类型、地区、状态）都在同一行显示。在容器宽度不足时，badge 可能会被截断或溢出容器，影响用户体验。
+
+### 解决方案
+在 `SiteBadge` 组件的容器 div 中添加 `flex-wrap` 类，使 badge 能够在容器宽度不足时自动换行到下一行。
+
+### 代码变更
+**文件**: `src/components/ui/site-badge.tsx`
+- **修改位置**: SiteBadge 组件的返回 JSX 中的容器 div
+- **修改内容**: 
+  ```typescript
+  // 修改前
+  <div className={cn("flex items-center gap-2 group transition-all duration-200", className)}>
+  
+  // 修改后
+  <div className={cn("flex items-center gap-2 flex-wrap group transition-all duration-200", className)}>
+  ```
+
+### 技术要点
+1. **Flexbox 换行**：使用 `flex-wrap` 类启用 Flexbox 的换行功能
+2. **保持对齐**：`items-center` 确保换行后的 badge 仍然垂直居中对齐
+3. **间距一致**：`gap-2` 确保 badge 之间的间距在换行前后保持一致
+4. **动画保持**：`group` 和 `transition-all` 类确保 hover 动画效果不受影响
+5. **向后兼容**：修改不影响现有的样式和功能
+
+### 验证结果
+- 在正常宽度容器中，badge 仍然在同一行显示
+- 在窄容器中，badge 能够自动换行到下一行
+- 换行后的 badge 保持正确的对齐和间距
+- hover 动画效果正常工作
+- 所有现有功能保持不变
+
+### 影响范围
+此修改影响所有使用 `SiteBadge` 组件的地方：
+- 首页资源卡片 (`ResourceCard.tsx`)
+- 站点详情页面 (`src/app/[locale]/site/[slug]/page.tsx`)
+- 站点列表页面等其他使用该组件的地方
+
 ## 站点卡片显示问题修复记录
 
 ### 问题描述
@@ -835,6 +948,129 @@ interface PostData {
 - 组件接口的统一性设计
 - 条件渲染的正确使用
 - 保持向后兼容性的重要性
+
+## 案例38：SiteBadge组件添加region地区badge支持
+
+### 问题描述
+用户要求在SiteBadge组件中增加一个region地区badge，用于显示站点的地区信息（国内/海外/全球）。
+
+### 分析
+- `site-fields.json`文件中已定义了region字段，包含domestic、overseas、global三种类型
+- 站点数据文件（如github.json）中已包含region字段
+- 需要在SiteBadge组件中添加对region字段的支持
+- 需要为不同地区类型设计合适的颜色和图标
+
+### 解决方案
+1. **扩展数据类型**：在SiteData接口中添加region字段
+2. **添加Props支持**：在SiteBadgeProps中添加showRegion参数
+3. **创建地区样式函数**：添加getRegionInfo函数，为不同地区提供颜色和图标
+4. **渲染地区Badge**：在组件中添加地区Badge的渲染逻辑
+5. **创建独立组件**：添加RegionBadge独立组件
+6. **更新使用处**：更新ResourceCard和站点详情页面中的SiteBadge使用
+
+### 代码变更
+**1. 扩展接口定义**：
+```typescript
+interface SiteData {
+  type?: string
+  status?: string
+  region?: string  // 新增
+}
+
+interface SiteBadgeProps {
+  siteData: SiteData
+  locale?: string
+  showType?: boolean
+  showStatus?: boolean
+  showRegion?: boolean  // 新增
+  className?: string
+}
+```
+
+**2. 添加地区样式函数**：
+```typescript
+function getRegionInfo(region: string) {
+  switch (region) {
+    case 'domestic':
+      return { 
+        color: 'bg-blue-100 text-blue-800 border-blue-200 hover:bg-blue-200', 
+        icon: MapPin 
+      }
+    case 'overseas':
+      return { 
+        color: 'bg-purple-100 text-purple-800 border-purple-200 hover:bg-purple-200', 
+        icon: MapPin 
+      }
+    case 'global':
+      return { 
+        color: 'bg-indigo-100 text-indigo-800 border-indigo-200 hover:bg-indigo-200', 
+        icon: Globe 
+      }
+    default:
+      return { 
+        color: 'bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200', 
+        icon: MapPin 
+      }
+  }
+}
+```
+
+**3. 添加地区Badge渲染**：
+```typescript
+{/* 地区Badge */}
+{showRegion && siteData.region && (
+  <Badge 
+    className={cn(
+      "text-[12px] font-normal leading-[18px] flex items-center gap-1 transition-colors",
+      getRegionInfo(siteData.region).color,
+      "group-hover:opacity-90"
+    )}
+  >
+    {(() => {
+      const RegionIcon = getRegionInfo(siteData.region).icon
+      return <RegionIcon size={12} />
+    })()}
+    {getRegionDisplayText(siteData.region)}
+  </Badge>
+)}
+```
+
+**4. 更新使用处**：
+```typescript
+// ResourceCard.tsx
+<SiteBadge 
+  siteData={{ type: resource.type, status: resource.status, region: resource.region }}
+  locale={locale}
+  showType={true}
+  showStatus={true}
+  showRegion={true}
+  className="text-[12px] font-normal leading-[18px]"
+/>
+
+// 站点详情页面
+<SiteBadge 
+  siteData={{ type: siteData.type, status: siteData.status, region: siteData.region }}
+  locale={locale}
+  showType={true}
+  showStatus={true}
+  showRegion={true}
+/>
+```
+
+### 验证结果
+- ✅ 成功添加region地区badge支持
+- ✅ 不同地区类型显示不同颜色和图标
+- ✅ ResourceCard和站点详情页面都正确显示三个badge
+- ✅ 支持多语言显示（国内/海外/全球）
+- ✅ 保持与现有badge的视觉一致性
+
+### 技术要点
+1. **接口扩展**：通过扩展TypeScript接口支持新字段
+2. **样式设计**：为不同地区类型设计区分度高的颜色方案
+3. **图标选择**：domestic/overseas使用MapPin，global使用Globe图标
+4. **组件复用**：创建RegionBadge独立组件支持单独使用
+5. **向后兼容**：showRegion默认为true，不影响现有使用
+6. **数据完整性**：确保站点数据文件包含region字段
 
 ## 案例37：站点详情页按钮添加AnimatedText hover效果
 

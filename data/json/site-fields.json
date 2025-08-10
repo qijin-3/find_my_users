@@ -59,6 +59,10 @@
     "overseas": {
       "zh": "海外",
       "en": "Overseas"
+    },
+    "global": {
+      "zh": "全球",
+      "en": "Global"
     }
   },
   "submitMethod": {
