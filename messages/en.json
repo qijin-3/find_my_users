@@ -25,6 +25,8 @@
     "title": "Sites",
     "description": "Explore our curated list of sites for web development, GitHub, and more.",
     "submitTool": "Submit Tool",
+    "visitWebsite": "Visit",
+    "submitProduct": "Submit",
     "categories": {
       "product-showcase": "Product Showcase",
       "tool-navigation": "Tool Navigation",

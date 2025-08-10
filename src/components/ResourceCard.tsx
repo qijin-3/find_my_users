@@ -4,7 +4,7 @@ import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { useFieldData } from '@/hooks/useFieldData'
+import { TypeBadge } from '@/components/ui/site-badge'
 
 /**
  * 资源对象类型定义
@@ -46,18 +46,6 @@ export default function ResourceCard({
   className = "",
   locale = 'zh'
 }: ResourceCardProps) {
-  const { getFieldDisplayText } = useFieldData(locale as 'zh' | 'en')
-
-  /**
-   * 获取分类显示名称
-   * @param {string} typeId - 类型ID
-   * @param {string} locale - 语言环境
-   * @returns {string} 分类显示名称
-   */
-  const getCategoryDisplayName = (typeId: string, locale: string): string => {
-    return getFieldDisplayText('type', typeId);
-  }
-
   /**
    * 获取网站缩略截图URL
    * @param {string} url - 网站URL
@@ -115,9 +103,11 @@ export default function ResourceCard({
             {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
             <div className="h-[auto] mt-0 mb-0 pb-0">
               {showCategory && resource.type && (
-                <Badge variant="secondary" className="text-[12px] font-normal leading-[18px] border-t-[rgb(var(--border))] border-b-[rgb(var(--border))] border-l-[rgb(var(--border))] border-r-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]">
-                  {getCategoryDisplayName(resource.type, locale)}
-                </Badge>
+                <TypeBadge 
+                  type={resource.type}
+                  locale={locale}
+                  className="text-[12px] font-normal leading-[18px]"
+                />
               )}
               
               {/* 其他标签区域 */}

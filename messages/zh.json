@@ -25,6 +25,8 @@
     "title": "站点",
     "description": "独立开发者工具站 | 全球产品必备工具资源源",
     "submitTool": "提交工具",
+    "visitWebsite": "访问官网",
+    "submitProduct": "提交产品",
     "categories": {
       "product-showcase": "产品展示页",
       "tool-navigation": "工具导航",

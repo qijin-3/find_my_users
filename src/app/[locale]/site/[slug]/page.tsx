@@ -2,12 +2,10 @@ import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
-import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight, Warning, WifiSlash } from '@phosphor-icons/react/dist/ssr'
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
+import { ArrowLeft, ArrowSquareOut, Globe, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import AnimatedText from '@/components/ui/animated-text'
+import SiteBadge from '@/components/ui/site-badge'
 import Image from 'next/image'
 
 // 类型定义
@@ -81,37 +79,7 @@ export async function generateMetadata({ params }: SitePageProps) {
   }
 }
 
-/**
- * 获取状态翻译文本
- * @param {string} status - 站点状态
- * @param {string} locale - 语言
- * @returns {Promise<string>} 翻译后的状态文本
- */
-async function getStatusText(status: string, locale: string): Promise<string> {
-  return await getFieldDisplayText('status', status, locale as 'zh' | 'en')
-}
 
-/**
- * 获取状态对应的颜色和图标
- * @param {string} status - 站点状态
- * @returns {Object} 包含颜色和图标的对象
- */
-function getStatusInfo(status: string) {
-  switch (status) {
-    case 'running':
-      return { color: 'bg-green-100 text-green-800', icon: CheckCircle };
-    case 'suspected_unmaintained':
-      return { color: 'bg-yellow-100 text-yellow-800', icon: Clock };
-    case 'confirmed_unmaintained':
-      return { color: 'bg-orange-100 text-orange-800', icon: Warning };
-    case 'temporarily_unavailable':
-      return { color: 'bg-blue-100 text-blue-800', icon: WifiSlash };
-    case 'stopped':
-      return { color: 'bg-red-100 text-red-800', icon: XCircle };
-    default:
-      return { color: 'bg-gray-100 text-gray-800', icon: Globe };
-  }
-}
 
 /**
  * 获取网站缩略截图URL
@@ -152,9 +120,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
     notFound()
   }
 
-  const statusInfo = getStatusInfo(siteData.status)
-  const StatusIcon = statusInfo.icon
-  const statusText = await getStatusText(siteData.status, locale)
+
 
   return (
     <article className="container mx-auto px-4 py-12 max-w-3xl">
@@ -163,7 +129,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <Link href="/" className="group">
           <AnimatedText 
             text={locale === 'zh' ? '首页' : 'Home'}
-            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            className="text-muted-foreground"
             animateOnHover={true}
             autoPlay={false}
             stagger={30}
@@ -175,7 +141,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <Link href="/site" className="group">
           <AnimatedText 
             text={t('title')}
-            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            className="text-muted-foreground"
             animateOnHover={true}
             autoPlay={false}
             stagger={30}
@@ -192,7 +158,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <div className="flex items-start gap-4 h-full">
           {/* 网站截图 */}
           <div className="flex-shrink-0 h-full w-1/2">
-            <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-card">
               <Image
                 src={getWebsiteScreenshotUrl(siteData.url)}
                 alt={`${siteData.name} screenshot`}
@@ -211,13 +177,12 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
               
               {/* 产品展示页和运行中状态标签 */}
               <div className="flex items-center gap-3 mb-4">
-                <Badge variant="secondary" className="text-[12px] font-normal">
-                  {locale === 'zh' ? '产品展示页' : 'Product Showcase'}
-                </Badge>
-                <Badge className={statusInfo.color}>
-                  <StatusIcon size={14} className="mr-1" />
-                  {statusText}
-                </Badge>
+                <SiteBadge 
+                  siteData={{ type: siteData.type, status: siteData.status }}
+                  locale={locale}
+                  showType={true}
+                  showStatus={true}
+                />
               </div>
               
               <p className="text-muted-foreground mb-4">{siteData.description}</p>
@@ -232,7 +197,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm"
               >
                 <Globe size={16} />
-                {locale === 'zh' ? '访问官网' : 'Visit Website'}
+                {t('visitWebsite')}
               </a>
               <a 
                 href={siteData.submitUrl} 
@@ -241,7 +206,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
               >
                 <ArrowSquareOut size={16} />
-                {locale === 'zh' ? '提交产品' : 'Submit Product'}
+                {t('submitProduct')}
               </a>
             </div>
           </div>
@@ -272,10 +237,10 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       {/* Back to site list link */}
       <div className="mt-12">
         <Link href="/site" className="group inline-flex items-center gap-2">
-          <ArrowLeft size={20} className="text-muted-foreground group-hover:text-muted-foreground transition-colors" />
+          <ArrowLeft size={20} className="text-muted-foreground" />
           <AnimatedText 
             text={locale === 'zh' ? '返回站点列表' : 'Back to site list'}
-            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            className="text-muted-foreground"
             animateOnHover={true}
             autoPlay={false}
             stagger={30}

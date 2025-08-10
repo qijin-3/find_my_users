@@ -125,10 +125,10 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm transition-colors ${
+                      className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm ${
                         isSelected 
                           ? 'border-2 border-text-dark text-foreground bg-muted rounded-[12px]' 
-                          : 'text-muted-foreground hover:bg-muted rounded-[12px]'
+                          : 'text-muted-foreground rounded-[12px]'
                       }`}
                       style={{
                         // 确保按钮内容能够正常进行transform动画
