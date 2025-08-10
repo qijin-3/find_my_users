@@ -24,7 +24,7 @@ export function Navigation() {
 
   return (
     <header className="sticky top-6 z-40 w-full">
-      <div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105">
+      <div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-3">
             <Image 
@@ -32,13 +32,14 @@ export function Navigation() {
               alt="FindMyUsers Logo" 
               width={40} 
               height={40}
-              className="h-10 w-auto"
+              className="h-10 w-auto group"
             />
             <AnimatedText
               text="FindMyUsers"
               className="inline-block font-bold w-[auto] text-[24px]"
-              autoPlay={true}
-              animateOnHover={true}
+              autoPlay={false}
+              animateOnHover={false}
+              useGroupHover={true}
               stagger={80}
               duration={0.2}
               yOffset={-4}

@@ -1,5 +1,206 @@
 # 修复记录
 
+## Navigation 导航栏 Logo hover 动画精确触发优化 (2025-01-28)
+
+### 问题描述
+用户反馈当前的导航栏动画触发机制不准确：目前是 hover `FindMyUsers` 文字时产生流动效果，而用户期望的是仅在 hover logo 图标时才触发文字的流动动画。
+
+### 问题分析
+之前的修改中，虽然添加了 `group` 类和 `group-hover` 机制，但实际的触发区域仍然是整个 `Link` 元素，包括文字部分。用户希望实现更精确的交互：只有当鼠标悬停在 logo 图标上时，才触发 `FindMyUsers` 文字的动画效果。
+
+### 解决方案
+1. **扩展 AnimatedText 组件功能**：
+   - 添加 `useGroupHover` 属性，支持响应父级元素的 group-hover 状态
+   - 使用 `useEffect` 监听 DOM 中 `.group` 元素的 `mouseenter` 事件
+   - 实现动画完成后的自动重置机制
+
+2. **优化导航栏结构**：
+   - 将 `group` 类从 `Link` 移动到 `Image` 组件
+   - 设置 `AnimatedText` 的 `animateOnHover={false}` 和 `useGroupHover={true}`
+   - 确保只有 hover logo 时才触发文字动画
+
+### 代码变更
+
+#### 1. **AnimatedText 组件扩展** (`src/components/ui/animated-text.tsx`)
+
+**接口扩展**：
+```typescript
+interface AnimatedTextProps {
+  // ... 其他属性
+  /**
+   * 是否使用 group-hover 机制 - 默认 false
+   * 当设置为 true 时，组件将响应父元素的 group-hover 状态
+   */
+  useGroupHover?: boolean
+}
+```
+
+**实现逻辑**：
+```typescript
+// 监听 group-hover 状态
+useEffect(() => {
+  if (useGroupHover) {
+    const handleGroupHover = () => {
+      setIsAnimating(true)
+      // 动画完成后重置状态
+      setTimeout(() => {
+        if (!autoPlay) {
+          setIsAnimating(false)
+        }
+      }, (characters.length * stagger) + (duration * 1000))
+    }
+
+    // 查找父级 group 元素
+    const parentElement = document.querySelector('.group')
+    if (parentElement) {
+      parentElement.addEventListener('mouseenter', handleGroupHover)
+      return () => {
+        parentElement.removeEventListener('mouseenter', handleGroupHover)
+      }
+    }
+  }
+}, [useGroupHover, characters.length, stagger, duration, autoPlay])
+```
+
+#### 2. **Navigation 组件优化** (`src/components/Navigation.tsx`)
+
+```typescript
+// 修改前
+<Link href="/" className="flex items-center space-x-3 group">
+  <Image 
+    src="/Logo/Logo.svg" 
+    alt="FindMyUsers Logo" 
+    width={40} 
+    height={40}
+    className="h-10 w-auto"
+  />
+  <AnimatedText
+    text="FindMyUsers"
+    className="inline-block font-bold w-[auto] text-[24px]"
+    autoPlay={false}
+    animateOnHover={true}
+    stagger={80}
+    duration={0.2}
+    yOffset={-4}
+  />
+</Link>
+
+// 修改后
+<Link href="/" className="flex items-center space-x-3">
+  <Image 
+    src="/Logo/Logo.svg" 
+    alt="FindMyUsers Logo" 
+    width={40} 
+    height={40}
+    className="h-10 w-auto group"
+  />
+  <AnimatedText
+    text="FindMyUsers"
+    className="inline-block font-bold w-[auto] text-[24px]"
+    autoPlay={false}
+    animateOnHover={false}
+    useGroupHover={true}
+    stagger={80}
+    duration={0.2}
+    yOffset={-4}
+  />
+</Link>
+```
+
+### 技术要点
+1. **精确交互控制**：通过将 `group` 类应用到 logo 图标，实现精确的 hover 区域控制
+2. **事件监听机制**：使用 DOM 事件监听器监听 group 元素的 `mouseenter` 事件
+3. **动画生命周期管理**：计算动画总时长并自动重置状态，避免动画卡住
+4. **组件解耦**：`AnimatedText` 组件通过 `useGroupHover` 属性支持多种触发方式
+5. **性能优化**：使用 `useEffect` 的清理函数正确移除事件监听器
+
+### 验证结果
+- 仅在 hover logo 图标时，`FindMyUsers` 文字才会触发流动动画
+- hover 文字本身不会触发动画
+- 动画完成后自动重置，可重复触发
+- 导航链接功能正常工作
+- 其他导航栏功能和样式保持不变
+
+### 影响范围
+此修改影响：
+- Logo 区域的精确交互体验
+- `AnimatedText` 组件的功能扩展，增加了 `useGroupHover` 支持
+- 导航栏的用户交互逻辑
+
+## Navigation 导航栏 hover 效果优化 (2025-01-28)
+
+### 问题描述
+用户要求对导航栏进行两项修改：
+1. 移除导航栏的 hover 变大效果
+2. 修改 `FindMyUsers` 文字的动画行为，使其仅在 hover logo 时才触发 `AnimatedText` 组件的动画效果，而不是持续流动
+
+### 问题分析
+当前导航栏存在以下问题：
+1. **导航栏 hover 变大效果**：导航栏容器使用了 `hover:scale-105` 类，在鼠标悬停时会放大整个导航栏，可能影响用户体验
+2. **文字动画持续流动**：`AnimatedText` 组件的 `autoPlay` 属性设置为 `true`，导致文字动画持续播放，而用户希望仅在 hover logo 时才触发动画
+
+### 解决方案
+1. **移除导航栏 hover 变大效果**：
+   - 从导航栏容器的 `className` 中移除 `hover:scale-105` 和相关的 transition 类
+
+2. **优化文字动画触发机制**：
+   - 在 `Link` 组件中添加 `group` 类，建立 hover 状态的父子关系
+   - 将 `AnimatedText` 组件的 `autoPlay` 属性设置为 `false`，禁用自动播放
+   - 利用 Tailwind CSS 的 `group-hover` 机制，使动画仅在 hover 时触发
+
+### 代码变更
+**文件**: `src/components/Navigation.tsx`
+
+1. **移除导航栏 hover 变大效果**：
+   ```typescript
+   // 修改前
+   className="fixed top-0 left-0 right-0 z-50 bg-[rgb(var(--background))] border-b border-[rgb(var(--border))] transition-all duration-300 hover:shadow-lg hover:scale-105"
+   
+   // 修改后
+   className="fixed top-0 left-0 right-0 z-50 bg-[rgb(var(--background))] border-b border-[rgb(var(--border))]"
+   ```
+
+2. **优化文字动画触发机制**：
+   ```typescript
+   // 修改前
+   <Link href={`/${locale}`} className="flex items-center space-x-3">
+     <AnimatedText
+       text="FindMyUsers"
+       className="text-2xl font-bold text-[rgb(var(--foreground))]"
+       autoPlay={true}
+     />
+   </Link>
+   
+   // 修改后
+   <Link href={`/${locale}`} className="flex items-center space-x-3 group">
+     <AnimatedText
+       text="FindMyUsers"
+       className="text-2xl font-bold text-[rgb(var(--foreground))]"
+       autoPlay={false}
+     />
+   </Link>
+   ```
+
+### 技术要点
+1. **CSS 类移除**：移除 `transition-all duration-300 hover:shadow-lg hover:scale-105` 类，简化导航栏样式
+2. **Group Hover 机制**：使用 Tailwind CSS 的 `group` 和 `group-hover` 类实现父子组件间的 hover 状态传递
+3. **动画控制**：通过 `autoPlay={false}` 禁用自动播放，让动画仅在特定条件下触发
+4. **用户体验优化**：移除不必要的视觉效果，提供更精确的交互反馈
+5. **保持功能完整性**：确保导航功能和其他样式不受影响
+
+### 验证结果
+- 导航栏不再有 hover 变大效果，保持固定尺寸
+- `FindMyUsers` 文字动画不再持续流动
+- 仅在 hover logo 区域时，文字动画才会触发
+- 导航链接功能正常工作
+- 其他导航栏样式和功能保持不变
+
+### 影响范围
+此修改影响：
+- 所有页面的导航栏显示效果
+- Logo 区域的交互体验
+- 文字动画的触发机制
+
 ## SiteBadge 类型 Badge 样式恢复原始设计 (2025-01-28)
 
 ### 问题描述

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { CSSProperties, useState } from 'react'
+import { CSSProperties, useState, useEffect } from 'react'
 
 interface AnimatedTextProps {
   /**
@@ -40,6 +40,11 @@ interface AnimatedTextProps {
    * 是否在mount时自动播放动画 - 默认 false
    */
   autoPlay?: boolean
+  /**
+   * 是否使用 group-hover 机制 - 默认 false
+   * 当设置为 true 时，组件将响应父元素的 group-hover 状态
+   */
+  useGroupHover?: boolean
 }
 
 /**
@@ -86,19 +91,44 @@ const AnimatedText = ({
   ease = 'easeOut',
   animateOnHover = true,
   autoPlay = false,
+  useGroupHover = false,
 }: AnimatedTextProps) => {
   // 将文本分割为字符数组，保留空格
   const characters = text.split('')
   const [isAnimating, setIsAnimating] = useState(autoPlay)
 
+  // 监听 group-hover 状态
+  useEffect(() => {
+    if (useGroupHover) {
+      const handleGroupHover = () => {
+        setIsAnimating(true)
+        // 动画完成后重置状态
+        setTimeout(() => {
+          if (!autoPlay) {
+            setIsAnimating(false)
+          }
+        }, (characters.length * stagger) + (duration * 1000))
+      }
+
+      // 查找父级 group 元素
+      const parentElement = document.querySelector('.group')
+      if (parentElement) {
+        parentElement.addEventListener('mouseenter', handleGroupHover)
+        return () => {
+          parentElement.removeEventListener('mouseenter', handleGroupHover)
+        }
+      }
+    }
+  }, [useGroupHover, characters.length, stagger, duration, autoPlay])
+
   const handleMouseEnter = () => {
-    if (animateOnHover) {
+    if (animateOnHover && !useGroupHover) {
       setIsAnimating(true)
     }
   }
 
   const handleMouseLeave = () => {
-    if (animateOnHover && !autoPlay) {
+    if (animateOnHover && !autoPlay && !useGroupHover) {
       setIsAnimating(false)
     }
   }
