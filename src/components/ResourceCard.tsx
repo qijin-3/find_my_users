@@ -3,8 +3,7 @@
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { TypeBadge } from '@/components/ui/site-badge'
+import SiteBadge from '@/components/ui/site-badge'
 
 /**
  * 资源对象类型定义
@@ -103,9 +102,11 @@ export default function ResourceCard({
             {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
             <div className="h-[auto] mt-0 mb-0 pb-0">
               {showCategory && resource.type && (
-                <TypeBadge 
-                  type={resource.type}
+                <SiteBadge 
+                  siteData={{ type: resource.type, status: resource.status }}
                   locale={locale}
+                  showType={true}
+                  showStatus={true}
                   className="text-[12px] font-normal leading-[18px]"
                 />
               )}
@@ -114,9 +115,14 @@ export default function ResourceCard({
               {resource.tags && resource.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 mt-2 text-muted-foreground">
                   {resource.tags.slice(0, 2).map((tag, index) => (
-                    <Badge key={index} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
+                    <SiteBadge 
+                      key={index}
+                      siteData={{ type: tag }}
+                      locale={locale}
+                      showType={true}
+                      showStatus={false}
+                      className="text-xs"
+                    />
                   ))}
                 </div>
               )}

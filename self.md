@@ -744,6 +744,209 @@ interface PostData {
 - 保持响应式设计，确保在不同屏幕尺寸下都能正常显示
 - 合理安排信息层级，提升用户阅读体验
 
+## 案例32：优化SiteBadge组件的hover效果统一性
+
+### 问题描述
+用户要求修改SiteBadge组件中div容器的hover效果，使其与内部badge的hover效果保持一致，提升用户交互体验。
+
+### 分析
+1. 原有实现中，div容器没有hover效果，只有内部的badge有独立的hover效果
+2. 需要为div容器添加group hover效果，统一管理内部元素的hover状态
+3. 保持与现有设计系统的一致性，使用合适的过渡动画
+
+### 解决方案
+1. **添加group hover类**：为div容器添加`group`类和过渡动画
+2. **统一hover效果**：使用`group-hover:`前缀统一管理内部元素的hover状态
+3. **保持设计一致性**：使用项目中已有的颜色变量和过渡效果
+
+### 代码变更
+
+#### 更新SiteBadge组件 (`/src/components/ui/site-badge.tsx`)
+```tsx
+// 修改div容器，添加group hover效果
+<div className={cn("flex items-center gap-2 group transition-all duration-200", className)}>
+  {/* 类型Badge - 添加group-hover效果 */}
+  {showType && siteData.type && (
+    <Badge 
+      variant="secondary" 
+      className="text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))] group-hover:bg-[rgb(var(--muted))] transition-colors"
+    >
+      {getTypeDisplayText(siteData.type)}
+    </Badge>
+  )}
+  
+  {/* 状态Badge - 添加group-hover透明度效果 */}
+  {showStatus && siteData.status && (
+    <Badge 
+      className={cn(
+        "text-[12px] font-normal leading-[18px] flex items-center gap-1 transition-colors",
+        getStatusInfo(siteData.status).color,
+        "group-hover:opacity-90"
+      )}
+    >
+      <StatusIcon size={12} />
+      {getStatusDisplayText(siteData.status)}
+    </Badge>
+  )}
+</div>
+```
+
+### 验证结果
+1. ✅ div容器hover时，内部badge统一响应
+2. ✅ 类型badge在hover时背景色变化为muted色
+3. ✅ 状态badge在hover时透明度降低到90%
+4. ✅ 过渡动画流畅，用户体验良好
+5. ✅ 保持与项目设计系统的一致性
+
+### 技术要点
+1. **Group Hover模式**：使用Tailwind的group hover功能统一管理子元素状态
+2. **过渡动画**：添加`transition-all duration-200`提供流畅的hover效果
+3. **颜色一致性**：使用项目中定义的CSS变量保持设计统一
+4. **渐进增强**：hover效果不影响基础功能，提升用户体验
+5. **性能优化**：使用CSS过渡而非JavaScript动画，性能更佳
+
+## 案例34：ResourceCard组件使用SiteBadge替换TypeBadge
+
+### 问题描述
+用户要求将ResourceCard组件中的TypeBadge替换为完整的SiteBadge组件，以保持组件使用的一致性。
+
+### 分析
+- ResourceCard组件当前使用TypeBadge显示资源类型
+- 需要替换为SiteBadge组件以保持项目中badge组件的统一性
+- 需要调整传参方式，使用siteData对象格式
+
+### 解决方案
+1. 更新导入语句，从TypeBadge改为SiteBadge
+2. 修改组件使用方式，传入siteData对象
+3. 设置showType为true，showStatus为false，只显示类型信息
+
+### 代码变更
+- `ResourceCard.tsx`：
+  - 导入：`import SiteBadge from '@/components/ui/site-badge'`
+  - 组件使用：传入`siteData={{ type: resource.type, status: resource.status }}`
+  - 配置：`showType={true}` 和 `showStatus={false}`
+
+### 验证结果
+- 组件正常渲染，显示类型badge
+- 保持了原有的视觉效果
+- 统一了项目中badge组件的使用方式
+
+### 技术要点
+- 组件接口的统一性设计
+- 条件渲染的正确使用
+- 保持向后兼容性的重要性
+
+## 案例36：SiteBadge双badge显示修复
+
+### 问题描述
+ResourceCard组件中的SiteBadge只显示了一个badge，没有显示type和status两个badge。
+
+### 分析
+- SiteBadge组件设计为可以同时显示type和status两个badge
+- ResourceCard中的showStatus设置为false，导致只显示type badge
+- 站点数据中包含status字段，应该同时显示两个badge
+
+### 解决方案
+1. 将ResourceCard中SiteBadge的showStatus参数从false改为true
+2. 确保站点数据包含status字段
+3. 验证两个badge都能正常显示
+
+### 代码变更
+```typescript
+// ResourceCard.tsx中的修改
+<SiteBadge 
+  siteData={{ type: resource.type, status: resource.status }}
+  locale={locale}
+  showType={true}
+  showStatus={true}  // 从false改为true
+  className="text-[12px] font-normal leading-[18px]"
+/>
+```
+
+### 验证结果
+- 成功显示type和status两个badge
+- 站点详情页面正常显示双badge
+- 保持一致的视觉效果和交互体验
+
+### 技术要点
+- 条件渲染控制：通过showType和showStatus参数控制badge显示
+- 数据完整性：确保传入的siteData包含必要的字段
+- 组件复用：SiteBadge组件支持灵活的显示配置
+- 视觉一致性：保持与站点详情页面的显示效果一致
+
+## 案例35：ResourceCard组件Badge完全统一化
+
+### 问题描述
+ResourceCard组件中仍有部分Badge组件未替换为SiteBadge，需要完全统一化。
+
+### 分析
+- ResourceCard.tsx和resourcecard.tsx两个文件都存在Badge组件
+- tags标签区域仍使用原始Badge组件
+- 需要移除对@/components/ui/badge的依赖
+
+### 解决方案
+1. 移除对Badge组件的导入
+2. 将tags区域的Badge组件替换为SiteBadge
+3. 确保两个文件都完成统一化
+
+### 代码变更
+```typescript
+// 移除Badge导入
+// import { Badge } from '@/components/ui/badge'
+
+// tags区域Badge替换
+{resource.tags.slice(0, 2).map((tag, index) => (
+  <SiteBadge 
+    key={index}
+    siteData={{ type: tag }}
+    locale={locale}
+    showType={true}
+    showStatus={false}
+    className="text-xs"
+  />
+))}
+```
+
+### 验证结果
+- 成功移除所有Badge组件依赖
+- SiteBadge组件正常渲染tags标签
+- 保持一致的视觉风格和交互体验
+
+### 技术要点
+- 完全统一化：所有badge相关组件都使用SiteBadge
+- 依赖清理：移除不必要的组件导入
+- 一致性设计：确保所有标签使用相同的设计系统
+- 可维护性：统一的组件接口便于后续维护和扩展
+
+## 案例33：类型Badge hover效果调整
+
+### 问题描述
+用户要求修改类型Badge的hover样式，希望hover后文字和背景颜色都不变，只是透明度变为90%。
+
+### 分析
+- 原有实现使用`group-hover:bg-muted`改变背景颜色
+- 用户希望保持原有颜色，只改变透明度
+- 需要将hover效果从颜色变化改为透明度变化
+
+### 解决方案
+1. 将`group-hover:bg-muted transition-colors`替换为`group-hover:opacity-90 transition-opacity`
+2. 保持原有的背景色和文字颜色不变
+3. 使用opacity属性实现透明度变化效果
+
+### 代码变更
+- `site-badge.tsx`第103-106行：
+  - 将`group-hover:bg-muted transition-colors`改为`group-hover:opacity-90 transition-opacity`
+
+### 验证结果
+- hover时透明度正确变为90%
+- 背景色和文字颜色保持不变
+- 过渡动画流畅自然
+
+### 技术要点
+- CSS opacity属性的使用
+- transition-opacity过渡动画
+- 保持颜色一致性的重要性
+
 ## 案例28：修复Meta卡片高度布局问题
 
 ### 问题描述

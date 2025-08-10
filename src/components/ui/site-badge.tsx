@@ -97,12 +97,12 @@ export default function SiteBadge({
   }
 
   return (
-    <div className={cn("flex items-center gap-2", className)}>
+    <div className={cn("flex items-center gap-2 group transition-all duration-200", className)}>
       {/* 类型Badge */}
       {showType && siteData.type && (
         <Badge 
           variant="secondary" 
-          className="text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))]"
+          className="text-[12px] font-normal leading-[18px] border-[rgb(var(--border))] bg-[rgb(var(--border))] text-[rgb(var(--card-text-white))] group-hover:opacity-90 transition-opacity"
         >
           {getTypeDisplayText(siteData.type)}
         </Badge>
@@ -113,7 +113,8 @@ export default function SiteBadge({
         <Badge 
           className={cn(
             "text-[12px] font-normal leading-[18px] flex items-center gap-1 transition-colors",
-            getStatusInfo(siteData.status).color
+            getStatusInfo(siteData.status).color,
+            "group-hover:opacity-90"
           )}
         >
           {(() => {
