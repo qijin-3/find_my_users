@@ -6,7 +6,9 @@ import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
 import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight, Warning, WifiSlash } from '@phosphor-icons/react/dist/ssr'
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import AnimatedText from '@/components/ui/animated-text'
+import Image from 'next/image'
 
 // 类型定义
 interface Resource {
@@ -112,6 +114,24 @@ function getStatusInfo(status: string) {
 }
 
 /**
+ * 获取网站缩略截图URL
+ * @param {string} url - 网站URL
+ * @returns {string} 缩略截图URL
+ */
+function getWebsiteScreenshotUrl(url: string): string {
+  try {
+    // 使用 WordPress.com 的 mshots 服务获取网站截图
+    // 这是一个稳定且免费的服务，被广泛使用
+    const encodedUrl = encodeURIComponent(url)
+    // 设置合适的宽度和高度，适配详情页布局
+    return `https://s0.wp.com/mshots/v1/${encodedUrl}?w=800&h=600`
+  } catch {
+    // 如果URL无效，返回默认图片
+    return '/next.svg' // 使用项目中的默认图片
+  }
+}
+
+/**
  * 站点详情页面组件
  * @param {Object} params - 路由参数
  * @returns {JSX.Element} 站点详情页面
@@ -168,73 +188,63 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       </nav>
       
       {/* Meta information card */}
-      <div className="bg-card rounded-[24px] p-6 mb-12 border-2">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
-            <p className="text-gray-600 mb-2">{siteData.description}</p>
+      <div className="bg-card rounded-[24px] p-6 mb-12 border-2 h-80">
+        <div className="flex items-start gap-4 h-full">
+          {/* 网站截图 */}
+          <div className="flex-shrink-0 h-full w-1/2">
+            <div className="w-full h-full rounded-lg overflow-hidden bg-gray-100">
+              <Image
+                src={getWebsiteScreenshotUrl(siteData.url)}
+                alt={`${siteData.name} screenshot`}
+                width={400}
+                height={268}
+                className="w-full h-full object-cover"
+                unoptimized
+              />
+            </div>
           </div>
-          <Badge className={statusInfo.color}>
-            <StatusIcon size={14} className="mr-1" />
-            {statusText}
-          </Badge>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '站点类型：' : 'Site Type:'}
-            </span>
-            <span className="text-gray-600">{await getFieldDisplayText('type', siteData.type, locale as 'zh' | 'en')}</span>
+          
+          {/* 内容区域 */}
+          <div className="flex-1 flex flex-col h-full">
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
+              
+              {/* 产品展示页和运行中状态标签 */}
+              <div className="flex items-center gap-3 mb-4">
+                <Badge variant="secondary" className="text-[12px] font-normal">
+                  {locale === 'zh' ? '产品展示页' : 'Product Showcase'}
+                </Badge>
+                <Badge className={statusInfo.color}>
+                  <StatusIcon size={14} className="mr-1" />
+                  {statusText}
+                </Badge>
+              </div>
+              
+              <p className="text-muted-foreground mb-4">{siteData.description}</p>
+            </div>
+            
+            {/* 访问官网和提交产品按钮 - 置底显示 */}
+            <div className="flex items-center gap-3 mt-auto">
+              <a 
+                href={siteData.url} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm"
+              >
+                <Globe size={16} />
+                {locale === 'zh' ? '访问官网' : 'Visit Website'}
+              </a>
+              <a 
+                href={siteData.submitUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm"
+              >
+                <ArrowSquareOut size={16} />
+                {locale === 'zh' ? '提交产品' : 'Submit Product'}
+              </a>
+            </div>
           </div>
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '适合地区：' : 'Suitable Region:'}
-            </span>
-            <span className="text-gray-600">{await getFieldDisplayText('region', siteData.region, locale as 'zh' | 'en')}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '递交方式：' : 'Submit Method:'}
-            </span>
-            <span className="text-gray-600">{await getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '审核：' : 'Review:'}
-            </span>
-            <span className="text-gray-600">
-              {siteData.review === 'Y' 
-                ? (locale === 'zh' ? '需要审核' : 'Required') 
-                : (locale === 'zh' ? '无需审核' : 'Not Required')
-              }
-            </span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '审核耗时：' : 'Review Time:'}
-            </span>
-            <span className="text-gray-600">{await getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-700">
-              {locale === 'zh' ? '预计曝光（周）：' : 'Expected Exposure (weeks):'}
-            </span>
-            <span className="text-gray-600">{await getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}</span>
-          </div>
-        </div>
-        
-        <div className="mt-4 pt-4 border-t border-gray-200">
-          <a 
-            href={siteData.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors"
-          >
-            <Globe size={16} />
-            {locale === 'zh' ? '访问官网' : 'Visit Website'}
-            <ArrowSquareOut size={14} />
-          </a>
         </div>
       </div>
 
