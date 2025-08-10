@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
+import { ArrowLeft, CaretRight, Clock, CalendarBlank } from '@phosphor-icons/react/dist/ssr'
 import { remark } from 'remark'
 import html from 'remark-html'
 import { getI18nArticleMeta } from '@/lib/i18n-data'
@@ -139,18 +139,20 @@ export default async function PostPage({ params }: PostPageProps) {
       
       {/* Meta information card */}
       <div className="bg-card rounded-[24px] p-6 mb-12 border-2">
+        {meta.description && (
+          <p className="text-[16px] text-foreground mb-4">{meta.description}</p>
+        )}
         {meta.lastModified && (
-          <p className="text-[14px] text-muted-foreground mb-2">
-            {t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}
-          </p>
+          <div className="flex items-center gap-2 text-[14px] text-muted-foreground mb-2">
+            <Clock size={16} />
+            <span>{t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}</span>
+          </div>
         )}
         {meta.date && (
-          <p className="text-[14px] text-muted-foreground mb-2">
-            {t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}
-          </p>
-        )}
-        {meta.description && (
-          <p className="text-[16px] text-foreground">{meta.description}</p>
+          <div className="flex items-center gap-2 text-[14px] text-muted-foreground mb-2">
+            <CalendarBlank size={16} />
+            <span>{t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}</span>
+          </div>
         )}
         {postData.locale !== locale && (
           <p className="text-destructive text-sm mt-2">

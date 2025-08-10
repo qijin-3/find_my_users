@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
 import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight } from '@phosphor-icons/react/dist/ssr'
+import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight, Warning, WifiSlash } from '@phosphor-icons/react/dist/ssr'
 import { Badge } from "@/components/ui/badge"
+import AnimatedText from '@/components/ui/animated-text'
 
 // 类型定义
 interface Resource {
@@ -99,6 +100,10 @@ function getStatusInfo(status: string) {
       return { color: 'bg-green-100 text-green-800', icon: CheckCircle };
     case 'suspected_unmaintained':
       return { color: 'bg-yellow-100 text-yellow-800', icon: Clock };
+    case 'confirmed_unmaintained':
+      return { color: 'bg-orange-100 text-orange-800', icon: Warning };
+    case 'temporarily_unavailable':
+      return { color: 'bg-blue-100 text-blue-800', icon: WifiSlash };
     case 'stopped':
       return { color: 'bg-red-100 text-red-800', icon: XCircle };
     default:
@@ -135,19 +140,35 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
     <article className="container mx-auto px-4 py-12 max-w-3xl">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:text-blue-600">
-          {locale === 'zh' ? '首页' : 'Home'}
+        <Link href="/" className="group">
+          <AnimatedText 
+            text={locale === 'zh' ? '首页' : 'Home'}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
         </Link>
         <CaretRight className="mx-2" size={16} />
-        <Link href="/site" className="hover:text-blue-600">
-          {t('title')}
+        <Link href="/site" className="group">
+          <AnimatedText 
+            text={t('title')}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
         </Link>
         <CaretRight className="mx-2" size={16} />
-        <span className="text-gray-900">{siteData.name}</span>
+        <span className="text-foreground">{siteData.name}</span>
       </nav>
       
       {/* Meta information card */}
-      <div className="bg-gray-100 rounded-lg p-6 mb-8">
+      <div className="bg-card rounded-[24px] p-6 mb-12 border-2">
         <div className="flex items-start justify-between mb-4">
           <div>
             <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
@@ -240,9 +261,17 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       
       {/* Back to site list link */}
       <div className="mt-12">
-        <Link href="/site" className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
-          <ArrowLeft size={20} />
-          {locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+        <Link href="/site" className="group inline-flex items-center gap-2">
+          <ArrowLeft size={20} className="text-muted-foreground group-hover:text-muted-foreground transition-colors" />
+          <AnimatedText 
+            text={locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+            className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+            animateOnHover={true}
+            autoPlay={false}
+            stagger={30}
+            duration={0.15}
+            yOffset={-2}
+          />
         </Link>
       </div>
     </article>

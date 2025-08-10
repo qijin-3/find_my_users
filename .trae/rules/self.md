@@ -143,7 +143,86 @@
 - 将函数改为异步函数以正确处理 Promise
 
 
-# 案例17：文章详情页多语言文本维护优化
+# 案例18：文章详情页Meta信息布局和图标优化
+
+## 问题描述
+用户要求对文章详情页的Meta信息卡片进行布局调整：
+1. 将Last modified和Published on信息移动到description的下方
+2. 为Last modified和Published on添加对应的phosphor图标
+
+## 解决方案
+1. 重新排列Meta信息卡片中的内容顺序，将description放在最上方
+2. 导入Clock和CalendarBlank图标用于时间信息显示
+3. 将原来的p标签改为div标签，使用flex布局来排列图标和文本
+4. 为description添加底部间距，与时间信息区分开
+
+## 代码变更
+
+### phosphor-icons导入修改
+```tsx
+// 修改前
+import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
+
+// 修改后
+import { ArrowLeft, CaretRight, Clock, CalendarBlank } from '@phosphor-icons/react/dist/ssr'
+```
+
+### Meta信息卡片布局调整
+```tsx
+// 修改前的顺序：lastModified -> date -> description
+{meta.lastModified && (
+  <p className="text-[14px] text-muted-foreground mb-2">
+    {t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}
+  </p>
+)}
+{meta.date && (
+  <p className="text-[14px] text-muted-foreground mb-2">
+    {t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}
+  </p>
+)}
+{meta.description && (
+  <p className="text-[16px] text-foreground">{meta.description}</p>
+)}
+
+// 修改后的顺序：description -> lastModified -> date
+{meta.description && (
+  <p className="text-[16px] text-foreground mb-4">{meta.description}</p>
+)}
+{meta.lastModified && (
+  <div className="flex items-center gap-2 text-[14px] text-muted-foreground mb-2">
+    <Clock size={16} />
+    <span>{t('lastModified')}: {new Date(meta.lastModified).toLocaleDateString()}</span>
+  </div>
+)}
+{meta.date && (
+  <div className="flex items-center gap-2 text-[14px] text-muted-foreground mb-2">
+    <CalendarBlank size={16} />
+    <span>{t('publishedOn')}: {new Date(meta.date).toLocaleDateString()}</span>
+  </div>
+)}
+```
+
+## 验证结果
+- Meta信息卡片中description显示在最上方，与时间信息有明确的视觉分层
+- Last modified信息显示Clock图标，语义清晰
+- Published on信息显示CalendarBlank图标，符合用户预期
+- 图标与文本对齐良好，整体布局更加美观
+- 页面正常渲染，无编译错误
+
+## 技术要点
+1. **布局优化**: 将最重要的description信息置于顶部，提升信息层次
+2. **图标语义**: 使用Clock表示修改时间，CalendarBlank表示发布时间，语义明确
+3. **Flex布局**: 使用 `flex items-center gap-2` 实现图标与文本的完美对齐
+4. **视觉分层**: 为description添加 `mb-4` 底部间距，与时间信息形成视觉分组
+5. **phosphor-icons**: 使用SSR版本的图标，确保服务端渲染兼容性
+6. **响应式设计**: 图标大小设置为16px，与14px文字形成良好的视觉比例
+
+## 最佳实践
+- 重要信息优先显示，按信息重要性排列布局顺序
+- 使用语义化图标增强用户理解，提升用户体验
+- 保持图标与文本的视觉平衡，使用合适的间距和对齐方式
+- 选择合适的phosphor图标，确保语义准确性
+- 使用flex布局实现图标文本组合的最佳对齐效果
 
 ## 问题描述
 用户要求将 `/Users/jin/SynologyDrive/Working/Dev/Project/find_my_users/src/app/[locale]/posts/[slug]/page.tsx` 文件中第157行的硬编码文本字段维护到 `/Users/jin/SynologyDrive/Working/Dev/Project/find_my_users/messages` 目录下的多语言文件中。
@@ -385,8 +464,192 @@ className="text-muted-foreground group-hover:text-muted-foreground transition-co
 4. **设计一致性**: 与其他卡片组件保持统一的背景颜色规范
 5. **Tailwind CSS**: 利用Tailwind的任意值语法 `[24px]` 实现自定义尺寸
 
+# 案例20：站点详情页样式统一优化
+
+## 问题描述
+用户要求将站点详情页的面包屑、meta card和返回列表样式参考文章详情页进行统一，确保两个页面的视觉一致性。
+
+## 解决方案
+1. 导入 `AnimatedText` 组件用于面包屑导航和返回列表
+2. 更新面包屑导航使用 `AnimatedText` 组件和统一的颜色系统
+3. 修改Meta信息卡片样式，使用 `bg-card` 背景色、24px圆角和统一间距
+4. 更新返回列表链接使用 `AnimatedText` 组件和统一的颜色系统
+
+## 代码变更
+
+### 组件导入修改
+```tsx
+// 新增导入
+import AnimatedText from '@/components/ui/animated-text'
+```
+
+### 面包屑导航样式统一
+```tsx
+// 修改前：硬编码文本和蓝色hover效果
+<nav className="flex items-center text-sm text-gray-500 mb-6">
+  <Link href="/" className="hover:text-blue-600">
+    {locale === 'zh' ? '首页' : 'Home'}
+  </Link>
+  <CaretRight className="mx-2" size={16} />
+  <Link href="/site" className="hover:text-blue-600">
+    {t('title')}
+  </Link>
+  <CaretRight className="mx-2" size={16} />
+  <span className="text-gray-900">{siteData.name}</span>
+</nav>
+
+// 修改后：使用AnimatedText和统一颜色系统
+<nav className="flex items-center text-sm text-gray-500 mb-6">
+  <Link href="/" className="group">
+    <AnimatedText 
+      text={locale === 'zh' ? '首页' : 'Home'}
+      className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+      animateOnHover={true}
+      autoPlay={false}
+      stagger={30}
+      duration={0.15}
+      yOffset={-2}
+    />
+  </Link>
+  <CaretRight className="mx-2" size={16} />
+  <Link href="/site" className="group">
+    <AnimatedText 
+      text={t('title')}
+      className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+      animateOnHover={true}
+      autoPlay={false}
+      stagger={30}
+      duration={0.15}
+      yOffset={-2}
+    />
+  </Link>
+  <CaretRight className="mx-2" size={16} />
+  <span className="text-foreground">{siteData.name}</span>
+</nav>
+```
+
+### Meta信息卡片样式统一
+```tsx
+// 修改前：灰色背景和小圆角
+<div className="bg-gray-100 rounded-lg p-6 mb-8">
+
+// 修改后：使用card背景色、24px圆角和统一间距
+<div className="bg-card rounded-[24px] p-6 mb-12 border-2">
+```
+
+### 返回列表链接样式统一
+```tsx
+// 修改前：蓝色文本和简单hover效果
+<Link href="/site" className="text-blue-600 hover:text-blue-800 transition-colors inline-flex items-center gap-2">
+  <ArrowLeft size={20} />
+  {locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+</Link>
+
+// 修改后：使用AnimatedText和统一颜色系统
+<Link href="/site" className="group inline-flex items-center gap-2">
+  <ArrowLeft size={20} className="text-muted-foreground group-hover:text-muted-foreground transition-colors" />
+  <AnimatedText 
+    text={locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+    className="text-muted-foreground group-hover:text-muted-foreground transition-colors"
+    animateOnHover={true}
+    autoPlay={false}
+    stagger={30}
+    duration={0.15}
+    yOffset={-2}
+  />
+</Link>
+```
+
+## 验证结果
+- 站点详情页与文章详情页的视觉风格完全统一
+- 面包屑导航使用AnimatedText组件，hover时有跳跃动画效果
+- Meta信息卡片使用统一的背景色和圆角样式
+- 返回列表链接使用统一的颜色系统和动画效果
+- 页面预览正常，无编译错误
+
+## 技术要点
+1. **组件统一**: 使用 `AnimatedText` 组件确保交互动画的一致性
+2. **颜色系统**: 统一使用 `text-muted-foreground` 和 `text-foreground` 语义化颜色
+3. **动画效果**: hover时只有跳跃动画，颜色保持不变，提升用户体验
+4. **卡片样式**: 使用 `bg-card` 背景色和 `rounded-[24px]` 圆角保持设计一致性
+5. **间距统一**: 使用 `mb-12` 确保与文章详情页的间距一致
+6. **主题兼容**: 所有颜色使用语义化变量，自动适配明暗主题
+
 ## 最佳实践
-- 优先使用globals.css中定义的语义化颜色变量而非硬编码颜色
-- 使用Tailwind CSS的任意值语法实现精确的设计要求
-- 保持组件样式与整体设计系统的一致性
-- 确保样式修改支持明暗主题切换
+- 保持页面间的视觉一致性，提升用户体验
+- 使用语义化颜色变量而非硬编码颜色值
+- 统一使用AnimatedText组件增强交互体验
+- 确保所有样式修改都支持主题切换
+- 保持代码结构和命名的一致性
+
+# 案例19：站点详情页Status种类扩充和图标优化
+
+## 问题描述
+用户要求扩充站点详情页面中Status的种类，新增以下状态：
+- `confirmed_unmaintained`: 不再维护
+- `temporarily_unavailable`: 暂时无法访问
+
+并为每种状态配置合适的phosphor图标和颜色。
+
+## 解决方案
+1. 在 `getStatusInfo` 函数中新增两种状态的处理
+2. 为新状态配置合适的颜色和phosphor图标
+3. 导入所需的新图标组件
+4. 确保与 `site-fields.json` 中的配置保持一致
+
+## 代码变更
+
+### phosphor-icons导入修改
+```tsx
+// 修改前
+import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight } from '@phosphor-icons/react/dist/ssr'
+
+// 修改后
+import { ArrowLeft, ArrowSquareOut, Globe, Clock, Users, CheckCircle, XCircle, CaretRight, Warning, WifiSlash } from '@phosphor-icons/react/dist/ssr'
+```
+
+### getStatusInfo函数扩充
+```tsx
+function getStatusInfo(status: string) {
+  switch (status) {
+    case 'running':
+      return { color: 'bg-green-100 text-green-800', icon: CheckCircle };
+    case 'suspected_unmaintained':
+      return { color: 'bg-yellow-100 text-yellow-800', icon: Clock };
+    case 'confirmed_unmaintained':
+      return { color: 'bg-orange-100 text-orange-800', icon: Warning };
+    case 'temporarily_unavailable':
+      return { color: 'bg-blue-100 text-blue-800', icon: WifiSlash };
+    case 'stopped':
+      return { color: 'bg-red-100 text-red-800', icon: XCircle };
+    default:
+      return { color: 'bg-gray-100 text-gray-800', icon: Globe };
+  }
+}
+```
+
+## 验证结果
+- 成功添加了两种新的状态类型
+- 每种状态都配置了语义化的图标和颜色
+- 与 `site-fields.json` 中的多语言配置保持一致
+- 页面预览正常，无编译错误
+
+## 技术要点
+1. **状态扩展**: 支持更多细分的站点状态，提供更准确的状态描述
+2. **图标语义**: 
+   - `Warning` 图标用于确认不再维护的状态
+   - `WifiSlash` 图标用于暂时无法访问的状态
+3. **颜色分级**: 使用不同颜色表示状态严重程度
+   - 绿色(running): 正常运行
+   - 黄色(suspected_unmaintained): 疑似问题
+   - 橙色(confirmed_unmaintained): 确认问题
+   - 蓝色(temporarily_unavailable): 临时问题
+   - 红色(stopped): 严重问题
+4. **phosphor-icons**: 使用SSR版本确保服务端渲染兼容性
+5. **数据一致性**: 与多语言配置文件保持同步，确保翻译正确显示
+
+## 最佳实践
+- 状态分类应该具有明确的语义区分
+- 图标选择要符合用户的直觉理解
+- 颜色使用要遵循通用的视觉语言（绿色=正常，红色=错误等）
+- 确保代码中的状态值与配置文件中的键名完全一致
