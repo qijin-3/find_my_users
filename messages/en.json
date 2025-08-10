@@ -39,6 +39,14 @@
     "empty": {
       "title": "No Tools Available",
       "description": "No tools are available in this category at the moment. Please check back later."
+    },
+    "detail": {
+      "submitGuidelines": "Submit Guidelines",
+      "summary": "Summary",
+      "backToSiteList": "Back to site list",
+      "breadcrumb": {
+        "home": "Home"
+      }
     }
   },
   "articles": {

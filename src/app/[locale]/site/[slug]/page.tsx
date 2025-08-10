@@ -128,7 +128,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       <nav className="flex items-center text-sm text-foreground mb-6">
         <Link href="/" className="group">
           <AnimatedText 
-            text={locale === 'zh' ? '首页' : 'Home'}
+            text={t('detail.breadcrumb.home')}
             className="text-muted-foreground"
             animateOnHover={true}
             autoPlay={false}
@@ -230,23 +230,13 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
 
       {/* Site content */}
       <div className="prose prose-lg max-w-none">
-        <h2>{locale === 'zh' ? '递交要求' : 'Submit Requirements'}</h2>
-        <p className="text-gray-700 leading-relaxed">{siteData.submitRequirements}</p>
+        <h2>{t('detail.submitGuidelines')}</h2>
+        <p className="text-foreground leading-relaxed">{siteData.submitRequirements}</p>
         
-        <h2>{locale === 'zh' ? '递交地址' : 'Submit URL'}</h2>
-        <p>
-          <a 
-            href={siteData.submitUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 transition-colors break-all"
-          >
-            {siteData.submitUrl}
-          </a>
-        </p>
         
-        <h2>{locale === 'zh' ? '评价' : 'Rating'}</h2>
-        <p className="text-gray-700 leading-relaxed">{siteData.rating}</p>
+        
+        <h2>{t('detail.summary')}</h2>
+        <p className="text-foreground leading-relaxed">{siteData.rating}</p>
       </div>
       
       {/* Back to site list link */}
@@ -254,7 +244,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         <Link href="/site" className="group inline-flex items-center gap-2">
           <ArrowLeft size={20} className="text-muted-foreground" />
           <AnimatedText 
-            text={locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+            text={t('detail.backToSiteList')}
             className="text-muted-foreground"
             animateOnHover={true}
             autoPlay={false}

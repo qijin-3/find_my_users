@@ -39,6 +39,14 @@
     "empty": {
       "title": "暂无工具",
       "description": "该分类下暂时没有工具，敬请期待"
+    },
+    "detail": {
+      "submitGuidelines": "提交说明",
+      "summary": "总结",
+      "backToSiteList": "返回站点列表",
+      "breadcrumb": {
+        "home": "首页"
+      }
     }
   },
   "articles": {

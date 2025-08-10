@@ -1,5 +1,130 @@
 # 修复记录
 
+## 站点详情页面多语言文字提取优化 (2025-01-28)
+
+### 问题描述
+用户要求将站点详情页面 (`src/app/[locale]/site/[slug]/page.tsx`) 中第 231-254 行的硬编码文字内容移动到 `/messages` 目录下进行维护，以实现国际化支持。
+
+### 问题分析
+当前站点详情页面存在以下硬编码文字：
+1. **面包屑导航**：`locale === 'zh' ? '首页' : 'Home'`
+2. **内容区域标题**：
+   - `locale === 'zh' ? '提交说明' : 'Submit Guidelines'`
+   - `locale === 'zh' ? '总结' : 'Summary'`
+3. **返回链接**：`locale === 'zh' ? '返回站点列表' : 'Back to site list'`
+
+这些硬编码文字不符合项目的国际化架构，应该统一使用 `next-intl` 的翻译机制进行管理。
+
+### 解决方案
+1. **扩展多语言文件结构**：
+   - 在 `messages/zh.json` 和 `messages/en.json` 中的 `site` 对象下添加 `detail` 子对象
+   - 添加站点详情页面相关的翻译键值对
+
+2. **替换硬编码文字**：
+   - 使用 `t('detail.breadcrumb.home')` 替换面包屑中的"首页"
+   - 使用 `t('detail.submitGuidelines')` 替换"提交说明"
+   - 使用 `t('detail.summary')` 替换"总结"
+   - 使用 `t('detail.backToSiteList')` 替换"返回站点列表"
+
+### 代码变更
+
+#### 1. **中文翻译文件扩展** (`messages/zh.json`)
+```json
+"site": {
+  // ... 现有内容
+  "detail": {
+    "submitGuidelines": "提交说明",
+    "summary": "总结", 
+    "backToSiteList": "返回站点列表",
+    "breadcrumb": {
+      "home": "首页"
+    }
+  }
+}
+```
+
+#### 2. **英文翻译文件扩展** (`messages/en.json`)
+```json
+"site": {
+  // ... 现有内容
+  "detail": {
+    "submitGuidelines": "Submit Guidelines",
+    "summary": "Summary",
+    "backToSiteList": "Back to site list", 
+    "breadcrumb": {
+      "home": "Home"
+    }
+  }
+}
+```
+
+#### 3. **站点详情页面代码优化** (`src/app/[locale]/site/[slug]/page.tsx`)
+
+**面包屑导航优化**：
+```typescript
+// 修改前
+<AnimatedText 
+  text={locale === 'zh' ? '首页' : 'Home'}
+  className="text-muted-foreground"
+  // ... 其他属性
+/>
+
+// 修改后
+<AnimatedText 
+  text={t('detail.breadcrumb.home')}
+  className="text-muted-foreground"
+  // ... 其他属性
+/>
+```
+
+**内容区域标题优化**：
+```typescript
+// 修改前
+<h2>{locale === 'zh' ? '提交说明' : 'Submit Guidelines'}</h2>
+<h2>{locale === 'zh' ? '总结' : 'Summary'}</h2>
+
+// 修改后
+<h2>{t('detail.submitGuidelines')}</h2>
+<h2>{t('detail.summary')}</h2>
+```
+
+**返回链接优化**：
+```typescript
+// 修改前
+<AnimatedText 
+  text={locale === 'zh' ? '返回站点列表' : 'Back to site list'}
+  className="text-muted-foreground"
+  // ... 其他属性
+/>
+
+// 修改后
+<AnimatedText 
+  text={t('detail.backToSiteList')}
+  className="text-muted-foreground"
+  // ... 其他属性
+/>
+```
+
+### 技术要点
+1. **国际化架构统一**：所有用户可见文字都通过 `next-intl` 的翻译系统管理
+2. **翻译键命名规范**：使用层级结构 `site.detail.*` 组织站点详情页面的翻译内容
+3. **代码简化**：移除条件判断逻辑，使用统一的翻译函数调用
+4. **维护性提升**：文案修改只需更新 JSON 文件，无需修改组件代码
+5. **类型安全**：利用 TypeScript 和 `next-intl` 的类型推导确保翻译键的正确性
+
+### 验证结果
+- 中文环境下显示：首页、提交说明、总结、返回站点列表
+- 英文环境下显示：Home、Submit Guidelines、Summary、Back to site list
+- 所有文字都通过翻译系统正确渲染
+- 页面功能和样式保持不变
+- 支持未来添加更多语言版本
+
+### 影响范围
+此修改影响：
+- 站点详情页面的所有硬编码文字显示
+- 多语言文件的结构扩展
+- 国际化系统的完整性和一致性
+
 ## Navigation 导航栏 Logo hover 动画精确触发优化 (2025-01-28)
 
 ### 问题描述
