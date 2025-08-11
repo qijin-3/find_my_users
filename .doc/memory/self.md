@@ -357,6 +357,177 @@ import AnimatedText from '@/components/ui/animated-text';
 - 提升了用户交互体验，使hover效果更加生动有趣
 - 符合项目使用Framer Motion进行动画优化的技术偏好
 
+## 案例34：Footer组件间距优化
+
+### 问题描述
+用户请求增加Footer组件中div元素之间的间距，以提升视觉层次感和阅读体验。
+
+### 分析
+当前Footer组件的间距设置相对紧凑，需要在以下几个方面增加间距：
+1. 主容器的垂直内边距
+2. 三列网格之间的间距
+3. 每个栏目内部元素的间距
+4. 列表项之间的间距
+5. 版权区域与主内容的间距
+
+### 解决方案
+1. **增加主容器间距**：将`py-12`调整为`py-16`，增加顶部和底部内边距
+2. **增加网格间距**：将`gap-8`调整为`gap-12`，增加三列之间的间距
+3. **优化栏目内部间距**：为每个栏目div添加`space-y-6`类，统一内部元素间距
+4. **增加列表项间距**：将`space-y-4`调整为`space-y-6`，增加链接之间的间距
+5. **优化版权区域间距**：将`mt-8 pt-8`调整为`mt-12 pt-12`，增加与主内容的分隔
+6. **改进文本行高**：为描述文本添加`leading-relaxed`类，提升可读性
+
+### 代码变更
+**主容器间距调整**：
+```tsx
+// 修改前
+<div className="max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+
+// 修改后
+<div className="max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+```
+
+**网格间距和栏目内部间距**：
+```tsx
+// 修改前
+<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+  <div>
+
+// 修改后
+<div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+  <div className="space-y-6">
+```
+
+**列表间距优化**：
+```tsx
+// 修改前
+<ul className="mt-4 space-y-4">
+
+// 修改后
+<ul className="space-y-6">
+```
+
+**版权区域间距**：
+```tsx
+// 修改前
+<div className="mt-8 border-t border-secondary pt-8">
+
+// 修改后
+<div className="mt-12 border-t border-secondary pt-12">
+```
+
+**文本行高优化**：
+```tsx
+// 修改前
+<p className="mt-4 text-base text-muted-foreground">
+
+// 修改后
+<p className="text-base text-muted-foreground leading-relaxed">
+```
+
+### 技术要点
+1. **Tailwind间距系统**：使用Tailwind的间距类实现一致的视觉节奏
+2. **响应式设计**：保持原有的响应式布局，间距调整不影响移动端体验
+3. **视觉层次**：通过间距变化建立清晰的信息层次结构
+4. **可读性优化**：使用`leading-relaxed`和`space-y-*`类提升文本可读性
+5. **一致性原则**：所有间距调整遵循Tailwind的4px基准单位
+
+### 验证结果
+- ✅ TypeScript编译检查通过，无类型错误
+- ✅ 浏览器预览正常，无控制台错误
+- ✅ 间距调整后视觉层次更加清晰
+- ✅ 保持了响应式布局的完整性
+- ✅ 文本可读性得到提升
+
+### 影响范围
+- 提升了Footer组件的视觉舒适度和可读性
+- 增强了信息的层次感和组织结构
+- 符合现代Web设计的间距规范
+- 为用户提供更好的浏览体验
+
+## 案例35：Navigation组件logo hover动效修复
+
+### 问题描述
+用户反馈在hover Navigation组件中的logo图片时，"FindMyUsers"文字没有产生跳跃动效。经检查发现`group`类被错误地添加到了`img`标签上，而不是包含整个logo区域的父级`Link`标签上。
+
+### 分析
+在Navigation.tsx组件中，logo区域由一个`Link`标签包含`Image`和`AnimatedText`两个子元素：
+1. `Image`组件显示logo图片
+2. `AnimatedText`组件显示"FindMyUsers"文字，配置了`useGroupHover={true}`
+
+问题在于`group`类被添加到了`Image`组件上，而`AnimatedText`的`useGroupHover`机制需要向上查找最近的带有`group`类的父元素。由于`Image`和`AnimatedText`是兄弟元素，`AnimatedText`无法找到正确的group父元素。
+
+### 解决方案
+将`group`类从`Image`组件移动到包含整个logo区域的`Link`组件上，这样：
+1. 当hover整个logo区域（包括图片和文字）时，都会触发group hover状态
+2. `AnimatedText`的`useGroupHover`机制可以正确找到父级的`group`元素
+3. 实现预期的文字跳跃动效
+
+### 代码变更
+```tsx
+// 修改前
+<Link href="/" className="flex items-center space-x-3">
+  <Image 
+    src="/Logo/Logo.svg" 
+    alt="FindMyUsers Logo" 
+    width={40} 
+    height={40}
+    className="h-10 w-auto group"  // group类在这里
+  />
+  <AnimatedText
+    text="FindMyUsers"
+    className="inline-block font-bold w-[auto] text-[24px]"
+    autoPlay={false}
+    animateOnHover={false}
+    useGroupHover={true}  // 无法找到正确的group父元素
+    stagger={80}
+    duration={0.2}
+    yOffset={-4}
+  />
+</Link>
+
+// 修改后
+<Link href="/" className="flex items-center space-x-3 group">  // group类移到这里
+  <Image 
+    src="/Logo/Logo.svg" 
+    alt="FindMyUsers Logo" 
+    width={40} 
+    height={40}
+    className="h-10 w-auto"  // 移除group类
+  />
+  <AnimatedText
+    text="FindMyUsers"
+    className="inline-block font-bold w-[auto] text-[24px]"
+    autoPlay={false}
+    animateOnHover={false}
+    useGroupHover={true}  // 现在可以正确找到Link上的group类
+    stagger={80}
+    duration={0.2}
+    yOffset={-4}
+  />
+</Link>
+```
+
+### 技术要点
+1. **group-hover机制**：Tailwind CSS的group类需要添加到包含所有相关元素的父容器上
+2. **DOM结构理解**：`useGroupHover`通过向上遍历DOM树查找最近的`.group`父元素
+3. **事件冒泡**：hover事件会从子元素冒泡到父元素，确保整个logo区域都能触发动效
+4. **组件层次**：正确理解React组件的DOM结构对于实现交互效果至关重要
+
+### 验证结果
+- ✅ TypeScript编译检查通过，无类型错误
+- ✅ 浏览器预览正常，无控制台错误
+- ✅ hover logo图片时，"FindMyUsers"文字正确显示跳跃动效
+- ✅ hover文字时，同样触发跳跃动效
+- ✅ 整个logo区域的交互体验得到改善
+
+### 影响范围
+- 修复了Navigation组件logo区域的hover交互效果
+- 提升了用户在导航栏的交互体验
+- 确保了AnimatedText组件的useGroupHover功能正常工作
+- 为其他类似的group-hover场景提供了正确的实现参考
+
 
 // 标题使用CSS变量颜色
 <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>

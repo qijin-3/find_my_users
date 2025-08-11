@@ -18,62 +18,58 @@ export function Footer() {
 
   return (
     <footer className="bg-background border-t border-secondary">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
+      <div className="max-w-5xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="space-y-6">
             <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">
               {t('about.title')}
             </h3>
-            <p className="mt-4 text-base text-muted-foreground">
+            <p className="text-base text-muted-foreground leading-relaxed">
               {t('about.description')}
             </p>
           </div>
-          <div>
+          <div className="space-y-6">
             <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">
               {t('quickLinks.title')}
             </h3>
-            <ul className="mt-4 space-y-4">
+            <ul className="space-y-6">
               <li>
                 <I18nLink href="/" className="text-base text-muted-foreground group">
-                  <AnimatedText text={t('quickLinks.home')} useGroupHover />
+                  <AnimatedText text={t('quickLinks.haoyoulink')} useGroupHover />
                 </I18nLink>
               </li>
               <li>
                 <I18nLink href="/site" className="text-base text-muted-foreground group">
-                  <AnimatedText text={t('quickLinks.site')} useGroupHover />
+                  <AnimatedText text={t('quickLinks.gitbase')} useGroupHover />
                 </I18nLink>
               </li>
-              <li>
-                <I18nLink href="/posts" className="text-base text-muted-foreground group">
-                  <AnimatedText text={t('quickLinks.articles')} useGroupHover />
-                </I18nLink>
-              </li>
+              
             </ul>
           </div>
-          <div>
+          <div className="space-y-6">
             <h3 className="text-sm font-semibold text-foreground tracking-wider uppercase">
               {t('connect.title')}
             </h3>
-            <ul className="mt-4 space-y-4">
+            <ul className="space-y-6">
               <li>
-                <a href="https://findmyusers.app/" target="_blank" className="text-base text-muted-foreground group">
-                  <AnimatedText text="FindMyUsers" useGroupHover />
+                <a href="https://www.xiaohongshu.com/user/profile/662cf72e0000000003032c9f" target="_blank" className="text-base text-muted-foreground group">
+                  <AnimatedText text="小红书" useGroupHover />
                 </a>
               </li>
               <li>
-                <a href="https://github.com/qiayue/findmyusers" target="_blank" className="text-base text-muted-foreground group">
+                <a href="https://github.com/qijin-3/find_my_users" target="_blank" className="text-base text-muted-foreground group">
                   <AnimatedText text="GitHub" useGroupHover />
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/gefei55" target="_blank" className="text-base text-muted-foreground group">
-                  <AnimatedText text="Twitter" useGroupHover />
+                <a href="https://x.com/qi_jin33" target="_blank" className="text-base text-muted-foreground group">
+                  <AnimatedText text="X" useGroupHover />
                 </a>
               </li>
             </ul>
           </div>
         </div>
-        <div className="mt-8 border-t border-secondary pt-8">
+        <div className="mt-12 border-t border-secondary pt-12">
           <p className="text-base text-muted-foreground text-center">
             {t('copyright', { year: currentYear })}
           </p>

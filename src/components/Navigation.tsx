@@ -26,13 +26,13 @@ export function Navigation() {
     <header className="sticky top-6 z-40 w-full">
       <div className="container flex h-16 items-center justify-between pl-[40px] pr-[40px] ml-16 mr-16 border-2 border-border mb-6 bg-card box-content aspect-auto min-w-0 w-[auto] rounded-xl">
         <div className="flex gap-6 md:gap-10">
-          <Link href="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3 group">
             <Image 
               src="/Logo/Logo.svg" 
               alt="FindMyUsers Logo" 
               width={40} 
               height={40}
-              className="h-10 w-auto group"
+              className="h-10 w-auto"
             />
             <AnimatedText
               text="FindMyUsers"

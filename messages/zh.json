@@ -23,7 +23,7 @@
   },
   "site": {
     "title": "站点",
-    "description": "独立开发者工具站 | 全球产品必备工具资源源",
+    "description": "独立开发者推广渠道收录",
     "submitTool": "提交工具",
     "visitWebsite": "访问官网",
     "submitProduct": "提交产品",
@@ -60,13 +60,12 @@
     "openSource": "开源项目",
     "about": {
       "title": "关于",
-      "description": "FindMyUsers 是一个基于 Next.js 构建的开源动态网站解决方案，无需传统数据库，由 GitHub 提供支持。"
+      "description": "FindMyUsers是一个专为独立开发者打造的推广渠道导航站工具。"
     },
     "quickLinks": {
-      "title": "快速链接",
-      "home": "首页",
-      "site": "站点",
-      "articles": "文章"
+      "title": "友情链接",
+      "haoyoulink": "好有链接",
+      "gitbase": "GitBase"
     },
     "connect": {
       "title": "联系我们"

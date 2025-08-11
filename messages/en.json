@@ -23,7 +23,7 @@
   },
   "site": {
     "title": "Sites",
-    "description": "Explore our curated list of sites for web development, GitHub, and more.",
+    "description": "A curated collection of promotion channels for indie developers.",
     "submitTool": "Submit Tool",
     "visitWebsite": "Visit",
     "submitProduct": "Submit",
@@ -60,13 +60,12 @@
     "openSource": "Open Source Project",
     "about": {
       "title": "About",
-      "description": "FindMyUsers is an open-source dynamic website solution without a traditional database, built with Next.js and powered by GitHub."
+      "description": "FindMyUsers is a curated directory of promotion channels built for indie developers."
     },
     "quickLinks": {
       "title": "Quick Links",
-      "home": "Home",
-      "site": "Site",
-      "articles": "Articles"
+      "haoyoulink": "Haoyou Link",
+      "gitbase": "GitBase"
     },
     "connect": {
       "title": "Connect"
