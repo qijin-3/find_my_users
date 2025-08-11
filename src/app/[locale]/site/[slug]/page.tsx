@@ -5,7 +5,7 @@ import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
 import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
 import { ArrowLeft, ArrowSquareOut, Globe, CaretRight } from '@phosphor-icons/react/dist/ssr'
-import AnimatedText from '@/components/ui/animated-text'
+import AnimatedTextServer from '@/components/ui/animated-text-server'
 import SiteBadge from '@/components/ui/site-badge'
 import Image from 'next/image'
 
@@ -128,26 +128,16 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-foreground mb-6">
         <Link href="/" className="group">
-          <AnimatedText 
+          <AnimatedTextServer 
             text={t('detail.breadcrumb.home')}
             className="text-muted-foreground"
-            animateOnHover={true}
-            autoPlay={false}
-            stagger={30}
-            duration={0.15}
-            yOffset={-2}
           />
         </Link>
         <CaretRight className="mx-2" size={16} />
         <Link href="/site" className="group">
-          <AnimatedText 
+          <AnimatedTextServer 
             text={t('title')}
             className="text-muted-foreground"
-            animateOnHover={true}
-            autoPlay={false}
-            stagger={30}
-            duration={0.15}
-            yOffset={-2}
           />
         </Link>
         <CaretRight className="mx-2" size={16} />
@@ -199,13 +189,8 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm group"
               >
                 <Globe size={16} />
-                <AnimatedText 
+                <AnimatedTextServer 
                   text={t('visitWebsite')}
-                  animateOnHover={true}
-                  autoPlay={false}
-                  stagger={50}
-                  duration={0.15}
-                  yOffset={-3}
                 />
               </a>
               <a 
@@ -215,13 +200,8 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm group"
               >
                 <ArrowSquareOut size={16} />
-                <AnimatedText 
+                <AnimatedTextServer 
                   text={t('submitProduct')}
-                  animateOnHover={true}
-                  autoPlay={false}
-                  stagger={50}
-                  duration={0.15}
-                  yOffset={-3}
                 />
               </a>
             </div>
@@ -231,22 +211,28 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
 
       {/* Site content */}
       <div className="prose prose-lg max-w-none">
-        <h2>{t('detail.submitGuidelines')}</h2>
-        <p className="text-foreground leading-relaxed">{siteData.submitRequirements}</p>
-        
-        <h2>{t('detail.expectedExposure')}</h2>
+
+         <h2>{t('detail.expectedExposure')}</h2>
         <p className="text-foreground leading-relaxed">
           {await getFieldDisplayText('expectedExposure', siteData.expectedExposure, locale as 'zh' | 'en')}
         </p>
-        
-        <h2>{t('detail.submitMethod')}</h2>
+
+          <h2>{t('detail.submitMethod')}</h2>
         <p className="text-foreground leading-relaxed">
           {await getFieldDisplayText('submitMethod', siteData.submitMethod, locale as 'zh' | 'en')}
         </p>
+
+        <h2>{t('detail.submitGuidelines')}</h2>
+        <p className="text-foreground leading-relaxed">{siteData.submitRequirements}</p>
         
         <h2>{t('detail.review')}</h2>
         <p className="text-foreground leading-relaxed">
-          {siteData.review === 'Y' ? (locale === 'zh' ? '需要审核' : 'Review Required') : (locale === 'zh' ? '无需审核' : 'No Review Required')}
+          {await getFieldDisplayText('review', siteData.review, locale as 'zh' | 'en')}
+          {siteData.review === 'Y' && (
+            <>
+              ，{await getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}
+            </>
+          )}
         </p>
         
         <h2>{t('detail.summary')}</h2>
@@ -257,14 +243,9 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       <div className="mt-12">
         <Link href="/site" className="group inline-flex items-center gap-2">
           <ArrowLeft size={20} className="text-muted-foreground" />
-          <AnimatedText 
+          <AnimatedTextServer 
             text={t('detail.backToSiteList')}
             className="text-muted-foreground"
-            animateOnHover={true}
-            autoPlay={false}
-            stagger={30}
-            duration={0.15}
-            yOffset={-2}
           />
         </Link>
       </div>

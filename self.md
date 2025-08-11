@@ -213,4 +213,70 @@ export default function ArticleList({ articles, showMoreLink = true }) {
 - **用户界面**：首页和相关页面的标题显示支持多语言
 - **维护成本**：降低硬编码文字的维护负担
 
+# 案例50：文件名大小写导入问题修复
+
+## 问题描述
+TypeScript 编译器报告文件名大小写不匹配的错误：
+- 实际文件名：`/src/components/sitelist.tsx` 和 `/src/components/articlelist.js`
+- 导入路径使用：`@/components/SiteList` 和 `@/components/ArticleList`
+- 错误信息：已包含的文件名仅大小写与实际文件名不同
+
+## 问题分析
+1. **文件系统敏感性**：在某些文件系统（如 macOS 的 APFS）中，文件名大小写敏感
+2. **TypeScript 严格检查**：TypeScript 编译器会检查导入路径与实际文件名的大小写匹配
+3. **导入路径不一致**：代码中使用的导入路径与实际文件名大小写不匹配
+4. **潜在部署问题**：在 Linux 等大小写敏感的系统中可能导致运行时错误
+
+## 解决方案
+1. **统一导入路径**：修改所有导入语句使用正确的文件名大小写
+2. **保持文件名一致性**：确保导入路径与实际文件名完全匹配
+3. **全项目检查**：搜索并修复所有相关的导入语句
+
+## 代码变更
+
+### 1. 修复主页导入路径
+```typescript
+// src/app/[locale]/page.tsx
+// 修改前
+import ArticleList from '@/components/ArticleList'
+import SiteList from '@/components/SiteList'
+
+// 修改后
+import ArticleList from '@/components/articlelist'
+import SiteList from '@/components/sitelist'
+```
+
+### 2. 修复 PostsPageContent 导入路径
+```typescript
+// src/components/PostsPageContent.tsx
+// 修改前
+import ArticleList from '@/components/ArticleList'
+
+// 修改后
+import ArticleList from '@/components/articlelist'
+```
+
+## 技术要点
+1. **大小写敏感性**：确保导入路径与文件名大小写完全匹配
+2. **跨平台兼容性**：避免在不同操作系统间出现文件找不到的问题
+3. **TypeScript 严格模式**：遵循 TypeScript 的严格文件名检查规则
+4. **项目一致性**：保持整个项目中文件命名和导入的一致性
+
+## 验证结果
+- ✅ TypeScript 编译错误消除
+- ✅ 导入路径与实际文件名匹配
+- ✅ 开发服务器正常编译
+- ✅ 跨平台兼容性提升
+
+## 影响范围
+- 修改了 `src/app/[locale]/page.tsx` 中的两个导入语句
+- 修改了 `src/components/PostsPageContent.tsx` 中的一个导入语句
+- 提升了项目的跨平台兼容性和代码规范性
+
+## 最佳实践建议
+1. **文件命名规范**：建议使用一致的文件命名规范（如全小写或 PascalCase）
+2. **导入路径检查**：在开发过程中注意导入路径的大小写匹配
+3. **自动化检查**：可以配置 ESLint 规则来自动检查文件名大小写问题
+4. **团队协作**：在团队中统一文件命名和导入规范
+
 ---

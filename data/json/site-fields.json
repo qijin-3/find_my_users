@@ -117,38 +117,48 @@
       "en": "Unknown"
     }
   },
+  "review": {
+    "Y": {
+      "zh": "需要审核",
+      "en": "Review Required"
+    },
+    "N": {
+      "zh": "无需审核",
+      "en": "No Review Required"
+    }
+  },
   "expectedExposure": {
     "not_disclosed": {
-      "zh": "未披露",
-      "en": "Not Disclosed"
+      "zh": "未披露🙅‍♀️🙅‍♂️",
+      "en": "Not Disclosed🙅‍♀️🙅‍♂️"
     },
     "not_evaluated": {
-      "zh": "未评测",
-      "en": "Not Evaluated"
+      "zh": "未评测😌",
+      "en": "Not Evaluated😌"
     },
     "within_100": {
-      "zh": "100以内",
-      "en": "Within 100"
+      "zh": "100以内😾",
+      "en": "Within 100😾"
     },
     "within_500": {
-      "zh": "500以内",
-      "en": "Within 500"
+      "zh": "500以内😿",
+      "en": "Within 500😿"
     },
     "within_1k": {
-      "zh": "1k以内",
-      "en": "Within 1K"
+      "zh": "1k以内😹",
+      "en": "Within 1K😹"
     },
     "within_2k": {
-      "zh": "2k以内",
-      "en": "Within 2K"
+      "zh": "2k以内😸",
+      "en": "Within 2K😸"
     },
     "within_10k": {
-      "zh": "1w以内",
-      "en": "Within 10K"
+      "zh": "1w以内😽",
+      "en": "Within 10K😽"
     },
     "over_10k": {
-      "zh": "1w以上",
-      "en": "Over 10K"
+      "zh": "1w以上😻",
+      "en": "Over 10K😻"
     }  
   }
 }

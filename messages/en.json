@@ -37,7 +37,8 @@
       "submitGuidelines": "Submit Guidelines",
       "expectedExposure": "Expected Exposure",
       "submitMethod": "Submit Method",
-      "review": "Review Required",
+      "review": "Review",
+      "reviewTime": "Review Time",
       "summary": "Summary",
       "backToSiteList": "Back to site list",
       "breadcrumb": {
@@ -66,5 +67,10 @@
     "light": "Light Mode",
     "dark": "Dark Mode",
     "system": "System"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Sorry, the page you are looking for does not exist or has been moved.",
+    "backHome": "Back to Home"
   }
 }

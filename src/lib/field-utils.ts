@@ -1,7 +1,7 @@
 /**
  * 站点字段类型定义
  */
-export type SiteFieldKey = 'status' | 'type' | 'region' | 'submitMethod' | 'reviewTime' | 'expectedExposure' | 'category'
+export type SiteFieldKey = 'status' | 'type' | 'region' | 'submitMethod' | 'reviewTime' | 'expectedExposure' | 'category' | 'review'
 
 /**
  * 字段数据结构

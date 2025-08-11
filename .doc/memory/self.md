@@ -135,10 +135,69 @@ className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm ${
 - ✅ 符合项目i18n规范
 - ✅ 便于后续维护和扩展
 
+## 案例31：站点详情页审核信息显示优化
+
+### 问题描述
+用户要求将站点详情页中的审核状态和审核时间合并显示在同一个h2标题下，显示格式为"review，reviewTime"的形式。
+
+### 分析
+原来的实现中，审核状态和审核时间分别有独立的h2标题和段落：
+1. 审核状态有独立的h2标题"审核"
+2. 审核时间有独立的h2标题"审核时间"（仅在审核状态为'Y'时显示）
+
+用户希望将两者合并，在同一个"审核"标题下显示，格式为"需要审核，三天内"这样的形式。
+
+### 解决方案
+1. **保留审核状态的h2标题**：继续使用`{t('detail.review')}`作为标题
+2. **合并显示逻辑**：在同一个p标签内显示审核状态和审核时间
+3. **条件显示审核时间**：只有当`siteData.review === 'Y'`时才显示审核时间
+4. **使用中文逗号分隔**：使用"，"连接审核状态和审核时间
+
+### 代码变更
+**修改前**：
+```tsx
+<h2>{t('detail.review')}</h2>
+<p className="text-foreground leading-relaxed">
+  {await getFieldDisplayText('review', siteData.review, locale as 'zh' | 'en')}
+</p>
+
+{/* 审核时间显示 - 只有当审核为Y时才显示 */}
+{siteData.review === 'Y' && (
+  <>
+    <h2>{t('detail.reviewTime')}</h2>
+    <p className="text-foreground leading-relaxed">
+      {await getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}
+    </p>
+  </>
+)}
+```
+
+**修改后**：
+```tsx
+<h2>{t('detail.review')}</h2>
+<p className="text-foreground leading-relaxed">
+  {await getFieldDisplayText('review', siteData.review, locale as 'zh' | 'en')}
+  {siteData.review === 'Y' && (
+    <>
+      ，{await getFieldDisplayText('reviewTime', siteData.reviewTime, locale as 'zh' | 'en')}
+    </>
+  )}
+</p>
+```
+
+### 验证结果
+- ✅ 审核状态和审核时间合并显示在同一个标题下
+- ✅ 显示格式为"需要审核，三天内"的形式
+- ✅ 当审核状态为'N'时，只显示"无需审核"
+- ✅ 当审核状态为'Y'时，显示"需要审核，具体时间"
+- ✅ 使用统一的字段获取函数，保持多语言支持
+
 ### 技术要点
-1. **i18n规范**：遵循next-intl的翻译函数使用规范
-2. **文件结构**：翻译文件按命名空间组织，site相关文本放在site命名空间下
-3. **代码简化**：移除条件判断，使用统一的翻译函数调用
+1. **条件渲染**：使用React的条件渲染语法在JSX中嵌套条件逻辑
+2. **异步函数调用**：在JSX中正确使用await调用异步函数
+3. **多语言支持**：继续使用getFieldDisplayText函数保持国际化功能
+4. **UI一致性**：保持与其他字段相同的样式和布局
+
 
 // 标题使用CSS变量颜色
 <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
