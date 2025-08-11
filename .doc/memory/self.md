@@ -192,11 +192,106 @@ className={`w-full flex items-center justify-between gap-3 px-3 py-2 text-sm ${
 - ✅ 当审核状态为'Y'时，显示"需要审核，具体时间"
 - ✅ 使用统一的字段获取函数，保持多语言支持
 
+## 案例32：Footer组件国际化重构
+
+### 问题描述
+用户要求将Footer.js文件中的硬编码文本进行双语维护，迁移到messages目录下的国际化文件中，实现更好的多语言支持。
+
+### 分析
+原Footer.js组件存在以下问题：
+1. 所有文本内容都是硬编码的英文
+2. 没有使用项目的国际化系统
+3. 文件格式为.js而非TypeScript
+4. 使用普通Link而非国际化路由Link
+
+### 解决方案
+1. **添加翻译文本**：在messages/zh.json和messages/en.json中添加footer相关翻译
+2. **重构组件**：将Footer.js改为Footer.tsx，添加国际化支持
+3. **使用翻译函数**：用useTranslations替换硬编码文本
+4. **使用国际化路由**：用@/i18n/navigation的Link替换普通Link
+
+### 代码变更
+**1. 翻译文件更新**：
+```json
+// messages/zh.json
+"footer": {
+  "about": {
+    "title": "关于",
+    "description": "FindMyUsers 是一个基于 Next.js 构建的开源动态网站解决方案，无需传统数据库，由 GitHub 提供支持。"
+  },
+  "quickLinks": {
+    "title": "快速链接",
+    "home": "首页",
+    "site": "站点", 
+    "articles": "文章"
+  },
+  "connect": {
+    "title": "联系我们"
+  },
+  "copyright": "© {year} FindMyUsers. 保留所有权利。"
+}
+
+// messages/en.json
+"footer": {
+  "about": {
+    "title": "About",
+    "description": "FindMyUsers is an open-source dynamic website solution without a traditional database, built with Next.js and powered by GitHub."
+  },
+  "quickLinks": {
+    "title": "Quick Links",
+    "home": "Home",
+    "site": "Site",
+    "articles": "Articles"
+  },
+  "connect": {
+    "title": "Connect"
+  },
+  "copyright": "© {year} FindMyUsers. All rights reserved."
+}
+```
+
+**2. 组件重构**：
+```tsx
+// 修改前 - Footer.js
+export function Footer() {
+  return (
+    <h3 className="...">About</h3>
+    <p>FindMyUsers is an open-source...</p>
+    <Link href="/">Home</Link>
+  )
+}
+
+// 修改后 - Footer.tsx
+'use client'
+import { useTranslations, useLocale } from 'next-intl';
+import { Link as I18nLink } from '@/i18n/navigation';
+
+export function Footer() {
+  const t = useTranslations('footer');
+  const currentYear = new Date().getFullYear();
+  
+  return (
+    <h3 className="...">{t('about.title')}</h3>
+    <p>{t('about.description')}</p>
+    <I18nLink href="/">{t('quickLinks.home')}</I18nLink>
+    <p>{t('copyright', { year: currentYear })}</p>
+  )
+}
+```
+
+### 验证结果
+- ✅ TypeScript编译检查通过
+- ✅ 浏览器预览无错误
+- ✅ 中英文切换正常显示
+- ✅ 国际化路由链接正常工作
+- ✅ 版权年份动态显示
+
 ### 技术要点
-1. **条件渲染**：使用React的条件渲染语法在JSX中嵌套条件逻辑
-2. **异步函数调用**：在JSX中正确使用await调用异步函数
-3. **多语言支持**：继续使用getFieldDisplayText函数保持国际化功能
-4. **UI一致性**：保持与其他字段相同的样式和布局
+1. **客户端组件**：使用'use client'指令支持useTranslations hook
+2. **国际化路由**：使用@/i18n/navigation的Link组件确保路由包含语言前缀
+3. **参数化翻译**：使用{year}参数实现动态年份显示
+4. **TypeScript支持**：将.js文件重命名为.tsx并添加函数注释
+5. **嵌套翻译结构**：使用分层的JSON结构组织翻译文本
 
 
 // 标题使用CSS变量颜色

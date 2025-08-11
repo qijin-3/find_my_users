@@ -57,7 +57,21 @@
   },
   "footer": {
     "poweredBy": "Powered by {technology}",
-    "openSource": "Open Source Project"
+    "openSource": "Open Source Project",
+    "about": {
+      "title": "About",
+      "description": "FindMyUsers is an open-source dynamic website solution without a traditional database, built with Next.js and powered by GitHub."
+    },
+    "quickLinks": {
+      "title": "Quick Links",
+      "home": "Home",
+      "site": "Site",
+      "articles": "Articles"
+    },
+    "connect": {
+      "title": "Connect"
+    },
+    "copyright": "© {year} FindMyUsers. All rights reserved."
   },
   "language": {
     "chinese": "中文",

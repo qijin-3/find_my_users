@@ -93,28 +93,28 @@
   },
   "reviewTime": {
     "immediately": {
-      "zh": "立刻",
-      "en": "Immediately"
+      "zh": "立刻🚀",
+      "en": "Immediately🚀"
     },
     "within_one_day": {
-      "zh": "一天内",
-      "en": "Within One Day"
+      "zh": "一天内✈️",
+      "en": "Within One Day✈️"
     },
     "within_three_days": {
-      "zh": "三天内",
-      "en": "Within Three Days"
+      "zh": "三天内🚗",
+      "en": "Within Three Days🚗"
     },
     "within_one_week": {
-      "zh": "一周内",
-      "en": "Within One Week"
+      "zh": "一周内🚌",
+      "en": "Within One Week🚌"
     },
     "over_one_week": {
-      "zh": "一周以上",
-      "en": "Over One Week"
+      "zh": "一周以上🚢",
+      "en": "Over One Week🚢"
     },
     "unknown": {
-      "zh": "未知",
-      "en": "Unknown"
+      "zh": "未知⏳",
+      "en": "Unknown⏳"
     }
   },
   "review": {

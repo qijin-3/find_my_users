@@ -57,7 +57,21 @@
   },
   "footer": {
     "poweredBy": "由 {technology} 驱动",
-    "openSource": "开源项目"
+    "openSource": "开源项目",
+    "about": {
+      "title": "关于",
+      "description": "FindMyUsers 是一个基于 Next.js 构建的开源动态网站解决方案，无需传统数据库，由 GitHub 提供支持。"
+    },
+    "quickLinks": {
+      "title": "快速链接",
+      "home": "首页",
+      "site": "站点",
+      "articles": "文章"
+    },
+    "connect": {
+      "title": "联系我们"
+    },
+    "copyright": "© {year} FindMyUsers. 保留所有权利。"
   },
   "language": {
     "chinese": "中文",
