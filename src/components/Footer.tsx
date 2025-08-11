@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link as I18nLink } from '@/i18n/navigation';
+import AnimatedText from '@/components/ui/animated-text';
 
 /**
  * Footer组件 - 网站底部组件
@@ -33,18 +34,18 @@ export function Footer() {
             </h3>
             <ul className="mt-4 space-y-4">
               <li>
-                <I18nLink href="/" className="text-base text-muted-foreground hover:text-gray-900">
-                  {t('quickLinks.home')}
+                <I18nLink href="/" className="text-base text-muted-foreground group">
+                  <AnimatedText text={t('quickLinks.home')} useGroupHover />
                 </I18nLink>
               </li>
               <li>
-                <I18nLink href="/site" className="text-base text-muted-foreground hover:text-gray-900">
-                  {t('quickLinks.site')}
+                <I18nLink href="/site" className="text-base text-muted-foreground group">
+                  <AnimatedText text={t('quickLinks.site')} useGroupHover />
                 </I18nLink>
               </li>
               <li>
-                <I18nLink href="/posts" className="text-base text-muted-foreground hover:text-gray-900">
-                  {t('quickLinks.articles')}
+                <I18nLink href="/posts" className="text-base text-muted-foreground group">
+                  <AnimatedText text={t('quickLinks.articles')} useGroupHover />
                 </I18nLink>
               </li>
             </ul>
@@ -55,18 +56,18 @@ export function Footer() {
             </h3>
             <ul className="mt-4 space-y-4">
               <li>
-                <a href="https://findmyusers.app/" target="_blank" className="text-base text-muted-foreground hover:text-gray-900">
-                  FindMyUsers
+                <a href="https://findmyusers.app/" target="_blank" className="text-base text-muted-foreground group">
+                  <AnimatedText text="FindMyUsers" useGroupHover />
                 </a>
               </li>
               <li>
-                <a href="https://github.com/qiayue/findmyusers" target="_blank" className="text-base text-muted-foreground hover:text-gray-900">
-                  GitHub
+                <a href="https://github.com/qiayue/findmyusers" target="_blank" className="text-base text-muted-foreground group">
+                  <AnimatedText text="GitHub" useGroupHover />
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com/gefei55" target="_blank" className="text-base text-muted-foreground hover:text-gray-900">
-                  Twitter
+                <a href="https://twitter.com/gefei55" target="_blank" className="text-base text-muted-foreground group">
+                  <AnimatedText text="Twitter" useGroupHover />
                 </a>
               </li>
             </ul>

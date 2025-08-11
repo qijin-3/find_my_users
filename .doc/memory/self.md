@@ -293,6 +293,70 @@ export function Footer() {
 4. **TypeScript支持**：将.js文件重命名为.tsx并添加函数注释
 5. **嵌套翻译结构**：使用分层的JSON结构组织翻译文本
 
+## 案例33：Footer组件链接hover效果优化
+
+### 问题描述
+用户要求修改Footer.tsx组件中可hover链接的效果，移除颜色变化，改为使用animated-text.tsx组件的动画效果。
+
+### 分析
+在Footer.tsx组件中，快速链接和联系方式部分的链接使用了`hover:text-gray-900`类来实现hover时的颜色变化效果。用户希望将这种颜色变化效果替换为更生动的文字跳跃动画效果。
+
+### 解决方案
+1. **导入AnimatedText组件**：添加animated-text组件的导入
+2. **替换hover颜色效果**：移除`hover:text-gray-900`类，添加`group`类
+3. **使用AnimatedText包装文本**：将链接文本用AnimatedText组件包装，启用`useGroupHover`属性
+4. **保持原有样式**：确保基础样式和布局不受影响
+
+### 代码变更
+**1. 添加组件导入**：
+```tsx
+import AnimatedText from '@/components/ui/animated-text';
+```
+
+**2. 修改快速链接部分**：
+```tsx
+// 修改前
+<I18nLink href="/" className="text-base text-muted-foreground hover:text-gray-900">
+  {t('quickLinks.home')}
+</I18nLink>
+
+// 修改后
+<I18nLink href="/" className="text-base text-muted-foreground group">
+  <AnimatedText text={t('quickLinks.home')} useGroupHover />
+</I18nLink>
+```
+
+**3. 修改联系方式部分**：
+```tsx
+// 修改前
+<a href="https://github.com/qiayue/findmyusers" target="_blank" className="text-base text-muted-foreground hover:text-gray-900">
+  GitHub
+</a>
+
+// 修改后
+<a href="https://github.com/qiayue/findmyusers" target="_blank" className="text-base text-muted-foreground group">
+  <AnimatedText text="GitHub" useGroupHover />
+</a>
+```
+
+### 技术要点
+1. **group-hover机制**：使用Tailwind的`group`类配合AnimatedText的`useGroupHover`属性
+2. **动画效果**：文字在hover时会逐字符进行跳跃动画，比颜色变化更生动
+3. **国际化支持**：快速链接部分使用翻译函数，外部链接使用硬编码文本
+4. **性能优化**：AnimatedText组件使用Framer Motion实现高性能动画
+
+### 验证结果
+- ✅ TypeScript编译检查通过，无类型错误
+- ✅ 浏览器预览正常，无控制台错误
+- ✅ hover时文字呈现跳跃动画效果，替代了原有的颜色变化
+- ✅ 快速链接和外部链接都正确应用了动画效果
+- ✅ 保持了原有的布局和基础样式
+
+### 影响范围
+- 修改了Footer组件的所有可点击链接的hover效果
+- 提升了用户交互体验，使hover效果更加生动有趣
+- 符合项目使用Framer Motion进行动画优化的技术偏好
+
 
 // 标题使用CSS变量颜色
 <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
