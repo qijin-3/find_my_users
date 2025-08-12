@@ -34,14 +34,14 @@ export function Footer() {
             </h3>
             <ul className="space-y-6">
               <li>
-                <I18nLink href="/" className="text-base text-muted-foreground group">
+                <a href="https://links.haoyou.tech" target="_blank" rel="noopener noreferrer" className="text-base text-muted-foreground group">
                   <AnimatedText text={t('quickLinks.haoyoulink')} useGroupHover />
-                </I18nLink>
+                </a>
               </li>
               <li>
-                <I18nLink href="/site" className="text-base text-muted-foreground group">
+                <a href="https://gitbase.app" target="_blank" rel="noopener noreferrer" className="text-base text-muted-foreground group">
                   <AnimatedText text={t('quickLinks.gitbase')} useGroupHover />
-                </I18nLink>
+                </a>
               </li>
               
             </ul>

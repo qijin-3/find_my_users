@@ -104,6 +104,7 @@ export default function SitePageContent({ resources, locale = 'zh' }: SitePageCo
                 // 移除hover背景色变化，保持原始颜色
                 transition: 'transform 0.2s ease-out'
               }}
+              onClick={() => window.open('https://github.com/qijin-3/find_my_users/issues', '_blank')}
             >
               <Plus className="w-4 h-4 mr-2 transition-transform group-hover:-translate-y-0.5" />
               <AnimatedText text={t('submitTool')} />
