@@ -64,11 +64,11 @@
     },
     "quickLinks": {
       "title": "友情链接",
-      "haoyoulink": "好有链接",
+      "haoyoulink": "好有链接 数字名片",
       "gitbase": "GitBase"
     },
     "connect": {
-      "title": "联系我们"
+      "title": "联系我"
     },
     "copyright": "© {year} FindMyUsers. 保留所有权利。"
   },
