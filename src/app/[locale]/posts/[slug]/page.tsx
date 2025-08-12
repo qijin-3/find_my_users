@@ -107,7 +107,8 @@ export default async function PostPage({ params }: PostPageProps) {
   const contentHtml = processedContent.toString()
   
   return (
-    <article className="container mx-auto px-4 py-12 max-w-3xl">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <article className="max-w-4xl mx-auto">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
         <Link href="/" className="group">
@@ -182,6 +183,7 @@ export default async function PostPage({ params }: PostPageProps) {
           />
         </Link>
       </div>
-    </article>
+      </article>
+    </div>
   )
 }

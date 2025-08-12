@@ -125,7 +125,8 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
 
 
   return (
-    <article className="container mx-auto px-4 py-12 max-w-3xl">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <article className="max-w-4xl mx-auto">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-foreground mb-6">
         <Link href="/" className="group">
@@ -146,10 +147,10 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
       </nav>
       
       {/* Meta information card */}
-      <div className="bg-card rounded-[24px] p-6 mb-12 border-2 h-80">
-        <div className="flex items-start gap-4 h-full">
+      <div className="bg-card rounded-[24px] p-6 mb-12 border-2 min-h-[400px] lg:h-[400px]">
+        <div className="flex flex-col lg:flex-row items-start gap-6 h-full">
           {/* 网站截图 */}
-          <div className="flex-shrink-0 h-full w-1/2">
+          <div className="w-full lg:w-1/2 h-48 lg:h-full flex-shrink-0">
             <div className="w-full h-full rounded-lg overflow-hidden bg-card">
               <Image
                 src={getWebsiteScreenshotUrl(siteData.url)}
@@ -163,12 +164,12 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
           </div>
           
           {/* 内容区域 */}
-          <div className="flex-1 flex flex-col h-full">
+          <div className="flex-1 flex flex-col h-full min-h-0">
             <div className="flex-1">
-              <h1 className="text-2xl font-bold mb-2">{siteData.name}</h1>
+              <h1 className="text-xl lg:text-2xl font-bold mb-2">{siteData.name}</h1>
               
               {/* 产品展示页、运行中状态和地区标签 */}
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 flex-wrap">
                 <SiteBadge 
                   siteData={{ type: siteData.type, status: siteData.status, region: siteData.region }}
                   locale={locale}
@@ -178,16 +179,18 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
                 />
               </div>
               
-              <p className="text-muted-foreground mb-4">{siteData.description}</p>
+              <p className="text-muted-foreground mb-4 text-sm lg:text-base">{siteData.description}</p>
             </div>
             
             {/* 访问官网和提交产品按钮 - 置底显示 */}
-            <SiteActionButtons
-              siteUrl={siteData.url}
-              submitUrl={siteData.submitUrl}
-              visitWebsiteText={t('visitWebsite')}
-              submitProductText={t('submitProduct')}
-            />
+            <div className="mt-auto">
+              <SiteActionButtons
+                siteUrl={siteData.url}
+                submitUrl={siteData.submitUrl}
+                visitWebsiteText={t('visitWebsite')}
+                submitProductText={t('submitProduct')}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -232,6 +235,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
           />
         </Link>
       </div>
-    </article>
+      </article>
+    </div>
   );
 }
