@@ -35,6 +35,15 @@ export async function generateMetadata({
     description: locale === 'zh' 
       ? '基于 Next.js 和 GitHub API 构建的无数据库开源动态网站'
       : 'Open source dynamic website without database, built with Next.js and GitHub API',
+    icons: {
+      icon: [
+        { url: '/Logo/Logo.svg', type: 'image/svg+xml' },
+        { url: '/favicon.ico', sizes: '32x32' }
+      ],
+      apple: [
+        { url: '/Logo/Logo.svg', type: 'image/svg+xml' }
+      ]
+    },
     other: {
       'og:locale': locale === 'zh' ? 'zh_CN' : 'en_US',
     }

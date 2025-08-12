@@ -1,4 +1,4 @@
-# FindMyUsers / 找用户
+# FindMyUsers
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14.2.5-black)](https://nextjs.org/)
@@ -92,11 +92,6 @@
 
 特别感谢开源社区的无私奉献，让独立开发者能够站在巨人的肩膀上创造价值。
 
-### 📞 联系我们
-
-- 📧 问题反馈：[GitHub Issues](https://github.com/qijin-3/find_my_users/issues)
-- 💬 功能建议：[GitHub Discussions](https://github.com/qijin-3/find_my_users/discussions)
-
 ---
 
 ## English
@@ -181,11 +176,6 @@ This project is built upon the following excellent open-source projects:
 - [1000UserGuide](https://github.com/naxiaoduo/1000UserGuide) - Source of channel data
 
 Special thanks to the open-source community for their selfless contributions, enabling indie developers to create value by standing on the shoulders of giants.
-
-### 📞 Contact Us
-
-- 📧 Issue Reports: [GitHub Issues](https://github.com/qijin-3/find_my_users/issues)
-- 💬 Feature Requests: [GitHub Discussions](https://github.com/qijin-3/find_my_users/discussions)
 
 ---
 
