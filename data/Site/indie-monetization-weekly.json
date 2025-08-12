@@ -1,0 +1,19 @@
+{
+  "name_zh": "独立开发变现周刊",
+  "name_en": "Indie Monetization Weekly",
+  "description_zh": "分享独立开发者的变现思路与案例",
+  "description_en": "Share the monetization ideas and cases of independent developers.",
+  "status": "stopped",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/ljinkai/weekly",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/ljinkai/weekly/issues",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_disclosed",
+  "rating_zh": "分享独立开发、产品变现相关内容。支持推荐或自荐。目前周刊已不再维护，但还是可以在issue中投稿，可能会被其他投稿的同行关注到。",
+  "rating_en": "Share content related to independent development and product monetization. Recommendations and self - promotions are welcome. Currently, the weekly newsletter is no longer maintained, but you can still submit contributions in the issues section, which may attract the attention of other contributing peers."
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "挖互联网",
+  "name_en": "Dig Internet",
+  "description_zh": "挖掘有趣、有料的网络好内容",
+  "description_en": "Discover interesting and informative online content.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://tigg.cc",
+  "submitMethod": "site_form",
+  "submitUrl": "https://tigg.cc/share",
+  "submitRequirements_zh": "官方要求是免费应用，产品要求是有用或有趣。",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "仅限分享和提交有创新特点的免费资源或工具，试用版或付费版不收录。",
+  "rating_en": "Only free resources or tools with innovative features are allowed to be shared and submitted. Trial versions or paid versions will not be included."
+}

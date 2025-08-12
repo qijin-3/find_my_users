@@ -1,0 +1,19 @@
+{
+  "name_zh": "中国独立开发者项目列表",
+  "name_en": "Chinese Indie Projects List",
+  "description_zh": "汇总中国独立开发者的优秀项目。入选标准：网站 / App。入选的产品会加入作者github库的Readme版面中。目前项目有接近50k star",
+  "description_en": "Summarize excellent projects of independent developers in China. Eligibility criteria: websites / apps. The selected products will be added to the Readme section of the author's GitHub repository. Currently, the project has nearly 50k stars.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/1c7/chinese-independent-developer",
+  "submitMethod": "submit_comment",
+  "submitUrl": "https://github.com/1c7/chinese-independent-developer/issues/160",
+  "submitRequirements_zh": "投稿内容尽可能简短，快速突出产品重点。不收录开发者工具",
+  "submitRequirements_en": "Make your submission as brief as possible and quickly highlight the key features of your product.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "会收录到Github中",
+  "rating_en": "It will be included in GitHub."
+}

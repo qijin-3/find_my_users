@@ -1,0 +1,19 @@
+{
+  "name_zh": "GitHubDaily",
+  "name_en": "GitHub Daily",
+  "description_zh": "坚持分享 GitHub 上高质量、有趣实用的开源技术教程、开发者工具、编程网站、技术资讯。目前已累积分享超过 8000 个开源项目",
+  "description_en": "Consistently share high-quality, interesting and practical open-source technology tutorials, developer tools, programming websites, and technical information on GitHub. So far, more than 8,000 open-source projects have been shared in total.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/GitHubDaily/GitHubDaily",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/GitHubDaily/GitHubDaily/issues",
+  "submitRequirements_zh": "需开源",
+  "submitRequirements_en": "Need to be open source.",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "GitHubDaily 也会在其他社交媒体平台帮助开发者传播与分享优质开源项目。但目前已经停更",
+  "rating_en": "GitHubDaily also helped developers promote and share high - quality open - source projects on other social media platforms. However, its updates have currently stopped."
+}

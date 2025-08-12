@@ -1,0 +1,19 @@
+{
+  "name_zh": "哎呦不错",
+  "name_en": "Aiyou Bucuo",
+  "description_zh": "每日分享各类新奇资源、工具和信息，以期刊形式定期更新",
+  "description_en": "Share various kinds of novel resources, tools, and information daily, and update them regularly in the form of a journal.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "",
+  "submitMethod": "email",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "一个挖掘好产品的分享网站，如果你的产品被收录将会更新到每日分享的文章内（一月一刊）。",
+  "rating_en": ""
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "HelloGitHub",
+  "name_en": "HelloGitHub",
+  "description_zh": "分享 GitHub 上有趣、入门级的开源项目。内容包括：有趣、入门级的开源项目、开源书籍、实战项目、企业级项目等。",
+  "description_en": "Share interesting and beginner - level open - source projects on GitHub. The content includes interesting and beginner - level open - source projects, open - source books, practical projects, enterprise - level projects, etc.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/521xueweihan/HelloGitHub",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/521xueweihan/HelloGitHub/issues",
+  "submitRequirements_zh": "需开源",
+  "submitRequirements_en": "Need to be open source.",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "期刊在每月 28 号以月刊的形式更新发布",
+  "rating_en": "The journal is updated and published monthly on the 28th of each month."
+}

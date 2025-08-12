@@ -1,0 +1,19 @@
+{
+  "name_zh": "Best App",
+  "name_en": "Best App",
+  "description_zh": "收集&推荐优秀的 Apps/硬件/技巧/周边等",
+  "description_en": "Collect and recommend excellent Apps, hardware, tips, peripherals, etc.",
+  "status": "suspected_unmaintained",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/hzlzh/Best-App",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/hzlzh/Best-App/issues",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "似乎已经停止维护",
+  "rating_en": "It seems that the maintenance has stopped."
+}

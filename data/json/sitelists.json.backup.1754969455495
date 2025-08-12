@@ -1,0 +1,205 @@
+[
+  {
+    "name_zh": "Next.js",
+    "name_en": "Next.js",
+    "slug": "nextjs",
+    "date": "2024-08-16T03:57:46.153Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "Tailwind CSS",
+    "name_en": "Tailwind CSS",
+    "slug": "tailwind-css",
+    "date": "2024-08-20T10:15:30.456Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "Shadcn/ui",
+    "name_en": "Shadcn/ui",
+    "slug": "shadcnui",
+    "date": "2024-09-05T14:22:18.789Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "Vercel",
+    "name_en": "Vercel",
+    "slug": "vercel",
+    "date": "2024-08-25T08:45:12.234Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "Github.com",
+    "name_en": "Github.com",
+    "slug": "github",
+    "date": "2024-07-10T16:30:45.678Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "Woy.ai",
+    "name_en": "Woy.ai",
+    "slug": "woyai",
+    "date": "2024-10-12T12:18:33.901Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "音乐播放器",
+    "name_en": "Music Player",
+    "slug": "music-player",
+    "date": "2024-11-08T09:42:27.345Z",
+    "lastModified": "2025-01-28T03:34:22Z"
+  },
+  {
+    "name_zh": "阮一峰的网络日志",
+    "name_en": "Ruan Yifeng’s Blog Weekly",
+    "slug": "ruan-yifengs-blog-weekly",
+    "date": "2025-08-12T03:23:37.243Z",
+    "lastModified": "2025-08-12T03:23:37.243Z"
+  },
+  {
+    "name_zh": "不死鸟",
+    "name_en": "Phoenix Frontier",
+    "slug": "phoenix-frontier",
+    "date": "2025-08-12T03:23:37.248Z",
+    "lastModified": "2025-08-12T03:23:37.248Z"
+  },
+  {
+    "name_zh": "挖互联网",
+    "name_en": "Dig Internet",
+    "slug": "dig-internet",
+    "date": "2025-08-12T03:23:37.248Z",
+    "lastModified": "2025-08-12T03:23:37.248Z"
+  },
+  {
+    "name_zh": "尽可能简短的介绍自己的产品,The official requirement is for free apps",
+    "name_en": "and the product requirement is to be useful or interesting.",
+    "slug": "and-the-product-requirement-is-to-be-useful-or-interesting",
+    "date": "2025-08-12T03:23:37.249Z",
+    "lastModified": "2025-08-12T03:23:37.249Z"
+  },
+  {
+    "name_zh": "Introduce your product as briefly as possible.,not_evaluated,immediately",
+    "name_en": "",
+    "slug": "introduce-your-product-as-briefly-as-possiblenot_evaluatedimmediately",
+    "date": "2025-08-12T03:23:37.249Z",
+    "lastModified": "2025-08-12T03:23:37.249Z"
+  },
+  {
+    "name_zh": "独立开发变现周刊",
+    "name_en": "Indie Monetization Weekly",
+    "slug": "indie-monetization-weekly",
+    "date": "2025-08-12T03:23:37.249Z",
+    "lastModified": "2025-08-12T03:23:37.249Z"
+  },
+  {
+    "name_zh": "哎呦不错",
+    "name_en": "Aiyou Bucuo",
+    "slug": "aiyou-bucuo",
+    "date": "2025-08-12T03:23:37.249Z",
+    "lastModified": "2025-08-12T03:23:37.249Z"
+  },
+  {
+    "name_zh": "只接公益类免费（或微氪）好用的网站项目，不接受包含商业推广产品,A sharing website for discovering great products. If your product is included",
+    "name_en": "it will be featured in the daily sharing article (published monthly).",
+    "slug": "it-will-be-featured-in-the-daily-sharing-article-published-monthly",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "We only accept free (or micro - payment) and useful website projects in the public welfare category. We do not accept products with commercial promotion. ,running,blog_newsletter,https://aiyoubucuo.com,https://aiyoubucuo.com/comment.html,domestic,site_form,1,300字以内，收录免费应用为主,Within 300 words",
+    "name_en": "mainly collect free apps.,not_disclosed,within_three_days",
+    "slug": "mainly-collect-free-appsnot_disclosedwithin_three_days",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "DecoHack",
+    "name_en": "DecoHack Weekly",
+    "slug": "decohack-weekly",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "独立开发者周刊",
+    "name_en": "Solopreneur Weekly",
+    "slug": "solopreneur-weekly",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "- 截图",
+    "name_en": "",
+    "slug": "-",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "- 介绍/推荐语,- Name + A one-sentence introduction",
+    "name_en": "",
+    "slug": "-name-a-one-sentence-introduction",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "- Screenshot",
+    "name_en": "",
+    "slug": "-screenshot",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "- Link/QR code",
+    "name_en": "",
+    "slug": "-linkqr-code",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "- Description/Recommendation,within_1k,within_three_days",
+    "name_en": "",
+    "slug": "-descriptionrecommendationwithin_1kwithin_three_days",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "HelloGitHub",
+    "name_en": "HelloGitHub",
+    "slug": "hellogithub",
+    "date": "2025-08-12T03:23:37.250Z",
+    "lastModified": "2025-08-12T03:23:37.250Z"
+  },
+  {
+    "name_zh": "GitHubDaily",
+    "name_en": "GitHub Daily",
+    "slug": "github-daily",
+    "date": "2025-08-12T03:23:37.251Z",
+    "lastModified": "2025-08-12T03:23:37.251Z"
+  },
+  {
+    "name_zh": "中国独立开发者项目列表",
+    "name_en": "Chinese Indie Projects List",
+    "slug": "chinese-indie-projects-list",
+    "date": "2025-08-12T03:23:37.251Z",
+    "lastModified": "2025-08-12T03:23:37.251Z"
+  },
+  {
+    "name_zh": "Developer tools are not accepted.,not_disclosed,within_three_days",
+    "name_en": "",
+    "slug": "developer-tools-are-not-acceptednot_disclosedwithin_three_days",
+    "date": "2025-08-12T03:23:37.252Z",
+    "lastModified": "2025-08-12T03:23:37.252Z"
+  },
+  {
+    "name_zh": "Best App",
+    "name_en": "Best App",
+    "slug": "best-app",
+    "date": "2025-08-12T03:23:37.252Z",
+    "lastModified": "2025-08-12T03:23:37.252Z"
+  },
+  {
+    "name_zh": "1Link.Fun",
+    "name_en": "1Link.Fun",
+    "slug": "1linkfun",
+    "date": "2025-08-12T03:23:37.252Z",
+    "lastModified": "2025-08-12T03:23:37.252Z"
+  }
+]

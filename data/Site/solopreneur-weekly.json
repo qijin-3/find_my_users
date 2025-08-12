@@ -1,0 +1,19 @@
+{
+  "name_zh": "独立开发者周刊",
+  "name_en": "Solopreneur Weekly",
+  "description_zh": "收录独立开发作品的周刊，包括网站、客户端应用、开源项目等，发布于微信公众号'独立开发'。",
+  "description_en": "A weekly newsletter featuring independently developed works, including websites, client applications, open-source projects, etc., published on the WeChat official account 'Independent Development'.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://github.com/hr98w/solopreneur",
+  "submitMethod": "submit_issue",
+  "submitUrl": "https://github.com/hr98w/solopreneur/issues",
+  "submitRequirements_zh": "- 名称 + 一句话简介",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "你的作品可以是网站，客户端产品，也可以是Github上的开源项目或自媒体，形式不限。通过作品博主会更新到公众号上",
+  "rating_en": "Your works can be websites, client products, open-source projects on GitHub, or self-media, with no restrictions on the form. The blogger will update the works on the official account of the WeChat public platform."
+}
