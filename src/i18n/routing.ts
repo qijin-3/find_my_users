@@ -12,5 +12,8 @@ export const routing = defineRouting({
   defaultLocale: 'zh',
 
   // 路径前缀策略 - 'always' 表示所有路径都带语言前缀
-  localePrefix: 'always'
+  localePrefix: 'always',
+  
+  // 启用本地化检测
+  localeDetection: true
 });

@@ -8,6 +8,11 @@ const handleI18nRouting = createMiddleware(routing);
 
 export function middleware(request) {
   const path = request.nextUrl.pathname;
+  
+  // 跳过根路径，让客户端组件处理重定向
+  if (path === '/') {
+    return NextResponse.next();
+  }
 
   // 检查是否是需要认证的路径（处理带locale前缀的路径）
   const isAdminPath = path.match(/^\/[a-z]{2}\/admin/) || path.startsWith('/admin');
@@ -31,7 +36,9 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    // 匹配所有路径，除了以下路径：
+    // 匹配所有路径，包括根路径
+    '/',
+    // 匹配所有其他路径，除了以下路径：
     // - 以 /api, /_next, /_vercel 开头的路径
     // - 包含点号的路径 (如 favicon.ico)
     '/((?!api|_next|_vercel|.*\\..*).*)'
