@@ -4,9 +4,10 @@ import { notFound } from 'next/navigation'
 import { getI18nSiteData, getI18nJsonData } from '@/lib/i18n-data'
 import { getFieldDisplayText } from '@/lib/field-utils'
 import { Link } from '@/i18n/navigation'
-import { ArrowLeft, ArrowSquareOut, Globe, CaretRight } from '@phosphor-icons/react/dist/ssr'
+import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import AnimatedTextServer from '@/components/ui/animated-text-server'
 import SiteBadge from '@/components/ui/site-badge'
+import SiteActionButtons from '@/components/SiteActionButtons'
 import Image from 'next/image'
 
 // 类型定义
@@ -181,30 +182,12 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
             </div>
             
             {/* 访问官网和提交产品按钮 - 置底显示 */}
-            <div className="flex items-center gap-3 mt-auto">
-              <a 
-                href={siteData.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-muted text-muted-foreground rounded-lg hover:bg-muted/80 transition-colors text-sm group"
-              >
-                <Globe size={16} />
-                <AnimatedTextServer 
-                  text={t('visitWebsite')}
-                />
-              </a>
-              <a 
-                href={siteData.submitUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors text-sm group"
-              >
-                <ArrowSquareOut size={16} />
-                <AnimatedTextServer 
-                  text={t('submitProduct')}
-                />
-              </a>
-            </div>
+            <SiteActionButtons
+              siteUrl={siteData.url}
+              submitUrl={siteData.submitUrl}
+              visitWebsiteText={t('visitWebsite')}
+              submitProductText={t('submitProduct')}
+            />
           </div>
         </div>
       </div>
