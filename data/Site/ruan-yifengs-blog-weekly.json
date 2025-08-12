@@ -9,10 +9,10 @@
   "url": "https://www.ruanyifeng.com/blog/weekly/",
   "submitMethod": "submit_issue",
   "submitUrl": "https://github.com/ruanyf/weekly/issues",
-  "submitRequirements_zh": "每周五发布，尽量在周五前投稿。 收录成功后，issue显示weekly tag",
+  "submitRequirements_zh": "每周五发布，尽量在周五前投稿。 收录成功后，issue会显示weekly tag",
   "submitRequirements_en": "It will be released every Friday. Please submit your work before Friday if possible. After successful inclusion, the issue will display the weekly tag.",
   "review": "Y",
-  "reviewTime": "immediately",
+  "reviewTime": "within_three_days",
   "expectedExposure": "not_evaluated",
   "rating_zh": "周刊周五发布，支持推荐或自荐文章/软件/资源。收录后将发布到周刊内，可能可以获得较高的流量。",
   "rating_en": "The weekly newsletter is released on Fridays. We support article/software/resource recommendations, either self-recommended or by others. Once included, they will be published in the weekly newsletter and may attract significant traffic."

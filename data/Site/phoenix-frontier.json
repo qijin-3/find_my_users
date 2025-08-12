@@ -12,7 +12,7 @@
   "submitRequirements_zh": "投稿内容尽可能简短，因为在每日分享中，展示位只有一句简介来展示你的产品特点",
   "submitRequirements_en": "Keep your submission as brief as possible. In the daily sharing, there's only one sentence in the showcase to highlight your product features.",
   "review": "Y",
-  "reviewTime": "immediately",
+  "reviewTime": "within_three_days",
   "expectedExposure": "not_evaluated",
   "rating_zh": "你的投稿如采纳，将会更新在不死鸟每日分享的文章内（一月一刊）。开发者可以投稿软件、网站、插件等产品",
   "rating_en": "If your submission is accepted, it will be updated in the articles of the Phoenix Daily Share (monthly issue). Developers can submit products such as software, websites, and plugins."

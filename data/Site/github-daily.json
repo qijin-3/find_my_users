@@ -11,8 +11,8 @@
   "submitUrl": "https://github.com/GitHubDaily/GitHubDaily/issues",
   "submitRequirements_zh": "需开源",
   "submitRequirements_en": "Need to be open source.",
-  "review": "N",
-  "reviewTime": "immediately",
+  "review": "Y",
+  "reviewTime": "unknown",
   "expectedExposure": "not_evaluated",
   "rating_zh": "GitHubDaily 也会在其他社交媒体平台帮助开发者传播与分享优质开源项目。但目前已经停更",
   "rating_en": "GitHubDaily also helped developers promote and share high - quality open - source projects on other social media platforms. However, its updates have currently stopped."

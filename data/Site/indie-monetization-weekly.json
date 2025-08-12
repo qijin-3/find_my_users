@@ -11,7 +11,7 @@
   "submitUrl": "https://github.com/ljinkai/weekly/issues",
   "submitRequirements_zh": "",
   "submitRequirements_en": "",
-  "review": "N",
+  "review": "Y",
   "reviewTime": "immediately",
   "expectedExposure": "not_disclosed",
   "rating_zh": "分享独立开发、产品变现相关内容。支持推荐或自荐。目前周刊已不再维护，但还是可以在issue中投稿，可能会被其他投稿的同行关注到。",

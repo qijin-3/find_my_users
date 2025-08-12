@@ -11,8 +11,8 @@
   "submitUrl": "https://github.com/521xueweihan/HelloGitHub/issues",
   "submitRequirements_zh": "需开源",
   "submitRequirements_en": "Need to be open source.",
-  "review": "N",
-  "reviewTime": "immediately",
+  "review": "Y",
+  "reviewTime": "over_one_week",
   "expectedExposure": "not_evaluated",
   "rating_zh": "期刊在每月 28 号以月刊的形式更新发布",
   "rating_en": "The journal is updated and published monthly on the 28th of each month."
