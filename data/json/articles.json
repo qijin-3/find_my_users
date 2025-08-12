@@ -1,74 +1,29 @@
 [
   {
-    "title_zh": "测试",
-    "title_en": "Test",
-    "description_zh": "测试des",
-    "description_en": "Test description",
-    "date": "2025-07-28T04:12:05.540Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "test-1"
+    "title_zh": "渠道更新",
+    "title_en": "Channel Updates",
+    "description_zh": "最近更新的渠道站点",
+    "description_en": "Recently updated channel sites",
+    "slug": "new-channels",
+    "date": "2025-08-12T06:15:29.067Z",
+    "lastModified": "2025-08-12T06:23:56.690Z"
   },
   {
-    "title_zh": "测试123",
-    "title_en": "Test123",
-    "description_zh": "hello",
-    "description_en": "hello",
-    "date": "2025-06-29T04:30:40.951Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "hello"
+    "title_zh": "功能更新",
+    "title_en": "Feature Updates",
+    "description_zh": "最近更新的功能和修复的bug",
+    "description_en": "Recently updated features and bug fixes",
+    "slug": "update",
+    "date": "2025-08-12T05:42:40.083Z",
+    "lastModified": "2025-08-12T06:21:07.903Z"
   },
   {
-    "title_zh": "Contributing to FindMyUsers",
-    "title_en": "贡献我的心",
-    "description_zh": "Hi, I'm 答案, creator of FindMyUsers. I'm excited to welcome you to our project and look forward to your contributions in making FindMyUsers even better!",
-    "description_en": "Hi, I'm Qiayue, creator of FindMyUsers. I'm excited to welcome you to our project and look forward to your contributions in making FindMyUsers even better!",
-    "date": "2024-08-16T03:57:46.153Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "how-to-contributing-to-findmyusers"
-  },
-  {
-    "title_zh": "这是我的爱",
-    "title_en": "Managing Articles in FindMyUsers Admin Panel",
-    "description_zh": "This guide will walk you through the process of viewing, editing, and creating new articles using the admin panel.",
-    "description_en": "This guide will walk you through the process of viewing, editing, and creating new articles using the admin panel.",
-    "date": "2024-08-11T13:16:44.231Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "managing-articles"
-  },
-  {
-    "title_zh": "Accessing the Admin Panel and Managing Resources in FindMyUsers",
-    "title_en": "Accessing the Admin Panel and Managing Resources in FindMyUsers",
-    "description_zh": "How to access the admin panel and manage your resource list in FindMyUsers",
-    "description_en": "How to access the admin panel and manage your resource list in FindMyUsers",
-    "date": "2024-08-11T13:14:40.737Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "accessing-admin-managing-resources"
-  },
-  {
-    "title_zh": "Configuring Environment Variables for FindMyUsers",
-    "title_en": "Configuring Environment Variables for FindMyUsers",
-    "description_zh": "How to configure FindMyUsers environment variables",
-    "description_en": "How to configure FindMyUsers environment variables",
-    "date": "2024-08-11T13:08:05.474Z",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "environment-variables"
-  },
-  {
-    "title_zh": "Installing and Deploying FindMyUsers: A Step-by-Step Guide",
-    "title_en": "Installing and Deploying FindMyUsers: A Step-by-Step Guide",
-    "description_zh": "A comprehensive guide for setting up FindMyUsers locally and deploying it to Vercel, suitable for beginners.",
-    "description_en": "A comprehensive guide for setting up FindMyUsers locally and deploying it to Vercel, suitable for beginners.",
-    "date": "2024-08-11",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "findmyusers-install-guide"
-  },
-  {
-    "title_zh": "FindMyUsers: A Dynamic, Database-Free Website Solution",
-    "title_en": "FindMyUsers: A Dynamic, Database-Free Website Solution",
-    "description_zh": "Explore the features and implementation of FindMyUsers, an innovative open-source project that combines Next.js, Tailwind CSS, and GitHub API for content management.",
-    "description_en": "Explore the features and implementation of FindMyUsers, an innovative open-source project that combines Next.js, Tailwind CSS, and GitHub API for content management.",
-    "date": "2024-08-11",
-    "lastModified": "2025-07-31T03:34:22Z",
-    "slug": "findmyusers-introduction"
+    "title_zh": "投稿须知",
+    "title_en": "Submission Guidelines",
+    "description_zh": "投递新的渠道站点的要求和方法",
+    "description_en": "Requirements and methods for submitting new channel sites",
+    "slug": "submission",
+    "date": "2025-07-28T04:16:42.854Z",
+    "lastModified": "2025-08-12T06:13:18.534Z"
   }
 ]

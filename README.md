@@ -66,7 +66,7 @@
 3. 在 `data/Site/` 目录下创建对应的 JSON 文件
 4. 提交 Pull Request
 
-详细的贡献指南请参考：[如何参与 FindMyUsers 项目贡献](https://findmyusers.app/posts/how-to-contributing-to-findmyusers)
+详细的贡献指南请参考：[如何参与 FindMyUsers 项目贡献](https://github.com/qijin-3/find_my_users/issues/1)
 
 ### 📋 开发计划
 
@@ -155,7 +155,7 @@ Visit [GitHub Issues](https://github.com/qijin-3/find_my_users/issues) to submit
 3. Create corresponding JSON files in the `data/Site/` directory
 4. Submit a Pull Request
 
-For detailed contribution guidelines, please refer to: [How to Contribute to FindMyUsers](https://findmyusers.app/posts/how-to-contributing-to-findmyusers)
+For detailed contribution guidelines, please refer to: [How to Contribute to FindMyUsers](https://github.com/qijin-3/find_my_users/issues/1)
 
 ### 📋 Development Roadmap
 
