@@ -32,8 +32,8 @@ function transformUnifiedToLocaleFormat(unifiedData: any, locale: string) {
  */
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const locale = searchParams.get('locale') || 'zh'
+    // 从查询参数中获取语言环境，默认为中文
+    const locale = request.nextUrl.searchParams.get('locale') || 'zh'
     
     // 直接读取 site-fields.json 文件
     const filePath = path.join(process.cwd(), 'data', 'json', 'site-fields.json')

@@ -40,9 +40,9 @@
 4. **🐛 Bug 反馈**：报告发现的问题
 5. **💻 代码贡献**：提交代码改进和新功能
 
-#### 投稿方式
+### 投稿方式
 
-**方式一：提交 Issue**
+#### 方式一：提交 Issue
 
 访问 [GitHub Issues](https://github.com/qijin-3/find_my_users/issues) 提交渠道信息，需要包含：
 
@@ -59,7 +59,7 @@
 - 预计曝光：该渠道预计可以给提交的产品带来多少的曝光量（阅读量）？
 - 总结：可以是你使用该渠道的一些经验分享。或是该站点的一些特点，比如seo友好，收录简单的等等
 
-**方式二：提交代码**
+#### 方式二：提交代码
 
 1. Fork 本项目
 2. 在 `data/json/sitelists.json` 中添加站点信息
@@ -129,9 +129,9 @@ You can participate in the project through the following ways:
 4. **🐛 Bug Reports**: Report issues you've found
 5. **💻 Code Contributions**: Submit code improvements and new features
 
-#### Submission Methods
+### Submission Methods
 
-**Method 1: Submit an Issue**
+#### Method 1: Submit an Issue
 
 Visit [GitHub Issues](https://github.com/qijin-3/find_my_users/issues) to submit channel information, including:
 
@@ -148,7 +148,7 @@ Visit [GitHub Issues](https://github.com/qijin-3/find_my_users/issues) to submit
 - Expected exposure: How much exposure (readership) can this channel potentially bring to submitted products?
 - Summary: This can be your experience sharing using this channel, or characteristics of this site, such as SEO-friendly, easy inclusion, etc.
 
-**Method 2: Submit Code**
+#### Method 2: Submit Code
 
 1. Fork this project
 2. Add site information in `data/json/sitelists.json`
