@@ -99,30 +99,46 @@ export default function ResourceCard({
               {resource.description}
             </p>
             
-            {/* 产品种类标签放在描述下方，固定与卡片底部间距为 24px */}
-            <div className="h-[auto] mt-0 mb-0 pb-0">
+            {/* 标签区域 - 固定高度，水平滑动 */}
+            <div className="h-[32px] overflow-hidden">
               {showCategory && resource.type && (
-                <SiteBadge 
-                  siteData={{ type: resource.type, status: resource.status, region: resource.region }}
-                  locale={locale}
-                  showType={true}
-                  showStatus={true}
-                  showRegion={true}
-                  className="text-[12px] font-normal leading-[18px]"
-                />
+                <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 h-full items-center">
+                  <SiteBadge 
+                    siteData={{ type: resource.type, status: resource.status, region: resource.region }}
+                    locale={locale}
+                    showType={true}
+                    showStatus={true}
+                    showRegion={true}
+                    className="text-[12px] font-normal leading-[18px] flex-shrink-0"
+                  />
+                  
+                  {/* 其他标签 */}
+                  {resource.tags && resource.tags.length > 0 && 
+                    resource.tags.slice(0, 3).map((tag, index) => (
+                      <SiteBadge 
+                        key={index}
+                        siteData={{ type: tag }}
+                        locale={locale}
+                        showType={true}
+                        showStatus={false}
+                        className="text-xs flex-shrink-0"
+                      />
+                    ))
+                  }
+                </div>
               )}
               
-              {/* 其他标签区域 */}
-              {resource.tags && resource.tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 mt-2 text-muted-foreground">
-                  {resource.tags.slice(0, 2).map((tag, index) => (
+              {/* 当没有主要分类时，只显示其他标签 */}
+              {!showCategory && resource.tags && resource.tags.length > 0 && (
+                <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 h-full items-center">
+                  {resource.tags.slice(0, 4).map((tag, index) => (
                     <SiteBadge 
                       key={index}
                       siteData={{ type: tag }}
                       locale={locale}
                       showType={true}
                       showStatus={false}
-                      className="text-xs"
+                      className="text-xs flex-shrink-0"
                     />
                   ))}
                 </div>
