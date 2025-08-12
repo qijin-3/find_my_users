@@ -15,7 +15,7 @@
 
 **FindMyUsers** 是专为独立开发者打造的推广渠道导航站，持续收录并评测国内外真实、可操作的产品推广免费渠道。帮助开发者找到首批用户、验证产品可行性，轻松迈出冷启动第一步。
 
-![FindMyUsers](https://toimg.xyz/file/5aa892c8e8385232fcdf3.png)
+![FindMyUsers](https://github.com/qijin-3/find_my_users/blob/main/public/Screenshot/homepage_zh.png)
 
 
 ### 🎯 项目目标
@@ -100,7 +100,7 @@
 
 **FindMyUsers** is a curated directory of marketing channels specifically designed for indie developers. We continuously collect and evaluate real, actionable free promotion channels from around the world, helping developers find their first users, validate product viability, and take the crucial first step in their cold start journey.
 
-![FindMyUsers](https://toimg.xyz/file/5aa892c8e8385232fcdf3.png)
+![FindMyUsers](https://github.com/qijin-3/find_my_users/blob/main/public/Screenshot/homepage_en.png)
 
 ### 🎯 Project Goals
 
