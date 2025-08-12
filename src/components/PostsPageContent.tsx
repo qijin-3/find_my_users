@@ -34,7 +34,7 @@ export default function PostsPageContent({ articles, locale = 'zh' }: PostsPageC
     <div className="min-h-screen bg-[#f9fafb00]">
       {/* 顶部标题栏 */}
       <div className="bg-[#ffffff00] h-[auto] pt-12">
-        <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between pt-0">
             <div>
               <h1 className="text-2xl font-bold text-foreground pb-2">{t('title')}</h1>
@@ -45,7 +45,7 @@ export default function PostsPageContent({ articles, locale = 'zh' }: PostsPageC
       </div>
 
       {/* 主要内容区域 */}
-      <div className="max-w-7xl mx-auto ml-[80px] mr-[80px] pl-0 pr-0 pt-6 pb-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-12">
         {/* @ts-ignore - ArticleList是JS文件，暂时忽略类型检查 */}
         <ArticleList articles={articles} showMoreLink={false} />
       </div>

@@ -42,7 +42,7 @@ export default async function HomePage({ params }: HomePageProps) {
   const latestArticles = allPostsData.slice(0, 4)
 
   return (
-    <div className="pl-20 pr-20 ml-0 mr-0 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       <section className="text-center pt-8 w-[auto] aspect-auto box-border">
         {/* 小人插画 */}
         <PeopleIllustration />
