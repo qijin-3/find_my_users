@@ -1,0 +1,19 @@
+{
+  "name_zh": "正版中国",
+  "name_en": "GetItFree",
+  "description_zh": "是一个分享正版软件限时免费信息的网站",
+  "description_en": "It is a website that shares time-limited free information of genuine software.",
+  "status": "suspected_unmaintained",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://www.getitfree.cn",
+  "submitMethod": "site_form",
+  "submitUrl": "https://www.getitfree.cn/contribute-page.html",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "疑似不再维护",
+  "rating_en": "Suspiciously no longer maintained."
+}

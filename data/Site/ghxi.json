@@ -1,0 +1,19 @@
+{
+  "name_zh": "果核剥壳",
+  "name_en": "GHXI",
+  "description_zh": "把绿化的，修改的绿色软件分享给大家。网站所有的资源都是免费。",
+  "description_en": "I'd like to share with you the green and modified software. All resources on the website are free.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://www.ghxi.com",
+  "submitMethod": "site_form",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "以分享绿色软件为主，并不适合独立开发者投稿",
+  "rating_en": "It mainly focuses on sharing green software and is not suitable for independent developers to submit contributions."
+}

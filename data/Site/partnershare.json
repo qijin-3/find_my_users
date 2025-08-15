@@ -1,0 +1,19 @@
+{
+  "name_zh": "PartnerShare",
+  "name_en": "PartnerShare",
+  "description_zh": "是一个为SAAS软件/APP/网站用户提供最新产品资讯、交流沟通的平台。10,000+家服务商正在通过PartnerShare展示产品，并获得潜在客户。",
+  "description_en": "It is a platform that provides the latest product information and communication channels for users of SaaS software, apps, and websites. More than 10,000 service providers are showcasing their products on PartnerShare and acquiring potential customers.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://www.partnershare.cn",
+  "submitMethod": "site_form",
+  "submitUrl": "https://brand.partnershare.cn/home",
+  "submitRequirements_zh": "需要材料类型较多：比如产品简介，认证，截图，产品资讯等材料。",
+  "submitRequirements_en": "A wide variety of materials are required, such as product introductions, certifications, screenshots, and product information.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "收录要求未知，一直卡在审核，没有明显的收录反馈机制",
+  "rating_en": "The inclusion requirements are unknown. It has been stuck in the review process, and there is no obvious inclusion feedback mechanism."
+}

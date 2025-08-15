@@ -1,0 +1,19 @@
+{
+  "name_zh": "新趣集",
+  "name_en": "Xinquji",
+  "description_zh": "发现有趣的网站与工具",
+  "description_en": "Discover interesting websites and tools",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://xinquji.com",
+  "submitMethod": "site_form",
+  "submitUrl": "https://xinquji.com/posts/create",
+  "submitRequirements_zh": "可以快速导入apple store/酷安中的产品链接",
+  "submitRequirements_en": "You can quickly import product links from the Apple Store/Coolapk.",
+  "review": "Y",
+  "reviewTime": "within_three_days",
+  "expectedExposure": "not_disclosed",
+  "rating_zh": "类似ProductHunt的平台，可创建自己的产品介绍页面，获得免费曝光。",
+  "rating_en": "A platform similar to ProductHunt where you can create your own product introduction page and get free exposure."
+}

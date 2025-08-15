@@ -1,0 +1,19 @@
+{
+  "name_zh": "ABABTOOLS",
+  "name_en": "ABABTOOLS",
+  "description_zh": "ABABTOOLS是一个一个集合了各种好玩又实用的宝藏之地。这里不仅有各种知识教程、网站、软件工具，还有硬件产品、资源，是一个无所事事不包的宝箱！",
+  "description_en": "ABABTOOLS is a treasure trove that combines all kinds of fun and useful things. Here, there are not only various knowledge tutorials, websites, and software tools but also hardware products and resources. It's a treasure chest that encompasses everything!",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://ababtools.com",
+  "submitMethod": "site_form",
+  "submitUrl": "https://ababtools.com/?post=1292",
+  "submitRequirements_zh": "符合表单即可",
+  "submitRequirements_en": "Just meet the form requirements.",
+  "review": "Y",
+  "reviewTime": "within_three_days",
+  "expectedExposure": "within_10k",
+  "rating_zh": "提供免费产品收录",
+  "rating_en": "Free product listing is provided."
+}

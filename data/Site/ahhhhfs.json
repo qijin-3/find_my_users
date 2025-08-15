@@ -1,0 +1,19 @@
+{
+  "name_zh": "ahhhhfs",
+  "name_en": "AhhhhFS",
+  "description_zh": "收集各种有趣实用的软件和APP和一些稀奇古怪的的网站",
+  "description_en": "Collect various interesting and practical software, apps, and some weird websites.",
+  "status": "running",
+  "type": "tool_navigation",
+  "region": "domestic",
+  "url": "https://www.ahhhhfs.com",
+  "submitMethod": "questionnaire",
+  "submitUrl": "https://support.qq.com/embed/411748/new-post/",
+  "submitRequirements_zh": "500字以内",
+  "submitRequirements_en": "Within 500 words.",
+  "review": "Y",
+  "reviewTime": "within_three_days",
+  "expectedExposure": "not_disclosed",
+  "rating_zh": "发布成功后会同步到X",
+  "rating_en": "It will be synced to X after the successful release."
+}

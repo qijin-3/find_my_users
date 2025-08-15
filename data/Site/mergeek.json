@@ -1,0 +1,19 @@
+{
+  "name_zh": "Mergeek",
+  "name_en": "Mergeek",
+  "description_zh": "一个产品发现及推荐的社区，致力于为仍在初创期的个人或团队提供产品发布及展示机会",
+  "description_en": "A community for product discovery and recommendation, dedicated to providing product release and display opportunities for individuals or teams in the startup phase.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://mergeek.com/zh/latest",
+  "submitMethod": "site_form",
+  "submitUrl": "https://mergeek.com/publish_project",
+  "submitRequirements_zh": "200字以内",
+  "submitRequirements_en": "Within 200 words.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "收录机制未知，没有明显的收录反馈机制",
+  "rating_en": "The indexing mechanism is unknown, and there is no obvious indexing feedback mechanism."
+}

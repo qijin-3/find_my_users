@@ -1,0 +1,19 @@
+{
+  "name_zh": "Fuun.fun",
+  "name_en": "Fuun.fun",
+  "description_zh": "互联网上有不计其数的网站，或有趣、或沙雕、或奇奇怪怪、或。。。 这些有趣的网站，因为太小众，不会被搜索引擎收录，因此几乎不会为人所知。 为了让这些有趣的网站给更多的人带来快乐，我们创建了 FUUN.FUN。",
+  "description_en": "There are countless websites on the Internet, some are interesting, some are hilarious, some are just plain weird, or... These interesting websites are too niche to be indexed by search engines, so they are hardly known to people. To bring the joy of these interesting websites to more people, we created FUUN.FUN.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://fuun.fun",
+  "submitMethod": "submit_comment",
+  "submitUrl": "https://fuun.fun/talk.html",
+  "submitRequirements_zh": "只收录网页应用",
+  "submitRequirements_en": "Only web applications are included.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "需要足够的有趣哦",
+  "rating_en": "It needs to be interesting enough!"
+}

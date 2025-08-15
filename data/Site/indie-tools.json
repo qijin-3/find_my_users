@@ -1,0 +1,19 @@
+{
+  "name_zh": "Indie Tools",
+  "name_en": "Indie Tools",
+  "description_zh": "汇聚了独立开发者在产品从想法到上线、再到增长的整个流程中可能需要用到的各类实用工具和资源。",
+  "description_en": "It brings together various practical tools and resources that independent developers may need throughout the entire process of a product, from ideation to launch and then to growth.",
+  "status": "running",
+  "type": "tool_navigation",
+  "region": "domestic",
+  "url": "https://www.indietools.work",
+  "submitMethod": "site_form",
+  "submitUrl": "https://www.indietools.work/submit",
+  "submitRequirements_zh": "需要简单对工具进行描述",
+  "submitRequirements_en": "A simple description of the tool is required.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "如果你的产品可以帮助到独立开发者，那么可以尝试提交，有机率被收录。",
+  "rating_en": "If your product can assist independent developers, you can try submitting it. There is a chance that it will be included."
+}

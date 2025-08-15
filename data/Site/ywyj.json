@@ -1,0 +1,19 @@
+{
+  "name_zh": "一网一匠",
+  "name_en": "YWYJ",
+  "description_zh": "产品发现社区，旨在打造一个服务于产品创造者和爱好者分享和交流社区。",
+  "description_en": "The product discovery community aims to create a community for product creators and enthusiasts to share and communicate.",
+  "status": "suspected_unmaintained",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://ywyj.cn",
+  "submitMethod": "site_form",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "疑似不再维护",
+  "rating_en": "It seems to be no longer maintained."
+}

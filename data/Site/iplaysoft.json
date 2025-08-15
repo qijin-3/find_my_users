@@ -1,0 +1,19 @@
+{
+  "name_zh": "异次元软件世界",
+  "name_en": "iPlaySoft",
+  "description_zh": "是一个致力于推广各种优秀实用软件、网络资源的网站。",
+  "description_en": "It is a website dedicated to promoting various excellent and practical software and online resources.",
+  "status": "running",
+  "type": "blog_newsletter",
+  "region": "domestic",
+  "url": "https://www.iplaysoft.com",
+  "submitMethod": "email",
+  "submitUrl": "https://www.iplaysoft.com/contribute",
+  "submitRequirements_zh": "需要分享对软件的原创使用体验，来稿不一定都会采用。",
+  "submitRequirements_en": "You are required to share your original experience of using the software. Not all submissions will be adopted.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "within_10k",
+  "rating_zh": "若投稿被采用，异次元会在文章中标记你的署名。也可以附上微博、博客链接等联系方式，也获得一定曝光。",
+  "rating_en": "If your submission is accepted, Yiciyuan will mark your signature in the article. You can also attach your contact information such as Weibo or blog links to gain some exposure."
+}

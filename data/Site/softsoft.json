@@ -1,0 +1,19 @@
+{
+  "name_zh": "软软科技",
+  "name_en": "SoftSoft",
+  "description_zh": "一个专注于软件发行、正版交易和社区建设的网站，可提交软件进行曝光获客。",
+  "description_en": "A website dedicated to software distribution, legitimate software transactions, and community building. You can submit your software here to gain exposure and acquire customers.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://www.softsoft.pro",
+  "submitMethod": "site_form",
+  "submitUrl": "https://www.softsoft.pro/softs/submit",
+  "submitRequirements_zh": "开发者需要完成认证才能更新",
+  "submitRequirements_en": "Developers need to complete the authentication before they can update.",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_disclosed",
+  "rating_zh": "",
+  "rating_en": ""
+}

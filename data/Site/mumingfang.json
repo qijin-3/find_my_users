@@ -1,0 +1,19 @@
+{
+  "name_zh": "霂明坊",
+  "name_en": "Mumingfang",
+  "description_zh": "创意工作者的优质导航",
+  "description_en": "A high-quality navigation for creative workers",
+  "status": "suspected_unmaintained",
+  "type": "tool_navigation",
+  "region": "domestic",
+  "url": "https://n.mumingfang.com/c/interesting-soul",
+  "submitMethod": "submit_comment",
+  "submitUrl": "https://n.mumingfang.com/url-recommend",
+  "submitRequirements_zh": "新奇，无影响阅读的广告，打动站长的理由，好看",
+  "submitRequirements_en": "Novelty, no ads that affect reading, reasons to impress webmasters, good-looking",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "within_500",
+  "rating_zh": "可以在这里分享你的创意和创造的产品，但没有明显的收录提示",
+  "rating_en": "You can share your ideas and the products you've created here, but there is no obvious indication for inclusion."
+}

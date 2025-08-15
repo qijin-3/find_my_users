@@ -1,0 +1,19 @@
+{
+  "name_zh": "小木屋",
+  "name_en": "WeChalet",
+  "description_zh": "收录国外和国内各类实用网站,内容涵盖工具、创意、设计、美食、视频、图片、旅游、文化、音乐等多领域站点资源，提供简单便捷的网上导航服务。",
+  "description_en": "It collects various types of practical websites from both abroad and at home. The content covers site resources in multiple fields such as tools, creativity, design, cuisine, videos, pictures, tourism, culture, music, etc., and provides simple and convenient online navigation services.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://wechalet.cn",
+  "submitMethod": "site_form",
+  "submitUrl": "https://wechalet.cn/appstore/add",
+  "submitRequirements_zh": "需网站截图",
+  "submitRequirements_en": "Website screenshots are needed.",
+  "review": "Y",
+  "reviewTime": "within_one_week",
+  "expectedExposure": "within_100",
+  "rating_zh": "",
+  "rating_en": ""
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "神器集",
+  "name_en": "Shenqi",
+  "description_zh": "全球实用工具精选",
+  "description_en": "",
+  "status": "stopped",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://shenqi.io",
+  "submitMethod": "site_form",
+  "submitUrl": "https://shenqi.io/new",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "一个发现分享有趣在线工具的网站。",
+  "rating_en": "A website for discovering and sharing interesting online tools."
+}

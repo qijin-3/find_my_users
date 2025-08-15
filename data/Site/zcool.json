@@ -1,0 +1,19 @@
+{
+  "name_zh": "站酷",
+  "name_en": "ZCOOL",
+  "description_zh": "设计创意社区",
+  "description_en": "Design and creative community.",
+  "status": "running",
+  "type": "design_platform",
+  "region": "domestic",
+  "url": "https://www.zcool.com.cn",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://my.zcool.com.cn/studio",
+  "submitRequirements_zh": "/",
+  "submitRequirements_en": "/",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_500",
+  "rating_zh": "可以分享产品的视觉和交互方案或者经验文章，侧面推广产品。视觉优秀的产品更加适合在站酷推广。",
+  "rating_en": "You can share the visual and interactive solutions or experience articles of the product to promote the product indirectly. Products with excellent visuals are more suitable for promotion on Zcool."
+}

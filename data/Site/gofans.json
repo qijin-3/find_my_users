@@ -1,0 +1,19 @@
+{
+  "name_zh": "Gofans",
+  "name_en": "Gofans",
+  "description_zh": "一款旨在提供Apple App优惠价格数据分析、相关热点资讯、周边生态产品推荐等资讯的互联网产品。旨在建立一个服务Apple开发者与Apple用户的生态系统，在这个生态系统中，我们将品牌、流量、变现能力赋予开发者，帮助开发者创造出影响世界 的新技术；将便捷、优质、一站式服务提供给用户。",
+  "description_en": "An internet product that aims to provide data analysis on discounted prices of Apple apps, relevant hot news, and recommendations for peripheral ecological products. It aims to establish an ecosystem for Apple developers and users. In this ecosystem, we will endow developers with brand influence, traffic, and monetization capabilities to help them create new technologies that can impact the world; and provide users with convenient, high - quality, and one - stop services.",
+  "status": "running",
+  "type": "product_showcase",
+  "region": "domestic",
+  "url": "https://gofans.cn",
+  "submitMethod": "site_form",
+  "submitUrl": "https://gofans.cn",
+  "submitRequirements_zh": "只需要提供App Store链接",
+  "submitRequirements_en": "Only the App Store link needs to be provided.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "只收录IOS应用",
+  "rating_en": "Only iOS apps are included."
+}
