@@ -14,6 +14,6 @@
   "review": "Y",
   "reviewTime": "immediately",
   "expectedExposure": "not_evaluated",
-  "rating_zh": "国内最适合build in public的社区。但要避免硬性推广产品，这种方式流量较低。比较好的方式是： 1. 分享开发过程和经验（但比较容易吸引到同行）。 2. 用户需求+情绪价值（解决用户一个小需求+有趣的视觉动效）。 3. 插入合适的关键词",
-  "rating_en": "The best community in China for building in public. However, you should avoid hard-promoting your products, as this approach generates relatively low traffic. A better way is as follows: 1. Share your development process and experiences (but this is more likely to attract peers). 2. Focus on user needs + emotional value (solve a small user need + use interesting visual animations). 3. Insert appropriate keywords."
+  "rating_zh": "国内最适合build in public的社区。但要避免硬性推广产品（会被隐性限流）。比较好的方式是： 1. 分享开发过程和经验（但比较容易吸引到同行）。 2. 用户需求+情绪价值（解决用户一个小需求+有趣的视觉动效）。 3. 插入合适的关键词",
+  "rating_en": "The best community in China for building in public. However, you should avoid hard-promoting your products (as it may lead to implicit traffic restrictions). A better approach is as follows:1. Share your development process and experiences (but this is more likely to attract peers).2. Focus on user needs and emotional value (solve a small user need + add interesting visual animations).3. Insert appropriate keywords."
 }
