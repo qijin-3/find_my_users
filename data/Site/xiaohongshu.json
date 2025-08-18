@@ -1,0 +1,19 @@
+{
+  "name_zh": "小红书",
+  "name_en": "Xiaohongshu",
+  "description_zh": "你的生活兴趣社区",
+  "description_en": "Your lifestyle interest community",
+  "status": "running",
+  "type": "social_platform",
+  "region": "domestic",
+  "url": "https://www.xiaohongshu.com/explore",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "尽量避免插入产品的网址和二维码",
+  "submitRequirements_en": "Try to avoid inserting the product's website URL and QR code.",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "国内最适合build in public的社区。但要避免硬性推广产品，这种方式流量较低。比较好的方式是： 1. 分享开发过程和经验（但比较容易吸引到同行）。 2. 用户需求+情绪价值（解决用户一个小需求+有趣的视觉动效）。 3. 插入合适的关键词",
+  "rating_en": "The best community in China for building in public. However, you should avoid hard-promoting your products, as this approach generates relatively low traffic. A better way is as follows: 1. Share your development process and experiences (but this is more likely to attract peers). 2. Focus on user needs + emotional value (solve a small user need + use interesting visual animations). 3. Insert appropriate keywords."
+}

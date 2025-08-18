@@ -1,0 +1,19 @@
+{
+  "name_zh": "CNode",
+  "name_en": "CNode",
+  "description_zh": "CNode 社区为国内最专业的 Node.js 开源技术社区，致力于 Node.js 的技术研究。",
+  "description_en": "CNode Community is the most professional open-source Node.js technology community in China, dedicated to the technical research of Node.js.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://cnodejs.org",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://cnodejs.org/?tab=share",
+  "submitRequirements_zh": "Node相关",
+  "submitRequirements_en": "Node-related",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_1k",
+  "rating_zh": "可以在分享区分享自己的产品，可以获得开发者内部的一些曝光效果。",
+  "rating_en": "You can share your own products in the sharing area and get some internal exposure among developers."
+}

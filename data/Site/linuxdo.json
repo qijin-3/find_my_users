@@ -1,0 +1,19 @@
+{
+  "name_zh": "LINUXDO",
+  "name_en": "LINUXDO",
+  "description_zh": "LINUX DO是一个以人工智能为主题的中文社区，用户可以分享自己的经验、问题、教程和资源。",
+  "description_en": "LINUX DO is a Chinese community centered around artificial intelligence, where users can share their experiences, problems, tutorials, and resources.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://linux.do",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "https://linux.do/faq",
+  "submitRequirements_en": "https://linux.do/faq",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "可以在【资源荟萃】【扬帆起航】分享自己的作品。论坛内容在谷歌等探索引擎权重非常高，但注册管理严格，需要邀请码。",
+  "rating_en": "You can share your own works in 【Resource Showcase】 and 【Set Sail】. The content on the forum has a very high weight on search engines like Google, but the registration management is strict and an invitation code is required."
+}

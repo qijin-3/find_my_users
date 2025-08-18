@@ -1,0 +1,19 @@
+{
+  "name_zh": "开源中国",
+  "name_en": "OSChina",
+  "description_zh": "中国最大的开源与 AI 技术社区之一，拥有超过 1100 万的注册用户。",
+  "description_en": "One of China's largest open-source and AI technology communities, with over 11 million registered users.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.oschina.net",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://www.oschina.net/project",
+  "submitRequirements_zh": "需开源",
+  "submitRequirements_en": "Needs to be open source.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "允许开发者发布他们的开源项目并与社区互动。",
+  "rating_en": "Allow developers to publish their open-source projects and interact with the community."
+}

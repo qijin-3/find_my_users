@@ -1,0 +1,19 @@
+{
+  "name_zh": "LearnKu",
+  "name_en": "LearnKu",
+  "description_zh": "LearnKu 是终身编程者的修道场。做最专业、严肃的技术论坛。",
+  "description_en": "LearnKu is a spiritual retreat for lifelong programmers. It aims to be the most professional and serious technical forum.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://learnku.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://learnku.com/laravel/c/creative",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_500",
+  "rating_zh": "可以在分享创造板块下发布自己的作品。",
+  "rating_en": "You can publish your own works under the Sharing and Creation section."
+}

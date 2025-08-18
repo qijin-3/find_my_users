@@ -1,0 +1,19 @@
+{
+  "name_zh": "掘金",
+  "name_en": "Juejin",
+  "description_zh": "可以通过发布文章，分享产品并与其他开发者互动。",
+  "description_en": "You can share your products and interact with other developers by publishing articles.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://juejin.cn",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://juejin.cn/creator/home",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_100",
+  "rating_zh": "面向互联网技术人的内容分享平台。",
+  "rating_en": "A content sharing platform for Internet technology professionals."
+}

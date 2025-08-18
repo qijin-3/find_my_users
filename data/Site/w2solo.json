@@ -1,0 +1,19 @@
+{
+  "name_zh": "W2solo",
+  "name_en": "W2solo",
+  "description_zh": "可发帖介绍自己的产品，想法创意，或是成功失败的经验。",
+  "description_en": "You can post messages to introduce your products, ideas, or experiences of success and failure.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://w2solo.com/topics/newproduct",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://w2solo.com/topics/new",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_100",
+  "rating_zh": "独立开发者社区，致力于搭建和维护好国内独立开发者圈子和氛围。",
+  "rating_en": "The independent developer community is committed to building and maintaining a good community and atmosphere for domestic independent developers."
+}

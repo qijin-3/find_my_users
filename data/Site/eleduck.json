@@ -1,0 +1,19 @@
+{
+  "name_zh": "电鸭社区",
+  "name_en": "EleDuck",
+  "description_zh": "电鸭是国内最早的远程工作社区。我们倡导“只工作，不上班”的生活方式，努力推动多样化工作方式在国内的渐进式发展。",
+  "description_en": "Dianya is the earliest remote work community in China. We advocate the lifestyle of work only, no commuting and strive to promote the gradual development of diverse work modes in China.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://eleduck.com/categories/15",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://eleduck.com/categories/15",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_500",
+  "rating_zh": "可以分享个人作品的创作灵感、开发经验、运营过程等；但不得只罗列产品功能来借机营销。如果产品是面向远程工作者、数字游民，推广效果会更好。",
+  "rating_en": "You can share the creative inspiration, development experience, and operation process of your personal works. However, you are not allowed to simply list product features for the purpose of marketing. If the product is targeted at remote workers and digital nomads, the promotion effect will be better."
+}

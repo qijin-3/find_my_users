@@ -1,0 +1,19 @@
+{
+  "name_zh": "知乎",
+  "name_en": "Zhihu",
+  "description_zh": "知乎是一个中文互联网上的知识分享社区，以“可信赖的问答社区”为定位，用户可以通过提问、回答、评论等方式进行知识互动和分享。",
+  "description_en": "Zhihu is a knowledge-sharing community on the Chinese Internet, positioning itself as a reliable Q&A community. Users can engage in knowledge interaction and sharing through methods such as asking questions, providing answers, and leaving comments.",
+  "status": "running",
+  "type": "social_platform",
+  "region": "domestic",
+  "url": "https://www.zhihu.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "可以发帖推广或者在其他相关问答下进行回答，注意包含一些长尾关键词的放置。",
+  "rating_en": "You can post promotional content or answer questions in other relevant Q&A sections. Make sure to include some long-tail keywords."
+}

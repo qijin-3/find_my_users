@@ -1,0 +1,19 @@
+{
+  "name_zh": "Ruby-China",
+  "name_en": "Ruby China",
+  "description_zh": "由众多爱好者共同维护的 Ruby 中文社区",
+  "description_en": "A Chinese Ruby community maintained by numerous enthusiasts.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://ruby-china.org",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "论坛内技术分享和招聘信息居多。但可以试着在【分享】和【创业】板块在分享自己的作品",
+  "rating_en": "Most of the content in the forum is about technical sharing and recruitment information. However, you can try to share your own works in the Sharing and Entrepreneurship sections."
+}

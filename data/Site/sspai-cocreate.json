@@ -1,0 +1,19 @@
+{
+  "name_zh": "少数派-共同创造",
+  "name_en": "SSPAI CoCreate",
+  "description_zh": "是少数派(SSPAI) 平台推出的一种合作模式，旨在让用户深度参与到产品和内容的创作过程中，从传统的“被动接受”转变为“共同创造”的主动参与者。这种模式的核心在于，用户不再仅仅是产品的消费者，而是可以参与到从产品设计、内容策划到最终成型的全过程，共同打造出更符合用户需求和期待的产品。",
+  "description_en": "It is a cooperation model launched by the SSPAI platform. It aims to enable users to deeply participate in the creation process of products and content, transforming them from traditional passive receivers into active participants in co - creation. The core of this model is that users are no longer just consumers of products. Instead, they can participate in the entire process from product design, content planning to the final formation, jointly creating products that better meet users' needs and expectations.",
+  "status": "running",
+  "type": "media",
+  "region": "domestic",
+  "url": "https://sspai.com/create",
+  "submitMethod": "questionnaire",
+  "submitUrl": "https://sspaime.feishu.cn/share/base/form/shrcniXIy137STmluvlHfsz8TWh",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "",
+  "rating_en": ""
+}

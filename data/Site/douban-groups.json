@@ -1,0 +1,19 @@
+{
+  "name_zh": "豆瓣小组",
+  "name_en": "Douban Groups",
+  "description_zh": "用户可以加入感兴趣的小组，与其他members 围绕特定主题进行讨论和分享。豆瓣小组的架构类似于Google Groups，旨在提供一个志同道合的人们聚集在一起，讨论共同兴趣爱好的平台。",
+  "description_en": "Users can join groups they are interested in and discuss and share with other members around specific topics. The structure of Douban Groups is similar to that of Google Groups, aiming to provide a platform where like-minded people can gather and discuss their common interests.",
+  "status": "running",
+  "type": "social_platform",
+  "region": "domestic",
+  "url": "https://www.douban.com/group/explore",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "遵守小组的规范",
+  "submitRequirements_en": "Abide by the group's rules.",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "可以根据你产品的目标用户或解决的问题找到适合的小组进行产品讨论和分享，但要避免硬性推广",
+  "rating_en": "You can find suitable groups based on the target users of your product or the problems it solves for product discussions and sharing, but avoid hard promotion."
+}

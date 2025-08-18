@@ -1,0 +1,19 @@
+{
+  "name_zh": "吾爱破解论坛",
+  "name_en": "52PoJie",
+  "description_zh": "吾爱破解论坛深耕软件逆向工程与反病毒技术领域，汇聚众多技术爱好者的智慧与经验，共同探索与分享前沿安全技术和防护策略，构建业内最具影响力的技术交流平台。",
+  "description_en": "52pojie.cn has been deeply involved in the fields of software reverse engineering and anti-virus technology. It brings together the wisdom and experience of numerous technology enthusiasts, who jointly explore and share cutting-edge security technologies and protection strategies, and build the most influential technology exchange platform in the industry.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.52pojie.cn/forum.php?mod=forumdisplay&fid=2&filter=author&orderby=dateline",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://www.52pojie.cn/forum.php?mod=forumdisplay&fid=2&filter=typeid&typeid=4&orderby=dateline",
+  "submitRequirements_zh": "必须加上软件正常运行截图、软件介绍和使用说明。不能添加网站。不能添加个人联系方式。",
+  "submitRequirements_en": "Screenshots of the software running normally, software introduction, and usage instructions must be added. Do not add websites. Do not add personal contact information.",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "within_2k",
+  "rating_zh": "可以在【原创发布区】发布自己的产品进行曝光。",
+  "rating_en": "You can publish your own products in the 【Original Publishing Area】 for exposure."
+}

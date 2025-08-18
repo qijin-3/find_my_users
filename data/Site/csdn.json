@@ -1,0 +1,19 @@
+{
+  "name_zh": "CSDN",
+  "name_en": "CSDN",
+  "description_zh": "CSDN 作为中国专业开发者社区、开源与大模型时代的开发者生产力平台，为开发者和开发组织提供内容、代码、工具服务，为技术企业提供生态市场与人才服务。",
+  "description_en": "As a professional developer community in China and a developer productivity platform in the era of open source and large models, CSDN provides content, code, and tool services for developers and development organizations, and offers ecological market and talent services for technology enterprises.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.csdn.net",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_1k",
+  "rating_zh": "一个面向开发者的技术社区，允许开发者发布文章，分享他们的产品并与其他开发者互动。可开通博客，发布文章进行曝光获客，特别适合SEO，该网站对搜索引擎收录特别友好。",
+  "rating_en": "A technical community for developers that allows them to publish articles, share their products, and interact with other developers. You can open a blog and publish articles to gain exposure and acquire customers. It is especially suitable for SEO as the website is very friendly to search engine indexing."
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "Solo 社区",
+  "name_en": "Solo Community",
+  "description_zh": "由众多独立开发者一起组建，分享最新动态、推动产品落地及运营和市场化。你能在这里找到资源和灵感，完成第一桶金的收入。我们的口号是：小产品，快变现~",
+  "description_en": "Established by numerous independent developers, we share the latest trends, promote product implementation, operation, and marketization. You can find resources and inspiration here and earn your first pot of gold. Our slogan is: Small products, quick monetization~",
+  "status": "suspected_unmaintained",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://solo.xin",
+  "submitMethod": "email",
+  "submitUrl": "https://solo.xin/product",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "可以分享自己的产品或者加入solo计划。但该站点从3月份开始不再更新，疑似不再维护。",
+  "rating_en": "You can share your own products or join the Solo plan. However, this site has not been updated since March and it seems to be no longer maintained."
+}

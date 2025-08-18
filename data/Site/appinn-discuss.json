@@ -1,0 +1,19 @@
+{
+  "name_zh": "小众软件-讨论分享",
+  "name_en": "AppInn - Discuss",
+  "description_zh": "小众软件讨论分享社区",
+  "description_en": "Community for discussing niche software.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://meta.appinn.net/c/discuss-and-share/6",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://meta.appinn.net/c/discuss-and-share/6",
+  "submitRequirements_zh": "讨论的话题不限，但不能直接推广产品",
+  "submitRequirements_en": "The topics for discussion are not limited, but direct product promotion is not allowed.",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_100",
+  "rating_zh": "在产品早期可以在讨论频道进行快速讨论和验证。审核要求相对宽松，但推广请去发现频道",
+  "rating_en": "In the early stage of the product, you can conduct quick discussions and validations in the discussion channel. The review requirements are relatively lenient, but please go to the discovery channel for promotion."
+}

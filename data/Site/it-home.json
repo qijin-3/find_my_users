@@ -1,0 +1,19 @@
+{
+  "name_zh": "IT之家",
+  "name_en": "IT Home",
+  "description_zh": "IT圈，原软媒论坛和IT之家社区，庞大人气和数量的兴趣圈和话题基地，分享知识、分享正能量、分享成长、分享前沿科技和数码世界都可以",
+  "description_en": "The IT circle, formerly the Ruancai Forum and the IT Home community, is a huge and popular interest circle and topic base. You can share knowledge, positive energy, personal growth, cutting - edge technology, and the digital world here.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.ithome.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://dyn.ithome.com/tougao/",
+  "submitRequirements_zh": "只能在手机app上进行投稿。 或者通过金山文档撰写并导入。",
+  "submitRequirements_en": "Submissions can only be made via the mobile app. Alternatively, you can write in WPS Docs and import the content.",
+  "review": "N",
+  "reviewTime": "unknown",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "未评测",
+  "rating_en": "Not evaluated"
+}

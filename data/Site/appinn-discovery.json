@@ -1,0 +1,19 @@
+{
+  "name_zh": "小众软件-发现频道",
+  "name_en": "AppInn - Discovery",
+  "description_zh": "小众软件是一个分享、体验、评测电脑软件、手机应用、互联网产品的网站",
+  "description_en": "Minority Software is a website that shares, experiences, and reviews computer software, mobile applications, and Internet products.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://meta.appinn.net/latest",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://meta.appinn.net/c/faxian/10",
+  "submitRequirements_zh": "需要符合站内的投稿要求，如果是收费或者需要注册，需要标明",
+  "submitRequirements_en": "It is necessary to meet the submission requirements of the website. If it is a paid submission or requires registration, it should be clearly indicated.",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_500",
+  "rating_zh": "提交软件、应用、服务，也可以是数码产品。发布成功后会同步到X",
+  "rating_en": "Submit software, applications, services, or digital products. After successful publication, they will be synchronized to X."
+}

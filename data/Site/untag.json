@@ -1,0 +1,19 @@
+{
+  "name_zh": "UNTAG",
+  "name_en": "UNTAG",
+  "description_zh": "本站的英文名为 #UNTAG，缩写为 UTGD。UNTAG 一词取“移除标签”之意向。本站不从内容上限制自己，作者们也不从思想和立场上限制自己。 本站在成立之初所希望提供的价值有二。其一，提供一个“解决问题”之处；其二，提供思维框架的基本组成单元。",
+  "description_en": "The English name of this website is #UNTAG, abbreviated as UTGD. The word UNTAG implies removing tags. This website does not restrict itself in terms of content, and the authors do not restrict themselves in terms of thoughts and stances. There are two values that this website hoped to provide at the beginning of its establishment. Firstly, it provides a place to solve problems; secondly, it provides the basic building blocks of a thinking framework.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://utgd.net",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://forum.unt.ag/c/share/6",
+  "submitRequirements_zh": "原创，避免硬性推广，不要在标题中包含不必要的数字和网站名称。",
+  "submitRequirements_en": "Original, avoid hard promotion, and do not include unnecessary numbers and website names in the title.",
+  "review": "Y",
+  "reviewTime": "within_three_days",
+  "expectedExposure": "not_disclosed",
+  "rating_zh": "支持开发者以投稿文章或发帖，以自荐形式在社区板块内推荐应用和产品。但注意不要过于频繁的推广，产品的重点要放在激发好奇心。",
+  "rating_en": "Developers are supported to recommend their apps and products in the community section by submitting articles or posting threads in a self - recommendation manner. However, note that you should not promote too frequently, and the focus of your product should be on arousing curiosity."
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "人人都是产品经理",
+  "name_en": "PMCAFF",
+  "description_zh": "人人都是产品经理致力为产品新人、产品经理等广大产品爱好者打造一个良好的学习交流平台。深度剖析国内外互联网业内动态，分享产品设计、交互设计、视觉设计、用户体验相关的内容",
+  "description_en": "Everyone Can Be a Product Manager is committed to creating a good learning and communication platform for new product enthusiasts, product managers, and a wide range of product lovers. It conducts in - depth analyses of the domestic and international Internet industry trends and shares content related to product design, interaction design, visual design, and user experience.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.woshipm.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "需要避免发出过于相似的主题，容易被拒绝",
+  "submitRequirements_en": "You need to avoid sending overly similar topics, as they are likely to be rejected.",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_10k",
+  "rating_zh": "不可以直接推广产品，但是可以通过以下方式进行软性推广： 1. 分享产品的制作过程，比如AI编程的方法。 2. 分享产品设计的方法论。 3.分享产品推广的经验和过程的反思等等",
+  "rating_en": "Direct product promotion is not allowed, but soft promotion can be carried out in the following ways: 1. Share the product's production process, such as AI programming methods. 2. Share the methodology of product design. 3. Share the experience of product promotion and reflections on the process, etc."
+}

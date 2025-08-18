@@ -1,0 +1,19 @@
+{
+  "name_zh": "V2EX",
+  "name_en": "V2EX",
+  "description_zh": "V2EX 是创意工作者们的社区。这里目前汇聚了超过 750,000 名主要来自互联网行业、游戏行业和媒体行业的创意工作者。V2EX 希望能够成为创意工作者们的生活和事业的一部分。",
+  "description_en": "V2EX is a community for creative workers. Currently, it has brought together over 750,000 creative workers mainly from the internet, gaming, and media industries. V2EX hopes to become a part of the lives and careers of creative workers.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.v2ex.com/go/create",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://www.v2ex.com/go/create",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_1k",
+  "rating_zh": "可以在分享创造频道发布自己的最新作品，可以免费曝光，主要受众人群为程序员、产品经理等",
+  "rating_en": "You can post your latest works on the sharing and creation channel, where they will be exposed for free. The main audience includes programmers, product managers, etc."
+}

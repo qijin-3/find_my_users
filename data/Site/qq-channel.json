@@ -1,0 +1,19 @@
+{
+  "name_zh": "qq频道",
+  "name_en": "QQ Channel",
+  "description_zh": "QQ 频道是腾讯QQ 推出的一种类似Discord 的新功能，旨在提供一个娱乐协作的新方式，让用户可以找到志同道合的伙伴，并进行各种互动和交流。",
+  "description_en": "QQ Channels is a new Discord-like feature launched by Tencent QQ. It aims to provide a new way for entertainment and collaboration, enabling users to find like-minded partners and engage in various interactions and exchanges.",
+  "status": "running",
+  "type": "social_platform",
+  "region": "domestic",
+  "url": "https://pd.qq.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "请遵守频道的规范",
+  "submitRequirements_en": "Please abide by the channel's regulations.",
+  "review": "Y",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "你可以找到合适的频道在里面进行发帖，或者寻找第一批用户。",
+  "rating_en": "You can find suitable channels to post in or look for the first batch of users."
+}

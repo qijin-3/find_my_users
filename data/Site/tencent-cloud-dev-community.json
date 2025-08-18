@@ -1,0 +1,19 @@
+{
+  "name_zh": "腾讯云开发者社区",
+  "name_en": "Tencent Cloud Dev Community",
+  "description_zh": "鼓励原创的技术创作，提供可信赖的内容，挖掘技术的价值，培育分享的土壤。",
+  "description_en": "Encourage original technical creations, provide reliable content, explore the value of technology, and cultivate a fertile ground for sharing.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://cloud.tencent.com/developer",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "需技术深度",
+  "submitRequirements_en": "Requires in-depth technical knowledge.",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_500",
+  "rating_zh": "可以分享自己的产品，但直接写推广文效果可能比较差。",
+  "rating_en": "You can share your own products, but directly writing promotional texts may not yield good results."
+}

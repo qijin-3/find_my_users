@@ -1,0 +1,19 @@
+{
+  "name_zh": "NodeSeek",
+  "name_en": "NodeSeek",
+  "description_zh": "NodeSeek旨在为主机爱好者打造高品质社区，传递行业新闻，分享技术心得。在这里，用户主要讨论的话题包括服务器行业新闻、优惠信息、开发经验与建站心得、开源项目与实用工具、pt、域名等。我们希望这里能够成为一个有效的主机信息聚集地，希望它能成长为一个有用的社群。",
+  "description_en": "NodeSeek aims to build a high-quality community for hosting enthusiasts, deliver industry news, and share technical insights. Here, the topics mainly discussed by users include server industry news, discount information, development experience and website building insights, open-source projects and practical tools, PT, domain names, etc. We hope this can become an effective gathering place for hosting information and grow into a useful community.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.nodeseek.com",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "unknown",
+  "expectedExposure": "within_500",
+  "rating_zh": "也会交流开源项目与实用工具。但注册比较严格，需要邀请码",
+  "rating_en": "There will also be exchanges on open-source projects and practical tools. However, the registration is rather strict and requires an invitation code."
+}

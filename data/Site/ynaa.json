@@ -1,0 +1,19 @@
+{
+  "name_zh": "YNAA",
+  "name_en": "YNAA",
+  "description_zh": "YNAA (Your Need An Adventure): 不再独自流浪。我们是为全球数字游民打造的专属社区与资源平台，让你在世界的每一个角落，都能找到归属感和下一个精彩目的地。",
+  "description_en": "YNAA (Your Need An Adventure): No more wandering alone. We are an exclusive community and resource platform tailored for digital nomads worldwide, enabling you to find a sense of belonging and your next exciting destination in every corner of the world.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://www.ynaa.net",
+  "submitMethod": "site_submission",
+  "submitUrl": "https://www.ynaa.net/create-topic",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "within_100",
+  "rating_zh": "",
+  "rating_en": ""
+}

@@ -1,0 +1,19 @@
+{
+  "name_zh": "乌鸦嘴",
+  "name_en": "WYZ",
+  "description_zh": "一个面向创业者和独立开发者的新手社区。用户在这里可以分享创业故事和职场经验，同时也被鼓励分享技术心得以帮助他人。",
+  "description_en": "A newbie community for entrepreneurs and independent developers. Users can share their startup stories and work experience here, and they are also encouraged to share their technical insights to help others.",
+  "status": "running",
+  "type": "vertical_forum",
+  "region": "domestic",
+  "url": "https://wyz.xyz",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "Y",
+  "reviewTime": "within_one_day",
+  "expectedExposure": "within_500",
+  "rating_zh": "乌鸦嘴原先是葛二蛋的个人技术学习的记录和分享平台，逐渐发展成为一个有固定访问量的社区。所以每个帖子和回复站长都会亲自审核，速度不确定。",
+  "rating_en": "Crow's Mouth was originally a platform for Ge Erdan to record and share his personal technology learning experiences. It has gradually evolved into a community with a stable number of visitors. Therefore, the webmaster will personally review each post and reply, but the review speed is uncertain."
+}

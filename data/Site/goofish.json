@@ -1,0 +1,19 @@
+{
+  "name_zh": "咸鱼兴趣圈",
+  "name_en": "Goofish",
+  "description_zh": "闲鱼兴趣圈是闲鱼App内基于用户兴趣爱好形成的一个社交圈子，用户可以在其中交流、分享、交易与特定兴趣相关的闲置物品和信息，并与其他同好者互动。",
+  "description_en": "Xianyu Interest Circles are social communities formed within the Xianyu App based on users' interests. Users can communicate, share, and trade second-hand items and information related to specific interests in these circles, and interact with other like-minded people.",
+  "status": "running",
+  "type": "social_platform",
+  "region": "domestic",
+  "url": "https://www.goofish.com/",
+  "submitMethod": "site_submission",
+  "submitUrl": "",
+  "submitRequirements_zh": "",
+  "submitRequirements_en": "",
+  "review": "N",
+  "reviewTime": "immediately",
+  "expectedExposure": "not_evaluated",
+  "rating_zh": "适合一些本地生活或者社交类型的产品进行推广",
+  "rating_en": "It is suitable for promoting some local life or social products."
+}
