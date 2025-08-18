@@ -1,5 +1,14 @@
 [
   {
+    "title_zh": "独立开发者的社交媒体内容策略指南",
+    "title_en": "Social media content strategy guide for indie developers",
+    "description_zh": "这是一份面向独立开发者的内容策略指南，教你如何通过社交媒体进行 Build in Public。从想法验证到产品上线与增长，每个阶段都有实用的内容主题、标签和标题参考，帮助你积累用户、建立个人品牌。",
+    "description_en": "A practical content strategy guide for indie developers to Build in Public on social media. From idea validation to launch and growth, each stage includes themes, hashtags, and sample titles to help you gain users and build your brand.",
+    "slug": "bip101",
+    "date": "2025-08-13T08:00:00.000Z",
+    "lastModified": "2025-08-13T08:00:00.000Z"
+  },
+  {
     "title_zh": "渠道更新",
     "title_en": "Channel Updates",
     "description_zh": "最近更新的渠道站点",
