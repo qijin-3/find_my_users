@@ -9,9 +9,22 @@ const handleI18nRouting = createMiddleware(routing);
 export function middleware(request) {
   const path = request.nextUrl.pathname;
   
-  // 跳过根路径，让客户端组件处理重定向
+  // 处理根路径的重定向
   if (path === '/') {
-    return NextResponse.next();
+    // 获取Accept-Language头来检测用户语言偏好
+    const acceptLanguage = request.headers.get('accept-language') || '';
+    
+    // 检测是否偏好中文
+    const prefersChinese = acceptLanguage.includes('zh') || 
+                          acceptLanguage.includes('CN') || 
+                          acceptLanguage.includes('TW') || 
+                          acceptLanguage.includes('HK');
+    
+    // 选择目标语言
+    const targetLocale = prefersChinese ? 'zh' : 'en';
+    
+    // 服务器端重定向到对应语言版本
+    return NextResponse.redirect(new URL(`/${targetLocale}`, request.url));
   }
 
   // 检查是否是需要认证的路径（处理带locale前缀的路径）
