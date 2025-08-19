@@ -1,5 +1,6 @@
 // components/ArticleList.js
 'use client'
+import React from 'react'
 import { Link } from '@/i18n/navigation'
 import { useTranslations } from 'next-intl'
 import { Calendar } from '@phosphor-icons/react'
@@ -33,29 +34,30 @@ export default function ArticleList({ articles, showMoreLink = true }) {
           </Link>
         </div>
       )}
-      <div className="space-y-6">
+      <div className="space-y-6 flex flex-col">
         {articles.map(({ slug, title, description, lastModified }) => (
-          <Card key={slug} className="border-2 rounded-[24px] cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-105 group">
-            <CardHeader className="border-0">
-              {lastModified && (
-                <div className="text-sm mb-2 text-muted-foreground flex items-center gap-2">
-                  <Calendar size={16} />
-                  {t('lastModified')}: {new Date(lastModified).toLocaleDateString('zh-CN', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit'
-                  })}
-                </div>
-              )}
-              <Link 
-                href={`/posts/${slug}`}
-                className="text-muted-foreground hover:text-foreground/80 transition-colors inline-flex items-center gap-1"
-              >
-                <CardTitle className="text-[20px] text-foreground">{title}</CardTitle>
-              </Link>
-              <CardDescription className="text-muted-foreground">{description}</CardDescription>
-            </CardHeader>
-          </Card>
+          <Link 
+            key={slug}
+            href={`/posts/${slug}`}
+            className="text-muted-foreground hover:text-foreground/80 transition-colors"
+          >
+            <Card className="border-2 rounded-[24px] cursor-pointer md:transition-all duration-300 hover:shadow-lg hover:scale-105 group">
+              <CardHeader className="border-0">
+                {lastModified && (
+                  <div className="text-sm mb-2 text-muted-foreground flex items-center gap-2">
+                    <Calendar size={16} />
+                    {t('lastModified')}: {new Date(lastModified).toLocaleDateString('zh-CN', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit'
+                    })}
+                  </div>
+                )}
+                  <CardTitle className="text-[20px] text-foreground">{title}</CardTitle>
+                <CardDescription className="text-muted-foreground">{description}</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
         ))}
       </div>
     </section>

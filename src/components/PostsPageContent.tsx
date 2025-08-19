@@ -1,7 +1,7 @@
 'use client'
 
+import React from 'react'
 import { useTranslations } from 'next-intl'
-// @ts-ignore - ArticleList是JS文件，暂时忽略类型检查
 import ArticleList from '@/components/ArticleList'
 
 /**

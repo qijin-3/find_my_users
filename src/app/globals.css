@@ -212,3 +212,17 @@
     display: none;  /* Safari and Chrome */
   }
 }
+
+/* 更改dark mode下prose的文本颜色，修复可读性 */
+.dark .prose {
+  color: #fff;
+}
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6,
+.dark .prose strong {
+  color: #fff;
+}
