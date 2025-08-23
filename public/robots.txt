@@ -1,0 +1,27 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+Disallow: /test-animation
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+
+# Baiduspider
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /login
+
+# Host
+Host: https://findmyusers.com
+
+# Sitemaps
+Sitemap: https://findmyusers.com/sitemap.xml

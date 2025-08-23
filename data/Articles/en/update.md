@@ -1,5 +1,10 @@
 # Feature Updates
 
+## August 23, 2025
+- User Experience Enhancements 🚀
+  - Improved reading experience in dark mode @Johnson (Xiuping) Wu
+- Added SEO optimizations
+
 ## August 13, 2025
 - User Experience Enhancements 🚀
   - Optimized language switching mechanism by removing intermediate redirect page for smoother navigation

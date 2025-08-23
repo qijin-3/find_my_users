@@ -11,6 +11,8 @@ import { remark } from 'remark'
 import html from 'remark-html'
 import { getI18nArticleMeta } from '@/lib/i18n-data'
 import AnimatedText from '@/components/ui/animated-text'
+import StructuredData, { generateArticleStructuredData } from '@/components/StructuredData'
+import { Metadata } from 'next'
 
 interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>
@@ -62,18 +64,85 @@ function getArticleData(slug: string, locale: string): PostData | null {
 /**
  * 生成页面元数据
  */
-export async function generateMetadata({ params }: PostPageProps) {
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
   const { locale, slug } = await params
   const meta = getI18nArticleMeta(slug, locale)
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://findmyusers.com'
+  
   if (!meta) {
     return {
       title: 'Article Not Found',
+      robots: {
+        index: false,
+        follow: false,
+      }
     }
   }
 
+  const articleUrl = `${siteUrl}/${locale}/posts/${slug}`
+  const imageUrl = `${siteUrl}/Screenshot/homepage_${locale}.png`
+
   return {
-    title: `${meta.title}`,
+    title: meta.title,
     description: meta.description || `Read about ${meta.title} on FindMyUsers`,
+    keywords: locale === 'zh' 
+      ? '独立开发者,产品推广,用户获取,营销策略,创业经验'
+      : 'indie developers,product promotion,user acquisition,marketing strategy,startup experience',
+    authors: [{ name: 'FindMyUsers Team' }],
+    creator: 'FindMyUsers',
+    publisher: 'FindMyUsers',
+    category: 'Technology',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    openGraph: {
+      type: 'article',
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
+      url: articleUrl,
+      siteName: 'FindMyUsers',
+      title: meta.title,
+      description: meta.description || `Read about ${meta.title} on FindMyUsers`,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+          type: 'image/png',
+        },
+      ],
+      publishedTime: meta.date,
+      modifiedTime: meta.lastModified || meta.date,
+      authors: ['FindMyUsers Team'],
+      section: 'Technology',
+      tags: locale === 'zh' 
+        ? ['独立开发者', '产品推广', '用户获取']
+        : ['indie developers', 'product promotion', 'user acquisition'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@findmyusers',
+      creator: '@findmyusers',
+      title: meta.title,
+      description: meta.description || `Read about ${meta.title} on FindMyUsers`,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: articleUrl,
+      languages: {
+        'zh-CN': `${siteUrl}/zh/posts/${slug}`,
+        'en-US': `${siteUrl}/en/posts/${slug}`,
+        'x-default': `${siteUrl}/zh/posts/${slug}`,
+      },
+    },
   }
 }
 
@@ -107,8 +176,20 @@ export default async function PostPage({ params }: PostPageProps) {
     .process(postData.content)
   const contentHtml = processedContent.toString()
   
+  // 生成结构化数据
+  const structuredData = generateArticleStructuredData({
+    title: meta.title,
+    description: meta.description || '',
+    slug: slug,
+    date: meta.date,
+    content: postData.content,
+    locale: locale
+  })
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <>
+      <StructuredData data={structuredData} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <article className="max-w-4xl mx-auto">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-gray-500 mb-6">
@@ -185,6 +266,7 @@ export default async function PostPage({ params }: PostPageProps) {
         </Link>
       </div>
       </article>
-    </div>
+      </div>
+    </>
   )
 }

@@ -6,6 +6,7 @@ import ArticleList from '@/components/ArticleList'
 import SiteList from '@/components/SiteList'
 import PeopleIllustration from '@/components/PeopleIllustration'
 import AnimatedText from '@/components/ui/animated-text'
+import StructuredData, { generateWebsiteStructuredData, generateOrganizationStructuredData } from '@/components/StructuredData'
 
 interface HomePageProps {
   params: Promise<{ locale: string }>
@@ -41,8 +42,16 @@ export default async function HomePage({ params }: HomePageProps) {
   // 获取最新的4篇文章
   const latestArticles = allPostsData.slice(0, 4)
 
+  // 生成结构化数据
+  const structuredDataList = [
+    generateWebsiteStructuredData(locale),
+    generateOrganizationStructuredData()
+  ]
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <>
+      <StructuredData data={structuredDataList} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       <section className="text-center pt-8 w-[auto] aspect-auto box-border">
         {/* 小人插画 */}
         <PeopleIllustration />
@@ -72,6 +81,7 @@ export default async function HomePage({ params }: HomePageProps) {
       <SiteList sites={latestSites} locale={locale} />
       {/* @ts-ignore - ArticleList 组件使用 .js 文件，类型检查暂时忽略 */}
       <ArticleList articles={latestArticles} showMoreLink={true} />
-    </div>
+      </div>
+    </>
   )
 }

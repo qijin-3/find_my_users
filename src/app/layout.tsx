@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import { Providers } from '@/components/providers'
 import { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
+import SEOTags from '@/components/SEOTags'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -33,6 +34,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html suppressHydrationWarning>
+      <head>
+        <SEOTags />
+      </head>
       <body className={inter.className}>
         <Providers>
           {children}

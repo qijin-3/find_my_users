@@ -8,7 +8,9 @@ import { ArrowLeft, CaretRight } from '@phosphor-icons/react/dist/ssr'
 import AnimatedTextServer from '@/components/ui/animated-text-server'
 import SiteBadge from '@/components/ui/site-badge'
 import SiteActionButtons from '@/components/SiteActionButtons'
+import StructuredData, { generateSiteDetailStructuredData } from '@/components/StructuredData'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 // 类型定义
 interface Resource {
@@ -65,23 +67,81 @@ export async function generateStaticParams(): Promise<{ locale: string; slug: st
  * @param {Object} params - 路由参数
  * @returns {Object} 页面元数据
  */
-export async function generateMetadata({ params }: SitePageProps) {
+export async function generateMetadata({ params }: SitePageProps): Promise<Metadata> {
   const { locale, slug } = await params
   const siteData = await getI18nSiteData(slug, locale)
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://findmyusers.com'
   
   if (!siteData) {
     return {
       title: locale === 'zh' ? '站点未找到' : 'Site Not Found',
+      robots: {
+        index: false,
+        follow: false,
+      }
     }
   }
 
+  const pageUrl = `${siteUrl}/${locale}/site/${slug}`
+  const imageUrl = getWebsiteScreenshotUrl(siteData.url)
+  const pageTitle = `${siteData.name} - ${locale === 'zh' ? '站点详情' : 'Site Details'}`
+
   return {
-    title: `${siteData.name} - ${locale === 'zh' ? '站点详情' : 'Site Details'}`,
+    title: pageTitle,
     description: siteData.description,
+    keywords: locale === 'zh' 
+      ? `${siteData.name},产品推广,用户获取,营销渠道,独立开发者工具`
+      : `${siteData.name},product promotion,user acquisition,marketing channels,indie developer tools`,
+    authors: [{ name: 'FindMyUsers Team' }],
+    creator: 'FindMyUsers',
+    publisher: 'FindMyUsers',
+    category: 'Technology',
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+    openGraph: {
+      type: 'website',
+      locale: locale === 'zh' ? 'zh_CN' : 'en_US',
+      url: pageUrl,
+      siteName: 'FindMyUsers',
+      title: pageTitle,
+      description: siteData.description,
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+          alt: `${siteData.name} screenshot`,
+          type: 'image/png',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@findmyusers',
+      creator: '@findmyusers',
+      title: pageTitle,
+      description: siteData.description,
+      images: [imageUrl],
+    },
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        'zh-CN': `${siteUrl}/zh/site/${slug}`,
+        'en-US': `${siteUrl}/en/site/${slug}`,
+        'x-default': `${siteUrl}/zh/site/${slug}`,
+      },
+    },
   }
 }
-
-
 
 /**
  * 获取网站缩略截图URL
@@ -122,10 +182,20 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
     notFound()
   }
 
-
+  // 生成结构化数据
+  const structuredData = generateSiteDetailStructuredData({
+    name: siteData.name,
+    description: siteData.description,
+    url: siteData.url,
+    slug: slug,
+    locale: locale,
+    category: siteData.type
+  })
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <>
+      <StructuredData data={structuredData} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <article className="max-w-4xl mx-auto">
       {/* Breadcrumb navigation */}
       <nav className="flex items-center text-sm text-foreground mb-6">
@@ -236,6 +306,7 @@ export default async function SiteDetailPage({ params }: SitePageProps) {
         </Link>
       </div>
       </article>
-    </div>
+      </div>
+    </>
   );
 }

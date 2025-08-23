@@ -1,0 +1,42 @@
+{
+  "name": "FindMyUsers - 独立开发者推广渠道导航站",
+  "short_name": "FindMyUsers",
+  "description": "专为独立开发者打造的推广渠道导航站，帮助找到首批用户",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "zh-CN",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/Logo/Logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/Screenshot/homepage_zh.png",
+      "sizes": "1200x675",
+      "type": "image/png",
+      "label": "FindMyUsers 中文主页"
+    },
+    {
+      "src": "/Screenshot/homepage_en.png", 
+      "sizes": "1200x675",
+      "type": "image/png",
+      "label": "FindMyUsers English Homepage"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
