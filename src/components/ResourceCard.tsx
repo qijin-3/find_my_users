@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { Link } from '@/i18n/navigation'
 import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -90,17 +91,17 @@ export default function ResourceCard({
           <div className="space-y-3">
             {/* 描述限制为两行，精确控制高度 */}
             <p className="font-medium text-muted-foreground text-[14px] overflow-hidden leading-[1.2] h-[33.6px]" 
-               style={{
-                 display: '-webkit-box',
-                 WebkitLineClamp: 2,
-                 WebkitBoxOrient: 'vertical' as const,
-                 lineHeight: '1.2'
-               }}>
+                style={{
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical' as const,
+                  lineHeight: '1.2'
+                }}>
               {resource.description}
             </p>
             
             {/* 标签区域 - 固定高度，水平滑动 */}
-            <div className="h-[32px] overflow-hidden">
+            <div className="h-[32px] overflow-auto">
               {showCategory && resource.type && (
                 <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1 h-full items-center">
                   <SiteBadge 
