@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import { Layout } from '@/components/Layout';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
@@ -15,6 +15,19 @@ interface LocaleLayoutProps {
  */
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+/**
+ * 生成viewport配置
+ */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' }
+  ]
 }
 
 /**
@@ -111,11 +124,6 @@ export async function generateMetadata({
       shortcut: '/favicon.ico',
     },
     manifest: '/manifest.json',
-    viewport: {
-      width: 'device-width',
-      initialScale: 1,
-      maximumScale: 1,
-    },
     verification: {
       google: process.env.GOOGLE_SITE_VERIFICATION,
       yandex: process.env.YANDEX_VERIFICATION,
