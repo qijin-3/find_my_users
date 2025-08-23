@@ -96,12 +96,6 @@ next.config.mjs              # Next.js优化配置
 3. 提交sitemap：添加 `https://findmyusers.com/sitemap.xml`
 4. 监控收录状态和搜索性能
 
-### 2. 百度站长平台
-1. 注册：https://ziyuan.baidu.com/
-2. 添加网站并验证
-3. 提交sitemap和主动推送URL
-4. 开启HTTPS认证
-
 ### 3. Bing 网站管理员工具
 1. 访问：https://www.bing.com/webmasters
 2. 添加网站并验证
