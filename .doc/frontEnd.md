@@ -194,80 +194,44 @@ import { GithubLogo, List, X, CaretDown } from '@phosphor-icons/react'
 ```
 src/
 ├── app/                    # Next.js App Router 页面
-│   ├── admin/             # 管理后台页面
-│   │   ├── articles/      # 文章管理页面
-│   │   └── page.js        # 管理后台首页
+│   ├── [locale]/          # 多语言页面
+│   │   ├── posts/         # 文章页面
+│   │   ├── site/          # 站点资源页面
+│   │   ├── layout.tsx     # 语言布局
+│   │   └── page.tsx       # 首页
 │   ├── api/               # API 路由
-│   │   ├── articles/      # 文章相关 API
-│   │   ├── check-auth/    # 认证检查 API
-│   │   ├── login/         # 登录 API
-│   │   ├── logout/        # 登出 API
-│   │   └── resources/     # 资源相关 API
-│   ├── login/             # 登录页面
-│   │   └── page.js        # 登录页面组件
-│   ├── posts/             # 文章页面
-│   │   ├── [slug]/        # 动态文章详情页
-│   │   └── page.js        # 文章列表页
-│   ├── site/              # 站点资源页面
-│   │   ├── [slug]/        # 动态站点详情页
-│   │   └── page.tsx       # 站点列表页
-│   ├── favicon.ico        # 网站图标
-│   ├── globals.css        # 全局样式
+│   │   └── fields/        # 字段映射 API（只读）
 │   ├── layout.tsx         # 根布局组件
-│   └── page.tsx           # 首页
+│   └── page.tsx           # 根路径入口
 ├── components/            # 可复用组件
 │   ├── ui/               # Shadcn/ui 基础组件
-│   │   ├── alert.tsx     # 警告提示组件
-│   │   ├── badge.tsx     # 徽章组件
-│   │   ├── button.tsx    # 按钮组件
-│   │   ├── card.tsx      # 卡片组件
-│   │   ├── dropdown-menu.tsx # 下拉菜单组件
-│   │   ├── input.tsx     # 输入框组件
-│   │   ├── table.tsx     # 表格组件
-│   │   └── textarea.tsx  # 文本域组件
-│   ├── ArticleEditor.js  # 文章编辑器
-│   ├── ArticleList.js    # 文章列表
-│   ├── Footer.js         # 页脚组件
-│   ├── Layout.js         # 布局组件
-│   ├── LoginModal.js     # 登录模态框
-│   ├── Navigation.tsx    # 导航组件 (TypeScript)
-│   ├── PeopleIllustration.tsx # 首页小人插画动效组件
-│   ├── ui/
-│   │   ├── animated-text.tsx  # 可复用文字跳跃流动动画组件
+│   ├── Navigation.tsx    # 导航组件
+│   ├── Footer.tsx        # 页脚组件
 │   ├── PostsPageContent.tsx # 文章页面内容组件
 │   ├── ResourceCard.tsx  # 资源卡片组件
-│   ├── ResourceList.js   # 资源列表
 │   ├── SiteList.tsx      # 站点列表组件
 │   ├── SitePageContent.tsx # 站点页面内容组件
 │   ├── language-toggle.tsx # 语言切换组件
 │   ├── providers.tsx     # 全局提供者组件
 │   └── theme-toggle.tsx  # 主题切换组件
 └── lib/                  # 工具函数和配置
-    ├── auth.js           # 认证逻辑
-    ├── posts.js          # 文章处理
+    ├── field-utils.ts    # 字段工具
+    ├── i18n-data.ts      # 多语言数据读取
     └── utils.ts          # 通用工具函数
 ```
+
+> 内容更新方式：直接编辑仓库内 `data/` 下的 Markdown / JSON，通过代码提交发布；已移除管理后台与登录能力。
 
 ### 各文件作用详解
 
 #### 页面层 (app/)
 - **layout.tsx**: 根布局，定义全站结构和元数据
-- **page.tsx**: 首页，展示项目介绍、资源和文章列表
-- **admin/**: 管理后台，用于内容管理
-  - **articles/**: 文章管理页面
-  - **page.js**: 管理后台首页
-- **api/**: API 路由，处理认证和数据操作
-  - **articles/**: 文章相关 API (创建、编辑、删除)
-  - **check-auth/**: 认证状态检查 API
-  - **login/**: 用户登录 API
-  - **logout/**: 用户登出 API
-  - **resources/**: 资源相关 API
-- **login/**: 用户登录页面
-  - **page.js**: 登录页面组件
+- **[locale]/page.tsx**: 首页，展示项目介绍、资源和文章列表
+- **api/fields/**: 只读字段映射 API，供站点筛选使用
 - **posts/**: 文章详情和列表页面
   - **[slug]/**: 动态文章详情页
-  - **page.js**: 文章列表页
-- **site/**: 站点资源页面 (原 resources 页面)
+  - **page.tsx**: 文章列表页
+- **site/**: 站点资源页面
   - **[slug]/**: 动态站点详情页
   - **page.tsx**: 站点列表页
 
@@ -287,9 +251,6 @@ src/
 - **Footer.js**: 页脚组件，包含链接和版权信息
 
 ##### 功能组件
-- **ArticleEditor.js**: 文章编辑器，支持 Markdown 编辑
-- **ArticleList.js**: 文章列表展示组件
-- **ResourceList.js**: 资源列表展示组件
 - **ResourceCard.tsx**: 资源卡片组件，用于展示单个资源
   - 支持自定义边框样式 (border-2 border-[#1a1a1a])
   - 标题字体大小 20px，行高 32px
@@ -302,8 +263,7 @@ src/
   - 顶层容器使用 `pt-12` 上边距
   - 内容区域使用 `pt-6 pb-12` 上下边距
   - 主内容区设置 `ml-[80px] mr-[80px]` 边距
-  - 集成 ArticleList 组件，支持多语言显示
-- **LoginModal.js**: 登录模态框组件
+  - 支持多语言文章列表展示
 - **PeopleIllustration.tsx**: 首页小人插画动效组件，使用 Framer Motion 实现
   - 支持9个小人角色的依次出现动画
   - 从下往上的俏皮动画效果
@@ -328,8 +288,8 @@ src/
 
 #### 工具层 (lib/)
 - **utils.ts**: 通用工具函数，主要是 `cn()` 类名合并函数
-- **auth.js**: 用户认证相关逻辑
-- **posts.js**: 文章数据处理和 Markdown 解析
+- **i18n-data.ts**: 多语言数据读取（文章、站点列表）
+- **field-utils.ts**: 站点字段映射工具
 
 ### 组件设计原则
 
@@ -337,7 +297,7 @@ src/
 ```jsx
 // 使用 Slot 模式实现组件组合
 <Button asChild>
-  <Link href="/login">登录</Link>
+  <Link href="/site">站点</Link>
 </Button>
 ```
 
@@ -381,7 +341,7 @@ const buttonVariants = cva(
 
 #### 服务端状态
 - **Next.js App Router**: 服务端组件和数据获取
-- **GitHub API**: 内容数据源
+- **仓库内 data/**: 内容数据源（Markdown / JSON，通过代码更新）
 
 ### 性能优化策略
 

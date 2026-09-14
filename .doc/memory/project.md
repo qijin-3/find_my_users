@@ -1,19 +1,19 @@
 # 项目偏好和自定义规则
 
 ## 项目概述
-FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站，无需传统数据库。项目采用现代化的技术栈和设计系统。
+FindMyUsers 是一个基于 Next.js 构建的开源内容站点。文章与渠道数据存放在仓库 `data/` 目录，通过代码直接更新并部署，无需传统数据库或管理后台。
 
 ## 技术栈偏好
 
 ### 核心框架
-- **Next.js 14.2.5** - 优先使用 App Router 架构
+- **Next.js 14.2.35** - 优先使用 App Router 架构（Cloudflare / OpenNext 最低要求）
 - **React 18** - 使用 React Server Components (RSC)
 - **TypeScript 5** - 所有代码必须使用 TypeScript，不使用 JavaScript
 
 ### 样式和UI偏好
 - **Tailwind CSS 3.4.1** - 优先使用实用优先的 CSS 框架
 - **Shadcn/ui** - 主要 UI 组件库，基于 Radix UI
-- **Lucide React** - 图标库首选
+- **Phosphor Icons** - 图标库首选
 - **Inter 字体** - 全站统一使用 Google Fonts 的 Inter 字体
 - **Framer Motion** - 复杂动画和交互效果的首选库
 
@@ -62,14 +62,14 @@ src/
 ## 数据管理偏好
 
 ### 内容存储
-- **GitHub 作为 CMS** - 使用 GitHub API 进行内容管理
+- **仓库内 data/** - Markdown / JSON 作为内容源
+- **代码更新** - 站点与文章通过提交代码发布，不使用管理后台
 - **Markdown 格式** - 所有文章和内容使用 Markdown
 - **JSON 配置** - 使用 JSON 文件存储配置和元数据
 
 ### API 设计
-- **RESTful API** - 使用 Next.js API Routes
-- **JWT 认证** - 使用 JSON Web Token 进行用户认证
-- **Cookie 会话管理** - 使用 Cookie 进行会话管理
+- **只读 API** - 仅保留必要的只读接口（如 `/api/fields`）
+- **无认证体系** - 已移除 JWT / Cookie 登录与后台写入接口
 
 ## 开发工具偏好
 
@@ -79,9 +79,9 @@ src/
 - **Prettier** - 代码格式化（如果需要）
 
 ### 构建和部署
-- **Vercel** - 优先部署平台
-- **环境变量** - 使用 .env.local 管理敏感信息
-- **自动部署** - 连接 GitHub 实现自动部署
+- **Cloudflare Workers** - 当前部署目标（需 Next.js >= 14.2.35）
+- **环境变量** - 使用 .env.local 管理可选配置
+- **自动部署** - 连接 Git 实现自动部署
 
 ## 性能优化偏好
 
@@ -97,15 +97,10 @@ src/
 
 ## 安全偏好
 
-### 认证和授权
-- **JWT Token** - 用户认证
-- **环境变量保护** - 敏感信息不提交到代码库
-- **HTTPS** - 生产环境强制使用 HTTPS
-
 ### 数据保护
 - **输入验证** - 所有用户输入必须验证
 - **XSS 防护** - 防止跨站脚本攻击
-- **CSRF 保护** - 防止跨站请求伪造
+- **HTTPS** - 生产环境强制使用 HTTPS
 
 ## 文档偏好
 

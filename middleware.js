@@ -1,11 +1,15 @@
 import { NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
-import { verifyToken } from './src/lib/auth';
 import { routing } from './src/i18n/routing';
 
-// 创建next-intl中间件
+// 创建 next-intl 中间件
 const handleI18nRouting = createMiddleware(routing);
 
+/**
+ * 全局中间件：处理根路径语言重定向与 i18n 路由
+ * @param {import('next/server').NextRequest} request - 入站请求
+ * @returns {import('next/server').NextResponse} 重定向或 i18n 处理后的响应
+ */
 export function middleware(request) {
   const path = request.nextUrl.pathname;
   
@@ -27,23 +31,7 @@ export function middleware(request) {
     return NextResponse.redirect(new URL(`/${targetLocale}`, request.url));
   }
 
-  // 检查是否是需要认证的路径（处理带locale前缀的路径）
-  const isAdminPath = path.match(/^\/[a-z]{2}\/admin/) || path.startsWith('/admin');
-  const isLoginPath = path.match(/^\/[a-z]{2}\/login/) || path.startsWith('/login');
-
-  if (isAdminPath) {
-    const token = request.cookies.get('auth_token')?.value;
-    const isLoggedIn = token && verifyToken(token);
-
-    if (!isLoggedIn) {
-      // 获取当前locale
-      const locale = path.match(/^\/([a-z]{2})\//)?.[1] || routing.defaultLocale;
-      // 重定向到对应语言的登录页面
-      return NextResponse.redirect(new URL(`/${locale}/login`, request.url));
-    }
-  }
-
-  // 应用i18n路由处理
+  // 应用 i18n 路由处理
   return handleI18nRouting(request);
 }
 

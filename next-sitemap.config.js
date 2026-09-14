@@ -9,10 +9,6 @@ module.exports = {
   
   // 排除不需要被搜索引擎索引的页面
   exclude: [
-    '/admin/*',
-    '/login',
-    '/*/admin/*',
-    '/*/login',
     '/test-animation',
     '/*/test-animation',
     '/api/*'
@@ -97,9 +93,7 @@ module.exports = {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/admin/',
           '/api/',
-          '/login',
           '/test-animation'
         ],
       },
@@ -107,18 +101,14 @@ module.exports = {
         userAgent: 'Googlebot',
         allow: '/',
         disallow: [
-          '/admin/',
           '/api/',
-          '/login'
         ],
       },
       {
         userAgent: 'Baiduspider',
         allow: '/',
         disallow: [
-          '/admin/',
           '/api/',
-          '/login'
         ],
       }
     ],

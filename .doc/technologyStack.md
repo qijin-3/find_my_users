@@ -2,17 +2,21 @@
 
 ## 项目概述
 
-FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站，无需传统数据库。
+FindMyUsers 是一个基于 Next.js 构建的开源内容站点，文章与渠道数据存放在仓库 `data/` 目录中，通过代码直接更新并部署，无需传统数据库或管理后台。
 
 ### 文章元数据同步策略（2025-08-09）
 - 统一以 `data/json/articles.json` 为权威来源同步每篇文章的 `date`、`lastModified`、`description`
 - 中英文描述分别绑定 `description_zh` 和 `description_en`
 - 保持 ISO 8601 时间格式，便于前端格式化显示
 
+### 内容维护方式（2026-09-14）
+- 站点/文章更新：直接修改 `data/Site/`、`data/Articles/`、`data/json/` 后提交代码
+- 已移除登录、管理后台、GitHub API 写入与 JWT 认证相关能力
+
 ## 核心技术栈
 
 ### 前端框架
-- **Next.js 14.2.5** - React 全栈框架，支持 App Router
+- **Next.js 14.2.35** - React 全栈框架，支持 App Router（Cloudflare Workers / OpenNext 最低要求）
 - **React 18** - 用户界面库
 - **TypeScript 5** - 类型安全的 JavaScript 超集
 
@@ -22,7 +26,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 - **Radix UI** - 无样式、可访问的 UI 组件
   - `@radix-ui/react-dropdown-menu`
   - `@radix-ui/react-slot`
-- **Lucide React** - 现代图标库
+- **Phosphor Icons** - 现代图标库
 - **Framer Motion** - 生产级动画库
 - **Class Variance Authority (CVA)** - 组件变体管理
 - **Tailwind Merge** - Tailwind 类名合并工具
@@ -36,18 +40,20 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 ### 生产依赖 (dependencies)
 ```json
 {
-  "@octokit/rest": "^21.0.1",                    // GitHub API 客户端
+  "@phosphor-icons/react": "^2.1.10",             // 图标库
   "@radix-ui/react-dropdown-menu": "^2.1.1",     // 下拉菜单组件
-  "@radix-ui/react-slot": "^1.1.0",              // 插槽组件
+  "@radix-ui/react-slot": "^1.2.3",              // 插槽组件
   "@tailwindcss/typography": "^0.5.14",          // Tailwind 排版插件
+  "@vercel/analytics": "^1.5.0",                 // 分析
   "class-variance-authority": "^0.7.0",          // 组件变体管理
   "clsx": "^2.1.1",                              // 条件类名工具
-  "cookie": "^0.6.0",                            // Cookie 处理
+  "critters": "^0.0.23",                         // CSS 内联优化
   "framer-motion": "^11.11.17",                  // 动画库
   "gray-matter": "^4.0.3",                       // Markdown 前置数据解析
-  "jsonwebtoken": "^9.0.2",                      // JWT 令牌处理
-  "@phosphor-icons/react": "^2.1.7",              // 图标库
-  "next": "14.2.5",                              // Next.js 框架
+  "next": "^14.2.35",                            // Next.js 框架
+  "next-intl": "^4.3.4",                         // 国际化
+  "next-sitemap": "^4.2.3",                      // Sitemap 生成
+  "next-themes": "^0.4.6",                       // 主题切换
   "react": "^18",                                // React 库
   "react-dom": "^18",                            // React DOM 渲染
   "remark": "^15.0.1",                           // Markdown 处理器
@@ -67,7 +73,7 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
   "@types/react-dom": "^18",                     // React DOM 类型定义
   "autoprefixer": "^10.4.20",                    // CSS 自动前缀
   "eslint": "^8.57.0",                           // 代码检查工具
-  "eslint-config-next": "14.2.5",                // Next.js ESLint 配置
+  "eslint-config-next": "^14.2.35",              // Next.js ESLint 配置
   "eslint-plugin-react": "^7.35.0",              // React ESLint 插件
   "globals": "^15.9.0",                          // 全局变量定义
   "postcss": "^8.4.41",                          // CSS 后处理器
@@ -92,11 +98,10 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 - [Framer Motion 文档](https://www.framer.com/motion/)
 
 ### 工具和实用程序
-- [GitHub Octokit REST API](https://octokit.github.io/rest.js/v21)
 - [SWR 数据获取](https://swr.vercel.app/)
 - [Gray Matter 文档](https://github.com/jonschlinkert/gray-matter)
 - [Remark 文档](https://remark.js.org/)
-- [JSON Web Token](https://github.com/auth0/node-jsonwebtoken)
+- [next-intl 文档](https://next-intl.dev/)
 
 ### 开发工具
 - [ESLint 文档](https://eslint.org/docs/latest/)
@@ -105,13 +110,9 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 
 ## 首选的库和工具
 
-### 认证和授权
-- **JSON Web Token (JWT)** - 用于用户认证
-- **Cookie** - 会话管理
-
 ### 数据获取和状态管理
-- **SWR** - 数据获取、缓存和同步
-- **GitHub API (@octokit/rest)** - 作为内容管理系统
+- **SWR** - 客户端字段数据获取、缓存和同步
+- **仓库内 data/** - 作为内容存储（构建时读取）
 
 ### 内容管理
 - **Gray Matter** - Markdown 文件前置数据处理
@@ -127,9 +128,9 @@ FindMyUsers 是一个基于 Next.js 和 GitHub API 构建的开源动态网站�
 ## 架构特点
 
 ### 无数据库设计
-- 使用 GitHub 仓库作为内容存储
-- Markdown 文件作为数据源
-- JSON 文件用于配置和元数据
+- 使用仓库内 Markdown / JSON 作为内容存储
+- 通过代码提交更新站点与文章
+- 保留只读 `/api/fields` 供前端筛选使用
 
 ### 现代化开发栈
 - React Server Components (RSC) 优先
@@ -153,7 +154,11 @@ npm run start    # 生产服务器
 npm run lint     # 代码检查
 ```
 
+### Cloudflare 部署注意
+- Next.js 版本需 **>= 14.2.35**，否则 `wrangler deploy` 无法自动配置
+- 部署命令示例：`npx wrangler deploy`（由 Cloudflare 检测 Next.js 并构建）
+
 ### 环境要求
 - Node.js 18+
-- npm 或 yarn
-- Git (用于内容管理)
+- npm
+- Git

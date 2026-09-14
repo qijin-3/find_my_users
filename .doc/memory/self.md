@@ -1941,3 +1941,23 @@ import AnimatedText from '@/components/ui/animated-text';
 
 // 按钮样式使用CSS变量，添加12px圆角
 <Button className="bg-card border-2 border-
+
+
+## 案例：Cloudflare 部署失败与移除后台（2026-09-14）
+
+### 错误：Next.js 版本过低导致 wrangler deploy 失败
+**错误做法**：
+```
+next@14.2.5 — Cloudflare / OpenNext 报错要求至少 14.2.35
+```
+
+**正确做法**：
+```
+npm install next@14.2.35 eslint-config-next@14.2.35
+```
+
+### 变更：移除管理后台
+- 删除 `/admin`、`/login`、认证 API、ArticleEditor、LoginModal、auth.js
+- 卸载 `@octokit/rest`、`jsonwebtoken`、`cookie`
+- middleware 仅保留 i18n / 根路径语言重定向
+- 内容改为直接编辑 `data/` 后通过代码发布
