@@ -1993,3 +1993,19 @@ Cloudflare Deploy command = npm run deploy
 # 即：opennextjs-cloudflare build && opennextjs-cloudflare deploy
 # Build command 留空
 ```
+
+
+## 案例：用 wrangler shim 兼容 Cloudflare 默认 deploy（2026-09-14）
+
+### 错误：控制台 Deploy command 仍是 npx wrangler deploy
+**错误做法**：
+```
+仅文档要求用户改控制台，用户未改则持续失败
+```
+
+**正确做法**：
+```
+postinstall 安装 scripts/wrangler-ci-shim.cjs 到 node_modules/.bin/wrangler
+拦截 deploy / versions upload：先 opennext build 再 deploy/upload
+OPEN_NEXT_DEPLOY=true 时透传真实 wrangler，避免递归
+```

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
+    "postinstall": "node scripts/install-wrangler-shim.cjs",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "next-sitemap",

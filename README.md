@@ -78,14 +78,14 @@
 
 ### ☁️ Cloudflare 部署
 
-Workers Builds 控制台（Settings → Build）请这样配置：
+仓库已兼容 Cloudflare 默认的 `npx wrangler deploy`（通过 `postinstall` 安装 shim，自动先 OpenNext build 再 deploy）。
+
+仍推荐在 Workers → Settings → Build 中设置为：
 
 | 设置 | 值 |
 |------|-----|
-| **Deploy command** | `npm run deploy` |
+| **Deploy command** | `npm run deploy`（或保持 `npx wrangler deploy`） |
 | **Build command** | 留空 |
-
-不要用 `npx wrangler deploy`：它不会先跑 OpenNext build，会报 `Could not find compiled Open Next config`。
 
 ### 📄 许可证
 
