@@ -2024,3 +2024,19 @@ require.resolve("@opennextjs/cloudflare/dist/cli/index.js") // 被 package expor
 用 Module._nodeModulePaths 找包根，再 path.join(root, "dist/cli/index.js")
 同时在 postinstall 补跑 esbuild/workerd install.js
 ```
+
+
+## 案例：Cloudflare 上站点和文章为空（2026-09-14）
+
+### 错误：线上首页站点和文章板块空白
+**错误做法**：
+```
+运行时 fs.readFileSync(process.cwd()+"/data/...")
+# Cloudflare Workers 无可靠文件系统，返回 []
+```
+
+**正确做法**：
+```
+prebuild/postinstall 运行 scripts/generate-content-modules.cjs
+把 data/ 内联到 src/lib/generated/*，i18n-data 改为静态导入
+```

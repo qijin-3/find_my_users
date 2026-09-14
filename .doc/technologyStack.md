@@ -162,6 +162,10 @@ npm run start    # 生产服务器
 npm run lint     # 代码检查
 ```
 
+### 内容数据打包（Cloudflare 必需）
+- `scripts/generate-content-modules.cjs` 在 `prebuild`/`postinstall` 将 `data/` 生成到 `src/lib/generated/`
+- 页面数据读取走静态模块，避免 Workers 运行时 `fs` 失败导致列表为空
+
 ### Cloudflare 部署注意
 - Next.js 版本需 **>= 15.5.24**（OpenNext Cloudflare peer；Next 14 已结束官方支持期）
 - 配置文件：`wrangler.jsonc`、`open-next.config.ts`

@@ -1,0 +1,169 @@
+/* eslint-disable */
+/**
+ * 自动生成：站点字段映射（勿手改）
+ * 来源：data/json/site-fields.json
+ */
+export const siteFields = {
+  "status": {
+    "running": {
+      "zh": "运行中",
+      "en": "Running"
+    },
+    "suspected_unmaintained": {
+      "zh": "疑似不再维护",
+      "en": "Suspected Unmaintained"
+    },
+    "confirmed_unmaintained": {
+      "zh": "不再维护",
+      "en": "Unmaintained"
+    },
+    "temporarily_unavailable": {
+      "zh": "暂时无法访问",
+      "en": "Temporarily Unavailable"
+    },
+    "stopped": {
+      "zh": "停止运营",
+      "en": "Stopped"
+    }
+  },
+  "type": {
+    "product_showcase": {
+      "zh": "产品展示页",
+      "en": "Product Showcase"
+    },
+    "tool_navigation": {
+      "zh": "工具导航",
+      "en": "Tool Navigation"
+    },
+    "blog_newsletter": {
+      "zh": "博客/周刊",
+      "en": "Blog/Newsletter"
+    },
+    "social_platform": {
+      "zh": "社交平台",
+      "en": "Social Platform"
+    },
+    "media": {
+      "zh": "媒体",
+      "en": "Media"
+    },
+    "vertical_forum": {
+      "zh": "垂直论坛",
+      "en": "Vertical Forum"
+    },
+    "design_platform": {
+      "zh": "设计平台",
+      "en": "Design Platform"
+    }
+  },
+  "region": {
+    "domestic": {
+      "zh": "国内",
+      "en": "Domestic"
+    },
+    "overseas": {
+      "zh": "海外",
+      "en": "Overseas"
+    },
+    "global": {
+      "zh": "全球",
+      "en": "Global"
+    }
+  },
+  "submitMethod": {
+    "email": {
+      "zh": "邮件提交",
+      "en": "Email Submission"
+    },
+    "site_submission": {
+      "zh": "站内投稿",
+      "en": "Site Submission"
+    },
+    "submit_issue": {
+      "zh": "提交issue",
+      "en": "Submit Issue"
+    },
+    "questionnaire": {
+      "zh": "问卷",
+      "en": "Questionnaire"
+    },
+    "site_form": {
+      "zh": "站内表单",
+      "en": "Site Form"
+    },
+    "submit_comment": {
+      "zh": "提交Comment",
+      "en": "Submit Comment"
+    }
+  },
+  "reviewTime": {
+    "immediately": {
+      "zh": "立刻🚀",
+      "en": "Immediately🚀"
+    },
+    "within_one_day": {
+      "zh": "一天内✈️",
+      "en": "Within One Day✈️"
+    },
+    "within_three_days": {
+      "zh": "三天内🚗",
+      "en": "Within Three Days🚗"
+    },
+    "within_one_week": {
+      "zh": "一周内🚌",
+      "en": "Within One Week🚌"
+    },
+    "over_one_week": {
+      "zh": "一周以上🚢",
+      "en": "Over One Week🚢"
+    },
+    "unknown": {
+      "zh": "未知⏳",
+      "en": "Unknown⏳"
+    }
+  },
+  "review": {
+    "Y": {
+      "zh": "需要审核",
+      "en": "Review Required"
+    },
+    "N": {
+      "zh": "无需审核",
+      "en": "No Review Required"
+    }
+  },
+  "expectedExposure": {
+    "not_disclosed": {
+      "zh": "未披露🙅‍♀️🙅‍♂️",
+      "en": "Not Disclosed🙅‍♀️🙅‍♂️"
+    },
+    "not_evaluated": {
+      "zh": "未评测😌",
+      "en": "Not Evaluated😌"
+    },
+    "within_100": {
+      "zh": "100以内😾",
+      "en": "Within 100😾"
+    },
+    "within_500": {
+      "zh": "500以内😿",
+      "en": "Within 500😿"
+    },
+    "within_1k": {
+      "zh": "1k以内😹",
+      "en": "Within 1K😹"
+    },
+    "within_2k": {
+      "zh": "2k以内😸",
+      "en": "Within 2K😸"
+    },
+    "within_10k": {
+      "zh": "1w以内😽",
+      "en": "Within 10K😽"
+    },
+    "over_10k": {
+      "zh": "1w以上😻",
+      "en": "Over 10K😻"
+    }
+  }
+} as const

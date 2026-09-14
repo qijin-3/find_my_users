@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { siteFields } from '@/lib/generated/site-fields'
 
 /**
  * 将统一格式转换为语言特定格式
@@ -24,20 +23,10 @@ function transformUnifiedToLocaleFormat(unifiedData: any, locale: string) {
   return result
 }
 
-// 预生成所有语言的数据
-const PREGENERATED_DATA: { [key: string]: any } = {}
-
-// 在模块加载时预生成数据
-try {
-  const filePath = path.join(process.cwd(), 'data', 'json', 'site-fields.json')
-  const fileContent = fs.readFileSync(filePath, 'utf-8')
-  const unifiedFieldsData = JSON.parse(fileContent)
-  
-  // 为每种语言预生成数据
-  PREGENERATED_DATA['zh'] = transformUnifiedToLocaleFormat(unifiedFieldsData, 'zh')
-  PREGENERATED_DATA['en'] = transformUnifiedToLocaleFormat(unifiedFieldsData, 'en')
-} catch (error) {
-  console.error('Failed to pregenerate fields data:', error)
+// 预生成所有语言的数据（静态打包，避免 Cloudflare Workers 依赖 fs）
+const PREGENERATED_DATA: { [key: string]: any } = {
+  zh: transformUnifiedToLocaleFormat(siteFields, 'zh'),
+  en: transformUnifiedToLocaleFormat(siteFields, 'en'),
 }
 
 /**

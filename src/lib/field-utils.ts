@@ -45,7 +45,7 @@ function transformUnifiedToLocaleFormat(unifiedData: any, locale: string): Field
 }
 
 /**
- * 获取字段映射数据
+ * 获取字段映射数据（服务端静态打包，客户端走 /api/fields）
  * @param locale - 语言环境 ('zh' | 'en')
  * @returns 字段映射数据的 Promise
  */
@@ -56,27 +56,12 @@ export async function getFieldsData(locale: 'zh' | 'en' = 'zh'): Promise<FieldOp
       return fieldsCache[locale];
     }
 
-    // 在服务端环境中，直接读取文件而不是使用 fetch
+    // 在服务端环境中，使用静态打包数据（Cloudflare Workers 无可靠 fs）
     if (typeof window === 'undefined') {
-      // 服务端环境，直接读取统一的字段文件
-      const fs = await import('fs');
-      const path = await import('path');
-      const fieldsPath = path.join(process.cwd(), 'data', 'json', 'site-fields.json');
-      
-      if (fs.existsSync(fieldsPath)) {
-        const content = fs.readFileSync(fieldsPath, 'utf8');
-        const unifiedData = JSON.parse(content);
-        // 转换为语言特定格式
-        const fieldsData = transformUnifiedToLocaleFormat(unifiedData, locale);
-        
-        // 缓存数据
-        fieldsCache[locale] = fieldsData;
-        
-        return fieldsData;
-      } else {
-        // 如果文件不存在，返回空对象
-        return {};
-      }
+      const { siteFields } = await import('@/lib/generated/site-fields')
+      const fieldsData = transformUnifiedToLocaleFormat(siteFields, locale)
+      fieldsCache[locale] = fieldsData
+      return fieldsData
     } else {
       // 客户端环境，使用 fetch（API已经处理了转换）
       const response = await fetch(`/api/fields?locale=${locale}`, {

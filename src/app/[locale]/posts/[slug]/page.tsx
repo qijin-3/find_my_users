@@ -2,14 +2,11 @@ import React from 'react'
 import { setRequestLocale } from 'next-intl/server'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
 import { Link } from '@/i18n/navigation'
 import { ArrowLeft, CaretRight, Clock, CalendarBlank } from '@phosphor-icons/react/dist/ssr'
 import { remark } from 'remark'
 import html from 'remark-html'
-import { getI18nArticleMeta } from '@/lib/i18n-data'
+import { getI18nArticle, getI18nArticleMeta, getI18nArticlesList } from '@/lib/i18n-data'
 import AnimatedText from '@/components/ui/animated-text'
 import StructuredData, { generateArticleStructuredData } from '@/components/StructuredData'
 import { Metadata } from 'next'
@@ -18,47 +15,19 @@ interface PostPageProps {
   params: Promise<{ locale: string; slug: string }>
 }
 
-interface PostData {
-  content: string
-  locale: string
-  slug: string
-}
-
 /**
- * 获取文章数据 - 内联函数
+ * 生成静态参数
  */
-function getArticleData(slug: string, locale: string): PostData | null {
-  try {
-    // 首先尝试获取指定语言的文章
-    const localePath = path.join(process.cwd(), 'data', 'Articles', locale, `${slug}.md`)
-    
-    if (fs.existsSync(localePath)) {
-      const content = fs.readFileSync(localePath, 'utf8')
-      const { content: articleContent } = matter(content)
-      return {
-        content: articleContent,
-        locale: locale,
-        slug: slug
-      }
+export async function generateStaticParams() {
+  const locales = ['zh', 'en']
+  const params: { locale: string; slug: string }[] = []
+  for (const locale of locales) {
+    const articles = getI18nArticlesList(locale)
+    for (const article of articles) {
+      if (article?.slug) params.push({ locale, slug: article.slug })
     }
-    
-    // 如果指定语言文章不存在，fallback到中文版本
-    const fallbackPath = path.join(process.cwd(), 'data', 'Articles', 'zh', `${slug}.md`)
-    
-    if (fs.existsSync(fallbackPath)) {
-      const content = fs.readFileSync(fallbackPath, 'utf8')
-      const { content: articleContent } = matter(content)
-      return {
-        content: articleContent,
-        locale: 'zh', // 标记实际使用的语言
-        slug: slug
-      }
-    }
-    
-    return null
-  } catch (error) {
-    return null
   }
+  return params
 }
 
 /**
@@ -159,8 +128,8 @@ export default async function PostPage({ params }: PostPageProps) {
   // 获取翻译文本
   const t = await getTranslations('articles')
   
-  // 获取文章数据
-  const postData = getArticleData(slug, locale)
+  // 获取文章数据（静态打包，不依赖运行时 fs）
+  const postData = getI18nArticle(slug, locale)
   const meta = getI18nArticleMeta(slug, locale)
   
   if (!postData) {

@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/generate-content-modules.cjs",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "postinstall": "node scripts/install-wrangler-shim.cjs",
+    "postinstall": "node scripts/generate-content-modules.cjs && node scripts/install-wrangler-shim.cjs",
     "start": "next start",
     "lint": "next lint",
     "sitemap": "next-sitemap",
+    "generate:content": "node scripts/generate-content-modules.cjs",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
