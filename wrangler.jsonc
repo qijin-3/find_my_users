@@ -1,0 +1,24 @@
+/**
+ * Cloudflare Workers / Wrangler 配置
+ * @see https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "find-my-users",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2026-09-14",
+	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	"services": [
+		{
+			"binding": "WORKER_SELF_REFERENCE",
+			"service": "find-my-users"
+		}
+	],
+	"observability": {
+		"enabled": true
+	}
+}

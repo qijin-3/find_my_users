@@ -2,7 +2,7 @@
 
 ## 设计系统概述
 
-FindMyUsers 前端采用现代化的设计系统，基于 Shadcn/ui 组件库和 Tailwind CSS，提供一致性和可维护性的用户界面。
+FindMyUsers 前端基于 Next.js 15.5.25 / React 19，采用现代化的设计系统，基于 Shadcn/ui 组件库和 Tailwind CSS，提供一致性和可维护性的用户界面。
 
 ## 字体系统
 

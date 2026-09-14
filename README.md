@@ -1,7 +1,7 @@
 # FindMyUsers
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2.35-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.25-black)](https://nextjs.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/qijin-3/find_my_users/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/qijin-3/find_my_users)](https://github.com/qijin-3/find_my_users/issues)
 

@@ -6,8 +6,8 @@ FindMyUsers 是一个基于 Next.js 构建的开源内容站点。文章与渠�
 ## 技术栈偏好
 
 ### 核心框架
-- **Next.js 14.2.35** - 优先使用 App Router 架构（Cloudflare / OpenNext 最低要求）
-- **React 18** - 使用 React Server Components (RSC)
+- **Next.js 15.5.25** - 优先使用 App Router 架构（OpenNext Cloudflare 要求 >=15.5.24）
+- **React 19** - 使用 React Server Components (RSC)
 - **TypeScript 5** - 所有代码必须使用 TypeScript，不使用 JavaScript
 
 ### 样式和UI偏好
@@ -79,7 +79,7 @@ src/
 - **Prettier** - 代码格式化（如果需要）
 
 ### 构建和部署
-- **Cloudflare Workers** - 当前部署目标（需 Next.js >= 14.2.35）
+- **Cloudflare Workers** - 当前部署目标（需 Next.js >= 15.5.24，使用 OpenNext）
 - **环境变量** - 使用 .env.local 管理可选配置
 - **自动部署** - 连接 Git 实现自动部署
 

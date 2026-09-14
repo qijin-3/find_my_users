@@ -16,7 +16,7 @@ FindMyUsers 是一个基于 Next.js 构建的开源内容站点，文章与渠�
 ## 核心技术栈
 
 ### 前端框架
-- **Next.js 14.2.35** - React 全栈框架，支持 App Router（Cloudflare Workers / OpenNext 最低要求）
+- **Next.js 15.5.25** - React 全栈框架，支持 App Router（OpenNext Cloudflare 要求 >=15.5.24）
 - **React 18** - 用户界面库
 - **TypeScript 5** - 类型安全的 JavaScript 超集
 
@@ -50,17 +50,25 @@ FindMyUsers 是一个基于 Next.js 构建的开源内容站点，文章与渠�
   "critters": "^0.0.23",                         // CSS 内联优化
   "framer-motion": "^11.11.17",                  // 动画库
   "gray-matter": "^4.0.3",                       // Markdown 前置数据解析
-  "next": "^14.2.35",                            // Next.js 框架
+  "next": "^15.5.25",                            // Next.js 框架
   "next-intl": "^4.3.4",                         // 国际化
   "next-sitemap": "^4.2.3",                      // Sitemap 生成
   "next-themes": "^0.4.6",                       // 主题切换
-  "react": "^18",                                // React 库
-  "react-dom": "^18",                            // React DOM 渲染
+  "react": "^19.3.0",                                // React 库
+  "react-dom": "^19.3.0",                            // React DOM 渲染
   "remark": "^15.0.1",                           // Markdown 处理器
   "remark-html": "^16.0.1",                      // Markdown 转 HTML
-  "swr": "^2.2.5",                               // 数据获取库
+  "swr": "^2.5.1",                               // 数据获取库
   "tailwind-merge": "^2.4.0",                    // Tailwind 类名合并
   "tailwindcss-animate": "^1.0.7"                // Tailwind 动画插件
+}
+```
+
+### Cloudflare 部署依赖
+```json
+{
+  "@opennextjs/cloudflare": "^1.20.6",
+  "wrangler": "^4.131.1"
 }
 ```
 
@@ -73,7 +81,7 @@ FindMyUsers 是一个基于 Next.js 构建的开源内容站点，文章与渠�
   "@types/react-dom": "^18",                     // React DOM 类型定义
   "autoprefixer": "^10.4.20",                    // CSS 自动前缀
   "eslint": "^8.57.0",                           // 代码检查工具
-  "eslint-config-next": "^14.2.35",              // Next.js ESLint 配置
+  "eslint-config-next": "^15.5.25",              // Next.js ESLint 配置
   "eslint-plugin-react": "^7.35.0",              // React ESLint 插件
   "globals": "^15.9.0",                          // 全局变量定义
   "postcss": "^8.4.41",                          // CSS 后处理器
@@ -155,8 +163,9 @@ npm run lint     # 代码检查
 ```
 
 ### Cloudflare 部署注意
-- Next.js 版本需 **>= 14.2.35**，否则 `wrangler deploy` 无法自动配置
-- 部署命令示例：`npx wrangler deploy`（由 Cloudflare 检测 Next.js 并构建）
+- Next.js 版本需 **>= 15.5.24**（OpenNext Cloudflare peer；Next 14 已结束官方支持期）
+- 推荐部署命令：`npm run deploy`（`opennextjs-cloudflare build && opennextjs-cloudflare deploy`）
+- 配置文件：`wrangler.jsonc`、`open-next.config.ts`
 
 ### 环境要求
 - Node.js 18+

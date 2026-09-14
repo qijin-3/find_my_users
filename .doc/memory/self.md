@@ -1961,3 +1961,18 @@ npm install next@14.2.35 eslint-config-next@14.2.35
 - 卸载 `@octokit/rest`、`jsonwebtoken`、`cookie`
 - middleware 仅保留 i18n / 根路径语言重定向
 - 内容改为直接编辑 `data/` 后通过代码发布
+
+
+## 案例：OpenNext 拒绝 Next.js 14（2026-09-14）
+
+### 错误：Next.js 14.2.35 is not supported by the Next.js team
+**错误做法**：
+```
+停留在 Next.js 14 + --dangerouslyUseUnsupportedNextVersion
+```
+
+**正确做法**：
+```
+升级到 Next.js 15.5.25 + React 19，并接入 @opennextjs/cloudflare
+OpenNext peer: next >=15.5.24 <16 || >=16.3.3
+```
