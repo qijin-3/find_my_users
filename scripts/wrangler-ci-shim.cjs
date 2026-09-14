@@ -8,11 +8,27 @@
  * 当 OpenNext 以 OPEN_NEXT_DEPLOY=true 回调 wrangler 时，直接透传到真实 wrangler。
  */
 const { spawnSync } = require('node:child_process')
+const fs = require('node:fs')
 const path = require('node:path')
+const Module = require('node:module')
 
 const args = process.argv.slice(2)
 const command = args[0]
 const fromOpenNext = process.env.OPEN_NEXT_DEPLOY === 'true'
+
+/**
+ * 在 node_modules 中定位包根目录（避开 package exports 干扰 require.resolve）
+ * @param {string} name - 包名
+ * @returns {string} 包根路径
+ */
+function resolvePkgRoot(name) {
+  const searchPaths = Module._nodeModulePaths(process.cwd())
+  for (const base of searchPaths) {
+    const candidate = path.join(base, name, 'package.json')
+    if (fs.existsSync(candidate)) return path.dirname(candidate)
+  }
+  throw new Error(`Package not found: ${name}`)
+}
 
 /**
  * 运行 OpenNext Cloudflare CLI 子命令
@@ -21,7 +37,10 @@ const fromOpenNext = process.env.OPEN_NEXT_DEPLOY === 'true'
  * @returns {import('node:child_process').SpawnSyncReturns<Buffer>}
  */
 function runOpenNext(subcommand, extraArgs = []) {
-  const cli = require.resolve('@opennextjs/cloudflare/dist/cli/index.js')
+  const cli = path.join(resolvePkgRoot('@opennextjs/cloudflare'), 'dist', 'cli', 'index.js')
+  if (!fs.existsSync(cli)) {
+    throw new Error(`OpenNext CLI not found: ${cli}`)
+  }
   return spawnSync(process.execPath, [cli, subcommand, ...extraArgs], {
     stdio: 'inherit',
     env: process.env,
@@ -34,8 +53,7 @@ function runOpenNext(subcommand, extraArgs = []) {
  * @returns {import('node:child_process').SpawnSyncReturns<Buffer>}
  */
 function runRealWrangler(argv) {
-  const wranglerPkg = path.dirname(require.resolve('wrangler/package.json'))
-  const wranglerJs = path.join(wranglerPkg, 'bin', 'wrangler.js')
+  const wranglerJs = path.join(resolvePkgRoot('wrangler'), 'bin', 'wrangler.js')
   return spawnSync(process.execPath, [wranglerJs, ...argv], {
     stdio: 'inherit',
     env: process.env,

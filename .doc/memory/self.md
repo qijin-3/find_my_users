@@ -2009,3 +2009,18 @@ postinstall 安装 scripts/wrangler-ci-shim.cjs 到 node_modules/.bin/wrangler
 拦截 deploy / versions upload：先 opennext build 再 deploy/upload
 OPEN_NEXT_DEPLOY=true 时透传真实 wrangler，避免递归
 ```
+
+
+## 案例：shim CLI 路径解析失败（2026-09-14）
+
+### 错误：Cannot find module .../dist/api/dist/cli/index.js.js
+**错误做法**：
+```
+require.resolve("@opennextjs/cloudflare/dist/cli/index.js") // 被 package exports 扭曲路径
+```
+
+**正确做法**：
+```
+用 Module._nodeModulePaths 找包根，再 path.join(root, "dist/cli/index.js")
+同时在 postinstall 补跑 esbuild/workerd install.js
+```
