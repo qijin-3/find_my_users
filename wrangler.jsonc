@@ -8,6 +8,8 @@
 	"main": ".open-next/worker.js",
 	"compatibility_date": "2026-09-14",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+	// Workers Builds：Deploy command 请设为 `npm run deploy`（含 build）
+	// 不要用裸 `npx wrangler deploy`，否则缺少 .open-next 编译产物
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".open-next/assets"

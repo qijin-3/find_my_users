@@ -76,6 +76,17 @@
 - [ ] 一些无关紧要的情绪价值
 - [ ] 完善渠道评分和推荐系统，帮助开发者快速筛选可用渠道
 
+### ☁️ Cloudflare 部署
+
+Workers Builds 控制台（Settings → Build）请这样配置：
+
+| 设置 | 值 |
+|------|-----|
+| **Deploy command** | `npm run deploy` |
+| **Build command** | 留空 |
+
+不要用 `npx wrangler deploy`：它不会先跑 OpenNext build，会报 `Could not find compiled Open Next config`。
+
 ### 📄 许可证
 
 本项目基于 [MIT License](LICENSE) 开源，允许自由使用、修改和分发。

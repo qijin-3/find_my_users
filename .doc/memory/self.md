@@ -1976,3 +1976,20 @@ npm install next@14.2.35 eslint-config-next@14.2.35
 升级到 Next.js 15.5.25 + React 19，并接入 @opennextjs/cloudflare
 OpenNext peer: next >=15.5.24 <16 || >=16.3.3
 ```
+
+
+## 案例：OpenNext deploy 缺 build（2026-09-14）
+
+### 错误：Could not find compiled Open Next config
+**错误做法**：
+```
+Cloudflare Deploy command = npx wrangler deploy
+# wrangler 会转调 opennextjs-cloudflare deploy，但不会先 build
+```
+
+**正确做法**：
+```
+Cloudflare Deploy command = npm run deploy
+# 即：opennextjs-cloudflare build && opennextjs-cloudflare deploy
+# Build command 留空
+```

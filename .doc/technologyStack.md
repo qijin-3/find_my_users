@@ -164,8 +164,12 @@ npm run lint     # 代码检查
 
 ### Cloudflare 部署注意
 - Next.js 版本需 **>= 15.5.24**（OpenNext Cloudflare peer；Next 14 已结束官方支持期）
-- 推荐部署命令：`npm run deploy`（`opennextjs-cloudflare build && opennextjs-cloudflare deploy`）
 - 配置文件：`wrangler.jsonc`、`open-next.config.ts`
+- **Workers Builds 控制台必须改 Deploy command**（否则会报 `Could not find compiled Open Next config`）：
+  - Deploy command: `npm run deploy`
+  - Build command: 留空（`npm run deploy` 已包含 OpenNext build）
+  - 或二段式：Build = `npx opennextjs-cloudflare build`，Deploy = `npx opennextjs-cloudflare deploy`
+- 不要使用裸的 `npx wrangler deploy`：它只会调用 `opennextjs-cloudflare deploy`，**不会**先 build
 
 ### 环境要求
 - Node.js 18+
